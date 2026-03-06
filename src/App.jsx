@@ -116,7 +116,7 @@ export default function App() {
     <div className="min-h-screen bg-gradient-to-br from-[#fff0f5] via-[#e6f2ff] to-[#ffe6f0] font-sans selection:bg-[#ffb7c5] selection:text-white relative overflow-hidden">
       <SakuraPetals />
 
-      <div className="max-w-7xl mx-auto p-4 md:p-8 flex flex-col md:flex-row gap-6 relative z-10 h-screen">
+      <div className="w-full px-4 md:px-8 flex flex-col md:flex-row gap-6 relative z-10 h-screen py-4 md:py-8">
         
         <aside className="w-full md:w-64 flex-shrink-0 flex flex-col gap-4">
           <div className="bg-white/60 backdrop-blur-xl border border-white/80 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center flex flex-col items-center">
