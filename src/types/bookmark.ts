@@ -13,3 +13,13 @@ export interface ICategory {
 export interface IBookmarkData {
   categories: ICategory[];
 }
+
+export interface IInterview {
+  id: string;
+  company: string;
+  department: string;
+  time: string;       // 格式: "2025_0123_19:00"
+  author: string;
+  tags: string[];
+  content: string;    // Markdown 格式
+}

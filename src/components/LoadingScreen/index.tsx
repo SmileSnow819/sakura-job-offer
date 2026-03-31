@@ -88,14 +88,14 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
     { color: '#a1c4fd', stroke: '#6B9ADE' },
     { color: '#ff9eb5', stroke: '#FF6B9E' },
   ];
-  const marqueeRows = Array.from({ length: 4 }, (_, row) => ({
+  const marqueeRows = Array.from({ length: 3 }, (_, row) => ({
     row,
     dir: row % 2 === 0 ? 1 : -1,
-    speed: 5 + row * 1.2,
-    fontSize: 48 + (row % 3) * 12,
+    speed: 4 + row * 1.2,
+    fontSize: 100 + (row % 2) * 18,
     theme: ROW_THEMES[row % ROW_THEMES.length],
     words: Array.from({ length: 10 }, (__, k) => MARQUEE_WORDS[(row * 2 + k) % MARQUEE_WORDS.length]),
-    top: `${8 + row * 26}%`,
+    top: `${15 + row * 32}%`,
   }));
 
   // ── JSX ──────────────────────────────────────────────────────────────────────
@@ -153,8 +153,8 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
       <div style={{
         position: 'absolute', inset: 0, zIndex: 1,
         background: 'rgba(255,245,250,0.18)',
-        backdropFilter: 'blur(2px)',
-        WebkitBackdropFilter: 'blur(2px)',
+        backdropFilter: 'blur(1px)',
+        WebkitBackdropFilter: 'blur(1px)',
         pointerEvents: 'none',
       }} />
 
@@ -267,7 +267,7 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
                   : 'linear-gradient(135deg, rgba(161,196,253,0.3), rgba(161,196,253,0.1))',
                 border: `1.5px solid ${i % 2 === 0 ? 'rgba(255,183,197,0.55)' : 'rgba(161,196,253,0.55)'}`,
                 color: i % 2 === 0 ? '#d06080' : '#6090d0',
-                backdropFilter: 'blur(8px)',
+                backdropFilter: 'blur(1px)',
               }}
             >{tag}</span>
           ))}

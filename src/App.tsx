@@ -1,17 +1,19 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import gsap from 'gsap';
 
 import bookmarkDataRaw from './bookmarks.json';
 import { IBookmarkData } from './types/bookmark';
 import SidebarDock from './components/SidebarDock';
-import BookmarkGrid from './components/BookmarkGrid';
 import LoadingScreen from './components/LoadingScreen';
+import BookmarksPage from './pages/BookmarksPage';
+import InterviewsPage from './pages/InterviewsPage';
+import InterviewDetailPage from './pages/InterviewDetailPage';
 
 const bookmarkData = bookmarkDataRaw as IBookmarkData;
 
-// ── Sakura petals background ──────────────────────────────────────────────────
-
+// ── Sakura petals ─────────────────────────────────────────────────────────────
 const SakuraPetals: React.FC = () => {
   const petals = Array.from({ length: 25 }).map((_, i) => {
     const left = Math.random() * 100;
@@ -24,12 +26,9 @@ const SakuraPetals: React.FC = () => {
         key={i}
         className="absolute pointer-events-none rounded-tl-full rounded-br-full rounded-tr-sm rounded-bl-sm"
         style={{
-          left: `${left}%`,
-          top: '-20px',
-          width: `${size}px`,
-          height: `${size}px`,
-          backgroundColor: '#ffb7c5',
-          opacity,
+          left: `${left}%`, top: '-20px',
+          width: `${size}px`, height: `${size}px`,
+          backgroundColor: '#ffb7c5', opacity,
           boxShadow: '0 0 10px rgba(255, 183, 197, 0.5)',
           animation: `fall ${duration}s linear infinite`,
           animationDelay: `-${delay}s`,
@@ -38,27 +37,26 @@ const SakuraPetals: React.FC = () => {
       />
     );
   });
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">{petals}</div>
-  );
+  return <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">{petals}</div>;
 };
 
 // ── App ───────────────────────────────────────────────────────────────────────
-
 const App: React.FC = () => {
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<string>(bookmarkData.categories[0].id);
   const [toast, setToast] = useState<string | null>(null);
-
   const mainRef = useRef<HTMLElement>(null);
   const dockWrapRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-  const activeCategory = bookmarkData.categories.find((c) => c.id === activeTab)!;
+  // 当前激活的 tab 从路径推导
+  const pathParts = location.pathname.split('/');
+  const activeTab = location.pathname.startsWith('/interviews')
+    ? 'interviews'
+    : (pathParts[2] ?? bookmarkData.categories.find(c => c.id !== 'interviews')?.id ?? '');
 
-  // ── 从右侧推入的入场动画 ──
   const handleLoadComplete = useCallback(() => {
     setLoading(false);
-    // 下一帧确保元素已渲染
     requestAnimationFrame(() => {
       gsap.fromTo(
         [mainRef.current, dockWrapRef.current],
@@ -68,15 +66,18 @@ const App: React.FC = () => {
     });
   }, []);
 
-  // 初始隐藏主内容（loading 期间不可见）
   useEffect(() => {
     if (mainRef.current) gsap.set(mainRef.current, { x: '100%', opacity: 0 });
     if (dockWrapRef.current) gsap.set(dockWrapRef.current, { x: '100%', opacity: 0 });
   }, []);
 
-  const handleTabChange = useCallback((newTabId: string) => {
-    setActiveTab(newTabId);
-  }, []);
+  const handleTabChange = useCallback((tabId: string) => {
+    if (tabId === 'interviews') {
+      navigate('/interviews');
+    } else {
+      navigate(`/bookmarks/${tabId}`);
+    }
+  }, [navigate]);
 
   const handleShare = useCallback((e: React.MouseEvent, url: string) => {
     e.preventDefault();
@@ -117,36 +118,29 @@ const App: React.FC = () => {
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
-      {/* 全屏背景渐变 */}
-      <div
-        className="fixed inset-0 -z-10"
+      <div className="fixed inset-0 -z-10"
         style={{ background: 'linear-gradient(135deg, #fff0f5 0%, #e6f2ff 50%, #ffe6f0 100%)' }}
       />
-
       <SakuraPetals />
 
-      {/* 主内容区：铺满视口，底部留出 Dock 高度，初始隐藏在右侧 */}
       <main
         ref={mainRef}
         className="relative z-10 flex flex-col"
         style={{
-          position: 'fixed',
-          inset: 0,
-          paddingBottom: 88,
+          position: 'fixed', inset: 0, paddingBottom: 88,
           background: 'rgba(255,255,255,0.38)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          backdropFilter: 'blur(20px)', WebkitBackdropFilter: 'blur(20px)',
           overflow: 'hidden',
         }}
       >
-        <BookmarkGrid
-          category={activeCategory}
-          allCategories={bookmarkData.categories}
-          onShare={handleShare}
-        />
+        <Routes>
+          <Route path="/" element={<Navigate to={`/bookmarks/${bookmarkData.categories.find(c => c.id !== 'interviews')?.id ?? 'campus'}`} replace />} />
+          <Route path="/bookmarks/:categoryId" element={<BookmarksPage onShare={handleShare} />} />
+          <Route path="/interviews" element={<InterviewsPage />} />
+          <Route path="/interviews/:id" element={<InterviewDetailPage />} />
+        </Routes>
       </main>
 
-      {/* 底部 Dock（fixed，自己管理 z-index） */}
       <div ref={dockWrapRef} style={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 40, pointerEvents: 'none' }}>
         <div style={{ pointerEvents: 'auto' }}>
           <SidebarDock
@@ -157,7 +151,6 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Toast 通知 */}
       {toast && (
         <div className="fixed top-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-xl border border-[#ffb7c5] text-[#FF6B9E] px-6 py-3 rounded-full shadow-[0_8px_30px_rgba(255,183,197,0.4)] flex items-center gap-2 z-50">
           <Check size={18} strokeWidth={3} />

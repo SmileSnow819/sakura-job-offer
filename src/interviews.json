@@ -1,0 +1,119 @@
+[
+  {
+    "id": "1",
+    "company": "迅雷科技",
+    "department": "前端",
+    "time": "2025_1209_19:30",
+    "author": "smile_snow",
+    "tags": ["前端", "DOM", "一面"],
+    "content": "## 迅雷科技\n\n### 面试时间\n\n`2025_12.09-19:30`\n\n### 面试内容\n\n1. 自我介绍\n2. 用 JS 写 CSS 选择器获取元素：获取 div 下面第二个 p 元素的第一个 a 标签的 `innerHTML`\n3. 获取页面所有图片\n4. 岗位技术栈较杂，不涉及 Vue/React，主要考察原生 JS 操作 DOM\n\n### 代码示例\n\n```javascript\nconst html = document.querySelector('div > p:nth-of-type(2) > a')?.innerHTML;\nconst images = Array.from(document.querySelectorAll('img'));\n```"
+  },
+  {
+    "id": "2",
+    "company": "心影随形",
+    "department": "前端",
+    "time": "2025_1210_17:00",
+    "author": "smile_snow",
+    "tags": ["前端", "Nuxt", "一二面"],
+    "content": "## 心影随形\n\n### 一面（12.09 15:00）\n\n1. 项目介绍（重点在 Nuxt + SEO 方面）\n2. 事件循环的过程\n3. 用 Promise 实现 sleep 函数\n4. 反问\n\n### 二面（12.10 17:00）\n\n1. 官网设计你会怎么考虑？（移动端适配、下载按钮、业务埋点如点击次数/完播率、性能监控如 PerformanceObserver API）\n2. 官网博客系统如何进行技术选型\n3. 想找一份怎么样的实习\n4. 能实习多久\n5. 反问\n\n### 代码示例\n\n```javascript\nfunction sleep(ms) {\n  return new Promise((resolve) => setTimeout(resolve, ms));\n}\n```"
+  },
+  {
+    "id": "3",
+    "company": "蓝色光标",
+    "department": "前端",
+    "time": "2025_1211_17:00",
+    "author": "smile_snow",
+    "tags": ["前端", "Vue", "一面"],
+    "content": "## 蓝色光标\n\n### 面试内容\n\n1. 布局你是怎么设计的\n2. 前端性能方面你会有哪些考虑\n3. Vue 父子组件通信方式\n4. Vue computed 和 watch 的区别\n5. 父子组件通信方式选择\n6. Vue ref 和 reactive 的区别\n7. 防抖和节流的区别\n8. 防抖和节流的实现思路\n9. 代码输出结果\n10. AI 页面实现与提示词设计\n11. 反问"
+  },
+  {
+    "id": "4",
+    "company": "腾讯科技",
+    "department": "前端",
+    "time": "2025_1218_19:00",
+    "author": "smile_snow",
+    "tags": ["前端", "计算机网络", "一面"],
+    "content": "## 腾讯科技\n\n### 面试内容\n\n1. 自我介绍\n2. 什么时候能来实习，能实习多久\n3. 目前学过哪些课程\n4. OSI 七层\n5. 为什么计算机网络要分层设计\n6. TCP 和 UDP 的区别\n7. TCP 连接过程\n8. HTTP 常见状态码\n9. HTTP 简单请求和复杂请求\n10. 跨域解决\n11. 项目性能优化与页面卡顿检测\n12. 虚拟滚动列表实现与计算\n13. 平时怎么学前端\n14. 为什么选择前端\n15. 了解游戏引擎吗\n16. DOM 实现小游戏，有无考虑 Canvas\n\n### 代码题\n\n1. 实现计算器：`1*2+3/4`\n2. token 校验：参数排序拼接后 md5 比对"
+  },
+  {
+    "id": "5",
+    "company": "字节跳动",
+    "department": "前端",
+    "time": "2026_0209_19:00",
+    "author": "smile_snow",
+    "tags": ["前端", "基础", "一面"],
+    "content": "## 字节跳动\n\n### 面试时间\n\n`2026_0209-19:00`\n\n### 面试内容\n\n1. 自我介绍\n2. 实习经历深挖\n3. 图片懒加载实现（IntersectionObserver）\n4. 兼容性考虑\n5. 老浏览器如何实现图片懒加载\n6. 多行溢出实现\n7. 单行溢出实现\n8. 多行溢出其他实现与兼容性\n9. 跨域\n10. 闭包\n11. 防抖节流应用（input 搜索）\n12. 第一次请求比第二次慢怎么办\n13. 节流应用（鼠标频繁触发）\n14. 事件冒泡和捕获\n15. 事件委托\n16. git merge 和 git rebase 区别\n17. 为什么要有跨域（域名、端口、协议）\n18. 除了代理还有哪些跨域方案\n19. Vue 多还是 React 多\n20. hooks\n21. hooks 在 React 任意位置都能用吗\n22. Vue2 和 Vue3 响应式区别\n23. diff 中 key 为什么不能用 index\n24. 事件循环输出题（追问事件循环）\n25. 手撕：比较版本号变种（给一个 list 排序）"
+  },
+  {
+    "id": "6",
+    "company": "携程集团",
+    "department": "前端",
+    "time": "2026_0210_17:00",
+    "author": "smile_snow",
+    "tags": ["前端", "React", "一面"],
+    "content": "## 携程集团\n\n### 面试时间\n\n`2026_0210-17:00`\n\n### 面试内容\n\n1. 自我介绍\n2. 项目提问\n3. 项目中如何通过 MCP 服务器自动生成组件库文档（追问 MCP 理解与具体方案）\n4. 国际化 i18n 实现（追问多页签语言加载、浏览器存储、SSR 场景问题）\n5. 团队设计不规范的地方\n6. 移动端无限滚动实现（IntersectionObserver）\n7. 优化 React 渲染周期与动画时序（useCallback/useMemo）\n8. 手撕：均匀递增数组中缺失一个数（二分）\n9. 反问：AI Coding 与部门情况"
+  },
+  {
+    "id": "7",
+    "company": "上海禾赛科技",
+    "department": "前端",
+    "time": "2026_0225_19:00",
+    "author": "smile_snow",
+    "tags": ["前端", "JS基础", "一面"],
+    "content": "## 上海禾赛科技\n\n### 面试时间\n\n`2026_0225-19:00`\n\n### 面试内容\n\n1. 自我介绍\n2. 为什么想换公司\n3. `==` 和 `===` 区别\n4. `{ } === { }` 结果\n5. 地址在堆内存还是栈内存\n6. 堆和栈分别存什么\n7. 新生代和旧生代\n8. 前端跨域方案\n9. 简单请求和复杂请求；GET 一定是简单请求吗\n10. 数组去重（除 Set 之外）；filter + indexOf 时间复杂度\n11. 讲一个项目里复杂点\n12. SSR 为什么要用\n13. SSR / CSR / SSG 的适用场景（是否可提前预渲染）\n14. SSR 缺点\n15. Vue3 哪些能力提升性能\n16. v-model 是语法糖，语法糖含义\n17. 反问"
+  },
+  {
+    "id": "8",
+    "company": "百度",
+    "department": "前端",
+    "time": "2026_0228_19:00",
+    "author": "smile_snow",
+    "tags": ["前端", "事件循环", "一面"],
+    "content": "## 百度\n\n### 面试时间\n\n`2026_0228-19:00`\n\n### 面试内容\n\n1. 自我介绍\n2. 代码输出题（CSS 垂直高度、this 指向、Promise + setTimeout、作用域链）\n3. 是否了解 BFC\n4. 讲事件循环\n5. 浏览器输入 URL 发生了什么\n6. 回流与重绘\n7. 闭包\n8. 项目难题与解决\n9. 为什么项目使用 SSR\n10. 平时怎么用 AI\n11. 如何理解 rules\n12. 手写类似百度搜索页（带分页，共享屏幕）\n13. 为什么用 pnpm（提到幻影依赖）\n14. 幻影依赖产生原理\n15. 手撕：反转链表\n16. 反问：学习建议\n\n### 面试代码题片段\n\n```javascript\nnew Promise((res) => {\n  console.log(1);\n  setTimeout(() => {\n    console.log(2);\n    res('success');\n    console.log(3);\n  }, 0);\n}).then((res) => console.log(res));\n\nconsole.log(4);\n```"
+  },
+  {
+    "id": "9",
+    "company": "快手",
+    "department": "前端",
+    "time": "2026_0305_14:00",
+    "author": "smile_snow",
+    "tags": ["前端", "AI Coding", "一面"],
+    "content": "## 快手\n\n### 面试时间\n\n`2026_0305-14:00`\n\n### 面试内容\n\n1. 自我介绍\n2. AST 静态分析生成文档、让 AI 更好理解上下文的实现细节\n3. rules 的使用，以及是否考虑过 AI Code Review\n4. skill 的使用经验\n5. 与面试官讨论 AI Code Review 的安全问题\n6. 为什么用 IntersectionObserver 替代滚动监听\n7. Git Hash 增量更新机制如何只更新变更文件文档\n8. 骨架屏预加载 + 视口懒加载 + 错误自动兜底的设计\n9. 是否做过移动端或安卓 App\n10. 手撕：数组合并、去重、排序（不用 API）\n11. Vue 多还是 React 多（回答 Vue）\n12. React 手写子父传值（后续改用 Vue）\n13. 建议加强 React（大厂 React 占比更高）\n14. 反问：业务方向与架构设计"
+  },
+  {
+    "id": "10",
+    "company": "有赞",
+    "department": "前端",
+    "time": "2026_0306_14:00",
+    "author": "smile_snow",
+    "tags": ["前端", "AI Agent", "一面"],
+    "content": "## 有赞\n\n### 面试时间\n\n`2026_0306-14:00`\n\n### 面试内容\n\n1. 自我介绍\n2. 心影业务逻辑介绍\n3. 广告素材实现难点\n4. 模型配置相关工作\n5. MCP 自动生成组件文档实现\n6. data-agent 详细介绍\n7. 运行过程详解\n8. 主要贡献\n9. 平时是否使用 AI Coding\n10. 为什么觉得 cursor 好用\n11. 如何理解 Agent\n12. 对 AI 未来发展的看法\n13. 反问"
+  },
+  {
+    "id": "11",
+    "company": "趣链",
+    "department": "前端",
+    "time": "2026_0306_19:00",
+    "author": "smile_snow",
+    "tags": ["前端", "JS基础", "一面"],
+    "content": "## 趣链\n\n### 面试时间\n\n`2026_0306-19:00`\n\n### 面试内容\n\n1. 自我介绍\n2. MCP 服务器如何实现\n3. 文件更新如何检测\n4. JS 数据类型\n5. 如何判断数据类型\n6. 对象类型判断\n7. JS 数组常见方法\n8. splice 的三个参数\n9. CSS 垂直居中方法\n10. 绝对定位元素相对于谁定位\n11. static 可以被定位吗\n12. 平时如何使用 AI Coding（详细）\n13. git：在 a 分支把 b 分支合并到 c 分支怎么做\n14. git：在 a 分支 cherry-pick b 分支的几个 commit 怎么做\n15. Vue 多还是 React 多\n16. Vue 计算属性实现\n17. React hooks 熟悉度\n18. 反问"
+  },
+  {
+    "id": "12",
+    "company": "快手",
+    "department": "前端",
+    "time": "2026_0309_15:00",
+    "author": "smile_snow",
+    "tags": ["前端", "React", "一面"],
+    "content": "## 快手\n\n### 面试时间\n\n`2026_0309-15:00`\n\n### 面试内容\n\n1. 面试官介绍抖音、PDD、京东、淘宝、快手电商布局\n2. 介绍前端团队方向\n3. C 端 App、B 端商家服务平台、内容审核与监测\n4. 自我介绍\n5. AI 对话框长对话和打字机效果是否考虑开源库\n6. 未使用库时如何实现（SSE + setTimeout）\n7. React useEffect 第二个参数三种情况\n8. React.memo 和 useMemo 区别\n9. 对前端热点方向的理解\n10. cursor 编辑器是自费还是公司提供\n11. 反问：对实习生的期待\n\n### 面试官给的建议\n\n1. JS 基础要扎实\n2. 项目经验要丰富\n3. 关注前端最新方向\n4. 保持对前端的热爱\n5. 做好校招储备"
+  },
+  {
+    "id": "13",
+    "company": "VIVO",
+    "department": "前端",
+    "time": "2026_0312_15:00",
+    "author": "smile_snow",
+    "tags": ["前端", "AI工程化", "一面"],
+    "content": "## VIVO\n\n### 面试时间\n\n`2026_0312-15:00`\n\n### 面试内容\n\n1. 自我介绍\n2. AST 静态分析：TS 类型与注释自动转 AI 可读索引如何实现\n3. Git Hash 增量设计：Hash 冲突处理、如何确保只更新变更文件文档\n4. MCP 自动生成组件文档库实现细节\n5. 多分支团队开发下如何保证组件文档最新\n6. 平时如何使用 AI 编码工具\n7. 大量 AI 生成代码时如何保证质量（AI Code Review、多 AI 交叉 Review）\n8. 需求完成后如何测试（手动 + 可自动模拟执行测试）\n9. MCP 和 Skill 的区别\n10. 反问\n11. 业务方向：AI 全栈、内部工具、ToB 与 ToC 皆有"
+  }
+]
