@@ -24,6 +24,13 @@ const TAG_COLORS = [
   { bg: 'rgba(16, 185, 129, 0.08)', color: '#047857', border: 'rgba(16,185,129,0.22)' },
 ];
 
+const OFFER_TAG_COLORS = [
+  { bg: 'rgba(245, 158, 11, 0.1)', color: '#d97706', border: 'rgba(245,158,11,0.3)' },
+  { bg: 'rgba(249, 115, 22, 0.1)', color: '#ea580c', border: 'rgba(249,115,22,0.25)' },
+  { bg: 'rgba(234, 179, 8, 0.1)', color: '#ca8a04', border: 'rgba(234,179,8,0.25)' },
+  { bg: 'rgba(251, 191, 36, 0.1)', color: '#b45309', border: 'rgba(251,191,36,0.3)' },
+];
+
 const InterviewCard: React.FC<IInterviewCardProps> = ({
   interview,
   index,
@@ -32,6 +39,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
   const cardRef = useRef<HTMLDivElement>(null);
   const [expanded, setExpanded] = useState(false);
   const { display, time } = parseTime(interview.time);
+  const isOffer = !!interview.isOffer;
 
   const normalizedContent = useMemo(() => {
     return interview.content.replace(/^##\s.+\n+/m, '').trim();
@@ -41,12 +49,15 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
     return Array.from(new Set(interview.tags.map((tag) => tag.trim())));
   }, [interview.tags]);
 
+  const tagColors = isOffer ? OFFER_TAG_COLORS : TAG_COLORS;
+
   const handleMouseEnter = () => {
     gsap.to(cardRef.current, {
       y: -4,
       scale: 1.01,
-      borderColor: 'rgba(99,102,241,0.22)',
-      boxShadow: '0 14px 26px rgba(15,23,42,0.16)',
+      boxShadow: isOffer
+        ? '0 14px 30px rgba(245,158,11,0.22)'
+        : '0 14px 26px rgba(15,23,42,0.16)',
       duration: 0.2,
       ease: 'power2.out',
     });
@@ -56,8 +67,9 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
     gsap.to(cardRef.current, {
       y: 0,
       scale: 1,
-      borderColor: 'rgba(15,23,42,0.06)',
-      boxShadow: '0 2px 10px rgba(15,23,42,0.08)',
+      boxShadow: isOffer
+        ? '0 4px 16px rgba(245,158,11,0.15)'
+        : '0 2px 10px rgba(15,23,42,0.08)',
       duration: 0.2,
       ease: 'power2.out',
     });
@@ -66,21 +78,48 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
   return (
     <div
       ref={cardRef}
+      className={isOffer ? 'offer-rainbow-border' : undefined}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => setExpanded((prev) => !prev)}
       style={{
         background: '#fff',
         borderRadius: 16,
-        border: '1px solid rgba(15,23,42,0.06)',
-        boxShadow: '0 2px 10px rgba(15,23,42,0.08)',
+        border: isOffer ? 'none' : '1px solid rgba(15,23,42,0.06)',
+        boxShadow: isOffer
+          ? '0 4px 16px rgba(245,158,11,0.15)'
+          : '0 2px 10px rgba(15,23,42,0.08)',
         overflow: 'hidden',
         cursor: 'pointer',
         marginBottom: 10,
         breakInside: 'avoid',
+        position: 'relative',
       }}
     >
-      <div style={{ padding: '10px 10px 11px' }}>
+      {isOffer && (
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            borderRadius: 16,
+            pointerEvents: 'none',
+            background: 'linear-gradient(135deg, rgba(245,158,11,0.04) 0%, transparent 40%, rgba(234,179,8,0.04) 100%)',
+            zIndex: 0,
+          }}
+        />
+      )}
+
+      {isOffer && (
+        <div
+          style={{
+            height: 3,
+            background: 'linear-gradient(90deg, #f59e0b, #f97316, #eab308)',
+            animation: 'offerShine 2s ease-in-out infinite',
+          }}
+        />
+      )}
+
+      <div style={{ padding: '10px 10px 11px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <div
@@ -88,7 +127,9 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 width: 18,
                 height: 18,
                 borderRadius: '50%',
-                background: '#0f172a',
+                background: isOffer
+                  ? 'linear-gradient(135deg, #f59e0b, #f97316)'
+                  : '#0f172a',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -100,20 +141,45 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
               {interview.author[0]}
             </div>
             <span style={{ fontSize: 10, color: '#475569', fontWeight: 700 }}>{interview.author}</span>
+            {isOffer && (
+              <span
+                style={{
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 2,
+                  fontSize: 9,
+                  fontWeight: 900,
+                  color: '#fff',
+                  background: 'linear-gradient(135deg, #f59e0b, #f97316)',
+                  padding: '1px 7px',
+                  borderRadius: 999,
+                  boxShadow: '0 2px 6px rgba(245,158,11,0.3)',
+                  letterSpacing: 0.8,
+                  animation: 'offerShine 2s ease-in-out infinite',
+                }}
+              >
+                🎉 OFFER
+              </span>
+            )}
           </div>
           <div style={{ textAlign: 'right' }}>
-            <div style={{ fontSize: 10, fontWeight: 700, color: '#64748b' }}>{display}</div>
-            <div style={{ fontSize: 10, color: '#94a3b8' }}>{time}</div>
+            <div style={{ fontSize: 10, fontWeight: 700, color: isOffer ? '#d97706' : '#64748b' }}>{display}</div>
+            <div style={{ fontSize: 10, color: isOffer ? '#f59e0b' : '#94a3b8' }}>{time}</div>
           </div>
         </div>
 
-        <div style={{ fontSize: 13, fontWeight: 800, color: '#0f172a', marginBottom: 5 }}>
+        <div style={{
+          fontSize: 13,
+          fontWeight: 800,
+          color: isOffer ? '#92400e' : '#0f172a',
+          marginBottom: 5,
+        }}>
           {interview.company}
         </div>
 
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginBottom: 6 }}>
           {dedupedTags.map((tag, ti) => {
-            const c = TAG_COLORS[ti % TAG_COLORS.length];
+            const c = tagColors[ti % tagColors.length];
             return (
               <span
                 key={tag}
@@ -171,8 +237,8 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 return (
                   <code
                     style={{
-                      background: 'rgba(99,102,241,0.1)',
-                      color: '#4f46e5',
+                      background: isOffer ? 'rgba(245,158,11,0.1)' : 'rgba(99,102,241,0.1)',
+                      color: isOffer ? '#d97706' : '#4f46e5',
                       padding: '1px 4px',
                       borderRadius: 4,
                       fontSize: 10,
@@ -194,10 +260,10 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 return (
                   <blockquote
                     style={{
-                      borderLeft: '2px solid #93c5fd',
+                      borderLeft: isOffer ? '2px solid #f59e0b' : '2px solid #93c5fd',
                       margin: '5px 0',
                       color: '#475569',
-                      background: 'rgba(147,197,253,0.12)',
+                      background: isOffer ? 'rgba(245,158,11,0.06)' : 'rgba(147,197,253,0.12)',
                       borderRadius: '0 6px 6px 0',
                       padding: '4px 8px',
                     }}
@@ -220,7 +286,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 return <td style={{ padding: '3px 6px', borderBottom: '1px solid rgba(148,163,184,0.2)' }}>{children}</td>;
               },
               strong({ children }) {
-                return <strong style={{ color: '#4338ca', fontWeight: 800 }}>{children}</strong>;
+                return <strong style={{ color: isOffer ? '#d97706' : '#4338ca', fontWeight: 800 }}>{children}</strong>;
               },
               li({ children }) {
                 return <li style={{ marginBottom: 1 }}>{children}</li>;

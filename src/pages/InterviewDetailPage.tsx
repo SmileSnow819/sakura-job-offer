@@ -52,6 +52,7 @@ const InterviewDetailPage: React.FC = () => {
 
   const { display, time } = parseTime(interview.time);
   const index = interviews.findIndex(iv => iv.id === id);
+  const isOffer = !!interview.isOffer;
 
   return (
     <div ref={pageRef} style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
@@ -75,27 +76,58 @@ const InterviewDetailPage: React.FC = () => {
           ← 返回列表
         </button>
         <div style={{ fontSize: 11, color: '#B0A090' }}>面经详情</div>
+        {isOffer && (
+          <span
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 3,
+              fontSize: 11,
+              fontWeight: 900,
+              color: '#fff',
+              background: 'linear-gradient(135deg, #f59e0b, #f97316)',
+              padding: '3px 12px',
+              borderRadius: 999,
+              boxShadow: '0 2px 8px rgba(245,158,11,0.4)',
+              letterSpacing: 1,
+              animation: 'offerShine 2s ease-in-out infinite',
+            }}
+          >
+            🎉 已拿到 OFFER
+          </span>
+        )}
       </div>
 
       {/* 内容区 */}
       <div ref={contentRef} style={{ flex: 1, overflowY: 'auto', padding: '16px 24px 24px', scrollbarWidth: 'none' }}>
         {/* 卡片头部 */}
         <div style={{
-          background: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(16px)',
-          borderRadius: 20, border: '1px solid rgba(255,183,197,0.25)',
+          background: isOffer ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.85)',
+          backdropFilter: 'blur(16px)',
+          borderRadius: 20,
+          border: isOffer ? '1.5px solid rgba(245,158,11,0.25)' : '1px solid rgba(255,183,197,0.25)',
           overflow: 'hidden', marginBottom: 16,
+          boxShadow: isOffer ? '0 8px 30px rgba(245,158,11,0.12)' : undefined,
         }}>
           <div style={{
             height: 6,
-            background: `linear-gradient(90deg, hsl(${340 - index * 25},80%,65%), hsl(${220 + index * 20},75%,70%))`,
+            background: isOffer
+              ? 'linear-gradient(90deg, #f59e0b, #f97316, #eab308, #f59e0b)'
+              : `linear-gradient(90deg, hsl(${340 - index * 25},80%,65%), hsl(${220 + index * 20},75%,70%))`,
+            backgroundSize: isOffer ? '200% 100%' : undefined,
+            animation: isOffer ? 'offerShine 2s ease-in-out infinite' : undefined,
           }} />
           <div style={{ padding: '20px 24px' }}>
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', marginBottom: 12 }}>
               <div>
-                <div style={{ fontSize: 24, fontWeight: 900, color: '#3D2B1F', marginBottom: 4 }}>
+                <div style={{
+                  fontSize: 24, fontWeight: 900, marginBottom: 4,
+                  color: isOffer ? '#92400e' : '#3D2B1F',
+                }}>
                   {interview.company}
+                  {isOffer && <span style={{ marginLeft: 8, fontSize: 20 }}>🏆</span>}
                 </div>
-                <div style={{ fontSize: 14, color: '#8D6E63' }}>{interview.department}</div>
+                <div style={{ fontSize: 14, color: isOffer ? '#b45309' : '#8D6E63' }}>{interview.department}</div>
               </div>
               <div style={{ textAlign: 'right' }}>
                 <div style={{ fontSize: 13, fontWeight: 700, color: '#8D6E63' }}>{display}</div>

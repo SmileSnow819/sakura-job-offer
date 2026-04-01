@@ -22,4 +22,5 @@ export interface IInterview {
   author: string;
   tags: string[];
   content: string;    // Markdown 格式
+  isOffer?: boolean;
 }

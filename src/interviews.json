@@ -24,6 +24,7 @@
     "time": "2025_1211_17:00",
     "author": "smile_snow",
     "tags": ["前端", "Vue", "一面"],
+    "isOffer": true,
     "content": "## 蓝色光标\n\n### 面试内容\n\n1. 布局你是怎么设计的\n2. 前端性能方面你会有哪些考虑\n3. Vue 父子组件通信方式\n4. Vue computed 和 watch 的区别\n5. 父子组件通信方式选择\n6. Vue ref 和 reactive 的区别\n7. 防抖和节流的区别\n8. 防抖和节流的实现思路\n9. 代码输出结果\n10. AI 页面实现与提示词设计\n11. 反问"
   },
   {
@@ -78,6 +79,7 @@
     "time": "2026_0305_14:00",
     "author": "smile_snow",
     "tags": ["前端", "AI Coding", "一面"],
+    "isOffer": true,
     "content": "## 快手\n\n### 面试时间\n\n`2026_0305-14:00`\n\n### 面试内容\n\n1. 自我介绍\n2. AST 静态分析生成文档、让 AI 更好理解上下文的实现细节\n3. rules 的使用，以及是否考虑过 AI Code Review\n4. skill 的使用经验\n5. 与面试官讨论 AI Code Review 的安全问题\n6. 为什么用 IntersectionObserver 替代滚动监听\n7. Git Hash 增量更新机制如何只更新变更文件文档\n8. 骨架屏预加载 + 视口懒加载 + 错误自动兜底的设计\n9. 是否做过移动端或安卓 App\n10. 手撕：数组合并、去重、排序（不用 API）\n11. Vue 多还是 React 多（回答 Vue）\n12. React 手写子父传值（后续改用 Vue）\n13. 建议加强 React（大厂 React 占比更高）\n14. 反问：业务方向与架构设计"
   },
   {
@@ -105,6 +107,7 @@
     "time": "2026_0309_15:00",
     "author": "smile_snow",
     "tags": ["前端", "React", "一面"],
+    "isOffer": true,
     "content": "## 快手\n\n### 面试时间\n\n`2026_0309-15:00`\n\n### 面试内容\n\n1. 面试官介绍抖音、PDD、京东、淘宝、快手电商布局\n2. 介绍前端团队方向\n3. C 端 App、B 端商家服务平台、内容审核与监测\n4. 自我介绍\n5. AI 对话框长对话和打字机效果是否考虑开源库\n6. 未使用库时如何实现（SSE + setTimeout）\n7. React useEffect 第二个参数三种情况\n8. React.memo 和 useMemo 区别\n9. 对前端热点方向的理解\n10. cursor 编辑器是自费还是公司提供\n11. 反问：对实习生的期待\n\n### 面试官给的建议\n\n1. JS 基础要扎实\n2. 项目经验要丰富\n3. 关注前端最新方向\n4. 保持对前端的热爱\n5. 做好校招储备"
   },
   {
