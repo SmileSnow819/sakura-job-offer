@@ -10,6 +10,7 @@ const SUBTITLE = '精心整理的校招春招资源，为你助力';
 const TAGS = ['春招', '秋招', '实习', 'Offer'];
 
 const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
+  const [canSkip, setCanSkip] = React.useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const sakuraRefs = useRef<(HTMLDivElement | null)[]>([]);
   const charRefs = useRef<(HTMLSpanElement | null)[]>([]);
@@ -22,6 +23,7 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
   const emojiRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const skipTimer = setTimeout(() => setCanSkip(true), 1500);
     const tl = gsap.timeline();
 
     gsap.set([emojiRef.current, progressBarRef.current], { opacity: 0, y: 24 });
@@ -46,7 +48,10 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
       .to(sakuraRefs.current, { y: 80, opacity: 0, stagger: 0.03, duration: 0.38, ease: 'power2.in' }, '-=0.2')
       .to(containerRef.current, { opacity: 0, scale: 0.97, duration: 0.42, ease: 'power2.in', onComplete }, '-=0.08');
 
-    return () => { tl.kill(); };
+    return () => {
+      tl.kill();
+      clearTimeout(skipTimer);
+    };
   }, [onComplete]);
 
   // ── 静态数据 ─────────────────────────────────────────────────────────────────
@@ -294,6 +299,26 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
           </div>
           <span style={{ fontSize: 12, color: '#C090A0', letterSpacing: 0.8 }}>资源加载中…</span>
         </div>
+
+        {canSkip && (
+          <button
+            onClick={onComplete}
+            style={{
+              marginTop: 16,
+              padding: '8px 20px',
+              borderRadius: 999,
+              border: '1.5px solid rgba(255,183,197,0.4)',
+              background: 'rgba(255,255,255,0.6)',
+              color: '#C090A0',
+              fontSize: 12,
+              fontWeight: 600,
+              cursor: 'pointer',
+              backdropFilter: 'blur(8px)',
+            }}
+          >
+            跳过动画
+          </button>
+        )}
 
       </div>{/* end 中心内容 */}
     </div>

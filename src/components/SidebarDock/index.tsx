@@ -15,7 +15,12 @@ interface ISidebarDockProps {
   onTabChange: (tabId: string) => void;
 }
 
-const ICON_SIZE = 44;
+const getIconSize = () => {
+  if (typeof window === 'undefined') return 44;
+  return window.innerWidth <= 768 ? 48 : 44;
+};
+
+const ICON_SIZE = getIconSize();
 const ICON_GAP = 10;
 
 const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTabChange }) => {
@@ -30,13 +35,14 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
         {/* Logo */}
         <div
           className="flex items-center justify-center rounded-[13px] text-white shadow-sm flex-shrink-0"
-          style={{ width: ICON_SIZE, height: ICON_SIZE, background: 'linear-gradient(135deg,#FFB7C5,#a1c4fd)' }}
+          style={{ width: ICON_SIZE, height: ICON_SIZE, background: 'linear-gradient(135deg, var(--pink-400), var(--blue-400))' }}
         >
           <Sparkles size={19} />
         </div>
 
         {/* 分隔线 */}
-        <div className="h-6 w-px rounded-full bg-[#FFB7C5]/35 flex-shrink-0" style={{ margin: '0 2px' }} />
+        <div className="h-6 w-px rounded-full flex-shrink-0"
+          style={{ margin: '0 2px', background: 'var(--pink-300)' }} />
 
         {/* Tab 图标列表 */}
         <ul className="flex flex-row items-center list-none m-0 p-0" style={{ gap: ICON_GAP }}>
@@ -69,13 +75,13 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
                     background: 'rgba(255,255,255,0.96)',
                     backdropFilter: 'blur(12px)',
                     WebkitBackdropFilter: 'blur(12px)',
-                    color: '#5D4037',
+                    color: 'var(--neutral-800)',
                     fontSize: 12,
                     fontWeight: 700,
                     padding: '5px 14px',
                     borderRadius: 12,
-                    border: '1px solid rgba(255,183,197,0.55)',
-                    boxShadow: '0 4px 18px rgba(255,107,158,0.2)',
+                    border: '1px solid var(--pink-300)',
+                    boxShadow: '0 4px 18px var(--pink-400)',
                     letterSpacing: 0.3,
                   }}>
                     {cat.name}
@@ -87,13 +93,13 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
                   className="w-full h-full flex items-center justify-center rounded-[13px] relative"
                   style={{
                     background: isActive
-                      ? 'linear-gradient(135deg,#ffe6f0,#fff)'
+                      ? 'linear-gradient(135deg, var(--pink-50), var(--neutral-50))'
                       : isHovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.6)',
-                    border: isActive ? '1.5px solid rgba(255,183,197,0.65)' : '1.5px solid rgba(255,255,255,0.75)',
-                    color: isActive || isHovered ? '#FF6B9E' : '#8D6E63',
+                    border: isActive ? '1.5px solid var(--pink-400)' : '1.5px solid rgba(255,255,255,0.75)',
+                    color: isActive || isHovered ? 'var(--pink-500)' : 'var(--neutral-600)',
                     boxShadow: isActive
-                      ? '0 4px 14px rgba(255,107,158,0.2)'
-                      : isHovered ? '0 6px 18px rgba(255,107,158,0.18)' : '0 2px 6px rgba(0,0,0,0.05)',
+                      ? '0 4px 14px var(--pink-400)'
+                      : isHovered ? '0 6px 18px var(--pink-400)' : '0 2px 6px rgba(0,0,0,0.05)',
                     transform: isHovered && !isActive ? 'scale(1.12) translateY(-3px)' : 'none',
                     transition: 'all 0.15s ease',
                     cursor: 'pointer',
@@ -103,7 +109,16 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
                 </button>
 
                 {isActive && (
-                  <span className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-1 h-1 rounded-full bg-[#FF6B9E]" />
+                  <span style={{
+                    position: 'absolute',
+                    bottom: '-0.375rem',
+                    left: '50%',
+                    transform: 'translateX(-50%)',
+                    width: '0.25rem',
+                    height: '0.25rem',
+                    borderRadius: '9999px',
+                    background: 'var(--pink-500)'
+                  }} />
                 )}
               </li>
             );

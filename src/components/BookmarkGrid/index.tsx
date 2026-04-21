@@ -16,10 +16,17 @@ interface IBookmarkGridProps {
 
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
-const CARD_W = 280;
-const CARD_H = 390;
+
+const getResponsiveCardSize = () => {
+  if (typeof window === 'undefined') return { width: 280, height: 390 };
+  return window.innerWidth <= 768
+    ? { width: 240, height: 340 }
+    : { width: 280, height: 390 };
+};
+
+const { width: CARD_W, height: CARD_H } = getResponsiveCardSize();
 const X_GAP = 40;
-const PITCH = CARD_W + X_GAP; // 320px
+const PITCH = CARD_W + X_GAP;
 
 const SLOT_STYLES: Record<number, { scale: number; opacity: number; zIndex: number; y: number }> = {
   [-2]: { scale: 0.72, opacity: 0.28, zIndex: 1,  y: 18 },
@@ -118,7 +125,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
     gsap.to(el, { rotateX: rx, rotateY: ry, duration: 0.3, ease: 'power2.out', transformPerspective: 900, overwrite: 'auto' });
   };
   const handleMouseLeaveCard = () => {
-    gsap.to(cardRef.current, { rotateX: 0, rotateY: 0, duration: 0.5, ease: 'back.out(1.2)', overwrite: 'auto' });
+    gsap.to(cardRef.current, { rotateX: 0, rotateY: 0, duration: 0.4, ease: 'power2.out', overwrite: 'auto' });
     gsap.to(shineRef.current, { opacity: 0, duration: 0.3 });
   };
   const handleMouseEnterCard = () => {
@@ -137,18 +144,18 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
     gsap.to(glowRef.current, { opacity: 1, scale: 1.5, duration: 0.4, ease: 'power2.out' });
   };
   const handleFaviconLeave = () => {
-    gsap.to(faviconWrapRef.current, { y: 0, scale: 1, duration: 0.4, ease: 'back.out(1.5)' });
+    gsap.to(faviconWrapRef.current, { y: 0, scale: 1, duration: 0.35, ease: 'power2.out' });
     gsap.to(glowRef.current, { opacity: 0, scale: 1, duration: 0.3 });
   };
 
   // ── 按钮弹弹 ──
-  const btnEnter = (el: HTMLElement | null) => gsap.to(el, { scale: 1.1, y: -2, duration: 0.22, ease: 'back.out(2)' });
-  const btnLeave = (el: HTMLElement | null) => gsap.to(el, { scale: 1, y: 0, duration: 0.22, ease: 'back.out(2)' });
+  const btnEnter = (el: HTMLElement | null) => gsap.to(el, { scale: 1.08, y: -2, duration: 0.25, ease: 'power2.out' });
+  const btnLeave = (el: HTMLElement | null) => gsap.to(el, { scale: 1, y: 0, duration: 0.25, ease: 'power2.out' });
   const btnClick = (el: HTMLElement | null) => {
     gsap.timeline()
-      .to(el, { scale: 0.88, duration: 0.1, ease: 'power2.in' })
-      .to(el, { scale: 1.1, duration: 0.18, ease: 'back.out(3)' })
-      .to(el, { scale: 1, duration: 0.14, ease: 'power2.out' });
+      .to(el, { scale: 0.92, duration: 0.08, ease: 'power2.in' })
+      .to(el, { scale: 1.05, duration: 0.15, ease: 'power2.out' })
+      .to(el, { scale: 1, duration: 0.12, ease: 'power2.out' });
   };
 
   // ── 收藏爱心 + 粒子爆炸 ──
@@ -201,15 +208,15 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
         left: '50%', top: '50%',
         marginLeft: -CARD_W / 2, marginTop: -CARD_H / 2,
         borderRadius: 20,
-        background: 'linear-gradient(145deg, rgba(255,255,255,0.94), rgba(255,230,240,0.88))',
+        background: 'linear-gradient(145deg, var(--neutral-50), var(--pink-50))',
         backdropFilter: 'blur(16px)',
-        border: isActive ? '2px solid rgba(255,107,158,0.65)' : '1.5px solid rgba(255,183,197,0.28)',
+        border: isActive ? '2px solid var(--pink-500)' : '1.5px solid var(--pink-200)',
         boxShadow: isActive
-          ? '0 12px 40px rgba(255,107,158,0.22), 0 2px 8px rgba(161,196,253,0.18)'
+          ? '0 12px 40px var(--pink-400), 0 2px 8px var(--blue-400)'
           : '0 4px 16px rgba(0,0,0,0.06)',
         animation: isActive ? 'strokePulse 2s ease-in-out infinite' : 'none',
         display: 'flex', flexDirection: 'column', alignItems: 'center',
-        padding: '28px 24px 22px',
+        padding: '32px 24px 24px',
         cursor: 'pointer', userSelect: 'none',
         willChange: 'transform, opacity',
         overflow: 'hidden', transformStyle: 'preserve-3d',
@@ -225,7 +232,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
       {/* 涟漪层 */}
       <div ref={rippleRef} style={{
         position: 'absolute', width: 60, height: 60, borderRadius: '50%',
-        background: 'radial-gradient(circle, rgba(161,196,253,0.45), transparent 70%)',
+        background: 'radial-gradient(circle, var(--blue-400), transparent 70%)',
         pointerEvents: 'none', display: 'none', marginLeft: -30, marginTop: -30, zIndex: 99,
       }} />
 
@@ -238,12 +245,14 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
         onClick={handleLike}
         onMouseEnter={() => btnEnter(heartBtnRef.current)}
         onMouseLeave={() => btnLeave(heartBtnRef.current)}
+        aria-label={liked ? '取消收藏' : '收藏'}
+        aria-pressed={liked}
         style={{
           position: 'absolute', top: 14, right: 14,
           width: 32, height: 32, borderRadius: '50%', border: 'none',
-          background: liked ? 'linear-gradient(135deg,#FF6B9E,#ff8fb8)' : 'rgba(255,183,197,0.2)',
+          background: liked ? 'linear-gradient(135deg, var(--pink-500), var(--pink-400))' : 'var(--pink-100)',
           cursor: 'pointer', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: liked ? '0 3px 10px rgba(255,107,158,0.4)' : 'none',
+          boxShadow: liked ? '0 3px 10px var(--pink-400)' : 'none',
           transition: 'background 0.3s, box-shadow 0.3s',
         }}
       >
@@ -254,19 +263,20 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
       <a
         href={link.url} target="_blank" rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
+        aria-label={`${link.title}的网站图标`}
         style={{ textDecoration: 'none', marginBottom: 12, flexShrink: 0, position: 'relative', display: 'block' }}
         onMouseEnter={handleFaviconEnter} onMouseLeave={handleFaviconLeave}
       >
         <div ref={glowRef} style={{
           position: 'absolute', inset: -12, borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(255,183,197,0.6) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, var(--pink-400) 0%, transparent 70%)',
           opacity: 0, pointerEvents: 'none',
         }} />
         <div ref={faviconWrapRef} style={{
           width: 88, height: 88, borderRadius: 22,
-          background: 'linear-gradient(135deg, #fff0f5, #e6f2ff)',
+          background: 'linear-gradient(135deg, var(--pink-50), var(--blue-50))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: '0 6px 20px rgba(255,183,197,0.35), inset 0 1px 0 rgba(255,255,255,0.95)',
+          boxShadow: '0 6px 20px var(--pink-400), inset 0 1px 0 rgba(255,255,255,0.95)',
         }}>
           <img src={getFavicon(link.url)} alt={link.title}
             style={{ width: 52, height: 52, objectFit: 'contain', borderRadius: 10 }}
@@ -275,52 +285,55 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
       </a>
 
       {/* 主标题 */}
-      <h3 style={{
-        fontSize: 16, fontWeight: 800, color: '#4A3728', lineHeight: 1.45,
-        margin: '0 0 6px', textAlign: 'center', width: '100%',
-        display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
-      }}>
+      <h3
+        style={{
+          fontSize: 16, fontWeight: 800, color: 'var(--neutral-800)', lineHeight: 1.45,
+          margin: '0 0 6px', textAlign: 'center', width: '100%',
+          display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
+        }}
+        title={link.title}
+      >
         {link.title}
       </h3>
 
       {/* hostname 胶囊 */}
       <div style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        background: 'rgba(255,183,197,0.15)', border: '1px solid rgba(255,183,197,0.35)',
-        borderRadius: 999, padding: '3px 10px', marginBottom: 10,
+        background: 'var(--pink-100)', border: '1px solid var(--pink-200)',
+        borderRadius: 999, padding: '4px 12px', marginBottom: 8,
       }}>
-        <span style={{ width: 6, height: 6, borderRadius: '50%', background: '#FFB7C5', display: 'inline-block', flexShrink: 0 }} />
-        <span style={{ fontSize: 11, color: '#A1887F', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 160 }}>
+        <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--pink-400)', display: 'inline-block', flexShrink: 0 }} />
+        <span style={{ fontSize: 11, color: 'var(--neutral-700)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', maxWidth: 160 }}>
           {hostname}
         </span>
       </div>
 
       {/* 分隔线 */}
       <div style={{
-        width: '80%', height: 1.5, borderRadius: 999, marginBottom: 10, flexShrink: 0,
-        background: 'linear-gradient(90deg, transparent, rgba(255,183,197,0.5) 30%, rgba(161,196,253,0.5) 70%, transparent)',
+        width: '80%', height: 1.5, borderRadius: 999, marginBottom: 8, flexShrink: 0,
+        background: 'linear-gradient(90deg, transparent, var(--pink-300) 30%, var(--blue-300) 70%, transparent)',
       }} />
 
       {/* 打字机鼓励语 */}
       <div style={{
         height: 72, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        marginBottom: 10, padding: '0 4px', flexShrink: 0,
+        marginBottom: 8, padding: '0 4px', flexShrink: 0,
       }}>
         <span ref={mottoRef} style={{
           display: 'block',
           fontSize: isActive ? 12 : 13,
-          color: isActive ? '#b06070' : 'rgba(160,96,112,0.5)',
+          color: isActive ? 'var(--pink-600)' : 'var(--neutral-700)',
           fontStyle: isActive ? 'italic' : 'normal',
-          fontFamily: isActive ? 'inherit' : 'monospace',
+          fontFamily: isActive ? 'Crimson Pro, Georgia, serif' : 'ui-monospace, monospace',
           textAlign: 'center', lineHeight: 1.7,
-          background: isActive ? 'rgba(255,183,197,0.12)' : 'transparent',
+          background: isActive ? 'var(--pink-100)' : 'transparent',
           borderRadius: 8, padding: isActive ? '6px 12px' : '0',
           letterSpacing: isActive ? 0.3 : 1.5,
         }} />
       </div>
 
       {/* 按钮区 */}
-      <div style={{ display: 'flex', gap: 10, marginTop: 'auto' }}>
+      <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
         <a
           ref={visitBtnRef}
           href={link.url}
@@ -329,13 +342,14 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           onClick={(e) => { e.stopPropagation(); btnClick(visitBtnRef.current); }}
           onMouseEnter={() => btnEnter(visitBtnRef.current)}
           onMouseLeave={() => btnLeave(visitBtnRef.current)}
+          aria-label={`访问${link.title}`}
           style={{
-            display: 'inline-flex', alignItems: 'center', gap: 5,
-            padding: '9px 22px', borderRadius: 999,
-            background: 'linear-gradient(135deg,#FF6B9E,#ff8fb8)',
+            display: 'inline-flex', alignItems: 'center', gap: 4,
+            padding: '8px 20px', borderRadius: 999,
+            background: 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
             color: '#fff', fontSize: 13, fontWeight: 700,
             textDecoration: 'none',
-            boxShadow: '0 4px 14px rgba(255,107,158,0.35)',
+            boxShadow: '0 4px 14px var(--pink-400)',
           }}
         >
           ↗ 访问
@@ -345,11 +359,12 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           onClick={(e) => { onShare(e, link.url); btnClick(shareBtnRef.current); }}
           onMouseEnter={() => btnEnter(shareBtnRef.current)}
           onMouseLeave={() => btnLeave(shareBtnRef.current)}
+          aria-label={`分享${link.title}`}
           style={{
-            padding: '9px 16px', borderRadius: 999,
-            background: 'rgba(161,196,253,0.18)',
-            border: '1.5px solid rgba(161,196,253,0.45)',
-            color: '#6B9ADE', cursor: 'pointer', fontSize: 13, fontWeight: 600,
+            padding: '8px 16px', borderRadius: 999,
+            background: 'var(--blue-100)',
+            border: '1.5px solid var(--blue-400)',
+            color: 'var(--blue-500)', cursor: 'pointer', fontSize: 13, fontWeight: 600,
           }}
         >
           ⬡ 分享
@@ -475,9 +490,29 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     if (!isDraggingRef.current) return;
     isDraggingRef.current = false;
     resetIdleTimer();
-    if (Math.abs(dx) > 40) {
+    if (Math.abs(dx) > 20) {
       setActiveIndex((prev) => {
         const next = ((prev + (dx < 0 ? 1 : -1)) % total + total) % total;
+        animateCards(next);
+        return next;
+      });
+    }
+  }, [total, animateCards, resetIdleTimer]);
+
+  const handleKeyDown = useCallback((e: React.KeyboardEvent) => {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      resetIdleTimer();
+      setActiveIndex((prev) => {
+        const next = ((prev - 1) % total + total) % total;
+        animateCards(next);
+        return next;
+      });
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      resetIdleTimer();
+      setActiveIndex((prev) => {
+        const next = (prev + 1) % total;
         animateCards(next);
         return next;
       });
@@ -517,12 +552,17 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   // 删除原来的第二个 useLayoutEffect（入场逻辑已合并上方）
 
   return (
-    <div
+    <section
       className="flex flex-col"
       style={{ height: '100%' }}
+      role="region"
+      aria-label={`${displayedCategory.name}书签轮播`}
+      aria-live="polite"
+      tabIndex={0}
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}
       onPointerUp={handlePointerUp}
+      onKeyDown={handleKeyDown}
     >
       {/* strokePulse keyframes */}
       <style>{`
@@ -535,9 +575,17 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
 
       {/* 标题行 */}
       <header ref={headerRef} className="mb-6 flex items-center gap-3 flex-shrink-0 px-8 pt-6">
-        <Hash size={24} className="text-[#FFB7C5]" />
-        <h2 className="text-2xl font-bold text-brown">{displayedCategory.name}</h2>
-        <div className="ml-auto text-sm text-[#8D6E63] bg-white/50 px-4 py-1.5 rounded-full border border-white/80">
+        <Hash size={24} style={{ color: 'var(--pink-400)' }} />
+        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}>{displayedCategory.name}</h2>
+        <div style={{
+          marginLeft: 'auto',
+          fontSize: '0.875rem',
+          color: 'var(--neutral-600)',
+          background: 'rgba(255,255,255,0.5)',
+          padding: '0.375rem 1rem',
+          borderRadius: '9999px',
+          border: '1px solid rgba(255,255,255,0.8)'
+        }}>
           共 {displayedCategory.links.length} 个内容
         </div>
       </header>
@@ -592,7 +640,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           />
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -1,11 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+
+  --pink-50: oklch(0.96 0.02 350);
+  --pink-100: oklch(0.92 0.04 350);
+  --pink-400: oklch(0.75 0.15 350);
+  --pink-500: oklch(0.65 0.18 350);
+  --pink-600: oklch(0.55 0.20 350);
+
+  --blue-50: oklch(0.95 0.02 240);
+  --blue-100: oklch(0.90 0.04 240);
+  --blue-400: oklch(0.70 0.12 240);
+  --blue-500: oklch(0.60 0.15 240);
+
+  --neutral-50: oklch(0.98 0.01 350);
+  --neutral-100: oklch(0.95 0.01 350);
+  --neutral-200: oklch(0.90 0.01 350);
+  --neutral-400: oklch(0.70 0.02 350);
+  --neutral-500: oklch(0.60 0.02 350);
+  --neutral-600: oklch(0.50 0.02 350);
+  --neutral-700: oklch(0.40 0.02 350);
+  --neutral-800: oklch(0.30 0.02 350);
 }
 
 body {
@@ -14,6 +36,32 @@ body {
   place-content: center;
   min-width: 320px;
   min-height: 100vh;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --card-width: 240px;
+    --card-height: 340px;
+    --dock-icon-size: 48px;
+  }
+}
+
+@media (min-width: 769px) {
+  :root {
+    --card-width: 280px;
+    --card-height: 390px;
+    --dock-icon-size: 44px;
+  }
 }
 
 @keyframes offerShine {

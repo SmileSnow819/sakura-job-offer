@@ -15,7 +15,20 @@ const bookmarkData = bookmarkDataRaw as IBookmarkData;
 
 // ── Sakura petals ─────────────────────────────────────────────────────────────
 const SakuraPetals: React.FC = () => {
-  const petals = Array.from({ length: 25 }).map((_, i) => {
+  const [reducedMotion, setReducedMotion] = React.useState(false);
+
+  React.useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  if (reducedMotion) return null;
+
+  const petals = Array.from({ length: 15 }).map((_, i) => {
     const left = Math.random() * 100;
     const duration = 5 + Math.random() * 10;
     const delay = Math.random() * 5;
@@ -28,11 +41,12 @@ const SakuraPetals: React.FC = () => {
         style={{
           left: `${left}%`, top: '-20px',
           width: `${size}px`, height: `${size}px`,
-          backgroundColor: '#ffb7c5', opacity,
-          boxShadow: '0 0 10px rgba(255, 183, 197, 0.5)',
+          backgroundColor: 'var(--pink-400)', opacity,
+          boxShadow: '0 0 10px var(--pink-400)',
           animation: `fall ${duration}s linear infinite`,
           animationDelay: `-${delay}s`,
           transform: 'rotate(45deg)',
+          willChange: 'transform',
         } as React.CSSProperties}
       />
     );
@@ -112,14 +126,14 @@ const App: React.FC = () => {
           0%, 100% { transform: translateY(0); }
           50%       { transform: translateY(-5px); }
         }
-        .text-brown { color: #5D4037; }
-        .hover-pink:hover { color: #FF6B9E; }
+        .text-brown { color: var(--neutral-800); }
+        .hover-pink:hover { color: var(--pink-500); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
 
       <div className="fixed inset-0 -z-10"
-        style={{ background: 'linear-gradient(135deg, #fff0f5 0%, #e6f2ff 50%, #ffe6f0 100%)' }}
+        style={{ background: 'linear-gradient(135deg, var(--pink-50) 0%, var(--blue-50) 50%, var(--pink-100) 100%)' }}
       />
       <SakuraPetals />
 
@@ -152,9 +166,25 @@ const App: React.FC = () => {
       </div>
 
       {toast && (
-        <div className="fixed top-10 left-1/2 -translate-x-1/2 bg-white/90 backdrop-blur-xl border border-[#ffb7c5] text-[#FF6B9E] px-6 py-3 rounded-full shadow-[0_8px_30px_rgba(255,183,197,0.4)] flex items-center gap-2 z-50">
+        <div style={{
+          position: 'fixed',
+          top: '2.5rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          background: 'rgba(255,255,255,0.9)',
+          backdropFilter: 'blur(24px)',
+          border: '1.5px solid var(--pink-400)',
+          color: 'var(--pink-600)',
+          padding: '0.75rem 1.5rem',
+          borderRadius: '9999px',
+          boxShadow: '0 8px 30px var(--pink-400)',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.5rem',
+          zIndex: 50
+        }}>
           <Check size={18} strokeWidth={3} />
-          <span className="font-bold tracking-wide text-sm">{toast}</span>
+          <span style={{ fontWeight: 700, letterSpacing: '0.025em', fontSize: '0.875rem' }}>{toast}</span>
         </div>
       )}
     </>
