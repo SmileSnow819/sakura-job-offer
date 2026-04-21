@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import gsap from 'gsap';
 import { IInterview } from '../../types/bookmark';
+import TimelineSVG from './TimelineSVG';
+import NoiseSVG from './NoiseSVG';
 
 interface IInterviewTimelineProps {
   interviews: IInterview[];
@@ -722,7 +724,7 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
       <style>{`
         @keyframes offerShine {
           0%, 100% { filter: brightness(1); }
-          50% { filter: brightness(1.15); }
+          50% { filter: brightness(1.08); }
         }
         @keyframes offerPulse {
           0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
@@ -730,20 +732,19 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
         }
       `}</style>
 
+      <NoiseSVG />
+
       <div style={{ width: '100%', position: 'relative', padding: '4px 0 12px' }}>
-        <div
-          ref={lineRef}
-          style={{
-            position: 'absolute',
-            left: '50%',
-            top: 0,
-            bottom: 0,
-            width: 3,
-            transform: 'translateX(-50%)',
-            borderRadius: 999,
-            background: 'linear-gradient(180deg, #6366f1 0%, #06b6d4 55%, #a78bfa 100%)',
-            boxShadow: '0 0 12px rgba(99,102,241,0.25)',
-          }}
+        {/* SVG 微曲线时间线 */}
+        <TimelineSVG
+          nodes={groups.map((g, i) => ({
+            x: 50,
+            y: i * 140 + 70,
+            isOffer: g.hasOffer,
+            isActive: activeDate === g.date,
+            color: COLORS[i % COLORS.length],
+          }))}
+          containerHeight={groups.length * 140 + 100}
         />
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 14, position: 'relative' }}>
