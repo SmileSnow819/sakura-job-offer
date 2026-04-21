@@ -78,7 +78,6 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
   return (
     <div
       ref={cardRef}
-      className={isOffer ? 'offer-rainbow-border' : undefined}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onClick={() => setExpanded((prev) => !prev)}
@@ -112,9 +111,8 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
       {isOffer && (
         <div
           style={{
-            height: 3,
-            background: 'linear-gradient(90deg, #f59e0b, #f97316, #eab308)',
-            animation: 'offerShine 2s ease-in-out infinite',
+            height: 1,
+            background: 'linear-gradient(90deg, oklch(0.75 0.15 85), oklch(0.70 0.18 75), oklch(0.78 0.14 95))',
           }}
         />
       )}
@@ -218,17 +216,40 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                   return (
                     <pre
                       style={{
-                        background: '#0f172a',
-                        borderRadius: 7,
-                        padding: '8px 9px',
+                        position: 'relative',
+                        background: '#0a0e1a',
+                        borderRadius: 8,
+                        padding: '20px 12px 10px',
                         overflowX: 'auto',
                         fontSize: 10,
                         lineHeight: 1.5,
-                        border: '1px solid rgba(148,163,184,0.25)',
-                        margin: '6px 0',
+                        border: '1px solid rgba(148,163,184,0.2)',
+                        margin: '8px 0',
+                        boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.3)',
                       }}
                     >
-                      <code style={{ color: '#e2e8f0', fontFamily: 'monospace' }} {...props}>
+                      {/* 终端三点装饰 */}
+                      <div style={{
+                        position: 'absolute',
+                        top: 6,
+                        left: 10,
+                        display: 'flex',
+                        gap: 4,
+                      }}>
+                        {['#ef4444', '#eab308', '#10b981'].map((color, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              width: 8,
+                              height: 8,
+                              borderRadius: '50%',
+                              background: color,
+                              opacity: 0.6,
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <code style={{ color: '#e2e8f0', fontFamily: 'var(--font-mono)' }} {...props}>
                         {children}
                       </code>
                     </pre>
@@ -239,10 +260,11 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                     style={{
                       background: isOffer ? 'rgba(245,158,11,0.1)' : 'rgba(99,102,241,0.1)',
                       color: isOffer ? '#d97706' : '#4f46e5',
-                      padding: '1px 4px',
+                      padding: '2px 5px',
                       borderRadius: 4,
                       fontSize: 10,
-                      fontFamily: 'monospace',
+                      fontFamily: 'var(--font-mono)',
+                      border: '1px solid rgba(15,23,42,0.1)',
                     }}
                     {...props}
                   >
@@ -260,14 +282,30 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 return (
                   <blockquote
                     style={{
-                      borderLeft: isOffer ? '2px solid #f59e0b' : '2px solid #93c5fd',
-                      margin: '5px 0',
+                      position: 'relative',
+                      padding: '6px 10px 6px 16px',
+                      margin: '6px 0',
+                      background: isOffer
+                        ? 'linear-gradient(135deg, rgba(245,158,11,0.04), rgba(245,158,11,0.06))'
+                        : 'linear-gradient(135deg, rgba(15,23,42,0.02), rgba(99,102,241,0.04))',
+                      borderRadius: 6,
+                      border: isOffer ? '1px solid rgba(245,158,11,0.15)' : '1px solid rgba(99,102,241,0.12)',
+                      fontSize: '11px',
+                      lineHeight: '1.5',
                       color: '#475569',
-                      background: isOffer ? 'rgba(245,158,11,0.06)' : 'rgba(147,197,253,0.12)',
-                      borderRadius: '0 6px 6px 0',
-                      padding: '4px 8px',
                     }}
                   >
+                    <span style={{
+                      position: 'absolute',
+                      left: 4,
+                      top: 4,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 12,
+                      color: isOffer ? '#f59e0b' : '#6366f1',
+                      opacity: 0.6,
+                    }}>
+                      &gt;
+                    </span>
                     {children}
                   </blockquote>
                 );

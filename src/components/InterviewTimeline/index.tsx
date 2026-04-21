@@ -131,11 +131,10 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
           flexDirection: 'column',
           position: 'relative',
         }}
-        className={isOffer ? 'offer-rainbow-border' : undefined}
       >
-        {/* 顶部彩条 */}
+        {/* 顶部金色线 */}
         <div style={{
-          height: 4,
+          height: isOffer ? 1 : 2,
           background: isOffer
             ? OFFER_GRADIENT
             : 'linear-gradient(90deg, #6366f1, #06b6d4, #8b5cf6)',
@@ -225,16 +224,39 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
                 if (isBlock) {
                   return (
                     <pre style={{
-                      background: '#0f172a',
-                      borderRadius: 10,
-                      padding: '12px 14px',
+                      position: 'relative',
+                      background: '#0a0e1a',
+                      borderRadius: 8,
+                      padding: '22px 14px 12px',
                       overflowX: 'auto',
                       fontSize: 12,
                       lineHeight: 1.6,
                       border: '1px solid rgba(148,163,184,0.2)',
                       margin: '10px 0',
+                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.3)',
                     }}>
-                      <code style={{ color: '#e2e8f0', fontFamily: 'monospace' }} {...props}>{children}</code>
+                      {/* 终端三点装饰 */}
+                      <div style={{
+                        position: 'absolute',
+                        top: 8,
+                        left: 12,
+                        display: 'flex',
+                        gap: 6,
+                      }}>
+                        {['#ef4444', '#eab308', '#10b981'].map((color, i) => (
+                          <div
+                            key={i}
+                            style={{
+                              width: 10,
+                              height: 10,
+                              borderRadius: '50%',
+                              background: color,
+                              opacity: 0.6,
+                            }}
+                          />
+                        ))}
+                      </div>
+                      <code style={{ color: '#e2e8f0', fontFamily: 'var(--font-mono)' }} {...props}>{children}</code>
                     </pre>
                   );
                 }
@@ -242,15 +264,16 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
                   <code style={{
                     background: 'rgba(99,102,241,0.1)',
                     color: '#4f46e5',
-                    padding: '1px 5px',
+                    padding: '2px 6px',
                     borderRadius: 4,
                     fontSize: 12,
-                    fontFamily: 'monospace',
+                    fontFamily: 'var(--font-mono)',
+                    border: '1px solid rgba(15,23,42,0.1)',
                   }} {...props}>{children}</code>
                 );
               },
               h2({ children }) {
-                return <h2 style={{ fontSize: 16, fontWeight: 800, color: '#1e293b', marginTop: 16, marginBottom: 6, borderBottom: '2px solid rgba(99,102,241,0.15)', paddingBottom: 4 }}>{children}</h2>;
+                return <h2 style={{ fontSize: 16, fontWeight: 800, color: '#1e293b', marginTop: 16, marginBottom: 6, borderBottom: '1px solid rgba(99,102,241,0.15)', paddingBottom: 4 }}>{children}</h2>;
               },
               h3({ children }) {
                 return <h3 style={{ fontSize: 14, fontWeight: 700, color: '#334155', marginTop: 12, marginBottom: 4 }}>{children}</h3>;
@@ -258,13 +281,29 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
               blockquote({ children }) {
                 return (
                   <blockquote style={{
-                    borderLeft: '3px solid #6366f1',
+                    position: 'relative',
+                    padding: '8px 12px 8px 20px',
                     margin: '8px 0',
+                    background: 'linear-gradient(135deg, rgba(15,23,42,0.03), rgba(99,102,241,0.04))',
+                    borderRadius: 6,
+                    border: '1px solid rgba(99,102,241,0.12)',
+                    fontSize: '12px',
+                    lineHeight: '1.6',
                     color: '#475569',
-                    background: 'rgba(99,102,241,0.05)',
-                    borderRadius: '0 8px 8px 0',
-                    padding: '6px 12px',
-                  }}>{children}</blockquote>
+                  }}>
+                    <span style={{
+                      position: 'absolute',
+                      left: 6,
+                      top: 6,
+                      fontFamily: "'JetBrains Mono', monospace",
+                      fontSize: 14,
+                      color: '#6366f1',
+                      opacity: 0.6,
+                    }}>
+                      &gt;
+                    </span>
+                    {children}
+                  </blockquote>
                 );
               },
               strong({ children }) {
@@ -310,7 +349,6 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
       ref={ref}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className={isOffer ? 'offer-rainbow-border' : undefined}
       style={{
         borderRadius: 10,
         overflow: 'hidden',
@@ -533,7 +571,6 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
               const cardEl = (
                 <div
                   onClick={() => onViewDetail(iv)}
-                  className={isOffer ? 'offer-rainbow-border' : undefined}
                   style={{
                     width: '100%',
                     maxWidth: 200,
@@ -574,7 +611,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                   ref={(el) => { itemRefs.current[i] = el; }}
                   style={{
                     display: 'grid',
-                    gridTemplateColumns: '1fr 36px 1fr',
+                    gridTemplateColumns: 'minmax(180px, 1.2fr) 40px minmax(200px, 1fr)',
                     alignItems: 'center',
                     gap: 8,
                   }}
@@ -691,19 +728,6 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
           0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
           50% { box-shadow: 0 0 0 5px rgba(245,158,11,0); }
         }
-        @keyframes rainbowBorder {
-          0% { border-color: #f59e0b; }
-          16% { border-color: #ef4444; }
-          33% { border-color: #ec4899; }
-          50% { border-color: #8b5cf6; }
-          66% { border-color: #06b6d4; }
-          83% { border-color: #10b981; }
-          100% { border-color: #f59e0b; }
-        }
-        .offer-rainbow-border {
-          border: 2px solid #f59e0b !important;
-          animation: rainbowBorder 4s linear infinite !important;
-        }
       `}</style>
 
       <div style={{ width: '100%', position: 'relative', padding: '4px 0 12px' }}>
@@ -800,7 +824,7 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
                 ref={(el) => { itemRefs.current[i] = el; }}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'minmax(0,1fr) 48px minmax(0,1fr)',
+                  gridTemplateColumns: 'minmax(180px, 1.2fr) 40px minmax(200px, 1fr)',
                   alignItems: 'center',
                   gap: 8,
                 }}
