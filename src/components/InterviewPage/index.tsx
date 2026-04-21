@@ -55,7 +55,7 @@ const InterviewPage: React.FC = () => {
     }}>
       {/* 页面头部 */}
       <div ref={headerRef} style={{ padding: '20px 24px 0', flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 4 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 4 }}>
           <div style={{
             width: 36, height: 36, borderRadius: 10,
             background: 'linear-gradient(135deg, #FF6B9E, #c58aff)',

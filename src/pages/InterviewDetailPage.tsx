@@ -64,7 +64,7 @@ const InterviewDetailPage: React.FC = () => {
         <button
           onClick={() => navigate('/interviews')}
           style={{
-            display: 'flex', alignItems: 'center', gap: 6,
+            display: 'flex', alignItems: 'center', gap: 8,
             fontSize: 13, fontWeight: 700, color: '#8D6E63',
             background: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,183,197,0.3)',
             borderRadius: 999, padding: '6px 14px', cursor: 'pointer',
@@ -81,10 +81,10 @@ const InterviewDetailPage: React.FC = () => {
             style={{
               display: 'inline-flex',
               alignItems: 'center',
-              gap: 3,
+              gap: 4,
               fontSize: 11,
               fontWeight: 900,
-              color: '#fff',
+              color: 'oklch(0.99 0.008 350)',
               background: 'linear-gradient(135deg, #f59e0b, #f97316)',
               padding: '3px 12px',
               borderRadius: 999,
@@ -134,7 +134,7 @@ const InterviewDetailPage: React.FC = () => {
                 <div style={{ fontSize: 12, color: '#B09080' }}>{time}</div>
               </div>
             </div>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 14 }}>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, marginBottom: 16 }}>
               {interview.tags.map((tag, ti) => {
                 const c = TAG_COLORS[ti % TAG_COLORS.length];
                 return (

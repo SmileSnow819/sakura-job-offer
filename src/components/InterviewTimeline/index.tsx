@@ -44,10 +44,10 @@ const OfferBadge: React.FC = () => (
     style={{
       display: 'inline-flex',
       alignItems: 'center',
-      gap: 3,
+      gap: 4,
       fontSize: 10,
       fontWeight: 900,
-      color: '#fff',
+      color: 'oklch(0.99 0.008 350)',
       background: OFFER_GRADIENT,
       padding: '2px 8px',
       borderRadius: 999,
@@ -80,7 +80,7 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
     gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25 });
     gsap.fromTo(contentRef.current,
       { opacity: 0, scale: 0.9, y: 40 },
-      { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'back.out(1.4)' },
+      { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'power4.out' },
     );
 
     return () => {
@@ -314,7 +314,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
       style={{
         borderRadius: 10,
         overflow: 'hidden',
-        background: '#fff',
+        background: 'oklch(0.99 0.008 350)',
         border: isOffer ? 'none' : '1px solid rgba(15,23,42,0.08)',
         boxShadow: isOffer
           ? '0 4px 16px rgba(245,158,11,0.18)'
@@ -325,7 +325,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
       <div
         style={{
           background: headerBg,
-          color: '#fff',
+          color: 'oklch(0.99 0.008 350)',
           fontSize: 11,
           fontWeight: 800,
           padding: '5px 8px',
@@ -374,7 +374,7 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
-            gap: 3,
+            gap: 4,
           }}
           onMouseEnter={(e) => { gsap.to(e.currentTarget, { scale: 1.05, duration: 0.12 }); }}
           onMouseLeave={(e) => { gsap.to(e.currentTarget, { scale: 1, duration: 0.12 }); }}
@@ -404,7 +404,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
 
   useEffect(() => {
     gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25 });
-    gsap.fromTo(contentRef.current, { opacity: 0, scale: 0.92, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'back.out(1.5)' });
+    gsap.fromTo(contentRef.current, { opacity: 0, scale: 0.92, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power4.out' });
 
     const tl = gsap.timeline({ delay: 0.2 });
     tl.fromTo(lineRef.current, { scaleY: 0 }, { scaleY: 1, transformOrigin: 'top center', duration: 0.5, ease: 'power3.out' });
@@ -419,7 +419,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
     });
     dotRefs.current.forEach((el) => {
       if (!el) return;
-      tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.25, ease: 'back.out(3)' }, `-=${0.2}`);
+      tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.25, ease: 'power4.out' }, `-=${0.2}`);
     });
 
     return () => { tl.kill(); };
@@ -475,7 +475,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: 15,
-                color: '#fff',
+                color: 'oklch(0.99 0.008 350)',
                 fontWeight: 900,
                 boxShadow: `0 4px 12px ${color}44`,
               }}
@@ -522,7 +522,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
             }}
           />
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
             {list.map((iv, i) => {
               const isLeft = i % 2 === 0;
               const isOffer = !!iv.isOffer;
@@ -539,7 +539,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                     maxWidth: 200,
                     borderRadius: 10,
                     overflow: 'hidden',
-                    background: '#fff',
+                    background: 'oklch(0.99 0.008 350)',
                     border: isOffer ? 'none' : `1px solid rgba(15,23,42,0.08)`,
                     boxShadow: isOffer ? '0 4px 16px rgba(245,158,11,0.18)' : '0 2px 8px rgba(15,23,42,0.06)',
                     cursor: 'pointer',
@@ -548,7 +548,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                 >
                   <div style={{
                     background: cardColor,
-                    color: '#fff',
+                    color: 'oklch(0.99 0.008 350)',
                     fontSize: 10,
                     fontWeight: 800,
                     padding: '4px 8px',
@@ -576,7 +576,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                     display: 'grid',
                     gridTemplateColumns: '1fr 36px 1fr',
                     alignItems: 'center',
-                    gap: 6,
+                    gap: 8,
                   }}
                 >
                   <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
@@ -591,7 +591,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
                         height: 12,
                         borderRadius: '50%',
                         background: dotBg,
-                        border: '2px solid #fff',
+                        border: '2px solid oklch(0.99 0.008 350)',
                         boxShadow: isOffer
                           ? '0 0 0 3px rgba(245,158,11,0.25), 0 2px 8px rgba(245,158,11,0.3)'
                           : `0 2px 6px ${color}44`,
@@ -660,7 +660,7 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
 
     dotRefs.current.forEach((el) => {
       if (!el) return;
-      tl.to(el, { scale: 1, opacity: 1, duration: 0.3, ease: 'back.out(3)' }, `-=${0.25}`);
+      tl.to(el, { scale: 1, opacity: 1, duration: 0.3, ease: 'power4.out' }, `-=${0.25}`);
     });
 
     return () => { tl.kill(); };
@@ -819,7 +819,7 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
                       width: isActive ? 18 : 14,
                       height: isActive ? 18 : 14,
                       borderRadius: '50%',
-                      border: isActive ? `3px solid ${dotColor ?? '#f59e0b'}` : '2.5px solid #fff',
+                      border: isActive ? `3px solid ${dotColor ?? '#f59e0b'}` : '2.5px solid oklch(0.99 0.008 350)',
                       background: dotBg,
                       boxShadow: hasOffer
                         ? '0 0 0 3px rgba(245,158,11,0.2), 0 2px 10px rgba(245,158,11,0.3)'

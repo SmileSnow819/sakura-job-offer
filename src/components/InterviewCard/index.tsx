@@ -83,7 +83,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
       onMouseLeave={handleMouseLeave}
       onClick={() => setExpanded((prev) => !prev)}
       style={{
-        background: '#fff',
+        background: 'oklch(0.99 0.008 350)',
         borderRadius: 16,
         border: isOffer ? 'none' : '1px solid rgba(15,23,42,0.06)',
         boxShadow: isOffer
@@ -121,7 +121,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
 
       <div style={{ padding: '10px 10px 11px', position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 6 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
             <div
               style={{
                 width: 18,
@@ -134,7 +134,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: 9,
-                color: '#fff',
+                color: 'oklch(0.99 0.008 350)',
                 fontWeight: 800,
               }}
             >
@@ -149,7 +149,7 @@ const InterviewCard: React.FC<IInterviewCardProps> = ({
                   gap: 2,
                   fontSize: 9,
                   fontWeight: 900,
-                  color: '#fff',
+                  color: 'oklch(0.99 0.008 350)',
                   background: 'linear-gradient(135deg, #f59e0b, #f97316)',
                   padding: '1px 7px',
                   borderRadius: 999,

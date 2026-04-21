@@ -347,7 +347,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
             display: 'inline-flex', alignItems: 'center', gap: 4,
             padding: '8px 20px', borderRadius: 999,
             background: 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
-            color: '#fff', fontSize: 13, fontWeight: 700,
+            color: 'oklch(0.99 0.008 350)', fontSize: 13, fontWeight: 700,
             textDecoration: 'none',
             boxShadow: '0 4px 14px var(--pink-400)',
           }}

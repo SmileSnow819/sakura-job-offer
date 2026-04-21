@@ -28,6 +28,8 @@
   --neutral-600: oklch(0.50 0.02 350);
   --neutral-700: oklch(0.40 0.02 350);
   --neutral-800: oklch(0.30 0.02 350);
+
+  --white: oklch(0.99 0.008 350);
 }
 
 body {

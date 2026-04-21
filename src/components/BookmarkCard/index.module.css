@@ -148,7 +148,7 @@
 
 .card-btn-primary {
   background: linear-gradient(135deg, #FF6B9E, #ff8fb8);
-  color: #fff;
+  color: oklch(0.99 0.008 350);
   box-shadow: 0 4px 12px rgba(255,107,158,0.35);
 }
 
@@ -200,7 +200,7 @@
 
 .carousel-nav-btn.next {
   background: linear-gradient(135deg, #FF6B9E, #ff8fb8);
-  color: #fff;
+  color: oklch(0.99 0.008 350);
   box-shadow: 0 4px 14px rgba(255,107,158,0.35);
 }
 

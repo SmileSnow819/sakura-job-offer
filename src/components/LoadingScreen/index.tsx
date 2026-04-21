@@ -34,16 +34,16 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
     gsap.set(sparkleRefs.current, { opacity: 0, scale: 0 });
     gsap.set(dotRefs.current, { opacity: 0 });
 
-    tl.to(sakuraRefs.current, { opacity: 1, scale: 1, stagger: 0.055, duration: 0.45, ease: 'back.out(1.6)' })
-      .to(emojiRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'back.out(2.5)' }, '-=0.15')
+    tl.to(sakuraRefs.current, { opacity: 1, scale: 1, stagger: 0.055, duration: 0.45, ease: 'power4.out' })
+      .to(emojiRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power4.out' }, '-=0.15')
       .to(dotRefs.current, { opacity: 1, stagger: 0.04, duration: 0.3, ease: 'power2.out' }, '-=0.2')
       .to(orbitRef.current, { rotation: 360, duration: 4, ease: 'none', repeat: -1 }, '<')
-      .to(charRefs.current, { opacity: 1, y: 0, rotateX: 0, stagger: 0.038, duration: 0.5, ease: 'back.out(1.8)', transformOrigin: '50% 50%' }, '-=3.5')
-      .to(subCharRefs.current, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.28, ease: 'back.out(2)' }, '-=0.1')
-      .to(tagRefs.current, { opacity: 1, x: 0, scale: 1, stagger: 0.08, duration: 0.38, ease: 'back.out(2)' }, '-=0.2')
+      .to(charRefs.current, { opacity: 1, y: 0, rotateX: 0, stagger: 0.038, duration: 0.5, ease: 'power4.out', transformOrigin: '50% 50%' }, '-=3.5')
+      .to(subCharRefs.current, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.28, ease: 'power4.out' }, '-=0.1')
+      .to(tagRefs.current, { opacity: 1, x: 0, scale: 1, stagger: 0.08, duration: 0.38, ease: 'power4.out' }, '-=0.2')
       .to(progressBarRef.current, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, '-=0.1')
       .to(progressBarRef.current?.querySelector('.bar-fill') ?? null, { width: '100%', duration: 1.5, ease: 'power1.inOut' })
-      .to(sparkleRefs.current, { opacity: 1, scale: 1, stagger: 0.07, duration: 0.28, ease: 'back.out(2)' }, '-=1.1')
+      .to(sparkleRefs.current, { opacity: 1, scale: 1, stagger: 0.07, duration: 0.28, ease: 'power4.out' }, '-=1.1')
       .to(sparkleRefs.current, { opacity: 0, scale: 0, stagger: 0.05, duration: 0.22, ease: 'power2.in' }, '-=0.55')
       .to(sakuraRefs.current, { y: 80, opacity: 0, stagger: 0.03, duration: 0.38, ease: 'power2.in' }, '-=0.2')
       .to(containerRef.current, { opacity: 0, scale: 0.97, duration: 0.42, ease: 'power2.in', onComplete }, '-=0.08');
@@ -259,7 +259,7 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
         </div>
 
         {/* 标签行 */}
-        <div style={{ display: 'flex', gap: 10, marginBottom: 28 }}>
+        <div style={{ display: 'flex', gap: 12, marginBottom: 28 }}>
           {TAGS.map((tag, i) => (
             <span
               key={tag}
