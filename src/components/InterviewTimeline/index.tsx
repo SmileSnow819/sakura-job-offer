@@ -3,8 +3,6 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import gsap from 'gsap';
 import { IInterview } from '../../types/bookmark';
-import TimelineSVG from './TimelineSVG';
-import NoiseSVG from './NoiseSVG';
 
 interface IInterviewTimelineProps {
   interviews: IInterview[];
@@ -37,10 +35,19 @@ function toPlainText(markdown: string) {
     .trim();
 }
 
-const COLORS = ['#6366f1', '#06b6d4', '#8b5cf6', '#10b981', '#ef4444', '#ec4899'];
-const OFFER_GRADIENT = 'linear-gradient(135deg, #f59e0b 0%, #f97316 40%, #eab308 100%)';
+const COLORS = [
+  'oklch(0.55 0.18 350)',
+  'oklch(0.58 0.14 320)',
+  'oklch(0.52 0.16 10)',
+  'oklch(0.55 0.12 340)',
+  'oklch(0.50 0.15 355)',
+  'oklch(0.60 0.13 330)',
+];
 
-/* ── Offer 徽章 ────────────────────────────────────────────────────────────── */
+const COLORS_HEX = ['#d4618c', '#b565a7', '#c75050', '#a8567a', '#c24068', '#c87aab'];
+
+const OFFER_GRADIENT = 'linear-gradient(135deg, oklch(0.75 0.15 85) 0%, oklch(0.70 0.16 70) 40%, oklch(0.78 0.13 90) 100%)';
+
 const OfferBadge: React.FC = () => (
   <span
     style={{
@@ -49,11 +56,11 @@ const OfferBadge: React.FC = () => (
       gap: 4,
       fontSize: 10,
       fontWeight: 900,
-      color: 'oklch(0.99 0.008 350)',
+      color: 'oklch(0.99 0.005 85)',
       background: OFFER_GRADIENT,
       padding: '2px 8px',
       borderRadius: 999,
-      boxShadow: '0 2px 8px rgba(245,158,11,0.4)',
+      boxShadow: '0 2px 8px oklch(0.70 0.15 85 / 0.35)',
       letterSpacing: 1,
       animation: 'offerShine 2s ease-in-out infinite',
     }}
@@ -62,7 +69,6 @@ const OfferBadge: React.FC = () => (
   </span>
 );
 
-/* ── 完整面经弹窗 ──────────────────────────────────────────────────────── */
 interface IDetailModalProps {
   interview: IInterview;
   onClose: () => void;
@@ -106,7 +112,7 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
         position: 'fixed',
         inset: 0,
         zIndex: 200,
-        background: 'rgba(15,23,42,0.5)',
+        background: 'oklch(0.15 0.02 350 / 0.5)',
         backdropFilter: 'blur(8px)',
         display: 'flex',
         alignItems: 'center',
@@ -118,35 +124,31 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
         ref={contentRef}
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: 'rgba(255,255,255,0.97)',
+          background: 'oklch(0.99 0.005 350 / 0.97)',
           backdropFilter: 'blur(20px)',
-          borderRadius: 22,
+          borderRadius: 16,
           maxWidth: 600,
           width: '100%',
           maxHeight: '85vh',
           overflow: 'hidden',
           boxShadow: isOffer
-            ? '0 30px 70px rgba(245,158,11,0.2), 0 0 0 1px rgba(245,158,11,0.15)'
-            : '0 30px 70px rgba(15,23,42,0.2)',
-          border: isOffer ? 'none' : '1px solid rgba(99,102,241,0.12)',
+            ? '0 24px 64px oklch(0.70 0.15 85 / 0.18), 0 0 0 1px oklch(0.75 0.12 85 / 0.12)'
+            : '0 24px 64px oklch(0.20 0.02 350 / 0.16)',
+          border: isOffer ? 'none' : '1px solid oklch(0.90 0.01 350)',
           display: 'flex',
           flexDirection: 'column',
           position: 'relative',
         }}
       >
-        {/* 顶部金色线 */}
         <div style={{
-          height: isOffer ? 1 : 2,
-          background: isOffer
-            ? OFFER_GRADIENT
-            : 'linear-gradient(90deg, #6366f1, #06b6d4, #8b5cf6)',
+          height: 2,
+          background: isOffer ? OFFER_GRADIENT : 'oklch(0.65 0.18 350)',
           flexShrink: 0,
         }} />
 
-        {/* 头部 */}
         <div style={{
           padding: '16px 20px 12px',
-          borderBottom: '1px solid rgba(15,23,42,0.06)',
+          borderBottom: '1px solid oklch(0.92 0.01 350 / 0.5)',
           flexShrink: 0,
           display: 'flex',
           alignItems: 'center',
@@ -154,16 +156,16 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
         }}>
           <div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
-              <span style={{ fontSize: 18, fontWeight: 900, color: '#1e293b' }}>
+              <span style={{ fontSize: 18, fontWeight: 900, color: 'oklch(0.22 0.02 350)' }}>
                 {interview.company}
               </span>
               {isOffer && <OfferBadge />}
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: '#64748b' }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, fontSize: 12, color: 'oklch(0.55 0.015 350)' }}>
               <span>{interview.department}</span>
-              <span>·</span>
+              <span style={{ opacity: 0.4 }}>·</span>
               <span>{displayDate} {time}</span>
-              <span>·</span>
+              <span style={{ opacity: 0.4 }}>·</span>
               <span>{interview.author}</span>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, marginTop: 8 }}>
@@ -173,11 +175,11 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
                   style={{
                     fontSize: 10,
                     fontWeight: 700,
-                    padding: '1px 8px',
+                    padding: '2px 8px',
                     borderRadius: 999,
-                    background: 'rgba(15,23,42,0.05)',
-                    color: '#475569',
-                    border: '1px solid rgba(15,23,42,0.08)',
+                    background: 'oklch(0.96 0.01 350)',
+                    color: 'oklch(0.45 0.02 350)',
+                    border: '1px solid oklch(0.92 0.01 350)',
                   }}
                 >
                   {tag}
@@ -191,11 +193,11 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
               width: 32,
               height: 32,
               borderRadius: '50%',
-              border: '1px solid rgba(15,23,42,0.1)',
-              background: 'rgba(15,23,42,0.04)',
+              border: '1px solid oklch(0.90 0.01 350)',
+              background: 'oklch(0.97 0.005 350)',
               cursor: 'pointer',
               fontSize: 16,
-              color: '#64748b',
+              color: 'oklch(0.55 0.015 350)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -208,14 +210,13 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
           </button>
         </div>
 
-        {/* Markdown 正文 */}
         <div style={{
           flex: 1,
           overflowY: 'auto',
-          padding: '16px 20px 20px',
+          padding: '16px 20px 24px',
           fontSize: 13,
           lineHeight: 1.75,
-          color: '#334155',
+          color: 'oklch(0.35 0.02 350)',
           scrollbarWidth: 'thin',
         }}>
           <ReactMarkdown
@@ -227,80 +228,78 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
                   return (
                     <pre style={{
                       position: 'relative',
-                      background: '#0a0e1a',
+                      background: 'oklch(0.15 0.01 350)',
                       borderRadius: 8,
-                      padding: '22px 14px 12px',
+                      padding: '28px 14px 14px',
                       overflowX: 'auto',
                       fontSize: 12,
                       lineHeight: 1.6,
-                      border: '1px solid rgba(148,163,184,0.2)',
-                      margin: '10px 0',
-                      boxShadow: 'inset 0 1px 3px rgba(0,0,0,0.3)',
+                      border: '1px solid oklch(0.30 0.01 350)',
+                      margin: '12px 0',
                     }}>
-                      {/* 终端三点装饰 */}
                       <div style={{
                         position: 'absolute',
-                        top: 8,
+                        top: 10,
                         left: 12,
                         display: 'flex',
                         gap: 6,
                       }}>
-                        {['#ef4444', '#eab308', '#10b981'].map((color, i) => (
+                        {['oklch(0.60 0.20 25)', 'oklch(0.75 0.15 95)', 'oklch(0.65 0.18 155)'].map((c, ci) => (
                           <div
-                            key={i}
+                            key={ci}
                             style={{
-                              width: 10,
-                              height: 10,
+                              width: 8,
+                              height: 8,
                               borderRadius: '50%',
-                              background: color,
-                              opacity: 0.6,
+                              background: c,
+                              opacity: 0.7,
                             }}
                           />
                         ))}
                       </div>
-                      <code style={{ color: '#e2e8f0', fontFamily: 'var(--font-mono)' }} {...props}>{children}</code>
+                      <code style={{ color: 'oklch(0.88 0.01 350)', fontFamily: 'var(--font-mono)' }} {...props}>{children}</code>
                     </pre>
                   );
                 }
                 return (
                   <code style={{
-                    background: 'rgba(99,102,241,0.1)',
-                    color: '#4f46e5',
+                    background: 'oklch(0.96 0.02 350)',
+                    color: 'oklch(0.45 0.15 350)',
                     padding: '2px 6px',
                     borderRadius: 4,
                     fontSize: 12,
                     fontFamily: 'var(--font-mono)',
-                    border: '1px solid rgba(15,23,42,0.1)',
+                    border: '1px solid oklch(0.92 0.01 350)',
                   }} {...props}>{children}</code>
                 );
               },
               h2({ children }) {
-                return <h2 style={{ fontSize: 16, fontWeight: 800, color: '#1e293b', marginTop: 16, marginBottom: 6, borderBottom: '1px solid rgba(99,102,241,0.15)', paddingBottom: 4 }}>{children}</h2>;
+                return <h2 style={{ fontSize: 16, fontWeight: 800, color: 'oklch(0.22 0.02 350)', marginTop: 20, marginBottom: 8, borderBottom: '1px solid oklch(0.92 0.01 350)', paddingBottom: 6 }}>{children}</h2>;
               },
               h3({ children }) {
-                return <h3 style={{ fontSize: 14, fontWeight: 700, color: '#334155', marginTop: 12, marginBottom: 4 }}>{children}</h3>;
+                return <h3 style={{ fontSize: 14, fontWeight: 700, color: 'oklch(0.35 0.02 350)', marginTop: 16, marginBottom: 6 }}>{children}</h3>;
               },
               blockquote({ children }) {
                 return (
                   <blockquote style={{
                     position: 'relative',
-                    padding: '8px 12px 8px 20px',
-                    margin: '8px 0',
-                    background: 'linear-gradient(135deg, rgba(15,23,42,0.03), rgba(99,102,241,0.04))',
-                    borderRadius: 6,
-                    border: '1px solid rgba(99,102,241,0.12)',
-                    fontSize: '12px',
-                    lineHeight: '1.6',
-                    color: '#475569',
+                    padding: '10px 14px 10px 20px',
+                    margin: '10px 0',
+                    background: 'oklch(0.97 0.008 350)',
+                    borderRadius: 8,
+                    border: '1px solid oklch(0.92 0.01 350)',
+                    fontSize: 12,
+                    lineHeight: 1.6,
+                    color: 'oklch(0.45 0.02 350)',
                   }}>
                     <span style={{
                       position: 'absolute',
-                      left: 6,
-                      top: 6,
-                      fontFamily: "'JetBrains Mono', monospace",
+                      left: 7,
+                      top: 8,
+                      fontFamily: 'var(--font-mono)',
                       fontSize: 14,
-                      color: '#6366f1',
-                      opacity: 0.6,
+                      color: 'oklch(0.65 0.12 350)',
+                      opacity: 0.5,
                     }}>
                       &gt;
                     </span>
@@ -309,10 +308,10 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
                 );
               },
               strong({ children }) {
-                return <strong style={{ color: '#4338ca', fontWeight: 800 }}>{children}</strong>;
+                return <strong style={{ color: 'oklch(0.40 0.15 350)', fontWeight: 800 }}>{children}</strong>;
               },
               li({ children }) {
-                return <li style={{ marginBottom: 2 }}>{children}</li>;
+                return <li style={{ marginBottom: 3 }}>{children}</li>;
               },
             }}
           >
@@ -324,21 +323,21 @@ const DetailModal: React.FC<IDetailModalProps> = ({ interview, onClose }) => {
   );
 };
 
-/* ── 单个面经小卡片 ─────────────────────────────────────────────────────── */
 interface IMiniCardProps {
   interview: IInterview;
   color: string;
+  colorHex: string;
   isOffer: boolean;
   onViewDetail: (iv: IInterview) => void;
 }
 
-const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewDetail }) => {
+const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, colorHex, isOffer, onViewDetail }) => {
   const ref = useRef<HTMLDivElement>(null);
   const { time } = parseTime(interview.time);
-  const previewText = toPlainText(interview.content).slice(0, 80);
+  const previewText = toPlainText(interview.content).slice(0, 90);
 
   const handleMouseEnter = () => {
-    gsap.to(ref.current, { scale: 1.03, y: -2, duration: 0.2, ease: 'power2.out' });
+    gsap.to(ref.current, { scale: 1.02, y: -2, duration: 0.2, ease: 'power2.out' });
   };
   const handleMouseLeave = () => {
     gsap.to(ref.current, { scale: 1, y: 0, duration: 0.2, ease: 'power2.out' });
@@ -352,43 +351,43 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        borderRadius: 10,
+        borderRadius: 12,
         overflow: 'hidden',
-        background: 'oklch(0.99 0.008 350)',
-        border: isOffer ? 'none' : '1px solid rgba(15,23,42,0.08)',
+        background: 'oklch(0.99 0.005 350)',
+        border: isOffer ? 'none' : '1px solid oklch(0.92 0.01 350)',
         boxShadow: isOffer
-          ? '0 4px 16px rgba(245,158,11,0.18)'
-          : '0 2px 10px rgba(15,23,42,0.07)',
+          ? '0 4px 16px oklch(0.70 0.15 85 / 0.15)'
+          : '0 2px 8px oklch(0.20 0.02 350 / 0.06)',
         position: 'relative',
       }}
     >
       <div
         style={{
           background: headerBg,
-          color: 'oklch(0.99 0.008 350)',
+          color: 'oklch(0.99 0.005 350)',
           fontSize: 11,
           fontWeight: 800,
-          padding: '5px 8px',
+          padding: '6px 10px',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
         }}
       >
         <span>{interview.company}</span>
-        <span style={{ fontSize: 10, opacity: 0.9, fontWeight: 600 }}>{time}</span>
+        <span style={{ fontSize: 10, opacity: 0.85, fontWeight: 600 }}>{time}</span>
       </div>
-      <div style={{ padding: '6px 8px' }}>
+      <div style={{ padding: '8px 10px 10px' }}>
         {isOffer && (
-          <div style={{ marginBottom: 4 }}>
+          <div style={{ marginBottom: 6 }}>
             <OfferBadge />
           </div>
         )}
         <p
           style={{
             margin: 0,
-            fontSize: 10,
-            lineHeight: 1.5,
-            color: '#475569',
+            fontSize: 11,
+            lineHeight: 1.55,
+            color: 'oklch(0.45 0.015 350)',
             display: '-webkit-box',
             WebkitLineClamp: 2,
             WebkitBoxOrient: 'vertical',
@@ -403,18 +402,23 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
             onViewDetail(interview);
           }}
           style={{
-            marginTop: 6,
-            fontSize: 10,
+            marginTop: 8,
+            fontSize: 11,
             fontWeight: 700,
-            color: isOffer ? '#d97706' : color,
-            border: `1px solid ${isOffer ? 'rgba(245,158,11,0.3)' : `${color}44`}`,
-            background: isOffer ? 'rgba(245,158,11,0.06)' : `${color}0a`,
+            color: isOffer ? 'oklch(0.55 0.14 85)' : color,
+            border: isOffer
+              ? '1px solid oklch(0.80 0.10 85 / 0.3)'
+              : `1px solid ${colorHex}33`,
+            background: isOffer
+              ? 'oklch(0.95 0.03 85)'
+              : `${colorHex}08`,
             borderRadius: 999,
-            padding: '2px 10px',
+            padding: '4px 12px',
             cursor: 'pointer',
             display: 'inline-flex',
             alignItems: 'center',
             gap: 4,
+            lineHeight: 1.4,
           }}
           onMouseEnter={(e) => { gsap.to(e.currentTarget, { scale: 1.05, duration: 0.12 }); }}
           onMouseLeave={(e) => { gsap.to(e.currentTarget, { scale: 1, duration: 0.12 }); }}
@@ -426,40 +430,32 @@ const MiniCard: React.FC<IMiniCardProps> = ({ interview, color, isOffer, onViewD
   );
 };
 
-/* ── 日内 Timeline 弹窗（竖向一左一右） ──────────────────────────────────── */
 interface IDayModalProps {
   date: string;
   list: IInterview[];
   color: string;
+  colorHex: string;
   onClose: () => void;
   onViewDetail: (iv: IInterview) => void;
 }
 
-const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onViewDetail }) => {
+const DayModal: React.FC<IDayModalProps> = ({ date, list, color, colorHex, onClose, onViewDetail }) => {
   const overlayRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dotRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     gsap.fromTo(overlayRef.current, { opacity: 0 }, { opacity: 1, duration: 0.25 });
     gsap.fromTo(contentRef.current, { opacity: 0, scale: 0.92, y: 30 }, { opacity: 1, scale: 1, y: 0, duration: 0.4, ease: 'power4.out' });
 
     const tl = gsap.timeline({ delay: 0.2 });
-    tl.fromTo(lineRef.current, { scaleY: 0 }, { scaleY: 1, transformOrigin: 'top center', duration: 0.5, ease: 'power3.out' });
     itemRefs.current.forEach((el, i) => {
       if (!el) return;
-      const isLeft = i % 2 === 0;
       tl.fromTo(el,
-        { opacity: 0, x: isLeft ? -30 : 30 },
-        { opacity: 1, x: 0, duration: 0.3, ease: 'power2.out' },
-        `-=${i === 0 ? 0.2 : 0.15}`,
+        { opacity: 0, y: 16 },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' },
+        `-=${i === 0 ? 0 : 0.15}`,
       );
-    });
-    dotRefs.current.forEach((el) => {
-      if (!el) return;
-      tl.fromTo(el, { scale: 0 }, { scale: 1, duration: 0.25, ease: 'power4.out' }, `-=${0.2}`);
     });
 
     return () => { tl.kill(); };
@@ -478,7 +474,7 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
         position: 'fixed',
         inset: 0,
         zIndex: 100,
-        background: 'rgba(15,23,42,0.4)',
+        background: 'oklch(0.15 0.02 350 / 0.4)',
         backdropFilter: 'blur(6px)',
         display: 'flex',
         alignItems: 'center',
@@ -490,42 +486,23 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
         ref={contentRef}
         onClick={(e) => e.stopPropagation()}
         style={{
-          background: 'rgba(255,255,255,0.95)',
+          background: 'oklch(0.99 0.005 350 / 0.95)',
           backdropFilter: 'blur(20px)',
-          borderRadius: 20,
-          padding: '20px 18px 18px',
-          maxWidth: 520,
+          borderRadius: 16,
+          padding: '20px 20px 18px',
+          maxWidth: 480,
           width: '100%',
           maxHeight: '80vh',
           overflowY: 'auto',
-          boxShadow: '0 25px 60px rgba(15,23,42,0.2)',
-          border: '1px solid rgba(99,102,241,0.12)',
+          boxShadow: '0 24px 56px oklch(0.20 0.02 350 / 0.18)',
+          border: '1px solid oklch(0.92 0.01 350)',
           position: 'relative',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <div
-              style={{
-                width: 32,
-                height: 32,
-                borderRadius: 10,
-                background: color,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                fontSize: 15,
-                color: 'oklch(0.99 0.008 350)',
-                fontWeight: 900,
-                boxShadow: `0 4px 12px ${color}44`,
-              }}
-            >
-              📅
-            </div>
-            <div>
-              <div style={{ fontSize: 14, fontWeight: 900, color: '#1e293b' }}>{date}</div>
-              <div style={{ fontSize: 11, color: '#64748b' }}>{list.length} 场面试</div>
-            </div>
+          <div>
+            <div style={{ fontSize: 15, fontWeight: 900, color: 'oklch(0.22 0.02 350)' }}>{date}</div>
+            <div style={{ fontSize: 11, color: 'oklch(0.55 0.015 350)', marginTop: 2 }}>{list.length} 场面试</div>
           </div>
           <button
             onClick={handleClose}
@@ -533,11 +510,11 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
               width: 28,
               height: 28,
               borderRadius: '50%',
-              border: '1px solid rgba(15,23,42,0.1)',
-              background: 'rgba(15,23,42,0.04)',
+              border: '1px solid oklch(0.90 0.01 350)',
+              background: 'oklch(0.97 0.005 350)',
               cursor: 'pointer',
               fontSize: 14,
-              color: '#64748b',
+              color: 'oklch(0.55 0.015 350)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
@@ -547,116 +524,41 @@ const DayModal: React.FC<IDayModalProps> = ({ date, list, color, onClose, onView
           </button>
         </div>
 
-        <div style={{ position: 'relative', padding: '4px 0' }}>
-          <div
-            ref={lineRef}
-            style={{
-              position: 'absolute',
-              left: '50%',
-              top: 0,
-              bottom: 0,
-              width: 2,
-              transform: 'translateX(-50%)',
-              borderRadius: 999,
-              background: `linear-gradient(180deg, ${color} 0%, ${color}66 100%)`,
-            }}
-          />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          {list.map((iv, i) => {
+            const isOffer = !!iv.isOffer;
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-            {list.map((iv, i) => {
-              const isLeft = i % 2 === 0;
-              const isOffer = !!iv.isOffer;
-              const { time } = parseTime(iv.time);
-              const cardColor = isOffer ? OFFER_GRADIENT : color;
-              const dotBg = isOffer ? OFFER_GRADIENT : color;
-
-              const cardEl = (
-                <div
-                  onClick={() => onViewDetail(iv)}
-                  style={{
-                    width: '100%',
-                    maxWidth: 200,
-                    borderRadius: 10,
-                    overflow: 'hidden',
-                    background: 'oklch(0.99 0.008 350)',
-                    border: isOffer ? 'none' : `1px solid rgba(15,23,42,0.08)`,
-                    boxShadow: isOffer ? '0 4px 16px rgba(245,158,11,0.18)' : '0 2px 8px rgba(15,23,42,0.06)',
-                    cursor: 'pointer',
-                    position: 'relative',
+            return (
+              <div
+                key={iv.id}
+                ref={(el) => { itemRefs.current[i] = el; }}
+              >
+                <MiniCard
+                  interview={iv}
+                  color={color}
+                  colorHex={colorHex}
+                  isOffer={isOffer}
+                  onViewDetail={(v) => {
+                    onClose();
+                    setTimeout(() => onViewDetail(v), 300);
                   }}
-                >
-                  <div style={{
-                    background: cardColor,
-                    color: 'oklch(0.99 0.008 350)',
-                    fontSize: 10,
-                    fontWeight: 800,
-                    padding: '4px 8px',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}>
-                    <span>{iv.company}</span>
-                    <span style={{ fontSize: 9, opacity: 0.85 }}>{time}</span>
-                  </div>
-                  <div style={{ padding: '5px 8px' }}>
-                    {isOffer && <div style={{ marginBottom: 3 }}><OfferBadge /></div>}
-                    <p style={{ margin: 0, fontSize: 10, lineHeight: 1.4, color: '#475569', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
-                      {toPlainText(iv.content).slice(0, 60)}...
-                    </p>
-                  </div>
-                </div>
-              );
-
-              return (
-                <div
-                  key={iv.id}
-                  ref={(el) => { itemRefs.current[i] = el; }}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'minmax(180px, 1.2fr) 40px minmax(200px, 1fr)',
-                    alignItems: 'center',
-                    gap: 8,
-                  }}
-                >
-                  <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                    {isLeft ? cardEl : <div />}
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'center' }}>
-                    <div
-                      ref={(el) => { dotRefs.current[i] = el; }}
-                      style={{
-                        width: 12,
-                        height: 12,
-                        borderRadius: '50%',
-                        background: dotBg,
-                        border: '2px solid oklch(0.99 0.008 350)',
-                        boxShadow: isOffer
-                          ? '0 0 0 3px rgba(245,158,11,0.25), 0 2px 8px rgba(245,158,11,0.3)'
-                          : `0 2px 6px ${color}44`,
-                        zIndex: 2,
-                      }}
-                    />
-                  </div>
-
-                  <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                    {!isLeft ? cardEl : <div />}
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>
   );
 };
 
-/* ── 主 Timeline ─────────────────────────────────────────────────────────── */
+const LINE_WIDTH = 2;
+const DOT_SIZE = 8;
+const DOT_SIZE_OFFER = 10;
+
 const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, activeDate, onDateClick }) => {
-  const lineRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const dotRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const [expandedDate, setExpandedDate] = useState<string | null>(null);
   const [detailInterview, setDetailInterview] = useState<IInterview | null>(null);
 
@@ -679,38 +581,26 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
   }, [interviews]);
 
   useEffect(() => {
-    gsap.set(lineRef.current, { scaleY: 0, transformOrigin: 'top center' });
-    gsap.set(dotRefs.current.filter(Boolean), { scale: 0, opacity: 0 });
-    gsap.set(itemRefs.current.filter(Boolean), { opacity: 0, y: 24 });
+    gsap.set(itemRefs.current.filter(Boolean), { opacity: 0, y: 20 });
 
     const tl = gsap.timeline({ delay: 0.08 });
-    tl.to(lineRef.current, { scaleY: 1, duration: 0.9, ease: 'power3.out' });
 
     itemRefs.current.forEach((el, i) => {
       if (!el) return;
       const isLeft = i % 2 === 0;
       tl.fromTo(
         el,
-        { opacity: 0, x: isLeft ? -20 : 20, y: 10 },
+        { opacity: 0, x: isLeft ? -16 : 16, y: 8 },
         { opacity: 1, x: 0, y: 0, duration: 0.35, ease: 'power2.out' },
-        `-=${i === 0 ? 0.5 : 0.22}`,
+        `-=${i === 0 ? 0 : 0.22}`,
       );
-    });
-
-    dotRefs.current.forEach((el) => {
-      if (!el) return;
-      tl.to(el, { scale: 1, opacity: 1, duration: 0.3, ease: 'power4.out' }, `-=${0.25}`);
     });
 
     return () => { tl.kill(); };
   }, [groups.length]);
 
-  const onSelect = useCallback((date: string, idx: number) => {
+  const onSelect = useCallback((date: string) => {
     onDateClick(date);
-    const dot = dotRefs.current[idx];
-    if (dot) {
-      gsap.fromTo(dot, { scale: 1 }, { scale: 1.4, duration: 0.15, yoyo: true, repeat: 1, ease: 'power2.out' });
-    }
   }, [onDateClick]);
 
   const handleViewDetail = useCallback((iv: IInterview) => {
@@ -726,63 +616,72 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
           0%, 100% { filter: brightness(1); }
           50% { filter: brightness(1.08); }
         }
-        @keyframes offerPulse {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
-          50% { box-shadow: 0 0 0 5px rgba(245,158,11,0); }
-        }
       `}</style>
 
-      <NoiseSVG />
-
-      <div style={{ width: '100%', position: 'relative', padding: '4px 0 12px' }}>
-        {/* SVG 微曲线时间线 */}
-        <TimelineSVG
-          nodes={groups.map((g, i) => ({
-            x: 50,
-            y: i * 140 + 70,
-            isOffer: g.hasOffer,
-            isActive: activeDate === g.date,
-            color: COLORS[i % COLORS.length],
-          }))}
-          containerHeight={groups.length * 140 + 100}
+      <div ref={containerRef} style={{ width: '100%', position: 'relative', padding: '8px 0 16px' }}>
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: 0,
+            bottom: 0,
+            width: LINE_WIDTH,
+            transform: 'translateX(-50%)',
+            background: 'oklch(0.88 0.03 350)',
+            borderRadius: 999,
+            zIndex: 0,
+          }}
         />
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 14, position: 'relative' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 32, position: 'relative' }}>
           {groups.map((g, i) => {
             const isLeft = i % 2 === 0;
             const isActive = activeDate === g.date;
             const color = COLORS[i % COLORS.length];
+            const colorHex = COLORS_HEX[i % COLORS_HEX.length];
             const visibleList = g.list.slice(0, MAX_VISIBLE_CARDS);
             const hasMore = g.list.length > MAX_VISIBLE_CARDS;
             const hasOffer = g.hasOffer;
 
-            const dotColor = hasOffer ? undefined : color;
-            const dotBg = hasOffer ? OFFER_GRADIENT : (isActive ? color : color);
+            const dotSz = hasOffer ? DOT_SIZE_OFFER : DOT_SIZE;
 
             const cardContent = (
-              <div style={{ width: 'min(100%, 280px)', display: 'flex', flexDirection: 'column', gap: 6 }}>
-                {/* 日期标题 */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginBottom: 2 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <button
+                  onClick={() => onSelect(g.date)}
+                  style={{
+                    background: 'none',
+                    border: 'none',
+                    padding: 0,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'baseline',
+                    gap: 8,
+                    textAlign: isLeft ? 'right' : 'left',
+                    justifyContent: isLeft ? 'flex-end' : 'flex-start',
+                  }}
+                >
                   <span
                     style={{
-                      fontSize: 13,
+                      fontSize: 14,
                       fontWeight: 900,
-                      color,
-                      letterSpacing: 0.3,
+                      color: isActive ? color : 'oklch(0.35 0.02 350)',
+                      letterSpacing: -0.2,
                     }}
                   >
                     {g.year}.{g.display}
                   </span>
-                  <span style={{ fontSize: 10, color: '#94a3b8', fontWeight: 600 }}>
-                    {g.list.length} 场面试
+                  <span style={{ fontSize: 11, color: 'oklch(0.60 0.01 350)', fontWeight: 500 }}>
+                    {g.list.length} 场
                   </span>
-                </div>
+                </button>
 
                 {visibleList.map((iv) => (
                   <MiniCard
                     key={iv.id}
                     interview={iv}
                     color={color}
+                    colorHex={colorHex}
                     isOffer={!!iv.isOffer}
                     onViewDetail={handleViewDetail}
                   />
@@ -798,13 +697,12 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
                       fontSize: 11,
                       fontWeight: 700,
                       color,
-                      border: `1.5px solid ${color}44`,
-                      background: `${color}0a`,
+                      border: `1px solid ${colorHex}33`,
+                      background: `${colorHex}08`,
                       borderRadius: 999,
                       padding: '5px 14px',
                       cursor: 'pointer',
-                      alignSelf: 'center',
-                      backdropFilter: 'blur(4px)',
+                      alignSelf: isLeft ? 'flex-end' : 'flex-start',
                     }}
                     onMouseEnter={(e) => {
                       gsap.to(e.currentTarget, { scale: 1.06, duration: 0.15 });
@@ -825,41 +723,35 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
                 ref={(el) => { itemRefs.current[i] = el; }}
                 style={{
                   display: 'grid',
-                  gridTemplateColumns: 'minmax(180px, 1.2fr) 40px minmax(200px, 1fr)',
-                  alignItems: 'center',
-                  gap: 8,
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: 32,
+                  position: 'relative',
                 }}
               >
-                {/* 左侧 */}
-                <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-                  {isLeft ? cardContent : <div style={{ width: 'min(100%, 280px)' }} />}
+                <div
+                  style={{
+                    position: 'absolute',
+                    left: '50%',
+                    top: 6,
+                    width: dotSz,
+                    height: dotSz,
+                    borderRadius: '50%',
+                    transform: 'translateX(-50%)',
+                    background: hasOffer ? OFFER_GRADIENT : (isActive ? color : 'oklch(0.99 0.005 350)'),
+                    border: hasOffer ? 'none' : `${LINE_WIDTH}px solid ${isActive ? color : colorHex}`,
+                    boxShadow: hasOffer
+                      ? '0 0 0 3px oklch(0.75 0.12 85 / 0.2)'
+                      : (isActive ? `0 0 0 3px ${colorHex}25` : 'none'),
+                    zIndex: 1,
+                  }}
+                />
+
+                <div style={{ display: 'flex', justifyContent: 'flex-end', paddingRight: 16 }}>
+                  {isLeft ? cardContent : null}
                 </div>
 
-                {/* 中间圆点 */}
-                <div style={{ display: 'flex', justifyContent: 'center' }}>
-                  <button
-                    ref={(el) => { dotRefs.current[i] = el; }}
-                    onClick={() => onSelect(g.date, i)}
-                    style={{
-                      width: isActive ? 18 : 14,
-                      height: isActive ? 18 : 14,
-                      borderRadius: '50%',
-                      border: isActive ? `3px solid ${dotColor ?? '#f59e0b'}` : '2.5px solid oklch(0.99 0.008 350)',
-                      background: dotBg,
-                      boxShadow: hasOffer
-                        ? '0 0 0 3px rgba(245,158,11,0.2), 0 2px 10px rgba(245,158,11,0.3)'
-                        : (isActive ? `0 0 0 4px ${color}33` : `0 2px 8px ${color}44`),
-                      cursor: 'pointer',
-                      padding: 0,
-                      zIndex: 2,
-                      animation: hasOffer ? 'offerPulse 2s ease-in-out infinite' : undefined,
-                    }}
-                  />
-                </div>
-
-                {/* 右侧 */}
-                <div style={{ display: 'flex', justifyContent: 'flex-start' }}>
-                  {!isLeft ? cardContent : <div style={{ width: 'min(100%, 280px)' }} />}
+                <div style={{ display: 'flex', justifyContent: 'flex-start', paddingLeft: 16 }}>
+                  {!isLeft ? cardContent : null}
                 </div>
               </div>
             );
@@ -867,12 +759,12 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
         </div>
       </div>
 
-      {/* 查看更多弹窗 */}
       {expandedGroup && (
         <DayModal
           date={expandedGroup.date}
           list={expandedGroup.list}
           color={COLORS[groups.indexOf(expandedGroup) % COLORS.length]}
+          colorHex={COLORS_HEX[groups.indexOf(expandedGroup) % COLORS_HEX.length]}
           onClose={() => setExpandedDate(null)}
           onViewDetail={(iv) => {
             setExpandedDate(null);
@@ -881,7 +773,6 @@ const InterviewTimeline: React.FC<IInterviewTimelineProps> = ({ interviews, acti
         />
       )}
 
-      {/* 完整面经弹窗 */}
       {detailInterview && (
         <DetailModal
           interview={detailInterview}

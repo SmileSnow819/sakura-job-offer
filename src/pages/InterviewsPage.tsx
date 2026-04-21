@@ -35,49 +35,63 @@ const InterviewsPage: React.FC = () => {
 
   return (
     <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
-      <div ref={headerRef} style={{ padding: '8px 12px 0', flexShrink: 0 }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 2 }}>
-          <div
-            style={{
-              width: 26,
-              height: 26,
-              borderRadius: 8,
-              background: 'linear-gradient(135deg, #6366f1, #22d3ee)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: 14,
-              boxShadow: '0 4px 10px rgba(79,70,229,0.2)',
-            }}
-          >
-            📝
-          </div>
+      <div
+        ref={headerRef}
+        style={{
+          padding: '16px 20px 12px',
+          flexShrink: 0,
+          borderBottom: '1px solid oklch(0.92 0.01 350 / 0.5)',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between' }}>
           <div>
-            <div style={{ fontSize: 15, fontWeight: 900, color: '#334155', letterSpacing: 0.2 }}>面经时间线</div>
-            <div style={{ fontSize: 10, color: '#64748b' }}>{filtered.length}/{interviews.length} 篇</div>
+            <h1
+              style={{
+                margin: 0,
+                fontSize: 18,
+                fontWeight: 900,
+                color: 'oklch(0.25 0.02 350)',
+                letterSpacing: -0.3,
+                lineHeight: 1.2,
+                fontFamily: 'var(--font-sans)',
+              }}
+            >
+              面经时间线
+            </h1>
+            <p
+              style={{
+                margin: '4px 0 0',
+                fontSize: 12,
+                fontWeight: 500,
+                color: 'oklch(0.55 0.015 350)',
+                letterSpacing: 0.1,
+              }}
+            >
+              {filtered.length}/{interviews.length} 篇
+            </p>
           </div>
           {activeDate && (
             <button
               onClick={() => setSearchParams({})}
               style={{
-                marginLeft: 'auto',
-                fontSize: 10,
+                fontSize: 11,
                 fontWeight: 700,
-                color: '#4f46e5',
-                background: 'rgba(99,102,241,0.1)',
-                border: '1px solid rgba(99,102,241,0.2)',
+                color: 'oklch(0.50 0.15 350)',
+                background: 'oklch(0.96 0.02 350)',
+                border: '1px solid oklch(0.90 0.04 350)',
                 borderRadius: 999,
-                padding: '3px 10px',
+                padding: '5px 14px',
                 cursor: 'pointer',
+                lineHeight: 1.4,
               }}
             >
-              清除筛选 ×
+              清除筛选
             </button>
           )}
         </div>
       </div>
 
-      <div style={{ flex: 1, overflowY: 'auto', padding: '6px 8px 10px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '12px 16px 16px' }}>
         <InterviewTimeline interviews={filtered} activeDate={activeDate} onDateClick={handleDateClick} />
       </div>
     </div>
