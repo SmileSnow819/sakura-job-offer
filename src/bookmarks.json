@@ -126,7 +126,76 @@
           "title": "Papergames",
           "url": "https://career.papegames.com/social/position/list"
         },
-        { "title": "腾讯音乐", "url": "https://join.tencentmusic.com/campus/" }
+        { "title": "腾讯音乐", "url": "https://join.tencentmusic.com/campus/" },
+        {
+          "title": "华为校园招聘",
+          "url": "https://career.huawei.com/reccampportal/portal5/index.html"
+        },
+        {
+          "title": "蚂蚁集团校园招聘",
+          "url": "https://talent.antgroup.com/campus"
+        },
+        {
+          "title": "OPPO校园招聘",
+          "url": "https://careers.oppo.com/campus"
+        },
+        {
+          "title": "大疆招聘",
+          "url": "https://we.dji.com/zh-CN/campus"
+        },
+        {
+          "title": "联想校园招聘",
+          "url": "https://talent.lenovo.com.cn/campus"
+        },
+        {
+          "title": "科大讯飞校园招聘",
+          "url": "https://campus.iflytek.com/"
+        },
+        {
+          "title": "得物招聘",
+          "url": "https://campus.dewu.com/578078"
+        },
+
+        {
+          "title": "BOSS直聘招聘",
+          "url": "https://www.zhipin.com/campus/pc/"
+        },
+        {
+          "title": "Keep招聘",
+          "url": "https://hr.keep.com/campus/jobs"
+        },
+        {
+          "title": "MiniMax招聘",
+          "url": "https://www.minimaxi.com/careers"
+        },
+        {
+          "title": "月之暗面 Moonshot AI",
+          "url": "https://careers.kimi.com/campus"
+        },
+
+        {
+          "title": "网易互娱招聘",
+          "url": "https://game.campus.163.com/"
+        },
+
+        {
+          "title": "库洛游戏招聘",
+          "url": "https://kurogame.jobs.feishu.cn/campus/"
+        },
+
+        {
+          "title": "4399招聘",
+          "url": "https://web.4399.com/campus/"
+        },
+
+        {
+          "title": "Momenta招聘",
+          "url": "https://momenta.jobs.feishu.cn/"
+        },
+        {
+          "title": "deepseek",
+          "url": "https://app.mokahr.com/social-recruitment/high-flyer/140576#/"
+        }
       ]
     },
     {

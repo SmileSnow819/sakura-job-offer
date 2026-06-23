@@ -2,7 +2,7 @@ import React from 'react';
 import { ExternalLink, Share2 } from 'lucide-react';
 
 import { ILink } from '../../types/bookmark';
-import { getFavicon, handleImgError } from '../../utils/getFavicon';
+import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
 import styles from './index.module.css';
 
 interface IBookmarkCardProps {
@@ -29,6 +29,7 @@ const BookmarkCard: React.FC<IBookmarkCardProps> = ({ link, onShare }) => {
           alt={link.title}
           className={styles['card-favicon']}
           onError={handleImgError}
+          onLoad={handleFaviconLoad}
         />
         <div className={styles['card-favicon-halo']} />
       </div>

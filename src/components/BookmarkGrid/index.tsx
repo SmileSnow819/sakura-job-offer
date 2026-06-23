@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ExternalLink, Grid3X3, Hash, List, Share2 } from 'lucide-react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { ExternalLink, Grid3X3, Hash, List, Search, Share2, X } from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
 import mottosRaw from '../../mottos.json';
 
 const MOTTOS: string[] = mottosRaw as string[];
-import { getFavicon, handleImgError } from '../../utils/getFavicon';
+import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
 
 interface IBookmarkGridProps {
   category: ICategory;
@@ -15,6 +15,11 @@ interface IBookmarkGridProps {
 }
 
 type ViewMode = 'cards' | 'table';
+interface ILinkGroup {
+  id: string;
+  name: string;
+  links: ILink[];
+}
 
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
@@ -22,12 +27,12 @@ const VISIBLE = 5;
 const getResponsiveCardSize = () => {
   if (typeof window === 'undefined') return { width: 280, height: 390 };
   return window.innerWidth <= 768
-    ? { width: 240, height: 340 }
+    ? { width: Math.min(window.innerWidth - 56, 248), height: 322 }
     : { width: 280, height: 390 };
 };
 
 const { width: CARD_W, height: CARD_H } = getResponsiveCardSize();
-const X_GAP = 40;
+const X_GAP = typeof window !== 'undefined' && window.innerWidth <= 768 ? 24 : 40;
 const PITCH = CARD_W + X_GAP;
 
 const SLOT_STYLES: Record<number, { scale: number; opacity: number; zIndex: number; y: number }> = {
@@ -38,6 +43,63 @@ const SLOT_STYLES: Record<number, { scale: number; opacity: number; zIndex: numb
    [2]: { scale: 0.72, opacity: 0.28, zIndex: 1,  y: 18 },
 };
 const HIDDEN_STYLE = { scale: 0.6, opacity: 0, zIndex: 0, y: 30 };
+
+const getHostname = (url: string) => {
+  try { return new URL(url).hostname.replace('www.', ''); }
+  catch { return url; }
+};
+
+const normalizeText = (value: string) => value.trim().toLowerCase();
+
+const getCampusGroupName = (link: ILink) => {
+  const haystack = normalizeText(`${link.title} ${getHostname(link.url)} ${link.url}`);
+
+  if (/(mihoyo|米哈游|papergames|叠纸|腾讯音乐|网易互娱|game|lilith|莉莉丝|心动|4399|kuro|库洛|hypergryph|鹰角|iqiyi|爱奇艺|阅文)/i.test(haystack)) {
+    return '游戏文娱';
+  }
+  if (/(moonshot|kimi|minimax|deepseek|momenta|iflytek|讯飞|夸克|百度|360|高德)/i.test(haystack)) {
+    return 'AI智能';
+  }
+  if (/(huawei|华为|oppo|vivo|xiaomi|小米|honor|荣耀|dji|大疆|lenovo|联想)/i.test(haystack)) {
+    return '硬件制造';
+  }
+  if (/(meituan|美团|didi|滴滴|sf-express|顺丰|ctrip|携程|nio|蔚来|dewu|得物)/i.test(haystack)) {
+    return '生活出行';
+  }
+  if (/(alibaba|阿里|antgroup|蚂蚁|taotian|淘天|jd|京东|pdd|拼多多|shein|有赞)/i.test(haystack)) {
+    return '电商平台';
+  }
+  return '互联网综合';
+};
+
+const getToolGroupName = (link: ILink) => {
+  const haystack = normalizeText(`${link.title} ${link.url}`);
+  if (/(简历|codecv|watermark|水印)/i.test(haystack)) return '简历工具';
+  if (/(面经|nowcoder|博客|juejin)/i.test(haystack)) return '面经资料';
+  return '其他工具';
+};
+
+const buildLinkGroups = (categoryId: string, links: ILink[]): ILinkGroup[] => {
+  if (links.length === 0) return [{ id: 'all', name: '全部', links: [] }];
+
+  const getGroupName = categoryId === 'tools' ? getToolGroupName : getCampusGroupName;
+  const groups = new Map<string, ILink[]>();
+  links.forEach((link) => {
+    const name = getGroupName(link);
+    groups.set(name, [...(groups.get(name) ?? []), link]);
+  });
+
+  const orderedNames = categoryId === 'tools'
+    ? ['简历工具', '面经资料', '其他工具']
+    : ['互联网综合', '电商平台', 'AI智能', '游戏文娱', '硬件制造', '生活出行'];
+
+  return [
+    { id: 'all', name: '全部', links },
+    ...orderedNames
+      .filter((name) => groups.has(name))
+      .map((name) => ({ id: name, name, links: groups.get(name) ?? [] })),
+  ];
+};
 
 // ── 单张卡片 ──────────────────────────────────────────────────────────────────
 interface ICarouselCardProps {
@@ -267,7 +329,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
         href={link.url} target="_blank" rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
         aria-label={`${link.title}的网站图标`}
-        style={{ textDecoration: 'none', marginBottom: 12, flexShrink: 0, position: 'relative', display: 'block' }}
+        style={{ textDecoration: 'none', marginBottom: CARD_H < 350 ? 8 : 12, flexShrink: 0, position: 'relative', display: 'block' }}
         onMouseEnter={handleFaviconEnter} onMouseLeave={handleFaviconLeave}
       >
         <div ref={glowRef} style={{
@@ -276,14 +338,22 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           opacity: 0, pointerEvents: 'none',
         }} />
         <div ref={faviconWrapRef} style={{
-          width: 88, height: 88, borderRadius: 22,
+          width: CARD_H < 350 ? 68 : 88,
+          height: CARD_H < 350 ? 68 : 88,
+          borderRadius: CARD_H < 350 ? 18 : 22,
           background: 'linear-gradient(135deg, var(--pink-50), var(--blue-50))',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: '0 6px 20px var(--pink-400), inset 0 1px 0 rgba(255,255,255,0.95)',
         }}>
           <img src={getFavicon(link.url)} alt={link.title}
-            style={{ width: 52, height: 52, objectFit: 'contain', borderRadius: 10 }}
-            onError={handleImgError} />
+            style={{
+              width: CARD_H < 350 ? 42 : 52,
+              height: CARD_H < 350 ? 42 : 52,
+              objectFit: 'contain',
+              borderRadius: 10,
+            }}
+            onError={handleImgError}
+            onLoad={handleFaviconLoad} />
         </div>
       </a>
 
@@ -319,8 +389,10 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
 
       {/* 打字机鼓励语 */}
       <div style={{
-        height: 72, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        marginBottom: 8, padding: '0 4px', flexShrink: 0,
+        height: CARD_H < 350 ? 54 : 72,
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        marginBottom: CARD_H < 350 ? 6 : 8,
+        padding: '0 4px', flexShrink: 0,
       }}>
         <span ref={mottoRef} style={{
           display: 'block',
@@ -336,7 +408,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
       </div>
 
       {/* 按钮区 */}
-      <div style={{ display: 'flex', gap: 8, marginTop: 'auto' }}>
+      <div style={{ display: 'flex', gap: 8, marginTop: 'auto', width: '100%' }}>
         <a
           ref={visitBtnRef}
           href={link.url}
@@ -348,11 +420,14 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           aria-label={`访问${link.title}`}
           style={{
             display: 'inline-flex', alignItems: 'center', gap: 4,
-            padding: '8px 20px', borderRadius: 999,
+            padding: CARD_H < 350 ? '8px 14px' : '8px 20px',
+            borderRadius: 999,
             background: 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
             color: 'oklch(0.99 0.008 350)', fontSize: 13, fontWeight: 700,
             textDecoration: 'none',
             boxShadow: '0 4px 14px var(--pink-400)',
+            flex: 1,
+            justifyContent: 'center',
           }}
         >
           ↗ 访问
@@ -364,7 +439,8 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           onMouseLeave={() => btnLeave(shareBtnRef.current)}
           aria-label={`分享${link.title}`}
           style={{
-            padding: '8px 16px', borderRadius: 999,
+            padding: CARD_H < 350 ? '8px 12px' : '8px 16px',
+            borderRadius: 999,
             background: 'var(--blue-100)',
             border: '1.5px solid var(--blue-400)',
             color: 'var(--blue-500)', cursor: 'pointer', fontSize: 13, fontWeight: 600,
@@ -383,15 +459,10 @@ interface IBookmarkTableProps {
   innerRef: (el: HTMLDivElement | null) => void;
 }
 
-const getHostname = (url: string) => {
-  try { return new URL(url).hostname.replace('www.', ''); }
-  catch { return url; }
-};
-
 const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef }) => (
   <div
     ref={innerRef}
-    className="mx-6 mb-4 flex-1 overflow-hidden"
+    className="bookmark-table-panel mx-6 mb-4 flex-1 overflow-hidden"
     style={{
       borderRadius: 18,
       border: '1px solid rgba(255,255,255,0.8)',
@@ -418,14 +489,15 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
             return (
               <tr
                 key={`${link.title}-${link.url}`}
+                className="bookmark-table-row"
                 style={{
                   background: index % 2 === 0 ? 'rgba(255,255,255,0.52)' : 'rgba(255,255,255,0.34)',
                 }}
               >
-                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-500)', fontWeight: 700 }}>
+                <td data-label="#" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-500)', fontWeight: 700 }}>
                   {String(index + 1).padStart(2, '0')}
                 </td>
-                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
+                <td data-label="名称" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
                     <span
                       style={{
@@ -440,17 +512,23 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                         flexShrink: 0,
                       }}
                     >
-                      <img src={getFavicon(link.url)} alt="" style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 4 }} onError={handleImgError} />
+                      <img
+                        src={getFavicon(link.url)}
+                        alt=""
+                        style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 4 }}
+                        onError={handleImgError}
+                        onLoad={handleFaviconLoad}
+                      />
                     </span>
                     <span style={{ color: 'var(--neutral-800)', fontWeight: 800, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
                       {link.title}
                     </span>
                   </div>
                 </td>
-                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-700)', fontSize: 13, fontFamily: 'var(--font-mono)' }}>
+                <td data-label="域名" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-700)', fontSize: 13, fontFamily: 'var(--font-mono)' }}>
                   {hostname}
                 </td>
-                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
+                <td data-label="链接" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
                   <a
                     href={link.url}
                     target="_blank"
@@ -471,7 +549,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                     {link.url}
                   </a>
                 </td>
-                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', textAlign: 'right' }}>
+                <td data-label="操作" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', textAlign: 'right' }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
                     <a
                       href={link.url}
@@ -528,6 +606,10 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const [displayedCategory, setDisplayedCategory] = useState<ICategory>(category);
   const [activeIndex, setActiveIndex] = useState(0);
   const [viewMode, setViewMode] = useState<ViewMode>('cards');
+  const [activeGroupId, setActiveGroupId] = useState('all');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [isComposing, setIsComposing] = useState(false);
 
   const headerRef = useRef<HTMLElement>(null);
   const isMountRef = useRef<boolean>(true);
@@ -546,7 +628,21 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const dragStartXRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
 
-  const links = displayedCategory.links;
+  const groups = useMemo(
+    () => buildLinkGroups(displayedCategory.id, displayedCategory.links),
+    [displayedCategory.id, displayedCategory.links],
+  );
+  const activeGroup = groups.find((group) => group.id === activeGroupId) ?? groups[0];
+  const filteredLinks = useMemo(() => {
+    const keyword = normalizeText(searchTerm);
+    const sourceLinks = activeGroup?.links ?? displayedCategory.links;
+    if (!keyword) return sourceLinks;
+    return sourceLinks.filter((link) => {
+      const hostname = getHostname(link.url);
+      return normalizeText(`${link.title} ${hostname} ${link.url}`).includes(keyword);
+    });
+  }, [activeGroup, displayedCategory.links, searchTerm]);
+  const links = filteredLinks;
   const total = links.length;
   const isCardsView = viewMode === 'cards';
   const getCurrentContent = useCallback(() => (
@@ -554,6 +650,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   ), [viewMode]);
 
   const animateCards = useCallback((centerIdx: number, duration = 0.55) => {
+    if (total === 0) return;
     const half = Math.floor(VISIBLE / 2);
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
@@ -568,6 +665,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   }, [total]);
 
   const initCards = useCallback((centerIdx: number) => {
+    if (total === 0) return;
     const half = Math.floor(VISIBLE / 2);
     cardRefs.current.forEach((el, i) => {
       if (!el) return;
@@ -582,6 +680,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   }, [total]);
 
   const goTo = useCallback((idx: number, duration?: number) => {
+    if (total === 0) return;
     const next = ((idx % total) + total) % total;
     activeIndexRef.current = next;
     setActiveIndex(next);
@@ -592,6 +691,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     if (autoPlayRef.current) { autoPlayRef.current.kill(); autoPlayRef.current = null; }
     isAutoPlayingRef.current = false;
     if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+    if (total === 0) return;
     autoTimerRef.current = setTimeout(() => {
       isAutoPlayingRef.current = true;
       const tick = () => {
@@ -611,6 +711,39 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   useEffect(() => {
     activeIndexRef.current = activeIndex;
   }, [activeIndex]);
+
+  useEffect(() => {
+    setActiveGroupId('all');
+    setSearchInput('');
+    setSearchTerm('');
+  }, [displayedCategory.id]);
+
+  useEffect(() => {
+    if (isComposing) return;
+    const timer = setTimeout(() => {
+      setSearchTerm(searchInput);
+    }, 220);
+    return () => clearTimeout(timer);
+  }, [isComposing, searchInput]);
+
+  useEffect(() => {
+    setActiveIndex(0);
+    activeIndexRef.current = 0;
+    cardRefs.current = cardRefs.current.slice(0, links.length);
+    const raf = requestAnimationFrame(() => {
+      initCards(0);
+      if (viewMode === 'cards') {
+        cardRefs.current.forEach((el) => { if (el) gsap.set(el, { opacity: 0 }); });
+        animateCards(0, 0.45);
+        resetIdleTimer();
+      }
+      if (viewMode === 'table' && tableWrapRef.current) {
+        const rows = tableWrapRef.current.querySelectorAll('tbody tr');
+        gsap.fromTo(rows, { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.22, stagger: 0.012, ease: 'power2.out', overwrite: 'auto' });
+      }
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [links, viewMode, animateCards, initCards, resetIdleTimer]);
 
   useEffect(() => {
     setActiveIndex(0);
@@ -782,12 +915,96 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           50%  { box-shadow: 0 0 0 7px rgba(161,196,253,0),    0 12px 40px rgba(161,196,253,0.25); }
           100% { box-shadow: 0 0 0 0px rgba(161,196,253,0),    0 12px 40px rgba(161,196,253,0.25); }
         }
+        .bookmark-toolbar-scroll::-webkit-scrollbar { display: none; }
+        .bookmark-toolbar-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (max-width: 768px) {
+          .bookmark-section-header {
+            padding: 16px 16px 0 !important;
+            margin-bottom: 12px !important;
+            gap: 10px !important;
+          }
+          .bookmark-section-title {
+            font-size: 1.18rem !important;
+          }
+          .bookmark-count-pill {
+            display: none !important;
+          }
+          .bookmark-filter-bar {
+            padding: 0 16px 12px !important;
+            gap: 10px !important;
+          }
+          .bookmark-search-box {
+            width: 100% !important;
+            min-width: 0 !important;
+            order: 1;
+          }
+          .bookmark-group-tabs {
+            width: 100% !important;
+            order: 2;
+          }
+          .bookmark-table-panel {
+            margin: 0 12px 12px !important;
+            border-radius: 16px !important;
+          }
+          .bookmark-card-stage {
+            margin-top: 10px;
+            margin-bottom: 12px;
+          }
+          .bookmark-card-indicators {
+            padding-top: 12px !important;
+            padding-bottom: 12px !important;
+          }
+          .bookmark-table-panel table,
+          .bookmark-table-panel thead,
+          .bookmark-table-panel tbody,
+          .bookmark-table-panel tr,
+          .bookmark-table-panel td {
+            display: block;
+            width: 100% !important;
+            min-width: 0 !important;
+          }
+          .bookmark-table-panel table {
+            min-width: 0 !important;
+          }
+          .bookmark-table-panel thead {
+            display: none;
+          }
+          .bookmark-table-row {
+            margin: 10px;
+            border: 1px solid rgba(255,183,197,0.3);
+            border-radius: 14px;
+            overflow: hidden;
+            background: rgba(255,255,255,0.62) !important;
+          }
+          .bookmark-table-row td {
+            border-top: none !important;
+            padding: 9px 12px !important;
+            text-align: left !important;
+          }
+          .bookmark-table-row td[data-label="#"] {
+            display: none;
+          }
+          .bookmark-table-row td[data-label="域名"] {
+            padding-top: 0 !important;
+            font-size: 12px !important;
+          }
+          .bookmark-table-row td[data-label="链接"] a {
+            max-width: 100% !important;
+            white-space: normal !important;
+            word-break: break-all;
+            line-height: 1.45;
+          }
+          .bookmark-table-row td[data-label="操作"] > div {
+            width: 100%;
+            justify-content: flex-end;
+          }
+        }
       `}</style>
 
       {/* 标题行 */}
-      <header ref={headerRef} className="mb-6 flex items-center gap-3 flex-shrink-0 px-8 pt-6" style={{ flexWrap: 'wrap' }}>
+      <header ref={headerRef} className="bookmark-section-header mb-4 flex items-center gap-3 flex-shrink-0 px-8 pt-6" style={{ flexWrap: 'wrap' }}>
         <Hash size={24} style={{ color: 'var(--pink-400)' }} />
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}>{displayedCategory.name}</h2>
+        <h2 className="bookmark-section-title" style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}>{displayedCategory.name}</h2>
         <div
           role="group"
           aria-label="视图切换"
@@ -854,7 +1071,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             );
           })}
         </div>
-        <div style={{
+        <div className="bookmark-count-pill" style={{
           marginLeft: 'auto',
           fontSize: '0.875rem',
           color: 'var(--neutral-600)',
@@ -863,16 +1080,158 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           borderRadius: '9999px',
           border: '1px solid rgba(255,255,255,0.8)'
         }}>
-          共 {displayedCategory.links.length} 个内容
+          {links.length === displayedCategory.links.length
+            ? `共 ${displayedCategory.links.length} 个内容`
+            : `${links.length}/${displayedCategory.links.length} 个内容`}
         </div>
       </header>
 
-      {isCardsView ? (
+      <div
+        className="bookmark-filter-bar flex items-center gap-3 flex-shrink-0 px-8 pb-4"
+        style={{ flexWrap: 'wrap' }}
+      >
+        <div
+          className="bookmark-search-box"
+          style={{
+            width: 280,
+            minWidth: 220,
+            height: 38,
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            padding: '0 12px',
+            borderRadius: 14,
+            background: 'rgba(255,255,255,0.62)',
+            border: '1px solid rgba(255,255,255,0.86)',
+            boxShadow: '0 6px 22px rgba(255,107,158,0.1)',
+          }}
+        >
+          <Search size={16} style={{ color: 'var(--pink-500)', flexShrink: 0 }} />
+          <input
+            value={searchInput}
+            onChange={(e) => {
+              const next = e.target.value;
+              setSearchInput(next);
+              if (!isComposing && next === '') setSearchTerm('');
+            }}
+            onCompositionStart={() => setIsComposing(true)}
+            onCompositionEnd={(e) => {
+              setIsComposing(false);
+              setSearchInput(e.currentTarget.value);
+              setSearchTerm(e.currentTarget.value);
+            }}
+            placeholder="搜索公司、域名或链接"
+            aria-label="搜索公司、域名或链接"
+            style={{
+              flex: 1,
+              minWidth: 0,
+              border: 'none',
+              outline: 'none',
+              background: 'transparent',
+              color: 'var(--neutral-800)',
+              fontSize: 13,
+              fontWeight: 600,
+            }}
+          />
+          {searchInput && (
+            <button
+              type="button"
+              aria-label="清空搜索"
+              onClick={() => {
+                setSearchInput('');
+                setSearchTerm('');
+              }}
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 8,
+                border: 'none',
+                background: 'rgba(255,183,197,0.25)',
+                color: 'var(--pink-600)',
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                cursor: 'pointer',
+                flexShrink: 0,
+              }}
+            >
+              <X size={14} />
+            </button>
+          )}
+        </div>
+
+        <div
+          className="bookmark-group-tabs bookmark-toolbar-scroll"
+          role="tablist"
+          aria-label={`${displayedCategory.name}分类`}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 8,
+            overflowX: 'auto',
+            padding: '2px',
+            flex: 1,
+            minWidth: 0,
+          }}
+        >
+          {groups.map((group) => {
+            const selected = group.id === activeGroupId;
+            return (
+              <button
+                key={group.id}
+                type="button"
+                role="tab"
+                aria-selected={selected}
+                onClick={() => setActiveGroupId(group.id)}
+                style={{
+                  height: 34,
+                  padding: '0 13px',
+                  borderRadius: 999,
+                  border: selected ? '1px solid var(--pink-400)' : '1px solid rgba(255,255,255,0.85)',
+                  background: selected ? 'linear-gradient(135deg, var(--pink-50), var(--blue-50))' : 'rgba(255,255,255,0.56)',
+                  color: selected ? 'var(--pink-600)' : 'var(--neutral-600)',
+                  boxShadow: selected ? '0 5px 16px rgba(255,107,158,0.16)' : 'none',
+                  fontSize: 12,
+                  fontWeight: 800,
+                  whiteSpace: 'nowrap',
+                  cursor: 'pointer',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: 6,
+                }}
+              >
+                <span>{group.name}</span>
+                <span style={{ color: selected ? 'var(--pink-500)' : 'var(--neutral-400)' }}>{group.links.length}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {links.length === 0 ? (
+        <div
+          className="mx-6 mb-4 flex-1"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            minHeight: 220,
+            borderRadius: 18,
+            border: '1px dashed rgba(255,107,158,0.36)',
+            background: 'rgba(255,255,255,0.42)',
+            color: 'var(--neutral-600)',
+            fontSize: 14,
+            fontWeight: 700,
+          }}
+        >
+          没有匹配的内容
+        </div>
+      ) : isCardsView ? (
         <>
           {/* 轮播舞台 */}
           <div
             ref={stageRef}
-            className="flex-1 relative"
+            className="bookmark-card-stage flex-1 relative"
             style={{ overflow: 'visible', touchAction: 'pan-y' }}
           >
             {/* 左右渐变遮罩 */}
@@ -901,7 +1260,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           </div>
 
           {/* 底部指示器 */}
-          <div className="flex items-center justify-center gap-2 pt-4 pb-2 flex-shrink-0">
+          <div className="bookmark-card-indicators flex items-center justify-center gap-2 pt-4 pb-2 flex-shrink-0">
             {links.map((_, i) => (
               <button
                 key={i}
