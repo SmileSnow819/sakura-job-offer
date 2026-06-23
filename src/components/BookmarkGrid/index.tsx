@@ -466,14 +466,66 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
     style={{
       borderRadius: 18,
       border: '1px solid rgba(255,255,255,0.8)',
-      background: 'rgba(255,255,255,0.58)',
-      boxShadow: '0 16px 48px rgba(255,107,158,0.12)',
-      backdropFilter: 'blur(18px)',
-      WebkitBackdropFilter: 'blur(18px)',
+      background: 'linear-gradient(135deg, rgba(255,255,255,0.54), rgba(255,246,250,0.34))',
+      boxShadow: '0 18px 52px rgba(255,107,158,0.14), inset 0 1px 0 rgba(255,255,255,0.82)',
+      backdropFilter: 'blur(22px) saturate(1.25)',
+      WebkitBackdropFilter: 'blur(22px) saturate(1.25)',
     }}
   >
     <div className="h-full overflow-auto">
-      <table style={{ width: '100%', minWidth: 720, borderCollapse: 'separate', borderSpacing: 0 }}>
+      <div className="bookmark-mobile-list">
+        {links.map((link, index) => {
+          const hostname = getHostname(link.url);
+          return (
+            <article
+              key={`${link.title}-${link.url}-mobile`}
+              className="bookmark-mobile-item"
+            >
+              <div className="bookmark-mobile-rank">{String(index + 1).padStart(2, '0')}</div>
+              <div className="bookmark-mobile-logo">
+                <img
+                  src={getFavicon(link.url)}
+                  alt=""
+                  onError={handleImgError}
+                  onLoad={handleFaviconLoad}
+                />
+              </div>
+              <div className="bookmark-mobile-info">
+                <div className="bookmark-mobile-title">{link.title}</div>
+                <div className="bookmark-mobile-domain">{hostname}</div>
+                <a
+                  className="bookmark-mobile-url"
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {link.url}
+                </a>
+              </div>
+              <div className="bookmark-mobile-actions">
+                <a
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`访问${link.title}`}
+                  title="访问"
+                >
+                  <ExternalLink size={16} />
+                </a>
+                <button
+                  onClick={(e) => onShare(e, link.url)}
+                  aria-label={`分享${link.title}`}
+                  title="分享"
+                >
+                  <Share2 size={16} />
+                </button>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <table className="bookmark-desktop-table" style={{ width: '100%', minWidth: 720, borderCollapse: 'separate', borderSpacing: 0 }}>
         <thead style={{ position: 'sticky', top: 0, zIndex: 2 }}>
           <tr style={{ background: 'rgba(255,246,250,0.96)', color: 'var(--neutral-700)' }}>
             <th style={{ width: 64, padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>#</th>
@@ -917,6 +969,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         }
         .bookmark-toolbar-scroll::-webkit-scrollbar { display: none; }
         .bookmark-toolbar-scroll { -ms-overflow-style: none; scrollbar-width: none; }
+        .bookmark-mobile-list { display: none; }
         @media (max-width: 768px) {
           .bookmark-section-header {
             padding: 16px 16px 0 !important;
@@ -945,6 +998,11 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           .bookmark-table-panel {
             margin: 0 12px 12px !important;
             border-radius: 16px !important;
+            background: rgba(255,255,255,0.2) !important;
+            border: 1px solid rgba(255,255,255,0.45) !important;
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.45) !important;
+            backdrop-filter: blur(18px) saturate(1.18) !important;
+            -webkit-backdrop-filter: blur(18px) saturate(1.18) !important;
           }
           .bookmark-card-stage {
             margin-top: 10px;
@@ -954,49 +1012,133 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             padding-top: 12px !important;
             padding-bottom: 12px !important;
           }
-          .bookmark-table-panel table,
-          .bookmark-table-panel thead,
-          .bookmark-table-panel tbody,
-          .bookmark-table-panel tr,
-          .bookmark-table-panel td {
-            display: block;
-            width: 100% !important;
-            min-width: 0 !important;
+          .bookmark-desktop-table { display: none; }
+          .bookmark-mobile-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 2px 14px;
           }
-          .bookmark-table-panel table {
-            min-width: 0 !important;
-          }
-          .bookmark-table-panel thead {
-            display: none;
-          }
-          .bookmark-table-row {
-            margin: 10px;
-            border: 1px solid rgba(255,183,197,0.3);
-            border-radius: 14px;
+          .bookmark-mobile-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 46px minmax(0, 1fr) auto;
+            gap: 11px;
+            align-items: center;
+            padding: 13px 12px 13px 14px;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.82);
+            background: linear-gradient(135deg, rgba(255,255,255,0.58), rgba(255,246,250,0.36));
+            backdrop-filter: blur(18px) saturate(1.22);
+            -webkit-backdrop-filter: blur(18px) saturate(1.22);
+            box-shadow: 0 12px 30px rgba(255,107,158,0.14), inset 0 1px 0 rgba(255,255,255,0.88);
             overflow: hidden;
-            background: rgba(255,255,255,0.62) !important;
           }
-          .bookmark-table-row td {
-            border-top: none !important;
-            padding: 9px 12px !important;
-            text-align: left !important;
+          .bookmark-mobile-item::after {
+            content: "";
+            position: absolute;
+            inset: 1px 1px auto 5px;
+            height: 38%;
+            border-radius: 16px 16px 22px 22px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.42), transparent);
+            pointer-events: none;
           }
-          .bookmark-table-row td[data-label="#"] {
-            display: none;
+          .bookmark-mobile-item::before {
+            content: "";
+            position: absolute;
+            inset: 0 auto 0 0;
+            width: 4px;
+            background: linear-gradient(180deg, var(--pink-400), var(--blue-400));
+            opacity: 0.82;
           }
-          .bookmark-table-row td[data-label="域名"] {
-            padding-top: 0 !important;
-            font-size: 12px !important;
+          .bookmark-mobile-rank {
+            position: absolute;
+            right: 12px;
+            top: 8px;
+            color: rgba(176,96,112,0.32);
+            font-size: 11px;
+            font-weight: 900;
+            font-family: var(--font-mono);
           }
-          .bookmark-table-row td[data-label="链接"] a {
-            max-width: 100% !important;
-            white-space: normal !important;
-            word-break: break-all;
-            line-height: 1.45;
+          .bookmark-mobile-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--pink-50), var(--blue-50));
+            box-shadow: 0 6px 16px rgba(255,107,158,0.16), inset 0 1px 0 rgba(255,255,255,0.9);
+            z-index: 1;
           }
-          .bookmark-table-row td[data-label="操作"] > div {
-            width: 100%;
-            justify-content: flex-end;
+          .bookmark-mobile-logo img {
+            width: 27px;
+            height: 27px;
+            object-fit: contain;
+            border-radius: 7px;
+          }
+          .bookmark-mobile-info {
+            min-width: 0;
+            z-index: 1;
+          }
+          .bookmark-mobile-title {
+            padding-right: 28px;
+            color: var(--neutral-800);
+            font-size: 14px;
+            font-weight: 900;
+            line-height: 1.35;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .bookmark-mobile-domain {
+            margin-top: 2px;
+            color: var(--neutral-600);
+            font-size: 12px;
+            font-weight: 700;
+            font-family: var(--font-mono);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .bookmark-mobile-url {
+            display: block;
+            margin-top: 5px;
+            max-width: 100%;
+            color: var(--blue-500);
+            font-size: 11px;
+            line-height: 1.35;
+            font-family: var(--font-mono);
+            text-decoration: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .bookmark-mobile-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 1;
+          }
+          .bookmark-mobile-actions a,
+          .bookmark-mobile-actions button {
+            width: 34px;
+            height: 34px;
+            border-radius: 12px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(255,255,255,0.86);
+            background: rgba(255,255,255,0.54);
+            backdrop-filter: blur(12px) saturate(1.18);
+            -webkit-backdrop-filter: blur(12px) saturate(1.18);
+            color: var(--pink-600);
+            box-shadow: 0 5px 14px rgba(255,107,158,0.1);
+            cursor: pointer;
+          }
+          .bookmark-mobile-actions button {
+            color: var(--blue-500);
+            padding: 0;
           }
         }
       `}</style>
