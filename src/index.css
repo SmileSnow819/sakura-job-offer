@@ -70,32 +70,3 @@ body {
   }
 }
 
-/* 时间线响应式样式 */
-@media (max-width: 767px) {
-  .timeline-container {
-    grid-template-columns: 32px 1fr !important;
-  }
-
-  .timeline-card {
-    width: 100% !important;
-    max-width: 100% !important;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .timeline-container {
-    grid-template-columns: 1fr 40px 1fr !important;
-    gap: 8px !important;
-  }
-}
-
-@keyframes offerShine {
-  0%, 100% { filter: brightness(1); }
-  50% { filter: brightness(1.08); }
-}
-
-@keyframes offerPulse {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(245,158,11,0.4); }
-  50% { box-shadow: 0 0 0 5px rgba(245,158,11,0); }
-}
-

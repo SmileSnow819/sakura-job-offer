@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { Hash } from 'lucide-react';
+import { ExternalLink, Grid3X3, Hash, List, Share2 } from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
@@ -13,6 +13,8 @@ interface IBookmarkGridProps {
   allCategories: ICategory[];
   onShare: (e: React.MouseEvent, url: string) => void;
 }
+
+type ViewMode = 'cards' | 'table';
 
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
@@ -251,9 +253,10 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
           position: 'absolute', top: 14, right: 14,
           width: 32, height: 32, borderRadius: '50%', border: 'none',
           background: liked ? 'linear-gradient(135deg, var(--pink-500), var(--pink-400))' : 'var(--pink-100)',
+          color: liked ? 'oklch(0.99 0.008 350)' : 'var(--pink-500)',
           cursor: 'pointer', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center',
           boxShadow: liked ? '0 3px 10px var(--pink-400)' : 'none',
-          transition: 'background 0.3s, box-shadow 0.3s',
+          transition: 'background 0.3s, box-shadow 0.3s, color 0.3s',
         }}
       >
         {liked ? '♥' : '♡'}
@@ -374,17 +377,166 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
   );
 };
 
+interface IBookmarkTableProps {
+  links: ILink[];
+  onShare: (e: React.MouseEvent, url: string) => void;
+  innerRef: (el: HTMLDivElement | null) => void;
+}
+
+const getHostname = (url: string) => {
+  try { return new URL(url).hostname.replace('www.', ''); }
+  catch { return url; }
+};
+
+const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef }) => (
+  <div
+    ref={innerRef}
+    className="mx-6 mb-4 flex-1 overflow-hidden"
+    style={{
+      borderRadius: 18,
+      border: '1px solid rgba(255,255,255,0.8)',
+      background: 'rgba(255,255,255,0.58)',
+      boxShadow: '0 16px 48px rgba(255,107,158,0.12)',
+      backdropFilter: 'blur(18px)',
+      WebkitBackdropFilter: 'blur(18px)',
+    }}
+  >
+    <div className="h-full overflow-auto">
+      <table style={{ width: '100%', minWidth: 720, borderCollapse: 'separate', borderSpacing: 0 }}>
+        <thead style={{ position: 'sticky', top: 0, zIndex: 2 }}>
+          <tr style={{ background: 'rgba(255,246,250,0.96)', color: 'var(--neutral-700)' }}>
+            <th style={{ width: 64, padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>#</th>
+            <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>名称</th>
+            <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>域名</th>
+            <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>链接</th>
+            <th style={{ width: 132, padding: '14px 18px', textAlign: 'right', fontSize: 12, fontWeight: 800 }}>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          {links.map((link, index) => {
+            const hostname = getHostname(link.url);
+            return (
+              <tr
+                key={`${link.title}-${link.url}`}
+                style={{
+                  background: index % 2 === 0 ? 'rgba(255,255,255,0.52)' : 'rgba(255,255,255,0.34)',
+                }}
+              >
+                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-500)', fontWeight: 700 }}>
+                  {String(index + 1).padStart(2, '0')}
+                </td>
+                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 12, minWidth: 0 }}>
+                    <span
+                      style={{
+                        width: 34,
+                        height: 34,
+                        borderRadius: 10,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        background: 'linear-gradient(135deg, var(--pink-50), var(--blue-50))',
+                        boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
+                        flexShrink: 0,
+                      }}
+                    >
+                      <img src={getFavicon(link.url)} alt="" style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 4 }} onError={handleImgError} />
+                    </span>
+                    <span style={{ color: 'var(--neutral-800)', fontWeight: 800, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+                      {link.title}
+                    </span>
+                  </div>
+                </td>
+                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', color: 'var(--neutral-700)', fontSize: 13, fontFamily: 'var(--font-mono)' }}>
+                  {hostname}
+                </td>
+                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)' }}>
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      color: 'var(--blue-500)',
+                      fontSize: 13,
+                      fontFamily: 'var(--font-mono)',
+                      textDecoration: 'none',
+                      display: 'block',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      whiteSpace: 'nowrap',
+                      maxWidth: 420,
+                    }}
+                    title={link.url}
+                  >
+                    {link.url}
+                  </a>
+                </td>
+                <td style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', textAlign: 'right' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`访问${link.title}`}
+                      title="访问"
+                      style={{
+                        width: 34,
+                        height: 34,
+                        borderRadius: 10,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--pink-600)',
+                        background: 'var(--pink-100)',
+                        border: '1px solid var(--pink-200)',
+                      }}
+                    >
+                      <ExternalLink size={16} />
+                    </a>
+                    <button
+                      onClick={(e) => onShare(e, link.url)}
+                      aria-label={`分享${link.title}`}
+                      title="分享"
+                      style={{
+                        width: 34,
+                        height: 34,
+                        borderRadius: 10,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'var(--blue-500)',
+                        background: 'var(--blue-100)',
+                        border: '1px solid var(--blue-400)',
+                        cursor: 'pointer',
+                      }}
+                    >
+                      <Share2 size={16} />
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  </div>
+);
+
 // ── BookmarkGrid ──────────────────────────────────────────────────────────────
 const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, onShare }) => {
   const [displayedCategory, setDisplayedCategory] = useState<ICategory>(category);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [viewMode, setViewMode] = useState<ViewMode>('cards');
 
   const headerRef = useRef<HTMLElement>(null);
   const isMountRef = useRef<boolean>(true);
   const tlRef = useRef<gsap.core.Timeline | null>(null);
   const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const activeIndexRef = useRef(0);
   const stageRef = useRef<HTMLDivElement>(null);
   const cardsWrapRef = useRef<HTMLDivElement>(null);
+  const tableWrapRef = useRef<HTMLDivElement | null>(null);
 
   const autoTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const autoPlayRef = useRef<gsap.core.Tween | null>(null);
@@ -396,6 +548,10 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
 
   const links = displayedCategory.links;
   const total = links.length;
+  const isCardsView = viewMode === 'cards';
+  const getCurrentContent = useCallback(() => (
+    viewMode === 'cards' ? (stageRef.current ?? cardsWrapRef.current) : tableWrapRef.current
+  ), [viewMode]);
 
   const animateCards = useCallback((centerIdx: number, duration = 0.55) => {
     const half = Math.floor(VISIBLE / 2);
@@ -427,6 +583,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
 
   const goTo = useCallback((idx: number, duration?: number) => {
     const next = ((idx % total) + total) % total;
+    activeIndexRef.current = next;
     setActiveIndex(next);
     animateCards(next, duration);
   }, [total, animateCards]);
@@ -441,6 +598,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         if (!isAutoPlayingRef.current) return;
         setActiveIndex((prev) => {
           const next = (prev + 1) % total;
+          activeIndexRef.current = next;
           animateCards(next, 1.2);
           return next;
         });
@@ -451,7 +609,12 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   }, [total, animateCards]);
 
   useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  useEffect(() => {
     setActiveIndex(0);
+    activeIndexRef.current = 0;
     cardRefs.current = cardRefs.current.slice(0, displayedCategory.links.length);
     const raf = requestAnimationFrame(() => {
       // 先把所有卡片设到正确位置但透明
@@ -464,6 +627,51 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     return () => cancelAnimationFrame(raf);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [displayedCategory.id]);
+
+  useLayoutEffect(() => {
+    if (viewMode === 'cards') {
+      const raf = requestAnimationFrame(() => {
+        if (!stageRef.current || !cardsWrapRef.current) return;
+        const currentIndex = activeIndexRef.current;
+        initCards(currentIndex);
+        cardRefs.current.forEach((el) => { if (el) gsap.set(el, { opacity: 0 }); });
+        gsap.fromTo(
+          stageRef.current,
+          { opacity: 0, x: 28, scale: 0.975, filter: 'blur(8px)' },
+          { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)', duration: 0.38, ease: 'power3.out', overwrite: 'auto' },
+        );
+        gsap.fromTo(
+          cardsWrapRef.current,
+          { y: 18, rotateX: -5 },
+          { y: 0, rotateX: 0, duration: 0.48, ease: 'power3.out', overwrite: 'auto' },
+        );
+        animateCards(currentIndex, 0.58);
+        resetIdleTimer();
+      });
+      return () => cancelAnimationFrame(raf);
+    }
+
+    if (autoTimerRef.current) clearTimeout(autoTimerRef.current);
+    if (autoPlayRef.current) { autoPlayRef.current.kill(); autoPlayRef.current = null; }
+    isAutoPlayingRef.current = false;
+
+    const raf = requestAnimationFrame(() => {
+      const table = tableWrapRef.current;
+      if (!table) return;
+      const rows = table.querySelectorAll('tbody tr');
+      gsap.fromTo(
+        table,
+        { opacity: 0, x: -24, scale: 0.985, filter: 'blur(8px)' },
+        { opacity: 1, x: 0, scale: 1, filter: 'blur(0px)', duration: 0.36, ease: 'power3.out', overwrite: 'auto' },
+      );
+      gsap.fromTo(
+        rows,
+        { opacity: 0, x: -14 },
+        { opacity: 1, x: 0, duration: 0.26, ease: 'power2.out', stagger: 0.018, overwrite: 'auto' },
+      );
+    });
+    return () => cancelAnimationFrame(raf);
+  }, [viewMode, animateCards, initCards, resetIdleTimer]);
 
   useEffect(() => {
     return () => {
@@ -493,6 +701,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     if (Math.abs(dx) > 20) {
       setActiveIndex((prev) => {
         const next = ((prev + (dx < 0 ? 1 : -1)) % total + total) % total;
+        activeIndexRef.current = next;
         animateCards(next);
         return next;
       });
@@ -505,6 +714,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
       resetIdleTimer();
       setActiveIndex((prev) => {
         const next = ((prev - 1) % total + total) % total;
+        activeIndexRef.current = next;
         animateCards(next);
         return next;
       });
@@ -513,6 +723,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
       resetIdleTimer();
       setActiveIndex((prev) => {
         const next = (prev + 1) % total;
+        activeIndexRef.current = next;
         animateCards(next);
         return next;
       });
@@ -534,16 +745,16 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     tlRef.current = tl;
     // header + 卡片整体同时出场
     tl.to(headerRef.current, { x: exitDir * 80, opacity: 0, duration: 0.22, ease: 'power2.in' });
-    tl.to(cardsWrapRef.current, { x: exitDir * 120, opacity: 0, duration: 0.25, ease: 'power2.in' }, '<');
+    tl.to(getCurrentContent(), { x: exitDir * 120, opacity: 0, duration: 0.25, ease: 'power2.in' }, '<');
     tl.call(() => {
       setDisplayedCategory(nextCategory);
       // 立刻把入场起始位置设好（React 会在下一 tick 渲染新卡片）
       requestAnimationFrame(() => {
         const enterDir = -exitDir;
         gsap.set(headerRef.current, { x: enterDir * 80, opacity: 0 });
-        gsap.set(cardsWrapRef.current, { x: enterDir * 120, opacity: 0 });
         gsap.to(headerRef.current, { x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
-        gsap.to(cardsWrapRef.current, { x: 0, opacity: 1, duration: 0.38, ease: 'power3.out', delay: 0.04 });
+        gsap.set(getCurrentContent(), { x: enterDir * 120, opacity: 0 });
+        gsap.to(getCurrentContent(), { x: 0, opacity: 1, duration: 0.38, ease: 'power3.out', delay: 0.04 });
       });
     });
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -559,10 +770,10 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
       aria-label={`${displayedCategory.name}书签轮播`}
       aria-live="polite"
       tabIndex={0}
-      onPointerDown={handlePointerDown}
-      onPointerMove={handlePointerMove}
-      onPointerUp={handlePointerUp}
-      onKeyDown={handleKeyDown}
+      onPointerDown={isCardsView ? handlePointerDown : undefined}
+      onPointerMove={isCardsView ? handlePointerMove : undefined}
+      onPointerUp={isCardsView ? handlePointerUp : undefined}
+      onKeyDown={isCardsView ? handleKeyDown : undefined}
     >
       {/* strokePulse keyframes */}
       <style>{`
@@ -574,9 +785,75 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
       `}</style>
 
       {/* 标题行 */}
-      <header ref={headerRef} className="mb-6 flex items-center gap-3 flex-shrink-0 px-8 pt-6">
+      <header ref={headerRef} className="mb-6 flex items-center gap-3 flex-shrink-0 px-8 pt-6" style={{ flexWrap: 'wrap' }}>
         <Hash size={24} style={{ color: 'var(--pink-400)' }} />
         <h2 style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}>{displayedCategory.name}</h2>
+        <div
+          role="group"
+          aria-label="视图切换"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 4,
+            padding: 4,
+            borderRadius: 14,
+            background: 'rgba(255,255,255,0.58)',
+            border: '1px solid rgba(255,255,255,0.85)',
+            boxShadow: '0 6px 22px rgba(255,107,158,0.12)',
+          }}
+        >
+          {[
+            { id: 'cards' as const, icon: <Grid3X3 size={16} />, label: '卡片' },
+            { id: 'table' as const, icon: <List size={17} />, label: '表格' },
+          ].map((option) => {
+            const selected = viewMode === option.id;
+            return (
+              <button
+                key={option.id}
+                type="button"
+                onClick={() => {
+                  if (option.id === viewMode) return;
+                  const content = getCurrentContent();
+                  if (!content) {
+                    setViewMode(option.id);
+                    return;
+                  }
+                  gsap.to(content, {
+                    opacity: 0,
+                    x: option.id === 'cards' ? 26 : -26,
+                    scale: 0.985,
+                    filter: 'blur(8px)',
+                    duration: 0.18,
+                    ease: 'power2.in',
+                    overwrite: 'auto',
+                    onComplete: () => setViewMode(option.id),
+                  });
+                }}
+                aria-pressed={selected}
+                title={option.label}
+                style={{
+                  height: 34,
+                  minWidth: 64,
+                  borderRadius: 10,
+                  border: selected ? '1px solid var(--pink-400)' : '1px solid transparent',
+                  background: selected ? 'linear-gradient(135deg, var(--pink-50), var(--blue-50))' : 'transparent',
+                  color: selected ? 'var(--pink-600)' : 'var(--neutral-600)',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: 6,
+                  fontSize: 12,
+                  fontWeight: 800,
+                  cursor: 'pointer',
+                  boxShadow: selected ? '0 4px 14px rgba(255,107,158,0.18)' : 'none',
+                }}
+              >
+                {option.icon}
+                <span>{option.label}</span>
+              </button>
+            );
+          })}
+        </div>
         <div style={{
           marginLeft: 'auto',
           fontSize: '0.875rem',
@@ -590,56 +867,66 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         </div>
       </header>
 
-      {/* 轮播舞台 */}
-      <div
-        ref={stageRef}
-        className="flex-1 relative"
-        style={{ overflow: 'visible', touchAction: 'pan-y' }}
-      >
-        {/* 左右渐变遮罩 */}
-        <div
-          className="absolute inset-y-0 pointer-events-none z-20"
-          style={{ left: '-100vw', right: '50%', background: 'linear-gradient(to right, rgba(255,240,245,0.92) 55%, transparent)' }}
-        />
-        <div
-          className="absolute inset-y-0 pointer-events-none z-20"
-          style={{ left: '50%', right: '-100vw', background: 'linear-gradient(to left, rgba(255,240,245,0.92) 55%, transparent)' }}
-        />
-
-        {/* 卡片层 */}
-        <div ref={cardsWrapRef} className="absolute inset-0 flex items-center justify-center">
-          {links.map((link, i) => (
-            <CarouselCard
-              key={`${displayedCategory.id}-${i}`}
-              link={link}
-              isActive={i === activeIndex}
-              onShare={onShare}
-              onClick={() => { resetIdleTimer(); goTo(i); }}
-              innerRef={(el) => { cardRefs.current[i] = el; }}
+      {isCardsView ? (
+        <>
+          {/* 轮播舞台 */}
+          <div
+            ref={stageRef}
+            className="flex-1 relative"
+            style={{ overflow: 'visible', touchAction: 'pan-y' }}
+          >
+            {/* 左右渐变遮罩 */}
+            <div
+              className="absolute inset-y-0 pointer-events-none z-20"
+              style={{ left: '-100vw', right: '50%', background: 'linear-gradient(to right, rgba(255,240,245,0.92) 55%, transparent)' }}
             />
-          ))}
-        </div>
-      </div>
+            <div
+              className="absolute inset-y-0 pointer-events-none z-20"
+              style={{ left: '50%', right: '-100vw', background: 'linear-gradient(to left, rgba(255,240,245,0.92) 55%, transparent)' }}
+            />
 
-      {/* 底部指示器 */}
-      <div className="flex items-center justify-center gap-2 pt-4 pb-2 flex-shrink-0">
-        {links.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => { resetIdleTimer(); goTo(i); }}
-            style={{
-              width: i === activeIndex ? 20 : 6,
-              height: 6,
-              borderRadius: 999,
-              background: i === activeIndex ? '#FF6B9E' : 'rgba(255,107,158,0.25)',
-              border: 'none',
-              padding: 0,
-              cursor: 'pointer',
-              transition: 'width 0.3s, background 0.3s',
-            }}
-          />
-        ))}
-      </div>
+            {/* 卡片层 */}
+            <div ref={cardsWrapRef} className="absolute inset-0 flex items-center justify-center">
+              {links.map((link, i) => (
+                <CarouselCard
+                  key={`${displayedCategory.id}-${i}`}
+                  link={link}
+                  isActive={i === activeIndex}
+                  onShare={onShare}
+                  onClick={() => { resetIdleTimer(); goTo(i); }}
+                  innerRef={(el) => { cardRefs.current[i] = el; }}
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* 底部指示器 */}
+          <div className="flex items-center justify-center gap-2 pt-4 pb-2 flex-shrink-0">
+            {links.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => { resetIdleTimer(); goTo(i); }}
+                style={{
+                  width: i === activeIndex ? 20 : 6,
+                  height: 6,
+                  borderRadius: 999,
+                  background: i === activeIndex ? '#FF6B9E' : 'rgba(255,107,158,0.25)',
+                  border: 'none',
+                  padding: 0,
+                  cursor: 'pointer',
+                  transition: 'width 0.3s, background 0.3s',
+                }}
+              />
+            ))}
+          </div>
+        </>
+      ) : (
+        <BookmarkTable
+          links={links}
+          onShare={onShare}
+          innerRef={(el) => { tableWrapRef.current = el; }}
+        />
+      )}
     </section>
   );
 };

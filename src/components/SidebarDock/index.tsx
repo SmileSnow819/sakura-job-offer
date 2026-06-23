@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { Compass, PenTool, BookOpen, Sparkles } from 'lucide-react';
+import React, { useState } from "react";
+import { Compass, PenTool, BookOpen } from "lucide-react";
 
-import { ICategory } from '../../types/bookmark';
+import { ICategory } from "../../types/bookmark";
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   Compass: <Compass size={20} />,
@@ -16,15 +16,21 @@ interface ISidebarDockProps {
 }
 
 const getIconSize = () => {
-  if (typeof window === 'undefined') return 44;
+  if (typeof window === "undefined") return 44;
   return window.innerWidth <= 768 ? 48 : 44;
 };
 
 const ICON_SIZE = getIconSize();
 const ICON_GAP = 10;
+const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
 
-const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTabChange }) => {
+const SidebarDock: React.FC<ISidebarDockProps> = ({
+  categories,
+  activeTab,
+  onTabChange,
+}) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [isLogoHovered, setIsLogoHovered] = useState(false);
 
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40">
@@ -34,18 +40,78 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
       >
         {/* Logo */}
         <div
-          className="flex items-center justify-center rounded-[13px] text-white shadow-sm flex-shrink-0"
-          style={{ width: ICON_SIZE, height: ICON_SIZE, background: 'linear-gradient(135deg, var(--pink-400), var(--blue-400))' }}
+          className="relative flex items-center justify-center rounded-[13px] text-white shadow-sm flex-shrink-0"
+          style={{
+            width: ICON_SIZE,
+            height: ICON_SIZE,
+            background:
+              "linear-gradient(135deg, var(--pink-400), var(--blue-400))",
+            transform: isLogoHovered ? "scale(1.08) translateY(-2px)" : "none",
+            transition: "transform 0.15s ease, box-shadow 0.15s ease",
+            boxShadow: isLogoHovered
+              ? "0 6px 18px var(--pink-400)"
+              : "0 2px 6px rgba(0,0,0,0.05)",
+          }}
+          onMouseEnter={() => setIsLogoHovered(true)}
+          onMouseLeave={() => setIsLogoHovered(false)}
+          aria-label="Sakura Offer Hub"
         >
-          <Sparkles size={19} />
+          <div
+            style={{
+              position: "absolute",
+              bottom: ICON_SIZE + 10,
+              left: "50%",
+              transform: `translateX(-50%) translateY(${isLogoHovered ? 0 : 6}px)`,
+              opacity: isLogoHovered ? 1 : 0,
+              pointerEvents: "none",
+              transition: "opacity 0.15s ease, transform 0.15s ease",
+              whiteSpace: "nowrap",
+              zIndex: 999,
+            }}
+          >
+            <div
+              style={{
+                background: "rgba(255,255,255,0.96)",
+                backdropFilter: "blur(12px)",
+                WebkitBackdropFilter: "blur(12px)",
+                color: "var(--neutral-800)",
+                fontSize: 12,
+                fontWeight: 700,
+                padding: "5px 14px",
+                borderRadius: 12,
+                border: "1px solid var(--pink-300)",
+                boxShadow: "0 4px 18px var(--pink-400)",
+                letterSpacing: 0.3,
+              }}
+            >
+              Sakura Offer Hub
+            </div>
+          </div>
+          <img
+            src={LOGO_URL}
+            alt=""
+            aria-hidden="true"
+            style={{
+              width: ICON_SIZE - 8,
+              height: ICON_SIZE - 8,
+              borderRadius: 11,
+              display: "block",
+              objectFit: "cover",
+            }}
+          />
         </div>
 
         {/* 分隔线 */}
-        <div className="h-6 w-px rounded-full flex-shrink-0"
-          style={{ margin: '0 2px', background: 'var(--pink-300)' }} />
+        <div
+          className="h-6 w-px rounded-full flex-shrink-0"
+          style={{ margin: "0 2px", background: "var(--pink-300)" }}
+        />
 
         {/* Tab 图标列表 */}
-        <ul className="flex flex-row items-center list-none m-0 p-0" style={{ gap: ICON_GAP }}>
+        <ul
+          className="flex flex-row items-center list-none m-0 p-0"
+          style={{ gap: ICON_GAP }}
+        >
           {categories.map((cat, i) => {
             const isActive = cat.id === activeTab;
             const isHovered = hoveredIndex === i;
@@ -60,30 +126,32 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
                 {/* Tooltip */}
                 <div
                   style={{
-                    position: 'absolute',
+                    position: "absolute",
                     bottom: ICON_SIZE + 10,
-                    left: '50%',
+                    left: "50%",
                     transform: `translateX(-50%) translateY(${isHovered ? 0 : 6}px)`,
                     opacity: isHovered ? 1 : 0,
-                    pointerEvents: 'none',
-                    transition: 'opacity 0.15s ease, transform 0.15s ease',
-                    whiteSpace: 'nowrap',
+                    pointerEvents: "none",
+                    transition: "opacity 0.15s ease, transform 0.15s ease",
+                    whiteSpace: "nowrap",
                     zIndex: 999,
                   }}
                 >
-                  <div style={{
-                    background: 'rgba(255,255,255,0.96)',
-                    backdropFilter: 'blur(12px)',
-                    WebkitBackdropFilter: 'blur(12px)',
-                    color: 'var(--neutral-800)',
-                    fontSize: 12,
-                    fontWeight: 700,
-                    padding: '5px 14px',
-                    borderRadius: 12,
-                    border: '1px solid var(--pink-300)',
-                    boxShadow: '0 4px 18px var(--pink-400)',
-                    letterSpacing: 0.3,
-                  }}>
+                  <div
+                    style={{
+                      background: "rgba(255,255,255,0.96)",
+                      backdropFilter: "blur(12px)",
+                      WebkitBackdropFilter: "blur(12px)",
+                      color: "var(--neutral-800)",
+                      fontSize: 12,
+                      fontWeight: 700,
+                      padding: "5px 14px",
+                      borderRadius: 12,
+                      border: "1px solid var(--pink-300)",
+                      boxShadow: "0 4px 18px var(--pink-400)",
+                      letterSpacing: 0.3,
+                    }}
+                  >
                     {cat.name}
                   </div>
                 </div>
@@ -93,32 +161,46 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({ categories, activeTab, onTab
                   className="w-full h-full flex items-center justify-center rounded-[13px] relative"
                   style={{
                     background: isActive
-                      ? 'linear-gradient(135deg, var(--pink-50), var(--neutral-50))'
-                      : isHovered ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.6)',
-                    border: isActive ? '1.5px solid var(--pink-400)' : '1.5px solid rgba(255,255,255,0.75)',
-                    color: isActive || isHovered ? 'var(--pink-500)' : 'var(--neutral-600)',
+                      ? "linear-gradient(135deg, var(--pink-50), var(--neutral-50))"
+                      : isHovered
+                        ? "rgba(255,255,255,0.9)"
+                        : "rgba(255,255,255,0.6)",
+                    border: isActive
+                      ? "1.5px solid var(--pink-400)"
+                      : "1.5px solid rgba(255,255,255,0.75)",
+                    color:
+                      isActive || isHovered
+                        ? "var(--pink-500)"
+                        : "var(--neutral-600)",
                     boxShadow: isActive
-                      ? '0 4px 14px var(--pink-400)'
-                      : isHovered ? '0 6px 18px var(--pink-400)' : '0 2px 6px rgba(0,0,0,0.05)',
-                    transform: isHovered && !isActive ? 'scale(1.12) translateY(-3px)' : 'none',
-                    transition: 'all 0.15s ease',
-                    cursor: 'pointer',
+                      ? "0 4px 14px var(--pink-400)"
+                      : isHovered
+                        ? "0 6px 18px var(--pink-400)"
+                        : "0 2px 6px rgba(0,0,0,0.05)",
+                    transform:
+                      isHovered && !isActive
+                        ? "scale(1.12) translateY(-3px)"
+                        : "none",
+                    transition: "all 0.15s ease",
+                    cursor: "pointer",
                   }}
                 >
                   {ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />}
                 </button>
 
                 {isActive && (
-                  <span style={{
-                    position: 'absolute',
-                    bottom: '-0.375rem',
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: '0.25rem',
-                    height: '0.25rem',
-                    borderRadius: '9999px',
-                    background: 'var(--pink-500)'
-                  }} />
+                  <span
+                    style={{
+                      position: "absolute",
+                      bottom: "-0.375rem",
+                      left: "50%",
+                      transform: "translateX(-50%)",
+                      width: "0.25rem",
+                      height: "0.25rem",
+                      borderRadius: "9999px",
+                      background: "var(--pink-500)",
+                    }}
+                  />
                 )}
               </li>
             );
