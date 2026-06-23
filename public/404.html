@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sakura Offer Hub</title>
+    <script>
+      (function () {
+        var base = "/sakura-job-offer/";
+        var path = location.pathname;
+        if (path.indexOf(base) !== 0) {
+          location.replace(base);
+          return;
+        }
+        sessionStorage.redirect =
+          location.origin + path + location.search + location.hash;
+        location.replace(location.origin + base);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>
