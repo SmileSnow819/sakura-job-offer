@@ -198,12 +198,7 @@ const App: React.FC = () => {
         <Routes>
           <Route
             path="/"
-            element={
-              <Navigate
-                to={`/bookmarks/${bookmarkData.categories.find((c) => c.id !== "interviews")?.id ?? "campus"}`}
-                replace
-              />
-            }
+            element={<BookmarksPage onShare={handleShare} />}
           />
           <Route
             path="/bookmarks/:categoryId"

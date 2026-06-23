@@ -15,7 +15,7 @@ const BookmarksPage: React.FC<IBookmarksPageProps> = ({ onShare }) => {
   const { categoryId } = useParams<{ categoryId: string }>();
   const activeCategory = bookmarkCategories.find(c => c.id === categoryId) ?? bookmarkCategories[0];
 
-  if (!bookmarkCategories.find(c => c.id === categoryId)) {
+  if (categoryId && !bookmarkCategories.find(c => c.id === categoryId)) {
     return <Navigate to={`/bookmarks/${bookmarkCategories[0].id}`} replace />;
   }
 
