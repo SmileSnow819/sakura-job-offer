@@ -1,6 +1,8 @@
 export interface ILink {
   title: string;
   url: string;
+  referralUrl?: string;
+  referralQrCode?: string;
 }
 
 export interface ICategory {

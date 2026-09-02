@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Grid3X3, Hash, List, RotateCcw, Search, Share2, Sparkles, X } from 'lucide-react';
+import { ExternalLink, Grid3X3, Hash, List, RotateCcw, Search, Send, Share2, Sparkles, X } from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
@@ -99,6 +99,83 @@ const buildLinkGroups = (categoryId: string, links: ILink[]): ILinkGroup[] => {
       .filter((name) => groups.has(name))
       .map((name) => ({ id: name, name, links: groups.get(name) ?? [] })),
   ];
+};
+
+interface IReferralApplyLinkProps {
+  link: ILink;
+  compact?: boolean;
+  tooltipPlacement?: 'top' | 'left';
+}
+
+const ReferralApplyLink: React.FC<IReferralApplyLinkProps> = ({ link, compact = false, tooltipPlacement = 'top' }) => {
+  if (!link.referralUrl) return null;
+
+  const qrCodeUrl = link.referralQrCode
+    ? `${import.meta.env.BASE_URL}${link.referralQrCode.replace(/^\//, '')}`
+    : null;
+
+  return (
+    <span className="referral-apply-wrap" style={{ position: 'relative', display: 'inline-flex', flex: compact ? undefined : 1, minWidth: 0 }}>
+      <a
+        href={link.referralUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="referral-apply-link"
+        aria-label={`通过内推码投递${link.title}`}
+        title="内推码投递"
+        onClick={(event) => event.stopPropagation()}
+        style={{
+          width: compact ? undefined : '100%',
+          minWidth: compact ? 34 : undefined,
+          height: compact ? 34 : undefined,
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 5,
+          padding: compact ? 0 : (CARD_H < 350 ? '8px 7px' : '8px 10px'),
+          borderRadius: compact ? 10 : 999,
+          color: 'white',
+          background: compact ? 'linear-gradient(135deg, var(--blue-500), var(--blue-400))' : 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
+          boxShadow: compact ? '0 4px 14px rgba(104,163,255,0.34)' : '0 4px 14px var(--pink-400)',
+          textDecoration: 'none',
+          fontSize: compact ? 11 : 13,
+          fontWeight: compact ? 800 : 700,
+          whiteSpace: 'nowrap',
+        }}
+      >
+        {compact ? <Send size={16} /> : '↗ 内推投递'}
+      </a>
+      {qrCodeUrl && (
+        <span
+          className={`referral-qr-tooltip referral-qr-tooltip-${tooltipPlacement}`}
+          role="tooltip"
+          style={{
+            position: 'absolute',
+            right: tooltipPlacement === 'left' ? 'calc(100% + 12px)' : 0,
+            top: tooltipPlacement === 'left' ? '50%' : undefined,
+            bottom: tooltipPlacement === 'left' ? undefined : 'calc(100% + 10px)',
+            zIndex: 60,
+            width: 142,
+            padding: 8,
+            borderRadius: 12,
+            background: 'rgba(255,255,255,0.96)',
+            border: '1px solid var(--blue-200)',
+            boxShadow: '0 12px 30px rgba(70,127,207,0.2)',
+            opacity: 0,
+            transform: tooltipPlacement === 'left' ? 'translateY(-50%) scale(0.96)' : 'translateY(6px) scale(0.96)',
+            pointerEvents: 'none',
+            transition: 'opacity 0.18s ease, transform 0.18s ease',
+          }}
+        >
+          <img src={qrCodeUrl} alt={`${link.title}内推码`} style={{ display: 'block', width: '100%', borderRadius: 7 }} />
+        <span style={{ display: 'block', marginTop: 6, color: 'var(--neutral-700)', fontSize: 11, fontWeight: 700, textAlign: 'center' }}>
+          扫码内推投递
+        </span>
+        <span style={{ position: 'absolute', right: 12, bottom: -5, width: 10, height: 10, background: 'rgba(255,255,255,0.96)', borderRight: '1px solid var(--blue-200)', borderBottom: '1px solid var(--blue-200)', transform: 'rotate(45deg)' }} />
+        </span>
+      )}
+    </span>
+  );
 };
 
 // ── 单张卡片 ──────────────────────────────────────────────────────────────────
@@ -409,29 +486,33 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
 
       {/* 按钮区 */}
       <div style={{ display: 'flex', gap: 8, marginTop: 'auto', width: '100%' }}>
-        <a
-          ref={visitBtnRef}
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          onClick={(e) => { e.stopPropagation(); btnClick(visitBtnRef.current); }}
-          onMouseEnter={() => btnEnter(visitBtnRef.current)}
-          onMouseLeave={() => btnLeave(visitBtnRef.current)}
-          aria-label={`访问${link.title}`}
-          style={{
-            display: 'inline-flex', alignItems: 'center', gap: 4,
-            padding: CARD_H < 350 ? '8px 14px' : '8px 20px',
-            borderRadius: 999,
-            background: 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
-            color: 'oklch(0.99 0.008 350)', fontSize: 13, fontWeight: 700,
-            textDecoration: 'none',
-            boxShadow: '0 4px 14px var(--pink-400)',
-            flex: 1,
-            justifyContent: 'center',
-          }}
-        >
-          ↗ 访问
-        </a>
+        {link.referralUrl ? <ReferralApplyLink link={link} /> : (
+          <a
+            ref={visitBtnRef}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => { e.stopPropagation(); btnClick(visitBtnRef.current); }}
+            onMouseEnter={() => btnEnter(visitBtnRef.current)}
+            onMouseLeave={() => btnLeave(visitBtnRef.current)}
+            aria-label={`立即投递${link.title}`}
+            style={{
+              display: 'inline-flex', alignItems: 'center', gap: 4,
+              padding: CARD_H < 350 ? '8px 7px' : '8px 10px',
+              borderRadius: 999,
+              background: 'linear-gradient(135deg, var(--pink-500), var(--pink-400))',
+              color: 'oklch(0.99 0.008 350)', fontSize: 13, fontWeight: 700,
+              textDecoration: 'none',
+              boxShadow: '0 4px 14px var(--pink-400)',
+              flex: 1,
+              justifyContent: 'center',
+              minWidth: 0,
+              whiteSpace: 'nowrap',
+            }}
+          >
+            ↗ 立即投递
+          </a>
+        )}
         <button
           ref={shareBtnRef}
           onClick={(e) => { onShare(e, link.url); btnClick(shareBtnRef.current); }}
@@ -444,6 +525,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
             background: 'var(--blue-100)',
             border: '1.5px solid var(--blue-400)',
             color: 'var(--blue-500)', cursor: 'pointer', fontSize: 13, fontWeight: 600,
+            whiteSpace: 'nowrap',
           }}
         >
           ⬡ 分享
@@ -503,15 +585,17 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                 </a>
               </div>
               <div className="bookmark-mobile-actions">
-                <a
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={`访问${link.title}`}
-                  title="访问"
-                >
-                  <ExternalLink size={16} />
-                </a>
+                {link.referralUrl ? <ReferralApplyLink link={link} compact /> : (
+                  <a
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`立即投递${link.title}`}
+                    title="立即投递"
+                  >
+                    <ExternalLink size={16} />
+                  </a>
+                )}
                 <button
                   onClick={(e) => onShare(e, link.url)}
                   aria-label={`分享${link.title}`}
@@ -532,7 +616,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
             <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>名称</th>
             <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>域名</th>
             <th style={{ padding: '14px 18px', textAlign: 'left', fontSize: 12, fontWeight: 800 }}>链接</th>
-            <th style={{ width: 132, padding: '14px 18px', textAlign: 'right', fontSize: 12, fontWeight: 800 }}>操作</th>
+            <th style={{ width: 178, padding: '14px 18px', textAlign: 'right', fontSize: 12, fontWeight: 800 }}>操作</th>
           </tr>
         </thead>
         <tbody>
@@ -603,26 +687,28 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                 </td>
                 <td data-label="操作" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', textAlign: 'right' }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                    <a
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`访问${link.title}`}
-                      title="访问"
-                      style={{
-                        width: 34,
-                        height: 34,
-                        borderRadius: 10,
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: 'var(--pink-600)',
-                        background: 'var(--pink-100)',
-                        border: '1px solid var(--pink-200)',
-                      }}
-                    >
-                      <ExternalLink size={16} />
-                    </a>
+                    {link.referralUrl ? <ReferralApplyLink link={link} compact tooltipPlacement="left" /> : (
+                      <a
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`立即投递${link.title}`}
+                        title="立即投递"
+                        style={{
+                          width: 34,
+                          height: 34,
+                          borderRadius: 10,
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          color: 'var(--pink-600)',
+                          background: 'var(--pink-100)',
+                          border: '1px solid var(--pink-200)',
+                        }}
+                      >
+                        <ExternalLink size={16} />
+                      </a>
+                    )}
                     <button
                       onClick={(e) => onShare(e, link.url)}
                       aria-label={`分享${link.title}`}
@@ -1097,6 +1183,15 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           0%   { box-shadow: 0 0 0 0px rgba(161,196,253,0.7),  0 12px 40px rgba(161,196,253,0.25); }
           50%  { box-shadow: 0 0 0 7px rgba(161,196,253,0),    0 12px 40px rgba(161,196,253,0.25); }
           100% { box-shadow: 0 0 0 0px rgba(161,196,253,0),    0 12px 40px rgba(161,196,253,0.25); }
+        }
+        .referral-apply-wrap:hover .referral-qr-tooltip,
+        .referral-apply-wrap:focus-within .referral-qr-tooltip {
+          opacity: 1 !important;
+          transform: translateY(0) scale(1) !important;
+        }
+        .referral-apply-wrap:hover .referral-qr-tooltip-left,
+        .referral-apply-wrap:focus-within .referral-qr-tooltip-left {
+          transform: translateY(-50%) scale(1) !important;
         }
         .bookmark-toolbar-scroll::-webkit-scrollbar { display: none; }
         .bookmark-toolbar-scroll { -ms-overflow-style: none; scrollbar-width: none; }

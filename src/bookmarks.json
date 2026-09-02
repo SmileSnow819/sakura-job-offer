@@ -6,6 +6,12 @@
       "icon": "CalendarDays",
       "links": [
         {
+          "title": "bilibili",
+          "url": "https://jobs.bilibili.com/campus/records",
+          "referralUrl": "https://jobs.bilibili.com/campus/positions?token=cad7ec39-c410-4cb1-8acf-d02914a12628&type=3",
+          "referralQrCode": "img/QR-CODE/bilibili.webp"
+        },
+        {
           "title": "字节跳动校园招聘",
           "url": "https://jobs.bytedance.com/campus/position"
         },
@@ -234,7 +240,9 @@
       "links": [
         {
           "title": "bilibili",
-          "url": "https://jobs.bilibili.com/campus/records"
+          "url": "https://jobs.bilibili.com/campus/records",
+          "referralUrl": "https://jobs.bilibili.com/campus/positions?token=cad7ec39-c410-4cb1-8acf-d02914a12628&type=3",
+          "referralQrCode": "img/QR-CODE/bilibili.webp"
         },
         {
           "title": "字节跳动校园招聘",
