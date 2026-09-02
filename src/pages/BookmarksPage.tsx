@@ -3,8 +3,9 @@ import { useParams, Navigate } from 'react-router-dom';
 import bookmarkDataRaw from '../bookmarks.json';
 import { IBookmarkData } from '../types/bookmark';
 import BookmarkGrid from '../components/BookmarkGrid';
+import { sanitizeBookmarkData } from '../utils/sanitizeRecruitmentUrl';
 
-const bookmarkData = bookmarkDataRaw as IBookmarkData;
+const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
 const bookmarkCategories = bookmarkData.categories.filter(c => c.id !== 'interviews');
 
 interface IBookmarksPageProps {

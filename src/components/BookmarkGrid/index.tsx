@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ExternalLink, Grid3X3, Hash, List, Search, Share2, X } from 'lucide-react';
+import { ExternalLink, Grid3X3, Hash, List, RotateCcw, Search, Share2, Sparkles, X } from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
@@ -653,6 +653,136 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
   </div>
 );
 
+const AutumnLaunchNotice: React.FC = () => {
+  const noticeRef = useRef<HTMLDivElement>(null);
+  const iconRef = useRef<HTMLSpanElement>(null);
+  const beamRef = useRef<HTMLSpanElement>(null);
+  const copyRef = useRef<HTMLSpanElement>(null);
+  const sparklesRef = useRef<HTMLSpanElement>(null);
+
+  const replay = useCallback(() => {
+    const notice = noticeRef.current;
+    if (!notice) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(notice, { opacity: 1, y: 0, rotateX: 0, rotateY: 0, clipPath: 'none' });
+      gsap.set([iconRef.current, copyRef.current, sparklesRef.current], { opacity: 1, x: 0, scale: 1, rotate: 0 });
+      return;
+    }
+
+    const timeline = gsap.timeline({ defaults: { overwrite: 'auto' } });
+    timeline
+      .set(notice, { opacity: 1, y: 0, rotateX: 0, rotateY: 0 })
+      .fromTo(notice, { clipPath: 'inset(0 100% 0 0)', y: -12 }, { clipPath: 'inset(0 0% 0 0)', y: 0, duration: 0.5, ease: 'power3.out' })
+      .fromTo(iconRef.current, { scale: 0.4, rotate: -28, opacity: 0 }, { scale: 1, rotate: 0, opacity: 1, duration: 0.42, ease: 'back.out(2.2)' }, '<0.08')
+      .fromTo(copyRef.current, { x: -18, opacity: 0 }, { x: 0, opacity: 1, duration: 0.38, ease: 'power3.out' }, '<0.04')
+      .fromTo(sparklesRef.current, { scale: 0.45, opacity: 0, rotate: -20 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.38, ease: 'back.out(2.4)' }, '<0.08')
+      .fromTo(beamRef.current, { xPercent: -135, opacity: 0 }, { xPercent: 175, opacity: 0.9, duration: 0.75, ease: 'power2.inOut' }, '<0.05')
+      .to(beamRef.current, { opacity: 0, duration: 0.12 });
+  }, []);
+
+  useEffect(() => {
+    replay();
+  }, [replay]);
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    const element = noticeRef.current;
+    if (!element || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const bounds = element.getBoundingClientRect();
+    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
+    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+    gsap.to(element, { rotateY: x * 2.4, rotateX: y * -2.4, y: -2, duration: 0.25, ease: 'power2.out', overwrite: 'auto' });
+  };
+
+  return (
+    <div className="autumn-launch-wrap px-8 pb-3 flex-shrink-0">
+      <div
+        ref={noticeRef}
+        className="autumn-launch-notice"
+        role="status"
+        onPointerMove={handlePointerMove}
+        onPointerLeave={() => gsap.to(noticeRef.current, { rotateX: 0, rotateY: 0, y: 0, duration: 0.35, ease: 'power3.out', overwrite: 'auto' })}
+        style={{
+          position: 'relative',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: 10,
+          maxWidth: '100%',
+          padding: '10px 11px 10px 14px',
+          overflow: 'hidden',
+          transformStyle: 'preserve-3d',
+          borderRadius: 16,
+          color: 'var(--pink-600)',
+          background: 'linear-gradient(110deg, rgba(255,240,246,0.8), rgba(235,245,255,0.7))',
+          border: '1px solid rgba(255,183,197,0.72)',
+          boxShadow: '0 8px 24px rgba(255,107,158,0.12), inset 0 1px 0 rgba(255,255,255,0.9)',
+          backdropFilter: 'blur(16px) saturate(1.18)',
+          WebkitBackdropFilter: 'blur(16px) saturate(1.18)',
+        }}
+      >
+        <span
+          ref={beamRef}
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: -16,
+            bottom: -16,
+            left: 0,
+            width: 56,
+            pointerEvents: 'none',
+            background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.9), transparent)',
+            transform: 'skewX(-20deg)',
+          }}
+        />
+        <span
+          ref={iconRef}
+          style={{
+            position: 'relative',
+            width: 28,
+            height: 28,
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            borderRadius: 9,
+            background: 'linear-gradient(135deg, var(--pink-400), var(--blue-400))',
+            color: 'white',
+            flexShrink: 0,
+            boxShadow: '0 5px 14px rgba(255,107,158,0.28)',
+          }}
+        >
+          <Sparkles size={15} />
+        </span>
+        <span ref={copyRef} className="autumn-launch-copy" style={{ position: 'relative', fontSize: 13, fontWeight: 800, whiteSpace: 'nowrap' }}>
+          秋招专场现已上线，每天自动更新秋招公司
+        </span>
+        <button
+          type="button"
+          onClick={replay}
+          aria-label="重播秋招专场上线动画"
+          title="重播上线动画"
+          style={{
+            position: 'relative',
+            width: 30,
+            height: 30,
+            padding: 0,
+            borderRadius: 9,
+            border: '1px solid rgba(255,255,255,0.88)',
+            background: 'rgba(255,255,255,0.56)',
+            color: 'var(--pink-600)',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            cursor: 'pointer',
+            flexShrink: 0,
+          }}
+        >
+          <span ref={sparklesRef} style={{ display: 'inline-flex' }}><RotateCcw size={14} /></span>
+        </button>
+      </div>
+    </div>
+  );
+};
+
 // ── BookmarkGrid ──────────────────────────────────────────────────────────────
 const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, onShare }) => {
   const [displayedCategory, setDisplayedCategory] = useState<ICategory>(category);
@@ -697,6 +827,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const links = filteredLinks;
   const total = links.length;
   const isCardsView = viewMode === 'cards';
+  const isAutumnCategory = displayedCategory.id === 'autumn';
   const getCurrentContent = useCallback(() => (
     viewMode === 'cards' ? (stageRef.current ?? cardsWrapRef.current) : tableWrapRef.current
   ), [viewMode]);
@@ -986,6 +1117,20 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             padding: 0 16px 12px !important;
             gap: 10px !important;
           }
+          .autumn-launch-wrap {
+            padding: 0 16px 12px !important;
+          }
+          .autumn-launch-notice {
+            min-height: 44px;
+            padding: 9px 12px !important;
+            border-radius: 14px !important;
+            align-items: flex-start !important;
+          }
+          .autumn-launch-copy {
+            white-space: normal !important;
+            font-size: 12px !important;
+            line-height: 1.45 !important;
+          }
           .bookmark-search-box {
             width: 100% !important;
             min-width: 0 !important;
@@ -1227,6 +1372,10 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             : `${links.length}/${displayedCategory.links.length} 个内容`}
         </div>
       </header>
+
+      {isAutumnCategory && (
+        <AutumnLaunchNotice />
+      )}
 
       <div
         className="bookmark-filter-bar flex items-center gap-3 flex-shrink-0 px-8 pb-4"

@@ -1,8 +1,235 @@
 {
   "categories": [
     {
+      "id": "autumn",
+      "name": "秋招专场",
+      "icon": "CalendarDays",
+      "links": [
+        {
+          "title": "字节跳动校园招聘",
+          "url": "https://jobs.bytedance.com/campus/position"
+        },
+        {
+          "title": "腾讯校园招聘",
+          "url": "https://join.qq.com/post.html"
+        },
+        {
+          "title": "阿里巴巴校园招聘",
+          "url": "https://campus-talent.alibaba.com/campus/index"
+        },
+        {
+          "title": "美团校园招聘",
+          "url": "https://zhaopin.meituan.com/web/campus"
+        },
+        {
+          "title": "百度校园招聘",
+          "url": "https://talent.baidu.com/jobs/list?recruitType=GRADUATE"
+        },
+        {
+          "title": "京东校园招聘",
+          "url": "https://campus.jd.com/#/jobs"
+        },
+        {
+          "title": "拼多多校园招聘",
+          "url": "https://careers.pddglobalhr.com/campus"
+        },
+        {
+          "title": "快手校园招聘",
+          "url": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/index"
+        },
+        {
+          "title": "华为校园招聘",
+          "url": "https://career.huawei.com/reccampportal/portal5/index.html"
+        },
+        {
+          "title": "小米校园招聘",
+          "url": "https://xiaomi.jobs.f.mioffice.cn/campus/"
+        },
+        {
+          "title": "OPPO校园招聘",
+          "url": "https://careers.oppo.com/campus"
+        },
+        {
+          "title": "大疆校园招聘",
+          "url": "https://we.dji.com/zh-CN/campus"
+        },
+        {
+          "title": "科大讯飞校园招聘",
+          "url": "https://campus.iflytek.com/"
+        },
+        {
+          "title": "蚂蚁集团校园招聘",
+          "url": "https://talent.antgroup.com/campus"
+        },
+        {
+          "title": "广联达招聘官网",
+          "url": "https://www.glodon.com/"
+        },
+        {
+          "title": "雷赛智能招聘官网",
+          "url": "https://www.leisai.com/"
+        },
+        {
+          "title": "好未来招聘官网",
+          "url": "https://www.tal.com/zh-cn"
+        },
+        {
+          "title": "记忆科技招聘官网",
+          "url": "https://www.biwintechnology.com/"
+        },
+        {
+          "title": "Meta Careers",
+          "url": "https://www.metacareers.com/"
+        },
+        {
+          "title": "虹软科技招聘官网",
+          "url": "https://www.arcsoft.com.cn/"
+        },
+        {
+          "title": "帆软招聘官网",
+          "url": "https://www.fanruan.com/"
+        },
+        {
+          "title": "黑芝麻智能招聘官网",
+          "url": "https://www.black-sesame.com/"
+        },
+        {
+          "title": "金升阳招聘官网",
+          "url": "https://www.mornsun.cn/"
+        },
+        {
+          "title": "RoboSense速腾聚创招聘官网",
+          "url": "https://www.robosense.ai/"
+        },
+        {
+          "title": "58同城招聘官网",
+          "url": "https://about.58.com/official/HomePage?title=0"
+        },
+        {
+          "title": "海能达招聘官网",
+          "url": "https://www.hytera.com/"
+        },
+        {
+          "title": "正浩创新 EcoFlow 招聘官网",
+          "url": "https://www.ecoflow.com/cn"
+        },
+        {
+          "title": "亿联网络招聘官网",
+          "url": "https://www.yealink.com/"
+        },
+        {
+          "title": "四方集团招聘官网",
+          "url": "https://www.sifang.com/"
+        },
+        {
+          "title": "维信诺招聘官网",
+          "url": "https://www.visionox.com/"
+        },
+        {
+          "title": "卓胜微电子招聘官网",
+          "url": "https://www.maxscend.com/"
+        },
+        {
+          "title": "禾赛科技招聘官网",
+          "url": "https://www.hesaitech.com/"
+        },
+        {
+          "title": "巨一科技招聘官网",
+          "url": "https://www.jee.com.cn/"
+        },
+        {
+          "title": "商汤科技招聘官网",
+          "url": "https://www.sensetime.com/"
+        },
+        {
+          "title": "新东方招聘官网",
+          "url": "https://www.xdf.cn/"
+        },
+        {
+          "title": "经纬恒润招聘官网",
+          "url": "https://www.hirain.com/"
+        },
+        {
+          "title": "海尔招聘官网",
+          "url": "https://www.haier.com/"
+        },
+        {
+          "title": "九牧集团招聘官网",
+          "url": "https://www.jomoo.com.cn/"
+        },
+        {
+          "title": "三一集团招聘官网",
+          "url": "https://www.sanyglobal.com/"
+        },
+        {
+          "title": "嘉士伯招聘官网",
+          "url": "https://www.carlsberggroup.com/"
+        },
+        {
+          "title": "九号公司招聘官网",
+          "url": "https://www.ninebot.com/"
+        },
+        {
+          "title": "宁德时代招聘官网",
+          "url": "https://www.catl.com/"
+        },
+        {
+          "title": "贝壳招聘官网",
+          "url": "https://www.ke.com/"
+        },
+        {
+          "title": "菜鸟集团招聘官网",
+          "url": "https://www.cainiao.com/"
+        },
+        {
+          "title": "电科金仓招聘官网",
+          "url": "https://www.kingbase.com.cn/"
+        },
+        {
+          "title": "黑白调招聘官网",
+          "url": "https://hbada.com/"
+        },
+        {
+          "title": "锐明技术招聘官网",
+          "url": "https://www.streamax.com/"
+        },
+        {
+          "title": "友塔游戏招聘官网",
+          "url": "https://www.phantixgames.com/"
+        },
+        {
+          "title": "银泰商业招聘官网",
+          "url": "https://www.intime.com.cn/"
+        },
+        {
+          "title": "飞步科技招聘官网",
+          "url": "https://www.fabu.ai/"
+        },
+        {
+          "title": "途游招聘官网",
+          "url": "https://www.tuyoo.com/"
+        },
+        {
+          "title": "微博招聘官网",
+          "url": "https://weibo.com/"
+        },
+        {
+          "title": "科华集团招聘官网",
+          "url": "https://www.kehua.com/"
+        },
+        {
+          "title": "富特科技招聘官网",
+          "url": "https://www.forte.com.cn/"
+        },
+        {
+          "title": "诗悦网络招聘官网",
+          "url": "https://www.shiyue.com/"
+        }
+      ]
+    },
+    {
       "id": "campus",
-      "name": "校招春招",
+      "name": "实习生招聘",
       "icon": "Compass",
       "links": [
         {
@@ -37,22 +264,34 @@
           "title": "小红书校园招聘",
           "url": "https://job.xiaohongshu.com/campus/position"
         },
-        { "title": "京东校招", "url": "https://campus.jd.com/#/jobs" },
+        {
+          "title": "京东校招",
+          "url": "https://campus.jd.com/#/jobs"
+        },
         {
           "title": "拼多多集团",
           "url": "https://careers.pddglobalhr.com/campus"
         },
-        { "title": "蔚来校招", "url": "https://nio.jobs.feishu.cn/campus/" },
+        {
+          "title": "蔚来校招",
+          "url": "https://nio.jobs.feishu.cn/campus/"
+        },
         {
           "title": "百度校园招聘",
           "url": "https://talent.baidu.com/jobs/list?recruitType=INTERN"
         },
-        { "title": "腾讯校招", "url": "https://join.qq.com/post.html" },
+        {
+          "title": "腾讯校招",
+          "url": "https://join.qq.com/post.html"
+        },
         {
           "title": "小米实习生招聘",
           "url": "https://xiaomi.jobs.f.mioffice.cn/internship/"
         },
-        { "title": "网易招聘", "url": "https://hr.163.com/job-list.html" },
+        {
+          "title": "网易招聘",
+          "url": "https://hr.163.com/job-list.html"
+        },
         {
           "title": "滴滴实习生",
           "url": "https://app.mokahr.com/apply/didiglobal/6222#/jobs"
@@ -97,7 +336,10 @@
           "title": "vivo招聘",
           "url": "https://hr-campus.vivo.com/intern/jobs"
         },
-        { "title": "爱奇艺实习生", "url": "https://careers.iqiyi.com/intern/" },
+        {
+          "title": "爱奇艺实习生",
+          "url": "https://careers.iqiyi.com/intern/"
+        },
         {
           "title": "荣耀招聘",
           "url": "https://career.honor.com/SU61b9b9992f9d24431f5050a5/pb/interns.html"
@@ -106,7 +348,10 @@
           "title": "酷家乐",
           "url": "https://www.kujiale.com/pub/hr-recruit/campus/postlist"
         },
-        { "title": "360校园招聘", "url": "https://360campus.zhiye.com/" },
+        {
+          "title": "360校园招聘",
+          "url": "https://360campus.zhiye.com/"
+        },
         {
           "title": "莉莉丝",
           "url": "https://lilithgames.jobs.feishu.cn/intern/"
@@ -115,18 +360,30 @@
           "title": "心动网络",
           "url": "https://hr.xd.cn/campus-recruitment/xd/99361#/"
         },
-        { "title": "SHEIN招聘", "url": "https://careers.shein.cn/All-Jobs" },
-        { "title": "有赞招聘", "url": "https://youzan.zhiye.com/campus" },
+        {
+          "title": "SHEIN招聘",
+          "url": "https://careers.shein.cn/All-Jobs"
+        },
+        {
+          "title": "有赞招聘",
+          "url": "https://youzan.zhiye.com/campus"
+        },
         {
           "title": "迅雷网络",
           "url": "https://campus.xunlei.com/campus_apply/xunlei/26600/#/jobs"
         },
-        { "title": "携程集团", "url": "https://job.ctrip.com/#/" },
+        {
+          "title": "携程集团",
+          "url": "https://job.ctrip.com/#/"
+        },
         {
           "title": "Papergames",
           "url": "https://career.papegames.com/social/position/list"
         },
-        { "title": "腾讯音乐", "url": "https://join.tencentmusic.com/campus/" },
+        {
+          "title": "腾讯音乐",
+          "url": "https://join.tencentmusic.com/campus/"
+        },
         {
           "title": "华为校园招聘",
           "url": "https://career.huawei.com/reccampportal/portal5/index.html"
@@ -155,7 +412,6 @@
           "title": "得物招聘",
           "url": "https://campus.dewu.com/578078"
         },
-
         {
           "title": "BOSS直聘招聘",
           "url": "https://www.zhipin.com/campus/pc/"
@@ -172,22 +428,18 @@
           "title": "月之暗面 Moonshot AI",
           "url": "https://careers.kimi.com/campus"
         },
-
         {
           "title": "网易互娱招聘",
           "url": "https://game.campus.163.com/"
         },
-
         {
           "title": "库洛游戏招聘",
           "url": "https://kurogame.jobs.feishu.cn/campus/"
         },
-
         {
           "title": "4399招聘",
           "url": "https://web.4399.com/campus/"
         },
-
         {
           "title": "Momenta招聘",
           "url": "https://momenta.jobs.feishu.cn/"
@@ -211,8 +463,14 @@
           "title": "去除简历水印",
           "url": "https://www.watermarkremover.io/zh/pdf-watermark-remover"
         },
-        { "title": "面经分享 (牛客网)", "url": "https://www.nowcoder.com/" },
-        { "title": "技术博客 (稀土掘金)", "url": "https://juejin.cn/" }
+        {
+          "title": "面经分享 (牛客网)",
+          "url": "https://www.nowcoder.com/"
+        },
+        {
+          "title": "技术博客 (稀土掘金)",
+          "url": "https://juejin.cn/"
+        }
       ]
     },
     {

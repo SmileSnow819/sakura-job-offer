@@ -14,11 +14,30 @@ import { IBookmarkData } from "./types/bookmark";
 import SidebarDock from "./components/SidebarDock";
 import LoadingScreen from "./components/LoadingScreen";
 import BookmarksPage from "./pages/BookmarksPage";
+import { sanitizeBookmarkData } from "./utils/sanitizeRecruitmentUrl";
+import AutumnLaunchOverlay from "./components/AutumnLaunchOverlay";
 
-const bookmarkData = bookmarkDataRaw as IBookmarkData;
+const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
 const INTERVIEWS_JSON_URL =
   "https://yuki-bloom.vercel.app/categories/interview";
 const INTRO_SEEN_KEY = "sakura-offer-hub:intro-seen";
+const AUTUMN_LAUNCH_SEEN_KEY = "sakura-offer-hub:autumn-launch-seen";
+const shouldReplayIntro = () =>
+  new URLSearchParams(window.location.search).get("debug") === "-1";
+const isAutumnLaunchPath = () => {
+  const path = window.location.pathname;
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
+  return path === basePath || path === `${basePath}/` || path.endsWith("/bookmarks/autumn");
+};
+const shouldShowAutumnLaunch = () => {
+  if (!isAutumnLaunchPath()) return false;
+  if (shouldReplayIntro()) return true;
+  try {
+    return window.localStorage.getItem(AUTUMN_LAUNCH_SEEN_KEY) !== "true";
+  } catch {
+    return true;
+  }
+};
 
 // ── Sakura petals ─────────────────────────────────────────────────────────────
 const SakuraPetals: React.FC = () => {
@@ -72,7 +91,11 @@ const SakuraPetals: React.FC = () => {
 
 // ── App ───────────────────────────────────────────────────────────────────────
 const App: React.FC = () => {
+  const [autumnLaunch, setAutumnLaunch] = useState(shouldShowAutumnLaunch);
   const [loading, setLoading] = useState(() => {
+    // The autumn launch experience replaces the generic first-load screen.
+    if (shouldShowAutumnLaunch()) return false;
+    if (shouldReplayIntro()) return true;
     try {
       return window.localStorage.getItem(INTRO_SEEN_KEY) !== "true";
     } catch {
@@ -113,6 +136,16 @@ const App: React.FC = () => {
         },
       );
     });
+  }, []);
+
+  const handleAutumnLaunchComplete = useCallback(() => {
+    try {
+      window.localStorage.setItem(AUTUMN_LAUNCH_SEEN_KEY, "true");
+      window.localStorage.setItem(INTRO_SEEN_KEY, "true");
+    } catch {
+      // Ignore storage failures; the animation can safely play again.
+    }
+    setAutumnLaunch(false);
   }, []);
 
   useEffect(() => {
@@ -216,6 +249,10 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
+      {autumnLaunch && (
+        <AutumnLaunchOverlay onComplete={handleAutumnLaunchComplete} />
+      )}
+
       <div
         ref={dockWrapRef}
         style={{
@@ -231,6 +268,7 @@ const App: React.FC = () => {
           <SidebarDock
             categories={bookmarkData.categories}
             activeTab={activeTab}
+            launchActive={autumnLaunch}
             onTabChange={handleTabChange}
           />
         </div>

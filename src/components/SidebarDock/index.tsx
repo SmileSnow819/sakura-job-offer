@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Compass, PenTool, BookOpen } from "lucide-react";
+import { CalendarDays, Compass, PenTool, BookOpen } from "lucide-react";
 
 import { ICategory } from "../../types/bookmark";
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   Compass: <Compass size={20} />,
+  CalendarDays: <CalendarDays size={20} />,
   PenTool: <PenTool size={20} />,
   BookOpen: <BookOpen size={20} />,
 };
@@ -12,6 +13,7 @@ const ICON_COMPONENTS: Record<string, React.ReactNode> = {
 interface ISidebarDockProps {
   categories: ICategory[];
   activeTab: string;
+  launchActive?: boolean;
   onTabChange: (tabId: string) => void;
 }
 
@@ -27,6 +29,7 @@ const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
 const SidebarDock: React.FC<ISidebarDockProps> = ({
   categories,
   activeTab,
+  launchActive = false,
   onTabChange,
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -34,6 +37,12 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
 
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40">
+      <style>{`
+        @keyframes autumnDockPulse {
+          0%, 100% { box-shadow: 0 4px 14px var(--pink-400); }
+          50% { box-shadow: 0 0 0 10px rgba(255,107,158,0), 0 12px 28px rgba(255,107,158,0.5); }
+        }
+      `}</style>
       <div
         className="flex flex-row items-center px-4 py-2 rounded-[26px] bg-white/55 backdrop-blur-2xl border border-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.1),0_2px_8px_rgba(255,183,197,0.2)]"
         style={{ gap: ICON_GAP }}
@@ -115,6 +124,7 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
           {categories.map((cat, i) => {
             const isActive = cat.id === activeTab;
             const isHovered = hoveredIndex === i;
+            const isLaunchTarget = launchActive && cat.id === "autumn";
             return (
               <li
                 key={cat.id}
@@ -129,8 +139,8 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                     position: "absolute",
                     bottom: ICON_SIZE + 10,
                     left: "50%",
-                    transform: `translateX(-50%) translateY(${isHovered ? 0 : 6}px)`,
-                    opacity: isHovered ? 1 : 0,
+                    transform: `translateX(-50%) translateY(${isHovered || isLaunchTarget ? 0 : 6}px)`,
+                    opacity: isHovered || isLaunchTarget ? 1 : 0,
                     pointerEvents: "none",
                     transition: "opacity 0.15s ease, transform 0.15s ease",
                     whiteSpace: "nowrap",
@@ -152,7 +162,7 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                       letterSpacing: 0.3,
                     }}
                   >
-                    {cat.name}
+                    {isLaunchTarget ? "秋招专场上线" : cat.name}
                   </div>
                 </div>
 
@@ -172,16 +182,20 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                       isActive || isHovered
                         ? "var(--pink-500)"
                         : "var(--neutral-600)",
-                    boxShadow: isActive
+                    boxShadow: isLaunchTarget
+                      ? "0 0 0 5px rgba(255,107,158,0.16), 0 12px 28px rgba(255,107,158,0.48)"
+                      : isActive
                       ? "0 4px 14px var(--pink-400)"
                       : isHovered
                         ? "0 6px 18px var(--pink-400)"
                         : "0 2px 6px rgba(0,0,0,0.05)",
-                    transform:
-                      isHovered && !isActive
+                    transform: isLaunchTarget
+                      ? "scale(1.28) translateY(-8px)"
+                      : isHovered && !isActive
                         ? "scale(1.12) translateY(-3px)"
                         : "none",
                     transition: "all 0.15s ease",
+                    animation: isLaunchTarget ? "autumnDockPulse 0.75s ease-in-out 3" : "none",
                     cursor: "pointer",
                   }}
                 >
