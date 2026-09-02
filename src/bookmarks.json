@@ -12,6 +12,10 @@
           "referralQrCode": "img/QR-CODE/bilibili.webp"
         },
         {
+          "title": "安克创新校园招聘",
+          "url": "https://career.anker.com.cn/universities/recruitment/"
+        },
+        {
           "title": "字节跳动校园招聘",
           "url": "https://jobs.bytedance.com/campus/position"
         },
@@ -238,6 +242,14 @@
         {
           "title": "诗悦网络招聘官网",
           "url": "https://www.shiyue.com/"
+        },
+        {
+          "title": "方太集团校园招聘",
+          "url": "https://fotile.zhiye.com/school"
+        },
+        {
+          "title": "歌尔股份校园招聘",
+          "url": "https://www.hotjob.cn/wt/GoerTek/web/index/webPosition210%21getPositionListByCorpAndWebColumnShowPic?columnId=1&lanType=1&recruitType=1"
         }
       ]
     },

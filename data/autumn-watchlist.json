@@ -1,0 +1,6003 @@
+{
+  "version": 1,
+  "description": "历史候选池：只用于发现和核验 2027 届官方秋招入口，不使用来源页中的投递链接。待确认项须先补齐 officialUrl，之后由 scripts/verify-autumn-watchlist.mjs 用本地 HTTP 抓取验证。",
+  "generatedAt": "2026-09-02T16:44:45.043Z",
+  "sources": [
+    "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+    "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm",
+    "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm",
+    "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm",
+    "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+  ],
+  "pending": [
+    {
+      "company": "360集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "42.360集团2026全球校园招聘全面启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "10009497ce8727abb3af714f2567327d7ecca3cd0e104186a0a04b8d64f7f59d",
+      "officialUrl": "https://hr.360.cn/hr/list",
+      "officialDomain": "hr.360.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:23:08.220Z",
+      "lastVerification": {
+        "finalUrl": "https://hr.360.cn/hr/list",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "阿里国际",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "55.阿里国际2026届秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "1638ea47078a742c1a3e461c945ff742aba8594798b961f5f12ef4d73d7cb6ee",
+      "officialUrl": "https://campus-talent.alibaba.com/campus/gov",
+      "officialDomain": "campus-talent.alibaba.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:23:08.220Z",
+      "lastVerification": {
+        "finalUrl": "https://campus-talent.alibaba.com/campus/gov",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "艾利特机器人",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "54.艾利特机器人2026届校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "fd9f9eca0996ca51e246db79af26f7885515afe00ad18cb4d9933897f61335ea",
+      "officialUrl": "https://www.elibot.com/about/join",
+      "officialDomain": "elibot.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:23:08.220Z",
+      "lastVerification": {
+        "finalUrl": "https://www.elibot.com/about/join",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "爱旭股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "67.爱旭股份2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "8465ddff8f6d2456db5ff0f37614d16dfca74497a1cf86e4e32d53474285d065",
+      "officialUrl": "https://aikosolar.com/cn/careers/",
+      "officialDomain": "aikosolar.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:23:08.220Z",
+      "lastVerification": {
+        "finalUrl": "https://aikosolar.com/cn/careers/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "奥特维",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "60.奥特维2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "b66937dbd4522f83b37173a71e21d3c1b0bf48264a5db5900f29660947be5276",
+      "officialUrl": "https://cn.wxautowell.com/join",
+      "officialDomain": "cn.wxautowell.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:25:40.458Z",
+      "lastVerification": {
+        "finalUrl": "https://cn.wxautowell.com/join",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "巴斯夫",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "71.巴斯夫2026校园招聘全面启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "acd89a31fe05af71813bc9993a8271c640996a9aa70a7ba5ab0f12268745abc4",
+      "officialUrl": "https://www.basf.com/cn/zh/careers",
+      "officialDomain": "basf.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:25:40.458Z",
+      "lastVerification": {
+        "finalUrl": "https://www.basf.com/cn/zh/careers",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "白象食品",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "41.白象食品2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "ae7e2710af7b35692c7552dc8ad904a2a65433bb5626f33061880dcf33d27d76",
+      "officialUrl": "https://baixiangfood.zhiye.com/campus/jobs",
+      "officialDomain": "baixiangfood.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:25:40.458Z",
+      "lastVerification": {
+        "finalUrl": "https://baixiangfood.zhiye.com/campus/jobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "百葛争流，后浪出海！葛洲坝国际",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "93.百葛争流，后浪出海！葛洲坝国际2026届全球校园招聘正式开启！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://www.gzbgj.ceec.net.cn/",
+      "officialDomain": "gzbgj.ceec.net.cn",
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": "2026-09-02T16:25:40.458Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "柏楚电子",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "35.柏楚电子2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "59b0eb65519795d98e72dbdb63446afc4267d0a36bee92df5894c4d2106fce82",
+      "officialUrl": "https://fscut.zhiye.com/campus/jobs",
+      "officialDomain": "fscut.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:25:40.458Z",
+      "lastVerification": {
+        "finalUrl": "https://fscut.zhiye.com/campus/jobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "宝洁",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "62.宝洁2026秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "77393a3da730331d28ba377cfbfea92547e13ff8d5b85adbd60399edd961edf7",
+      "officialUrl": "https://careers.pg.com.cn/cn/zh/home",
+      "officialDomain": "careers.pg.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:05.024Z",
+      "lastVerification": {
+        "finalUrl": "https://careers.pg.com.cn/cn/zh/home",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "保利和润",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "80.内推燃动，校招同行丨保利和润2026届校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "2648a24540ab82a012dbba1068da685cc6cdcef766f39d539b52385a59350583",
+      "officialUrl": "https://polycareer.zhiye.com/cjobs",
+      "officialDomain": "polycareer.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:05.024Z",
+      "lastVerification": {
+        "finalUrl": "https://polycareer.zhiye.com/cjobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "北京联通新苗计划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "77.北京联通新苗计划2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "7b88db32109256770f78b4cff41ae5d039f96d066793418442bd54295ff422a0",
+      "officialUrl": "https://www.chinaunicom.com.cn/46/menu01/528/column06",
+      "officialDomain": "www.chinaunicom.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:05.024Z",
+      "lastVerification": {
+        "finalUrl": "https://www.chinaunicom.com.cn/46/menu01/528/column06",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "北京汽车制造厂",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "36.北京汽车制造厂2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "2f57ae2feda73d83c9f61e3da5d44d1bc6e552697450776ab7bb31eccc52bb8b",
+      "officialUrl": "https://www.baw.com.cn/index.html",
+      "officialDomain": "www.baw.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:05.024Z",
+      "lastVerification": {
+        "finalUrl": "https://www.baw.com.cn/index.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "北京证券交易所全国股转公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "13.北京证券交易所全国股转公司2025年校园招聘公告"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "bd8c58fb8b437944e0227331f178059c56fe46c3eb4d5274c4b313817e2a7abb",
+      "officialUrl": "https://www.bse.cn/company/recruit.html",
+      "officialDomain": "www.bse.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:05.024Z",
+      "lastVerification": {
+        "finalUrl": "https://www.bse.cn/company/recruit.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "北汽集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "2.北汽集团2026届全球校园招聘启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "fa25ba22438975dd5270c6a03d0ff0a4cbf06761b4db1b6ff0641708b1af04bf",
+      "officialUrl": "https://www.baicgroup.com.cn/",
+      "officialDomain": "www.baicgroup.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:36.563Z",
+      "lastVerification": {
+        "finalUrl": "https://www.baicgroup.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "比亚迪",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "69.比亚迪2026届全球校园招聘正式启动！",
+        "5.比亚迪2026届校招持续进行中-技术类岗位（附内推码）",
+        "18.校招｜比亚迪2026届校招持续进行中-非技术类岗位（附内推码）"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e08d2563674ad7e33ee9361ef91246a16d161310279bab4f8b59d2932d79ad3d",
+      "officialUrl": "https://job.byd.com/portal/mobile/school-home",
+      "officialDomain": "job.byd.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:36.563Z",
+      "lastVerification": {
+        "finalUrl": "https://job.byd.com/portal/mobile/school-home",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "超聚变",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "16.探索不止智创未来｜超聚变2026届校园招聘全面启动！",
+        "86.超聚变2026届校园招聘算力事业部岗位推介",
+        "87.超聚变2026届校园招聘供应制造管理部岗位推介"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "cdb24ef82081c6c64477ed3a5441eb563b28c727ab28c247c03e1a05f2814db9",
+      "officialUrl": "https://career.xfusion.com/cn/job",
+      "officialDomain": "career.xfusion.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:36.563Z",
+      "lastVerification": {
+        "finalUrl": "https://career.xfusion.com/cn/job",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "创维集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "30.创维集团2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://career.skyworth.com/",
+      "officialDomain": "career.skyworth.com",
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:36.563Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "答疑| 得物",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "66.答疑| 得物2026届秋季校园招聘Q&A"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "d47a3452d4d80d69c7a6517e1764623c504dcf21505df43330ebbeca2d51a694",
+      "officialUrl": "https://campus.dewu.com",
+      "officialDomain": "campus.dewu.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:36.563Z",
+      "lastVerification": {
+        "finalUrl": "https://campus.dewu.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "大华股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "91.大华股份2026届校园招聘正式启动！",
+        "65.大华股份2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "03f677927d13445758eab85b8e9f78de951676a5d020ce3f49838bbd17196327",
+      "officialUrl": "https://job.dahuatech.com/",
+      "officialDomain": "job.dahuatech.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:55.949Z",
+      "lastVerification": {
+        "finalUrl": "https://job.dahuatech.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "大连泰星能源有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "49.大连泰星能源有限公司2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": null,
+      "lastSearchedAt": "2026-09-02T16:42:41.018Z"
+    },
+    {
+      "company": "得物",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "65.开箱新世界| 得物2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "d47a3452d4d80d69c7a6517e1764623c504dcf21505df43330ebbeca2d51a694",
+      "officialUrl": "https://campus.dewu.com",
+      "officialDomain": "campus.dewu.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:26:55.949Z",
+      "lastVerification": {
+        "finalUrl": "https://campus.dewu.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "德州仪器",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "34.德州仪器2026届秋季校园招聘全面开启"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "553175e3995b3f1e93d86d0efbe17c00df8188e77782b8d8d1bef3ab292fdb2d",
+      "officialUrl": "https://www.ti.com.cn/",
+      "officialDomain": "ti.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:27:06.360Z",
+      "lastVerification": {
+        "finalUrl": "https://www.ti.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "滴滴",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "20.滴滴2026届校招提前批网申倒计时10天！ (8月10日截止）",
+        "67.滴滴2026届秋季校招正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://campus.didiglobal.com/campus_apply/didiglobal/96064",
+      "officialDomain": "campus.didiglobal.com",
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": "2026-09-02T16:27:23.941Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "帝奥微",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "50.帝奥微2026届校园招聘正式开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:42:41.018Z"
+    },
+    {
+      "company": "电科蓝天",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "30.电科蓝天2026届校园招聘开启 | 电燃青春 科创未来"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "fb3e85b2c1e2648960dd0e52f544ba7940fd0fa07282097f64468eace8a25d6d",
+      "officialUrl": "https://www.lantiantech.com.cn/index/show?catname=gongsixinwen&id=61&lang=zh-cn",
+      "officialDomain": "www.lantiantech.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:27:23.941Z",
+      "lastVerification": {
+        "finalUrl": "https://www.lantiantech.com.cn/index/show?catname=gongsixinwen&id=61&lang=zh-cn",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "钉钉",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "42.钉钉2026校招，启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "9b88b3785fd6973b04063ed6276653f0b4ca2aa4513b604e74ee9c09325bd201",
+      "officialUrl": "https://www.dingtalk.com/",
+      "officialDomain": "www.dingtalk.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:28:17.459Z",
+      "lastVerification": {
+        "finalUrl": "https://www.dingtalk.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "鼎信通讯",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "23.寻找【X-in】力量|鼎信通讯2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://career.topscomm.com/",
+      "officialDomain": "career.topscomm.com",
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": "2026-09-02T16:28:17.459Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "东方电气集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "78.东方电气集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "2fac7295979a64e457a4500f530574cf73201c8e18d23040e06a4807ada3fda4",
+      "officialUrl": "https://www.dongfang.com/zxns/xyzp.htm",
+      "officialDomain": "www.dongfang.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:28:17.459Z",
+      "lastVerification": {
+        "finalUrl": "https://www.dongfang.com/zxns/xyzp.htm",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "东风电子科技股份有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "69.扬帆启新程筑梦赴未来丨东风电子科技股份有限公司2026届校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://dfmc.hotjob.cn/SU68afaf376c88b20bfe6238e3/mc/position/campus?projectCode=210401&showProjectBanner=true",
+      "officialDomain": "dfmc.hotjob.cn",
+      "lastHttpStatus": null,
+      "officialUrlSource": "official Dongfeng recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "东莞新兴产投",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "65.东莞新兴产投2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "14f5affde58ab806234e294b41601ad46314c7e97d63e31af190e17253957879",
+      "officialUrl": "https://dggmt.zhiye.com/campus/jobs",
+      "officialDomain": "dggmt.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:28:40.799Z",
+      "lastVerification": {
+        "finalUrl": "https://dggmt.zhiye.com/campus/jobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "方田教育",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "3.方田教育2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://www.ftapplyonline.work/indexPc.html#/",
+      "officialDomain": "www.ftapplyonline.work",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:29:50.240Z",
+      "lastVerification": {
+        "finalUrl": "https://www.ftapplyonline.work/indexPc.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "福特中国",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "1 . 校招 | 福特中国 2026 校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "ecb8e19095e84d17cd8126764e0713dbc99480384f9c95c3f2b1f70a5a8862fa",
+      "officialUrl": "https://www.ford.com.cn/home",
+      "officialDomain": "www.ford.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:30:29.601Z",
+      "lastVerification": {
+        "finalUrl": "https://www.ford.com.cn/home",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "高德地图秋季",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "12. 高德地图秋季2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "0117476c7c6627c3486f213a80cb630408388d5f78a2e7d14c1c1165e40750cf",
+      "officialUrl": "https://talent.amap.com/campus/home?lang=zh",
+      "officialDomain": "talent.amap.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:30:29.601Z",
+      "lastVerification": {
+        "finalUrl": "https://talent.amap.com/campus/home",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "高途",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "42.3500+offer！高途2026全球校园招聘启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "dd7d9c50551a763d771a2816d08513dd96f66604c98b03def9c41d7eb82fe6df",
+      "officialUrl": "https://job.gaotu.cn/",
+      "officialDomain": "job.gaotu.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:31:03.694Z",
+      "lastVerification": {
+        "finalUrl": "https://job.gaotu.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "格力电器",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "25.格力电器2026届秋季校园大使招募！",
+        "93.格力电器2026届秋季校园招聘正式开启！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "73846d1beb7eb0ef4f4e22b26e40ee2176146f072391d3786fb32f2a86653945",
+      "officialUrl": "https://zhaopin.greeyun.com/home?navSelect=1",
+      "officialDomain": "zhaopin.greeyun.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.greeyun.com/home?navSelect=1",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "格思航天",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "23.校园招聘| 格思航天2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:42:41.018Z"
+    },
+    {
+      "company": "中国原子能科学研究院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "27.共铸国之光荣与梦想，2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "2674be515424e3f62d4b029427168509a7e90a6f178e9c6352fa52b37f7a8f2e",
+      "officialUrl": "https://cnnc.zhiye.com/ciaesxs",
+      "officialDomain": "cnnc.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": "https://cnnc.zhiye.com/ciaesxs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "官宣！丸美生物",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "70.官宣！丸美生物2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "155b9369bfd4464ea42b9461d77bc4e3f73d6274fd8b835f4726286cd4a7895d",
+      "officialUrl": "https://marubi.zhiye.com/Campus",
+      "officialDomain": "marubi.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official site or recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": "https://marubi.zhiye.com/Campus",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "广开控股金粤计划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "5.金粤新生广开未来| 广开控股“金粤计划”2026校园招聘全面启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://hrzp.getholdings.com.cn/",
+      "officialDomain": "hrzp.getholdings.com.cn",
+      "lastHttpStatus": null,
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "国机数字科技有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "90.校园招聘| 国机数字科技有限公司2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "4b3269542908a7cca6f59448730321ed5a34beb4b9a0faa53c16f51cb7298946",
+      "officialUrl": "https://digital.sinomach.com.cn/rcfz/jrwm/",
+      "officialDomain": "digital.sinomach.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official site or recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": "https://digital.sinomach.com.cn/rcfz/jrwm/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国家电投集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "35.国家电投集团2026届校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "a10eafeb6198c6df00532860f7414d8704ccc57b91c92fb7550a05b1efee6beb",
+      "officialUrl": "https://www.spic.com.cn/",
+      "officialDomain": "spic.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official site or recruitment system found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.spic.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国家开发银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "68.国家开发银行2026年校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://www.cdb.com.cn/xwzx/xxgg/zpgg/",
+      "officialDomain": "cdb.com.cn",
+      "lastHttpStatus": 412,
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.cdb.com.cn/xwzx/xxgg/zpgg/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国家能源集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "73.国家能源集团2026校园招聘来了！",
+        "74.国家能源集团2026校园招聘来了！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "fd78403a640fa6870161c93d9afb6ebbe40b5879259e62e84a55660cd88ff7dc",
+      "officialUrl": "https://zhaopin.chnenergy.com.cn/",
+      "officialDomain": "zhaopin.chnenergy.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.chnenergy.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国贸股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "52.开启世界新YOUNG贸|国贸股份2026届秋季全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "f87401e90e01d6ae73d616bf33e634c2c32ee4979b596f0aef19eb85972d9c50",
+      "officialUrl": "https://itg.zhiye.com/gmkgxzlb",
+      "officialDomain": "itg.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://itg.zhiye.com/gmkgxzlb",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国睿科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "29.国睿科技2025届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://www.glarun.com/",
+      "officialDomain": "glarun.com",
+      "lastHttpStatus": null,
+      "officialUrlSource": "official site found via web search",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "国寿投资",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "98.国寿投资2026年度校园招聘火热进行中"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "cc195c3477a4ca72286137b7a1157c48bf92818480322740c2c29ab4bd357e46",
+      "officialUrl": "https://www.chinalifeinvest.com/invest/folder/2001/0044-1.html",
+      "officialDomain": "chinalifeinvest.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.chinalifeinvest.com/invest/folder/2001/0044-1.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国泰君安期货",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "21.青春逐梦闪耀金衍丨国泰君安期货2026年校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "0fd02533191a25814e08873b99a80f9312a3f68663b67ee44237a96530371aca",
+      "officialUrl": "https://www.gtjaqh.com/pc/c/hiring",
+      "officialDomain": "gtjaqh.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment platform found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.gtjaqh.com/pc/c/hiring",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国网天津市电力公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "87.国网天津市电力公司2026年校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://zhaopin.sgcc.com.cn/",
+      "officialDomain": "zhaopin.sgcc.com.cn",
+      "lastHttpStatus": 412,
+      "officialUrlSource": "official recruitment platform found via web search",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.sgcc.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国网信通产业集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "18.国网信通产业集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://zhaopin.sgcc.com.cn/",
+      "officialDomain": "zhaopin.sgcc.com.cn",
+      "lastHttpStatus": 412,
+      "officialUrlSource": "official recruitment platform found via web search",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.sgcc.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国网智慧车联网技术有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "76.国网智慧车联网技术有限公司2026年校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://zhaopin.sgcc.com.cn/",
+      "officialDomain": "zhaopin.sgcc.com.cn",
+      "lastHttpStatus": 412,
+      "officialUrlSource": "official recruitment platform found via web search",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.sgcc.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "国药集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "76.国药集团2026届“星耀计划”校园招聘全面启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "1385dd118ab4909aaf842b7b7b9ab7f87aa18c190617297e651c415a477d4023",
+      "officialUrl": "https://www.sinopharm.com/zpgg.html",
+      "officialDomain": "sinopharm.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.sinopharm.com/zpgg.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "哈电集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "51.逐梦哈电 创享未来 | 哈电集团2026校园招聘正式启动",
+        "53.哈电集团2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "3696a5d9a45749ff68f1754a86aff297ca75a8284fbc907e08f3f7ee09ca90d5",
+      "officialUrl": "https://www.harbin-electric.com/zxns.htm",
+      "officialDomain": "harbin-electric.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.harbin-electric.com/zxns.htm",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "海大集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "16.海大集团2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "a3b33de554798e542372dc6d54c6cdb457d651878096f28be034cceabbe083ec",
+      "officialUrl": "https://haid1.zhiye.com/campus/jobs?memory=%7B%7D&silence=1",
+      "officialDomain": "haid1.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment system link found via current 2027 campus recruitment notice",
+      "lastVerification": {
+        "finalUrl": "https://haid1.zhiye.com/campus/jobs?memory=%7B%7D&silence=1",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "海光信息",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "48.海光信息2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://app.mokahr.com/campus-recruitment/hygon/169939#/",
+      "officialDomain": "app.mokahr.com",
+      "lastHttpStatus": null,
+      "officialUrlSource": "current 2027 campus recruitment application link from official recruitment notice",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "海康威视",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "4.海康威视2026校园招聘正式启动！",
+        "8.海康威视2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "da1472455c281a91fb35d0bfed01387d9d236b2c7833180ba806fec6c3df87cd",
+      "officialUrl": "https://campushr.hikvision.com/school",
+      "officialDomain": "campushr.hikvision.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official campus recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://campushr.hikvision.com/school",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "海信集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "7.海信集团2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "1cf6235e4351baf6ab2981d75101c84b2de0b243bac2ca267d939ea0a8925b60",
+      "officialUrl": "https://jobs.hisense.com/campus/jobs",
+      "officialDomain": "jobs.hisense.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official campus recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://jobs.hisense.com/campus/jobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "寒武纪",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "64.寒武纪2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "b74ad8e54b55113d8f06521e46855bb4e5710791ea53225d03e761e8545927b6",
+      "officialUrl": "https://www.cambricon.com/",
+      "officialDomain": "cambricon.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official company or recruitment page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.cambricon.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "汉德车桥",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "29.撑起世界 承启未来丨汉德车桥2026届校园招聘正式启动！",
+        "30.撑起世界 承启未来丨汉德车桥2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "1a89c699b7fe39c68803e54ad4d8b82ee31a1c255c40507fd1a8d60c65d3434a",
+      "officialUrl": "https://www.hdcq.com/job/job_center.htm",
+      "officialDomain": "hdcq.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official company or recruitment page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.hdcq.com/job/job_center.htm",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "航天彩虹无人机股份有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "9.【招聘】激扬青春“彩虹同行” | 航天彩虹无人机股份有限公司2026届校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:42:41.018Z"
+    },
+    {
+      "company": "航天火工",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "8.筑梦九天火耀未来| 航天火工2026届校园招聘火热进行中"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:42:41.018Z"
+    },
+    {
+      "company": "禾望电气",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "92.禾望电气2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "45545fcd32cf95c4bf30d31f2c59183cd1bebb91ce4815839a91ec95e6d2a40e",
+      "officialUrl": "https://www.hopewind.com/",
+      "officialDomain": "hopewind.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official company or recruitment page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.hopewind.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "合合信息",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "29.合合信息2026届秋季校园招聘全面启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "5969cac4e345d75d5aa1b9522541e7ac0cae3ff500523c22f6fd7cc5bcfe61d6",
+      "officialUrl": "https://intsig.zhiye.com/campus/jobs",
+      "officialDomain": "intsig.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment site or official company page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://intsig.zhiye.com/campus/jobs",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "河北高速集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "7.河北高速集团2026年校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "7fe8710f4a35233ac5df45c73ac5ec1c650086ba69dd3a9cc005cea125e6bfdf",
+      "officialUrl": "https://hbgsxy2026.zhaopin.com/",
+      "officialDomain": "hbgsxy2026.zhaopin.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:43:00.838Z",
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://hbgsxy2026.zhaopin.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "河北金租",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "35.河北金租2026届校园招聘 | 共冀未来 星耀金途"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "ec0a2e29ac2d510823fd1e73111914ea0587ec75d4d792deda8326d14bbc2085",
+      "officialUrl": "https://www.heflc.com/list.asp?classid=9",
+      "officialDomain": "heflc.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment site or official company page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.heflc.com/news/index.html",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "核电运行研究（上海）有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "59.核电运行研究（上海）有限公司2026届校园招聘公告"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "2674be515424e3f62d4b029427168509a7e90a6f178e9c6352fa52b37f7a8f2e",
+      "officialUrl": "https://cnnc.zhiye.com/",
+      "officialDomain": "cnnc.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment site or official company page found via web search",
+      "lastVerification": {
+        "finalUrl": "https://cnnc.zhiye.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "盒马",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "68.盒马2026届秋季校园招聘启动啦！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "fcc361c8781b59866f45ca2b938afce1cfa0969e488bbc28a01f63e98eb73a74",
+      "officialUrl": "https://hire.freshippo.com/campus/position-list?campusType=talentPlan&lang=zh",
+      "officialDomain": "hire.freshippo.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:43:00.838Z",
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://hire.freshippo.com/campus/position-list?campusType=talentPlan&",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "恒生",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "89.恒生2026校园招聘正式启动",
+        "15.恒生2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "3deb55e46d6a3e7a16b3d210123aabf681e035fc3fa00363e459527c03fb3282",
+      "officialUrl": "https://campus.hundsun.com/",
+      "officialDomain": "campus.hundsun.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:43:00.838Z",
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://campus.hundsun.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "虹科",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "51.虹科2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "182312a167398bc03f795830e4eb7f78ffb88948405ece16d058a6318b66206b",
+      "officialUrl": "https://job.hkaco.com/recruitment-2/",
+      "officialDomain": "job.hkaco.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:43:00.838Z",
+      "officialUrlSource": "official recruitment site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://job.hkaco.com/recruitment-2/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "湖北港口集团启动",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "40.湖北港口集团启动2025年秋季校园招聘"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "4a4adc614e7f999944e6c089c84af6ebab194c78a245d557883e9afc399c0e4b",
+      "officialUrl": "https://hbgk.jobhb.com/",
+      "officialDomain": "hbgk.jobhb.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z",
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://hbgk.jobhb.com/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "华测导航",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "3.华测导航2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "5e34451771d6eedd4b00e94829824eb7091925c72ac91e5b65d9d8eece016fd2",
+      "officialUrl": "https://www.huace.cn/",
+      "officialDomain": "huace.cn",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z",
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.huace.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "华诺星空",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "33.华诺星空2026届校园招聘火热开启！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://job.novasky.cn/",
+      "officialDomain": "job.novasky.cn",
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z",
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "华润电力",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "8.不负韶华，润启新生| 华润电力2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://careers.crpower.com.cn/",
+      "officialDomain": "careers.crpower.com.cn",
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z",
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "华润燃气",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "20.华润燃气2026届校园招聘“菁英计划· 管培生”全面开启",
+        "56.华润燃气2026届校园招聘“菁英计划·管培生”全面开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z"
+    },
+    {
+      "company": "华润万象生活商业航道",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "95.华润万象生活商业航道2026届校园招聘火热进行中！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "1bd54ab13d76771c84017c8011d0ae660e8db931dad1ed321986e187ddef9d8b",
+      "officialUrl": "https://www.crmixclifestyle.com.cn/",
+      "officialDomain": "crmixclifestyle.com.cn",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:44:00.748Z",
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastVerification": {
+        "finalUrl": "https://www.crmixclifestyle.com.cn/",
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "活力源泉I德邦证券",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "25.活力源泉I德邦证券2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://zhaopin.deppon.com/campus/jobs",
+      "officialDomain": "zhaopin.deppon.com",
+      "lastHttpStatus": null,
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastSearchedAt": "2026-09-02T16:44:45.043Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "积成电子",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "27.积成电子2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "ef18da791a3ef0831be7d0e011a1327110a6652c05e41fa313451630cbac733b",
+      "officialUrl": "https://www.ieslab.com.cn/index.php?c=category&id=46",
+      "officialDomain": "ieslab.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastSearchedAt": "2026-09-02T16:44:45.043Z",
+      "lastVerification": {
+        "finalUrl": "https://www.ieslab.com.cn/index.php?c=category&id=46",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "基恩士",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "17.基恩士2026秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "6329f5008b28caef9ce5a779af54b9c4ff71d16c7f42897a2abdaa2d8ab49b4e",
+      "officialUrl": "https://www.keyence.com.cn/ss/careers/recruitment.jsp",
+      "officialDomain": "keyence.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastSearchedAt": "2026-09-02T16:44:45.043Z",
+      "lastVerification": {
+        "finalUrl": "https://www.keyence.com.cn/ss/careers/recruitment.jsp",
+        "changed": true,
+        "keywordMatched": true,
+        "excerpt": "校园招聘 Q&A &ensp;close 招聘岗位 招聘岗位 recruitment Message --> 校园招聘 Q&A 校园招聘 More 社会招聘 More 2027秋季校园招聘 销售工程师/销售 立即网申 招聘对象 2027届本科及以上应届毕业生，专业不限 毕业时间2026年9月1日-2027年8月31日 招聘岗位 销售工程师/销售 工作内容： 顾问式销售，在所负责区域范围内推广、销售基恩士产品，帮助客户解决问题 直接对应最终用户，了解客户显在和潜在需求（B2B销售） 分析所负责区域的行业动态并制定相应",
+        "error": null
+      }
+    },
+    {
+      "company": "吉利",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "99.吉利2026管培生校招｜登舰，启新程，驶向智能出行未来！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": null,
+      "officialUrl": "https://campus.geely.com/",
+      "officialDomain": "campus.geely.com",
+      "lastHttpStatus": null,
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastSearchedAt": "2026-09-02T16:44:45.043Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
+    },
+    {
+      "company": "吉利控股集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "70吉利控股集团2026届全球校园招聘正式启动",
+        "11.吉利控股集团2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:44:45.069Z",
+      "lastContentHash": "23b27a9d80f0c9845cc4db62832852a7d316b32b672b8b3a5bbea2aa548f8ad2",
+      "officialUrl": "https://zgh.com/recruitment/",
+      "officialDomain": "zgh.com",
+      "lastHttpStatus": 200,
+      "officialUrlSource": "official recruitment or company site found via web search",
+      "lastSearchedAt": "2026-09-02T16:44:45.043Z",
+      "lastVerification": {
+        "finalUrl": "https://zgh.com/recruitment/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
+    },
+    {
+      "company": "济宁能源集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "32.千亿国企，职等你来丨济宁能源集团2026届校园招聘开始啦"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "冀行致远，梦绘新篇河北银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "23.“冀行致远，梦绘新篇”河北银行2026年度校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "冀续扬帆 追逐梦想国网冀北电力",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "62.【“冀”续扬帆 追逐梦想】国网冀北电力2026年校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "加入优家 |",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "31.加入优家 | 2026优衣库校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "佳驰科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "93.佳驰科技2026届校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "建发集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "82.建发集团2026届校园招聘全球启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "江淮汽车",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "41.江淮汽车2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "江南造船",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "47.百年征程亮舰深蓝——江南造船2026届校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "交通银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "58.交通银行2026校园招聘火热开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "金光集团APP（中国）",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "43.金光集团APP（中国）2026秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "金山办公",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "19.金山办公2026届全球校园招聘启动！「云杉计划」携热AI而来"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "京城机电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "29.京城机电2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "九阳",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "34.九阳2026届秋季校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "九州通",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "9.九州通2026届星九管培生秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "炬芯科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "66.炬芯科技2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "君实生物",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "38.君实生物2026届校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "卡奥斯",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "71.卡奥斯2026届校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "卡特彼勒",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "47.卡特彼勒2026校园招聘拉开序幕！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "康恩贝股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "68.康恩贝股份2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "康冠科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "56.康冠科技2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "科力普",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "27.科力普2026届校园招聘闪耀开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "来了！中国信保",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "98.来了！中国信保2026年校园招聘宣讲正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "浪潮集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "79.浪潮集团2026届校园招聘提前批正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "崂山国家实验室",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "12.崂山国家实验室2025年校园招聘宣讲会"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "乐鑫科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "1.乐鑫科技 2026 届秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "黎明院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "58.化工报国正当其时| 黎明院2026校园招聘火热进行中"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "理想汽车",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "86.理想汽车2026校园招聘正式启动",
+        "83.理想汽车2026校园招聘本科生热招职位特辑"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "联想",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "43.联想 2026 校园招聘全面启动！",
+        "44.联想2026校园招聘超全Q&A来啦"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "联芸科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "46.联芸科技2026届校园招聘正式启动！",
+        "72.联芸科技2026届校园招聘（更新）"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "辽港集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "44.辽港集团2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "零跑汽车",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "74.零跑汽车2026届校园招聘研发提前批启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "龙湖集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "38.龙湖集团2026届点将校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "泸州老窖股份有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "55.泸州老窖股份有限公司2026届全国校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "氯碱事业部",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "59.一“氯”同行 遇“碱”美好 | 氯碱事业部2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "麦风科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "63.麦风科技2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "美年健康集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "63.美年健康集团2026届美年星校园招聘活力启航"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "蒙牛",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "54.蒙牛2026「星动力」校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "梦想靠岸招商银行东莞分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "38.“梦想靠岸”招商银行东莞分行2026校园招聘进行中！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "梦想靠岸招商银行潍坊分行、日照分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "81.潍坊、日照｜“梦想靠岸”招商银行潍坊分行、日照分行2026校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "咪咕公司｜",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "66.咪咕公司｜2026校园招聘网申倒计时"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "蜜雪集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "46.蜜雪集团2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "名创优品",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "45.名创优品2026届全球校园招聘正式启动！加入我们，定义零售新未来"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "明阳集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "7.明阳集团2026全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "沐瞳",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "32.沐瞳2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "南航集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "27.南航集团2026届校园招聘|常见问题解答（Q&A）"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "内蒙古第一机械集团有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "71.内蒙古第一机械集团有限公司2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "内蒙古能源集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "6.内蒙古能源集团2026年校园招聘336人"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "你好，红雁生软控股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "82.【你好，红雁生】软控股份2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "宁德新能源(ATL)",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "58.宁德新能源(ATL)2026届全球校招"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "诺瓦星云",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "77.诺瓦星云2026届校园招聘正式启动！",
+        "78.诺瓦星云2026届校园招聘Q&A"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "鹏芯微",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "88.鹏芯微2026届校园招聘正在进行中！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "浦发银行长沙分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "85.Call浦青年 锚定未来｜浦发银行长沙分行2026年度校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "普源精电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "37.普源精电2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "奇瑞捷豹路虎",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "22.奇瑞捷豹路虎2026校园招聘·焕新启航"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "乾程",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "13.乾程2026全球校园招聘计划正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "青岛银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "11.青春梦行非凡｜青岛银行2026年校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "青矩技术",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "71.青春有你矩力同行| 青矩技术2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "人保寿险",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "81.青春起跑 如获至保 | 人保寿险2026届校园招聘已开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "荣耀",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "32. 荣耀2026届校园招聘全球热招"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "瑞众保险",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "24.瑞众保险2026届全国校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "睿联",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "79.睿联2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "三所招聘｜",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "24.三所招聘｜2026届应届生招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "三峡集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "22.三峡集团2026年校园招聘开始啦"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "三峡能源启动",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "31.三峡能源启动2026年秋季校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "三一重卡",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "17.三一重卡2026全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "三只松鼠",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "57.三只松鼠2026届校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "厦门航空",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "69.厦门航空2026校园招聘正式启航！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "山东联通｜",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "100.山东联通｜2026校园招聘进行中"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "山东联通新苗计划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "78.山东联通“新苗计划”2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "山东铁塔",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "88.山东铁塔2026年秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "陕文投集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "11.陕文投集团2026校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "上海电气集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "79.校园招聘| 上海电气集团2026届校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "上海华测导航技术股份有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "25.上海华测导航技术股份有限公司2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "上汽集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "3.上汽集团2026届校园招聘启动啦！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "韶音科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "73.韶音科技2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "申万宏源集团及证券",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "50.申万宏源集团及证券2026届秋季校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "深信服",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "57.深信服2026届校园招聘全球启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "深圳能源",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "33.深圳能源2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "神州数码集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "54.神州数码集团2026届校园招聘正式启动~~~"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "石家庄丨中信银行石家庄分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "90.石家庄丨中信银行石家庄分行2026年校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "数禾科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "2.数禾科技2026届校园招聘火热启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "双节快乐｜中国移动",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "67.双节快乐｜中国移动2026校招邀你加入！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "舜宇集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "80.舜宇集团2026届全球校园招聘 | 正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "思特奇",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "62.思特奇2026届校园招聘已开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "搜狐集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "41.搜狐集团2026秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "淘宝闪购新羽计划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "4.淘宝闪购新羽计划2026届校招正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "淘天集团丨",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "13.淘天集团丨2026届秋季应届生招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "特变电工",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "88.特变电工2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "特发集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "32.独特青春·一触即发｜特发集团2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "特斯拉",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "76特斯拉2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "天津银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "95.智慧天行共赴未来| 天津银行2026校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "天味食品",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "74.天味食品2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "天正电气",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "57.天正电气2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "同力重工",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "34.校招| 同力重工2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "万华化学",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "75.万华化学2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "网易有道",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "63.网易有道2026校招开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "旺旺集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "44.旺旺集团2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "微源半导体",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "40.微源半导体2026届校园招聘火热进行中"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "潍柴集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "25.科技赋能装备美好丨潍柴集团2026届全球校园招聘燃“擎”启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "卫华集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "28.产业报国卫我中华| 卫华集团2026届校园招募火热开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "未岚大陆",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "60.未岚大陆2026届校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "文香",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "34.文香2026校园招聘全面启动啦！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "小红书",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "47.小红书2026校园招聘全球启动！毕业两年内均可投递"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "校园招聘丨国机集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "91.校园招聘丨国机集团2026届校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "校园招聘丨金风科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "61.校园招聘丨金风科技2026届全球校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "校招内推|上海电气",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "78.校招内推|上海电气2026届校招内推全面启动！喊你来“荐”面！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "校招中国能建数科集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "31.【校招】中国能建数科集团2026年校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "携程集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "61.携程集团2026届秋季校园招聘｜全球启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "芯恩",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "26.芯恩2026届校园招聘正式启动！",
+        "83.芯恩2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "芯原股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "99.芯原股份2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "欣旺达",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "87.欣旺达2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "新和成",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "55.新和成2026秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "新华教育集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "48.新华教育集团2026校园招聘正式开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "新能安",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "59.新能安2026全球校园招聘“A+Star”顶尖人才计划正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "新时达",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "70.新时达2026届校园招聘正式启程！",
+        "37.新时达2026届校园招聘正式启程！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "新芯股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "94.新芯股份2026届全球校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "兴业银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "59.兴业银行2026届校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "兴银理财",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "96.兴银理财2026校园招聘启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "雅迪科技集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "96.雅迪科技集团2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "雅砻江水电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "91.雅砻江水电2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "亚朵集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "63.亚朵集团2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "阳光电源",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "85.阳光电源2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "伊利集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "84.伊利集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "移动研究院 |",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "77.移动研究院 | 2026届校园招聘全面启航，就等你上线了！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "以心铸芯向未来联芸科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "73.以心铸芯向未来联芸科技2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "以中为始 同行未来中国银行青岛市分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "39.【以中为始 同行未来】中国银行青岛市分行2026年校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "益丰集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "98.益丰集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "影石",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "28.影石2026届秋季校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "宇通集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "2.宇你同行驱动未来丨宇通集团2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "驭势科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "23.驭势科技2026校园招聘启动，与AI司机一同驶向星辰大海"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "越疆机器人",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "61.机器人创梦者行动| 越疆机器人2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "云圣智能",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "97.云圣智能2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "云天化集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "6.云天化集团2026 年高层次人才校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "长安汽车",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "10.长安汽车2026全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "长光卫星",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "52.长光卫星2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "招聘| 国家开发投资集团有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "28.招聘| 国家开发投资集团有限公司2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "招聘沪东中华",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "64.【招聘】沪东中华2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "招商局集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "70.立潮头创未来｜招商局集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "招商银行·招银网络科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "49.招商银行·招银网络科技2026届秋季校园招聘全球启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "兆芯",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "45.兆芯2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "兆易创新",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "36.兆易创新2026校园招聘提前批正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "浙江省国贸集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "65.浙江省国贸集团2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "正式开启元气森林",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "64.【正式开启】元气森林2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "正式启动｜一汽-大众",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "100.正式启动｜一汽-大众2026全球校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "职等你Pick！招商蛇口",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "92.“职”等你Pick！招商蛇口2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "智洋创新",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "46.智洋创新2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中车长客",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "29.中车长客2026届校园招聘开启啦！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中车株机",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "34.连接世界与你同行| 中车株机2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中车株洲所",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "96.Z·时代为梦想加速 | 中车株洲所2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中城规划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "2.中城规划2026届秋季校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中船集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "48.校园招聘| 舰证卓越 艇立潮头——中船集团2026届校园招聘开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国宝武",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "89.中国宝武2026全球校招“国宝生”计划开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国保险保障基金有限责任公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "22.中国保险保障基金有限责任公司2026年校园招聘职等你来"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国兵器",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "22.中国兵器2026届秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国出版集团有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "63.中国出版集团有限公司2026校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电建",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "30.中国电建2026届校园招聘全球启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电建昆明院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "20.中国电建昆明院2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电科11所",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "32.中国电科11所2026届校园招聘开启 | 电燃青春 科创未来"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电科五十五所",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "55.凝芯聚力共创未来| 中国电科五十五所2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电子",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "18.校招 | 中国电子2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国电子云",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "66.校招｜中国电子云2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国工商银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "53.中国工商银行2026年度校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国航空工业集团津电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "9.中国航空工业集团津电2026届校园招聘启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国航天科工三院三十五所",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "8.铸剑兴华，烽火启航——中国航天科工三院三十五所2026届校园招聘正式启动！",
+        "62.中国航天科工三院三十五所2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国航天科工十院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "83.中国航天科工十院2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国航天科工四院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "10.中国航天科工四院2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国核电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "47.中国核电2026届校园招聘火热来袭！",
+        "51.核你共谱零碳未来| 中国核电2026届校园招聘火热来袭！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国华能",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "19.中国华能2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国华能集团有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "24.中国华能集团有限公司2026年校园招聘综合素质测评考试通知"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国化学天辰公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "25.天骄辰选计划 | 中国化学天辰公司2026年校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国化学校园行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "43.“中国化学校园行”2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国蓝星",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "86.星辰大海扬帆起航| 中国蓝星2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国联通新苗计划",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "77.中国联通新苗计划2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国煤科",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "59.中国煤科2026届校园招聘 | 下属企业招聘专业及咨询电话",
+        "60.中国煤科2025届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国煤炭地质总局",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "33.中国煤炭地质总局2026年校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国南方电网有限责任公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "47.中国南方电网有限责任公司2026年校园招聘公告"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国南方航空",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "26.中国南方航空2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国农业银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "97.值此青绿追梦年华| 中国农业银行2026年度校园招聘盛大开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国农业银行湖北省分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "99.值此青绿 追梦年华 | 中国农业银行湖北省分行2026年度校园招聘盛大开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国农业银行总行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "100.中国农业银行总行2026年度校园招聘",
+        "35.中国农业银行总行2026年度校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国汽研",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "45.【中国汽研2026届校园招聘正式启动】汽梦同行，研创未来"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国人寿集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "80.中国人寿集团2026年度校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国人寿资产",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "82.中国人寿资产2026年度校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国铁道科学研究院集团有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "4.中国铁道科学研究院集团有限公司2026届校园招聘启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国铁塔",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "81.青春与塔同行|中国铁塔2026年秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国通服广西公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "95.中国通服广西公司2026校园招聘火热进行中！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国移动",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "62.中国移动2026校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国移动物联网公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "16.中国移动物联网公司2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国银联",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "37.中国银联2026年度校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "20.中国银行2026年全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国有色集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "38.中国有色集团2026年校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国远洋海运集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "46.中国远洋海运集团2026全球校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国再保",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "39.中国再保2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国长城",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "75.逐梦启程 星耀长城｜中国长城2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中国中化",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "17.中国中化2026校园招聘正式启动",
+        "44.中国中化2026校园招聘正式启动！",
+        "60.中国中化2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中航集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm",
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "18.“凤”华正茂 梦想启航 | 中航集团2026届校园招聘启动！",
+        "67.“凤”华正茂 梦想启航 | 中航集团2026届校园招聘启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中航科创",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "50.中航科创2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中核集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "52.中核集团2026届提前批校招正式启航!"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中核苏能",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "1.中核苏能2026届校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中核五公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "19.新核聚变能量无限| 中核五公司2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中核浙能",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "12.中核浙能2026校园招聘正式开启"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中化信息",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "87.智领中化数创未来| 中化信息2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中建八局",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "84.中建八局2026届“新砼人”校园招聘全面开启！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中建科工",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "83.中建科工2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中建六局水利水电公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "54.中建六局水利水电公司2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中建三局总承包公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "40.中建三局总承包公司2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中建西勘院、中建地下空间公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "40.启航之星 | 中建西勘院、中建地下空间公司2026届秋季校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中江国际集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "74.才聚中江奋斗者先| 中江国际集团2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中交城市投资控股有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "72.中交城市投资控股有限公司 2026年秋季校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中科创达",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "10.中科创达2026校园招聘启动 | 看见你的每一种可能"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中科光电",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "31.中科光电2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中蓝晨光院",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "21.晨启新程材创未来|中蓝晨光院2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中煤科工集团新疆研究院有限公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "58.中煤科工集团新疆研究院有限公司2026届全球校园招聘公告"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中泰证券",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "53.中泰证券2026届秋季校园招聘公告"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中铁大桥局",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "94.桥见未来 | 中铁大桥局2026届校园招聘启动啦！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中铁建设集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "85.中铁建设集团2026届校园招聘信息直通车"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中铁十四局",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "97.中铁十四局2026届校招启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中望软件",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "13.因你所爱望向未来| 中望软件2026届校园招聘"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中芯国际",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "11.中芯国际2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中信银行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "41.中信银行2026年校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中信证券",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "1.中信证券2026年校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中信证券（山东）",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "44.中信证券（山东）2026年校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中兴通讯",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "9.中兴通讯2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中央国债登记结算有限责任公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "36.中央国债登记结算有限责任公司2026年度校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中英人寿",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "15.中英人寿2026年校园招聘｜与你，共赴新程"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "中邮消费金融",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "4.邮你炫耀出彩| 中邮消费金融2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "重磅！鲁南制药集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "73.重磅！鲁南制药集团2026全球招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "重磅！青岛国信集团",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "52.重磅！青岛国信集团2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "逐梦智能科技，邮你更精彩！中邮科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "16.逐梦智能科技，邮你更精彩！中邮科技2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "筑梦青岛 职通交行！交通银行青岛分行",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "35.筑梦青岛 “职”通交行！交通银行青岛分行2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "卓越教育",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "26.卓越教育2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "最好的选择是彼此成就！中建三局三公司",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a475415/page.htm"
+      ],
+      "seedTitles": [
+        "93.最好的选择是彼此成就！中建三局三公司2026届校园招聘全面启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "AAC瑞声科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "33.AAC瑞声科技2026校园招聘全面启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "AMIES",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "68.芯火相传，共创“微”来|AMIES 2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "CVTE",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "84.CVTE2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "LE见未来，",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "7.LE见未来，2026乐信校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "MPS芯源系统",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "53.MPS芯源系统2026校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "NAURA校招北方华创微电子",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a479724/page.htm"
+      ],
+      "seedTitles": [
+        "94.【NAURA校招】北方华创微电子2026校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "realme",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "38.realme2026届全球校园招聘正式启动啦！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "TCL",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "15.TCL 2026届全球校园招聘正式启动",
+        "72.TCL 2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "TCL通力股份",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "6.TCL通力股份2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "TP-LINK",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "27.TP-LINK 2026届秋季校园大使招募正式启动！",
+        "98.TP-LINK 2026届秋季校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "V·SOL 芯德科技",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a481831/page.htm"
+      ],
+      "seedTitles": [
+        "13.V·SOL 芯德科技2026届校园招聘正式启动！"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    },
+    {
+      "company": "vivo",
+      "status": "pending",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "60.vivo 2026届全球校园招聘正式启动"
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": null,
+      "officialDomain": null,
+      "lastHttpStatus": null
+    }
+  ],
+  "opened": [
+    {
+      "company": "bilibili",
+      "status": "opened",
+      "officialUrl": "https://jobs.bilibili.com/campus/records",
+      "officialDomain": "jobs.bilibili.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "字节跳动校园招聘",
+      "status": "opened",
+      "officialUrl": "https://jobs.bytedance.com/campus/position",
+      "officialDomain": "jobs.bytedance.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "腾讯校园招聘",
+      "status": "opened",
+      "officialUrl": "https://join.qq.com/post.html",
+      "officialDomain": "join.qq.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "腾讯音乐校园招聘",
+      "status": "opened",
+      "officialUrl": "https://join.tencentmusic.com/campus/faq/",
+      "officialDomain": "join.tencentmusic.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "中国电信校园招聘",
+      "status": "opened",
+      "officialUrl": "https://wejob.chinatelecom.com.cn/wt/TELE/web/index",
+      "officialDomain": "wejob.chinatelecom.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "阿里巴巴校园招聘",
+      "status": "opened",
+      "officialUrl": "https://campus-talent.alibaba.com/campus/index",
+      "officialDomain": "campus-talent.alibaba.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "美团校园招聘",
+      "status": "opened",
+      "officialUrl": "https://zhaopin.meituan.com/web/campus",
+      "officialDomain": "zhaopin.meituan.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "百度校园招聘",
+      "status": "opened",
+      "officialUrl": "https://talent.baidu.com/jobs/list?recruitType=GRADUATE",
+      "officialDomain": "talent.baidu.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "京东校园招聘",
+      "status": "opened",
+      "officialUrl": "https://campus.jd.com/#/jobs",
+      "officialDomain": "campus.jd.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "拼多多校园招聘",
+      "status": "opened",
+      "officialUrl": "https://careers.pddglobalhr.com/campus",
+      "officialDomain": "careers.pddglobalhr.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "快手校园招聘",
+      "status": "opened",
+      "officialUrl": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/index",
+      "officialDomain": "campus.kuaishou.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "华为校园招聘",
+      "status": "opened",
+      "officialUrl": "https://career.huawei.com/reccampportal/portal5/index.html",
+      "officialDomain": "career.huawei.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "小米校园招聘",
+      "status": "opened",
+      "officialUrl": "https://xiaomi.jobs.f.mioffice.cn/campus/",
+      "officialDomain": "xiaomi.jobs.f.mioffice.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "OPPO校园招聘",
+      "status": "opened",
+      "officialUrl": "https://careers.oppo.com/campus",
+      "officialDomain": "careers.oppo.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "大疆校园招聘",
+      "status": "opened",
+      "officialUrl": "https://we.dji.com/zh-CN/campus",
+      "officialDomain": "we.dji.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "科大讯飞校园招聘",
+      "status": "opened",
+      "officialUrl": "https://campus.iflytek.com/",
+      "officialDomain": "campus.iflytek.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "蚂蚁集团校园招聘",
+      "status": "opened",
+      "officialUrl": "https://talent.antgroup.com/campus",
+      "officialDomain": "talent.antgroup.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "广联达招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.glodon.com/",
+      "officialDomain": "glodon.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "雷赛智能招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.leisai.com/",
+      "officialDomain": "leisai.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "好未来招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.tal.com/zh-cn",
+      "officialDomain": "tal.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "记忆科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.biwintechnology.com/",
+      "officialDomain": "biwintechnology.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "Meta Careers",
+      "status": "opened",
+      "officialUrl": "https://www.metacareers.com/",
+      "officialDomain": "metacareers.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "虹软科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.arcsoft.com.cn/",
+      "officialDomain": "arcsoft.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "帆软招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.fanruan.com/",
+      "officialDomain": "fanruan.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "黑芝麻智能招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.black-sesame.com/",
+      "officialDomain": "black-sesame.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "金升阳招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.mornsun.cn/",
+      "officialDomain": "mornsun.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "RoboSense速腾聚创招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.robosense.ai/",
+      "officialDomain": "robosense.ai",
+      "confirmedAt": null
+    },
+    {
+      "company": "58同城招聘官网",
+      "status": "opened",
+      "officialUrl": "https://about.58.com/official/HomePage?title=0",
+      "officialDomain": "about.58.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "海能达招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.hytera.com/",
+      "officialDomain": "hytera.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "正浩创新 EcoFlow 招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.ecoflow.com/cn",
+      "officialDomain": "ecoflow.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "亿联网络招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.yealink.com/",
+      "officialDomain": "yealink.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "四方集团招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.sifang.com/",
+      "officialDomain": "sifang.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "维信诺招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.visionox.com/",
+      "officialDomain": "visionox.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "卓胜微电子招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.maxscend.com/",
+      "officialDomain": "maxscend.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "禾赛科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.hesaitech.com/",
+      "officialDomain": "hesaitech.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "巨一科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.jee.com.cn/",
+      "officialDomain": "jee.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "商汤科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.sensetime.com/",
+      "officialDomain": "sensetime.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "新东方招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.xdf.cn/",
+      "officialDomain": "xdf.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "经纬恒润招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.hirain.com/",
+      "officialDomain": "hirain.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "海尔招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.haier.com/",
+      "officialDomain": "haier.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "九牧集团招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.jomoo.com.cn/",
+      "officialDomain": "jomoo.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "三一集团招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.sanyglobal.com/",
+      "officialDomain": "sanyglobal.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "嘉士伯招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.carlsberggroup.com/",
+      "officialDomain": "carlsberggroup.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "九号公司招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.ninebot.com/",
+      "officialDomain": "ninebot.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "宁德时代招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.catl.com/",
+      "officialDomain": "catl.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "贝壳招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.ke.com/",
+      "officialDomain": "ke.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "菜鸟集团招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.cainiao.com/",
+      "officialDomain": "cainiao.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "电科金仓招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.kingbase.com.cn/",
+      "officialDomain": "kingbase.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "黑白调招聘官网",
+      "status": "opened",
+      "officialUrl": "https://hbada.com/",
+      "officialDomain": "hbada.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "锐明技术招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.streamax.com/",
+      "officialDomain": "streamax.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "友塔游戏招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.phantixgames.com/",
+      "officialDomain": "phantixgames.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "银泰商业招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.intime.com.cn/",
+      "officialDomain": "intime.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "飞步科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.fabu.ai/",
+      "officialDomain": "fabu.ai",
+      "confirmedAt": null
+    },
+    {
+      "company": "途游招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.tuyoo.com/",
+      "officialDomain": "tuyoo.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "微博招聘官网",
+      "status": "opened",
+      "officialUrl": "https://weibo.com/",
+      "officialDomain": "weibo.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "科华集团招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.kehua.com/",
+      "officialDomain": "kehua.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "富特科技招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.forte.com.cn/",
+      "officialDomain": "forte.com.cn",
+      "confirmedAt": null
+    },
+    {
+      "company": "诗悦网络招聘官网",
+      "status": "opened",
+      "officialUrl": "https://www.shiyue.com/",
+      "officialDomain": "shiyue.com",
+      "confirmedAt": null
+    },
+    {
+      "company": "安克创新",
+      "status": "opened",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "49.安克创新2026届全球校园招聘正式启动！"
+      ],
+      "lastCheckedAt": "2026-09-02T16:23:08.248Z",
+      "lastContentHash": "7142f728c5c71c9a10a8addbfe347d47e222a815fbf9a9decbedbcf4d2b48998",
+      "officialUrl": "https://career.anker.com.cn/universities/recruitment/",
+      "officialDomain": "career.anker.com.cn",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:23:08.220Z",
+      "lastVerification": {
+        "finalUrl": "https://career.anker.com.cn/universities/recruitment/",
+        "changed": true,
+        "keywordMatched": true,
+        "excerpt": "校园招聘 | 安克招聘网 安克创新 2027届全球校园招聘 校园招聘 社会招聘 工作地点 安克生活 登录 中文 English 中文 校园招聘分类 校园招聘 面向全球2027届应届毕业生 工作地点：中国大陆&港澳台 投递岗位 海外招聘 面向全球2027应届毕业生 工作地点：海外 投递岗位 实习招聘 面向全球在校生 投递岗位 招聘流程 1 简历投递 选择你心仪的岗位，上传简历并投递 2 测评&笔试 <div class=\"w-full md:w-[25%] lg:w-[25%] xl:w-[25%] 2xl:w-[2",
+        "error": null
+      },
+      "confirmedAt": "2026-09-02T16:23:25.755Z"
+    },
+    {
+      "company": "方太集团",
+      "status": "opened",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm"
+      ],
+      "seedTitles": [
+        "28.方太集团2026届校园招聘正式启动"
+      ],
+      "lastCheckedAt": "2026-09-02T16:29:50.267Z",
+      "lastContentHash": "97fa1ec428278610f2831eabfe020df806b23c99fb73752ec3524f2c52b522d4",
+      "officialUrl": "https://fotile.zhiye.com/school",
+      "officialDomain": "fotile.zhiye.com",
+      "lastHttpStatus": 200,
+      "officialUrlVerifiedAt": "2026-09-02T16:29:50.240Z",
+      "lastVerification": {
+        "finalUrl": "https://fotile.zhiye.com/school",
+        "changed": true,
+        "keywordMatched": true,
+        "excerpt": "校园招聘 社会招聘 校园招聘 了解方太 个人中心 退出 登录 注册 --> --> 了不起的新一代 --> --> 播放校招主题宣传片 滚动 方太 2027 校园招聘 诚邀加入方太 一起给爱回馈 应届生 实习生 每一代 都有其使命 每一代 都不负使命 亲爱的同学们，见字如面。 2018年，我们正式提出了新使命“为了亿万家庭的幸福”。 我们始终持守着一颗仁爱之心，以顾客为中心，以员工为根本，快乐学习，快乐奋斗，促进人类社会的真善美。 未来，我们立志“成为一家伟大的企业”，弘扬中华优秀文化，让顾客得安心，员工得成长，社",
+        "error": null
+      },
+      "confirmedAt": "2026-09-02T16:30:05.021Z"
+    },
+    {
+      "company": "歌尔",
+      "status": "opened",
+      "sourceUrls": [
+        "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm"
+      ],
+      "seedTitles": [
+        "11. 歌尔2025年校园大使招募进行中..."
+      ],
+      "lastCheckedAt": null,
+      "lastContentHash": null,
+      "officialUrl": "https://www.hotjob.cn/wt/GoerTek/web/index/webPosition210%21getPositionListByCorpAndWebColumnShowPic?columnId=1&lanType=1&recruitType=1",
+      "officialDomain": "www.hotjob.cn",
+      "lastHttpStatus": null,
+      "officialUrlVerifiedAt": "2026-09-02T16:31:03.694Z",
+      "confirmedAt": "2026-09-02T16:31:03.695Z"
+    }
+  ]
+}
