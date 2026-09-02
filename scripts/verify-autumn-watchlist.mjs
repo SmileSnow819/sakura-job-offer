@@ -3,9 +3,12 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 
 const DEFAULT_INPUT = 'data/autumn-watchlist.json';
+// 为每个请求设置上限，避免某个无法访问的招聘网站阻塞整轮每日校验。
 const FETCH_TIMEOUT_MS = 12_000;
+// 限制下载的 HTML 大小，避免遇到超大页面时占用过多内存。
 const MAX_BODY_BYTES = 768 * 1024;
-const CONCURRENCY = 5;
+// 提供足够并发以完成全量官网校验，同时保留单请求超时和失败记录能力。
+const CONCURRENCY = 20;
 
 const args = new Set(process.argv.slice(2));
 const inputArg = process.argv.find((arg) => arg.startsWith('--input='));
@@ -21,6 +24,7 @@ const companies = new Set(
 );
 const shouldWrite = args.has('--write');
 
+// 将页面转换为可比较的纯文本：移除脚本和样式，解码招聘网站常见实体，并统一空白字符。
 const decodeHtml = (value) => value
   .replace(/&nbsp;/gi, ' ')
   .replace(/&amp;/gi, '&')
@@ -64,7 +68,9 @@ const verifyEntry = async (entry, checkedAt) => {
   try {
     const page = await fetchPage(entry.officialUrl);
     const text = getPageText(page.text);
+    // 使用内容哈希判断页面是否变化，不把完整响应正文存入候选数据文件。
     const contentHash = createHash('sha256').update(text).digest('hex');
+    // 页面同时出现年份标记和校园招聘标记时，才视为命中 2027 秋招信息。
     const hasYear = /(?:2027\s*(?:届|年)?|27届)/.test(text);
     const hasCampusRecruiting = /(?:校园招聘|秋招|应届生招聘|应届生)/.test(text);
     const keywordMatched = hasYear && hasCampusRecruiting;
@@ -114,6 +120,8 @@ const runPool = async (entries, callback) => {
   return results;
 };
 
+// 默认全量检查所有 pending 且带有 officialUrl 的候选；--limit 和 --companies
+// 用于安全试跑和定向检查。
 const data = JSON.parse(await readFile(inputPath, 'utf8'));
 const eligible = data.pending
   .filter((entry) => entry.status === 'pending' && entry.officialUrl && (!companies.size || companies.has(entry.company)))
@@ -136,6 +144,8 @@ for (const result of results) {
   };
 }
 
+// 不加 --write 时只读不写入；加上 --write 后仅保存校验元数据（时间、状态、哈希、
+// 摘要和错误）。新官网发现及 src/bookmarks.json 更新属于独立的 Web Search/维护步骤。
 if (shouldWrite && results.length > 0) {
   await writeFile(inputPath, `${JSON.stringify(data, null, 2)}\n`);
 }
