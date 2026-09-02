@@ -1,7 +1,7 @@
 {
   "version": 1,
   "description": "历史候选池：只用于发现和核验 2027 届官方秋招入口，不使用来源页中的投递链接。待确认项须先补齐 officialUrl，之后由 scripts/verify-autumn-watchlist.mjs 用本地 HTTP 抓取验证。",
-  "generatedAt": "2026-09-02T16:44:45.043Z",
+  "generatedAt": "2026-09-02T16:49:41.394Z",
   "sources": [
     "https://ocean.upc.edu.cn/2025/0806/c15079a468599/page.htm",
     "https://ocean.upc.edu.cn/2025/0806/c15079a471174/page.htm",
@@ -1853,11 +1853,20 @@
       "seedTitles": [
         "32.千亿国企，职等你来丨济宁能源集团2026届校园招聘开始啦"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "a6dcb0aef45798352e12f351f2f7e52ab6204c9bf5cbb83fa396baf0bca9d384",
+      "officialUrl": "https://www.jiningcoal.com/",
+      "officialDomain": "www.jiningcoal.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.shandongronghui.com/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "冀行致远，梦绘新篇河北银行",
@@ -1868,11 +1877,20 @@
       "seedTitles": [
         "23.“冀行致远，梦绘新篇”河北银行2026年度校园招聘正式启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "ea4f3249decd7a6c86954669498500fd42c146f8650ee22f39b49623563abd7a",
+      "officialUrl": "https://hebbank.zhiye.com/Campus",
+      "officialDomain": "hebbank.zhiye.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://hebbank.zhiye.com/Campus",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "冀续扬帆 追逐梦想国网冀北电力",
@@ -1883,11 +1901,20 @@
       "seedTitles": [
         "62.【“冀”续扬帆 追逐梦想】国网冀北电力2026年校园招聘"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://zhaopin.sgcc.com.cn/",
+      "officialDomain": "zhaopin.sgcc.com.cn",
+      "lastHttpStatus": 412,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.sgcc.com.cn/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "加入优家 |",
@@ -1898,11 +1925,20 @@
       "seedTitles": [
         "31.加入优家 | 2026优衣库校园招聘正式启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "24fb3ac51b7f5bae0abab61800867c1bcbba8e6600edde4ae6cb220f3c5d8320",
+      "officialUrl": "https://www.uniqlo.com/cn/employment/",
+      "officialDomain": "www.uniqlo.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.uniqlo.com/cn/employment/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "佳驰科技",
@@ -1917,7 +1953,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "建发集团",
@@ -1928,11 +1965,20 @@
       "seedTitles": [
         "82.建发集团2026届校园招聘全球启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "officialUrl": "https://campus.chinacnd.com/",
+      "officialDomain": "campus.chinacnd.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://campus.chinacnd.com/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "江淮汽车",
@@ -1943,11 +1989,20 @@
       "seedTitles": [
         "41.江淮汽车2026届校园招聘正式启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "cbcda2ab2c595099262b0445a77606c51c6317704c5c29a754e72915d306e516",
+      "officialUrl": "https://www.jac.com.cn/rczp/",
+      "officialDomain": "www.jac.com.cn",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.jac.com.cn/rczp/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "江南造船",
@@ -1958,11 +2013,20 @@
       "seedTitles": [
         "47.百年征程亮舰深蓝——江南造船2026届校园招聘启动"
       ],
-      "lastCheckedAt": null,
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
       "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "officialUrl": "https://www.jnshipyard.com.cn/cms/document/show/6.html",
+      "officialDomain": "www.jnshipyard.com.cn",
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
     },
     {
       "company": "交通银行",
@@ -1977,7 +2041,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "金光集团APP（中国）",
@@ -1988,11 +2053,20 @@
       "seedTitles": [
         "43.金光集团APP（中国）2026秋季校园招聘正式启动"
       ],
-      "lastCheckedAt": null,
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
       "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "officialUrl": "https://www.app.com.cn/join",
+      "officialDomain": "www.app.com.cn",
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
     },
     {
       "company": "金山办公",
@@ -2007,7 +2081,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "京城机电",
@@ -2018,11 +2093,20 @@
       "seedTitles": [
         "29.京城机电2026届校园招聘正式启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "99f8cb002e7374c0e22ead82aacda632511e3b32f66ae1061d146c4b496a6631",
+      "officialUrl": "https://www.jcmeh.com/",
+      "officialDomain": "www.jcmeh.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.jcmeh.com/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "九阳",
@@ -2033,11 +2117,20 @@
       "seedTitles": [
         "34.九阳2026届秋季校园招聘启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "78c16919651334e0c32141ee5ea9015aa2b3dccfe5b01cbc155a4d256b7fdc42",
+      "officialUrl": "https://zhaopin.joyoung.com/campus/jobs",
+      "officialDomain": "zhaopin.joyoung.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://zhaopin.joyoung.com/campus/jobs",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "九州通",
@@ -2052,7 +2145,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "炬芯科技",
@@ -2063,11 +2157,20 @@
       "seedTitles": [
         "66.炬芯科技2026届校园招聘正式启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "36acf87d046181f3de9cbe87bb76bdc6d6c488ddd30175f064d06b0f93910ba8",
+      "officialUrl": "https://www.actionstech.com/index.php?id=join",
+      "officialDomain": "www.actionstech.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.actionstech.com/index.php?id=join",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "君实生物",
@@ -2078,11 +2181,20 @@
       "seedTitles": [
         "38.君实生物2026届校园招聘全面启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "04217823c4ab80901f5467bfb5f05236cfc0a363225693c494f10c982ba5d119",
+      "officialUrl": "https://junshibiosciences.zhiye.com/campus",
+      "officialDomain": "junshibiosciences.zhiye.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://junshibiosciences.zhiye.com/campus",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "卡奥斯",
@@ -2093,11 +2205,20 @@
       "seedTitles": [
         "71.卡奥斯2026届校园招聘全面启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "d5034a71126da6b8d11e44cd875ed019feb660665b6e3743ad9a45188e21015f",
+      "officialUrl": "https://maker.haier.net/client/campus/activityindex.html",
+      "officialDomain": "maker.haier.net",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://maker.haier.net/client/campus/activityindex.html",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "卡特彼勒",
@@ -2108,11 +2229,20 @@
       "seedTitles": [
         "47.卡特彼勒2026校园招聘拉开序幕！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "ae0b26c68939e8214056c2517af3b5091f1c674c8aef5f1e1fbab7804a78829b",
+      "officialUrl": "https://careers.caterpillar.com/zh/%E8%81%8C%E4%BD%8D/?search=campushire&country=China&pagesize=20#results",
+      "officialDomain": "careers.caterpillar.com",
+      "lastHttpStatus": 403,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://careers.caterpillar.com/zh/%E8%81%8C%E4%BD%8D/?search=campushire&country=China&pagesize=20",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "康恩贝股份",
@@ -2123,11 +2253,20 @@
       "seedTitles": [
         "68.康恩贝股份2026届校园招聘正式启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "5291cbb5ac87b015c4c2e2630543c5480766ca29fe913b3cc532c49d55e23a51",
+      "officialUrl": "https://www.conbagroup.com/",
+      "officialDomain": "www.conbagroup.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.conbagroup.com/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "康冠科技",
@@ -2138,11 +2277,20 @@
       "seedTitles": [
         "56.康冠科技2026届校园招聘正式启动！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "20e7eb18f43d74dff2276940a12ad7b1bfe48136419c2d990210a0641b02ee30",
+      "officialUrl": "https://www.ktc.cn/talents.html",
+      "officialDomain": "www.ktc.cn",
+      "lastHttpStatus": 500,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.ktc.cn/talents.html",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "科力普",
@@ -2153,11 +2301,20 @@
       "seedTitles": [
         "27.科力普2026届校园招聘闪耀开启！"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "aef14fb3ea2cf7ec2e255bc6962a258f5784d08dbd93e78b2c7c86d34ba0c35e",
+      "officialUrl": "https://campus-recruitment.colipu.com",
+      "officialDomain": "campus-recruitment.colipu.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://campus-recruitment.colipu.com/",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "来了！中国信保",
@@ -2172,7 +2329,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "浪潮集团",
@@ -2183,11 +2341,20 @@
       "seedTitles": [
         "79.浪潮集团2026届校园招聘提前批正式启动！"
       ],
-      "lastCheckedAt": null,
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
       "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "officialUrl": "https://career.inspur.com/campus2027/index.html",
+      "officialDomain": "career.inspur.com",
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": null,
+        "changed": false,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": "fetch failed"
+      }
     },
     {
       "company": "崂山国家实验室",
@@ -2202,7 +2369,8 @@
       "lastContentHash": null,
       "officialUrl": null,
       "officialDomain": null,
-      "lastHttpStatus": null
+      "lastHttpStatus": null,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z"
     },
     {
       "company": "乐鑫科技",
@@ -2213,11 +2381,20 @@
       "seedTitles": [
         "1.乐鑫科技 2026 届秋季校园招聘正式启动"
       ],
-      "lastCheckedAt": null,
-      "lastContentHash": null,
-      "officialUrl": null,
-      "officialDomain": null,
-      "lastHttpStatus": null
+      "lastCheckedAt": "2026-09-02T16:49:41.610Z",
+      "lastContentHash": "7f195cd63d17dfe40de955cc3b5a891c161c819286ea6c87b02ecb01f2e1ac5c",
+      "officialUrl": "https://www.espressif.com/zh-hans/join-us/job-search",
+      "officialDomain": "www.espressif.com",
+      "lastHttpStatus": 200,
+      "lastSearchedAt": "2026-09-02T16:49:41.394Z",
+      "officialUrlVerifiedAt": "2026-09-02T16:49:41.394Z",
+      "lastVerification": {
+        "finalUrl": "https://www.espressif.com/zh-hans/join-us/job-search",
+        "changed": true,
+        "keywordMatched": false,
+        "excerpt": null,
+        "error": null
+      }
     },
     {
       "company": "黎明院",

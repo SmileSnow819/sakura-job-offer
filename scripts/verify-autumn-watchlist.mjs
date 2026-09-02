@@ -10,8 +10,15 @@ const CONCURRENCY = 5;
 const args = new Set(process.argv.slice(2));
 const inputArg = process.argv.find((arg) => arg.startsWith('--input='));
 const limitArg = process.argv.find((arg) => arg.startsWith('--limit='));
+const companiesArg = process.argv.find((arg) => arg.startsWith('--companies='));
 const inputPath = resolve(inputArg?.slice('--input='.length) || DEFAULT_INPUT);
 const limit = Number(limitArg?.slice('--limit='.length) || Number.POSITIVE_INFINITY);
+const companies = new Set(
+  companiesArg
+    ?.slice('--companies='.length)
+    .split(',')
+    .filter(Boolean) ?? [],
+);
 const shouldWrite = args.has('--write');
 
 const decodeHtml = (value) => value
@@ -109,7 +116,7 @@ const runPool = async (entries, callback) => {
 
 const data = JSON.parse(await readFile(inputPath, 'utf8'));
 const eligible = data.pending
-  .filter((entry) => entry.status === 'pending' && entry.officialUrl)
+  .filter((entry) => entry.status === 'pending' && entry.officialUrl && (!companies.size || companies.has(entry.company)))
   .slice(0, Number.isFinite(limit) ? limit : undefined);
 const checkedAt = new Date().toISOString();
 const results = await runPool(eligible, (entry) => verifyEntry(entry, checkedAt));
