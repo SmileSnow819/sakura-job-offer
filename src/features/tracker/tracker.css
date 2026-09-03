@@ -124,7 +124,8 @@
 .tracker-field>small{display:block;font-size:10px;color:#909ba5;font-weight:400;line-height:1.7;margin-top:6px}
 .tracker-required{color:#b16566}.tracker-optional{color:#98a1ab;font-weight:400;font-size:10px;margin-left:5px}
 .tracker-input-icon{display:flex;align-items:center;gap:8px;color:#98a1ab}
-.tracker-input-icon input{border:0;outline:0;background:none;width:100%}.tracker-input-icon:focus-within{outline:2px solid #94aec5;outline-offset:1px}
+.tracker-input-icon input,.tracker-input-icon input:focus-visible{border:0;outline:none;outline-offset:0;box-shadow:none;background:none;width:100%}
+.tracker-input-icon:focus-within{border-color:#829ab3;outline:none}
 .tracker-more{border-top:1px solid #e8eaed;border-bottom:1px solid #e8eaed;margin:20px 0;padding:14px 0}
 .tracker-more>summary,.tracker-stage-fields summary{cursor:pointer;font-size:12px;color:#71849a}
 .tracker-more .tracker-field{margin:15px 0 5px}
