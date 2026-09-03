@@ -79,6 +79,36 @@
 .tracker-table td{padding:16px 14px;border-top:1px solid #eef0f2;vertical-align:middle}
 .tracker-table-company{display:flex;gap:10px;align-items:center;max-width:300px;overflow-wrap:anywhere}
 .tracker-table-company strong{font-weight:650}.tracker-table-company p{color:#7c8c9b;font-size:11px;margin-top:4px}
+.tracker-table .tracker-expand-column{width:40px;padding-left:12px;padding-right:0}
+.tracker-row-toggle{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:5px;background:transparent;color:#83909d}
+.tracker-row-toggle:hover{background:#eaf0f6;color:#315f91}
+.tracker-row-toggle svg{transition:transform .15s ease}
+.tracker-row-toggle[aria-expanded=true]{color:#315f91}
+.tracker-row-toggle[aria-expanded=true] svg{transform:rotate(90deg)}
+.tracker-record-expanded{background:#fafbfd}
+.tracker-table .tracker-timeline-row>td{padding:0;border-top:0;background:#fafbfd}
+.tracker-row-timeline{width:0;min-width:100%;padding:0 24px 20px 54px;box-sizing:border-box}
+.tracker-row-timeline-heading{display:flex;align-items:center;gap:12px;border-top:1px solid #e9edf1;padding:15px 0;font-size:11px;color:#7b8794}
+.tracker-row-timeline-heading small{font-size:10px;color:#98a2ae}
+.tracker-row-timeline-scroll{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin;scrollbar-color:#d0d8e0 transparent;padding:3px 3px 10px}
+.tracker-inline-timeline{display:flex;list-style:none;margin:0;padding:0;width:max-content;min-width:100%}
+.tracker-inline-stage{flex:1;position:relative;min-width:112px;max-width:180px;padding-right:22px;color:#929ca7}
+.tracker-inline-stage:last-child{padding-right:0}
+.tracker-inline-stage-marker{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:1px solid #dce2e8;background:#fff;color:#99a3ae;font-size:11px}
+.tracker-inline-connector{position:absolute;display:flex;align-items:center;left:32px;right:7px;top:7px;height:12px;color:#d4dce4}
+.tracker-inline-connector:before{content:'';flex:1;border-top:1px solid currentColor}
+.tracker-inline-connector svg{flex-shrink:0;margin-left:-4px}
+.tracker-inline-stage-button>strong{display:block;font-size:12px;font-weight:500;color:#7b8793;margin-top:10px;overflow-wrap:anywhere}
+.tracker-inline-stage-status{display:block;font-size:10px;margin-top:5px}
+.tracker-inline-stage time{display:block;font-size:10px;font-variant-numeric:tabular-nums;color:#929dab;margin-top:4px}
+.tracker-inline-stage.completed .tracker-inline-stage-marker{color:#51806a;background:#eff6f2;border-color:#ccdcd2}
+.tracker-inline-stage.completed .tracker-inline-connector{color:#afc3b9}
+.tracker-inline-stage.completed strong{color:#596d62}
+.tracker-inline-stage.active .tracker-inline-stage-marker{color:#fff;background:#315f91;border-color:#315f91;box-shadow:0 0 0 3px #e8eff6}
+.tracker-inline-stage.active strong,.tracker-inline-stage.active .tracker-inline-stage-status{color:#315f91;font-weight:600}
+.tracker-inline-stage.skipped .tracker-inline-stage-marker{border-style:dashed;background:#f1f3f5}
+.tracker-inline-stage.rejected .tracker-inline-stage-marker{color:#b35f65;background:#fbf0f1;border-color:#e7c7ca}
+.tracker-inline-stage.rejected strong,.tracker-inline-stage.rejected .tracker-inline-stage-status{color:#b35f65}
 .tracker-footer{display:flex;gap:12px;justify-content:space-between;align-items:center;margin:24px 0 0;font-size:10px;color:#8b96a2}
 .tracker-footer>span{display:flex;gap:7px;align-items:center}.tracker-footer button{display:inline-flex;align-items:center;gap:5px;border:0;background:transparent;color:#6a8199;font-size:10px;white-space:nowrap}
 .tracker-dialog{position:fixed;inset:0;margin:auto;border:1px solid #fff;border-radius:7px;padding:0;width:min(540px,calc(100vw - 28px));max-height:calc(100dvh - 40px);background:#fff;color:#30353c;box-shadow:none;overflow:auto;font-family:var(--font-sans);font-size:13px}
@@ -141,3 +171,12 @@
 .tracker-company-manager>div{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:10px 0;border-bottom:1px solid #eef0f2}.tracker-company-manager>div>span{flex:1;min-width:100px;overflow-wrap:anywhere}.tracker-company-manager small{display:block;font-size:10px;color:#8c97a2;margin-top:3px}.tracker-company-manager .tracker-warning{flex-basis:100%;margin:5px 0}.tracker-company-edit{padding:16px;background:#f5f7f9;border:1px solid #e0e5ea;border-radius:7px;margin-top:16px}
 .tracker-analytics{display:grid;grid-template-columns:1.4fr 1fr;gap:16px;margin:4px 0 22px}.tracker-analytics>section{padding:17px 18px 8px;border:1px solid #e1e5ea;background:#fff;border-radius:7px;min-width:0}.tracker-analytics header{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.tracker-analytics h3{font-size:12px;font-weight:600;color:#525e6c}.tracker-analytics header span{font-size:10px;color:#929da9}.tracker-chart{width:100%;height:185px}.tracker-chart-empty{height:185px;display:grid;place-items:center;color:#a0a9b3;font-size:12px}
 @media(max-width:700px){.tracker-analytics{grid-template-columns:1fr;gap:10px}.tracker-stats{border-radius:7px;grid-template-columns:repeat(4,minmax(0,1fr))}.tracker-stat{padding:12px 10px;border-bottom:0}.tracker-stat-label{font-size:10px;white-space:nowrap}.tracker-stat strong{font-size:23px}.tracker-stat small{display:none}.tracker-header{margin-bottom:20px}.tracker-card-footer .tracker-button{font-size:11px!important}.tracker-workspace-heading>.tracker-inline-actions{flex-wrap:wrap}.tracker-workspace-heading .tracker-button{flex:initial}.tracker-selection{flex-wrap:wrap}}
+
+.tracker-inline-stage-button{display:block;width:100%;padding:0;border:0;background:transparent;color:inherit;text-align:left;border-radius:5px}
+.tracker-inline-stage-button:hover strong,.tracker-inline-stage-button[aria-expanded=true] strong{text-decoration:underline;text-underline-offset:3px}
+.tracker-inline-stage-button:hover .tracker-inline-stage-marker,.tracker-inline-stage-button[aria-expanded=true] .tracker-inline-stage-marker{box-shadow:0 0 0 3px #e4ebf3}
+.tracker-inline-connector{pointer-events:none}
+.tracker-stage-actions{margin-top:10px;padding:12px 16px;background:#fff;border:1px solid #dfe6ed;border-radius:7px}
+.tracker-stage-actions-heading{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-size:12px}
+.tracker-stage-actions-heading>span{color:#8995a1;font-size:11px}.tracker-stage-actions-heading>.tracker-icon-button{margin-left:auto;width:26px;height:26px}
+.tracker-stage-actions .tracker-help{margin:10px 0 0}.tracker-row-timeline-heading{flex-wrap:wrap}
