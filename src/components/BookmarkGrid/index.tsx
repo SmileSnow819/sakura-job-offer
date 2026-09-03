@@ -4,6 +4,7 @@ import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
 import mottosRaw from '../../mottos.json';
+import TrackApplicationButton from '../TrackApplicationButton';
 
 const MOTTOS: string[] = mottosRaw as string[];
 import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
@@ -194,12 +195,9 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
   const shineRef = useRef<HTMLDivElement>(null);
   const visitBtnRef = useRef<HTMLAnchorElement>(null);
   const shareBtnRef = useRef<HTMLButtonElement>(null);
-  const heartBtnRef = useRef<HTMLButtonElement>(null);
   const rippleRef = useRef<HTMLDivElement>(null);
   const mottoRef = useRef<HTMLSpanElement>(null);
   const scrambleTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const particleContainerRef = useRef<HTMLDivElement>(null);
-  const [liked, setLiked] = useState(false);
   const mottoIdx = useRef(Math.floor(Math.random() * MOTTOS.length));
 
   const hostname = (() => {
@@ -299,34 +297,6 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
       .to(el, { scale: 1, duration: 0.12, ease: 'power2.out' });
   };
 
-  // ── 收藏爱心 + 粒子爆炸 ──
-  const handleLike = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const next = !liked;
-    setLiked(next);
-    btnClick(heartBtnRef.current);
-    if (!next) return;
-    const container = particleContainerRef.current;
-    if (!container) return;
-    const colors = ['#FF6B9E', '#a1c4fd', '#FFB7C5', '#ffd6e7', '#c2e0ff'];
-    for (let p = 0; p < 10; p++) {
-      const dot = document.createElement('div');
-      dot.style.cssText = `position:absolute;width:7px;height:7px;border-radius:50%;background:${colors[p % colors.length]};top:50%;left:50%;pointer-events:none;`;
-      container.appendChild(dot);
-      const angle = (p / 10) * Math.PI * 2;
-      const dist = 28 + Math.random() * 22;
-      gsap.fromTo(dot,
-        { x: 0, y: 0, scale: 1, opacity: 1 },
-        {
-          x: Math.cos(angle) * dist, y: Math.sin(angle) * dist,
-          scale: 0, opacity: 0, duration: 0.55 + Math.random() * 0.2,
-          ease: 'power2.out',
-          onComplete: () => dot.remove(),
-        }
-      );
-    }
-  };
-
   // ── 涟漪 ──
   const handleRipple = (e: React.MouseEvent<HTMLDivElement>) => {
     const rip = rippleRef.current;
@@ -377,29 +347,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({ link, isActive, onShare, o
         pointerEvents: 'none', display: 'none', marginLeft: -30, marginTop: -30, zIndex: 99,
       }} />
 
-      {/* 粒子容器 */}
-      <div ref={particleContainerRef} style={{ position: 'absolute', top: 18, right: 18, width: 0, height: 0, zIndex: 50, pointerEvents: 'none' }} />
-
-      {/* 收藏按钮（右上角）*/}
-      <button
-        ref={heartBtnRef}
-        onClick={handleLike}
-        onMouseEnter={() => btnEnter(heartBtnRef.current)}
-        onMouseLeave={() => btnLeave(heartBtnRef.current)}
-        aria-label={liked ? '取消收藏' : '收藏'}
-        aria-pressed={liked}
-        style={{
-          position: 'absolute', top: 14, right: 14,
-          width: 32, height: 32, borderRadius: '50%', border: 'none',
-          background: liked ? 'linear-gradient(135deg, var(--pink-500), var(--pink-400))' : 'var(--pink-100)',
-          color: liked ? 'oklch(0.99 0.008 350)' : 'var(--pink-500)',
-          cursor: 'pointer', fontSize: 15, display: 'flex', alignItems: 'center', justifyContent: 'center',
-          boxShadow: liked ? '0 3px 10px var(--pink-400)' : 'none',
-          transition: 'background 0.3s, box-shadow 0.3s, color 0.3s',
-        }}
-      >
-        {liked ? '♥' : '♡'}
-      </button>
+      <TrackApplicationButton link={link} corner />
 
       {/* Favicon（可点击跳转）*/}
       <a
@@ -585,6 +533,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                 </a>
               </div>
               <div className="bookmark-mobile-actions">
+                <TrackApplicationButton link={link} />
                 {link.referralUrl ? <ReferralApplyLink link={link} compact /> : (
                   <a
                     href={link.url}
@@ -687,6 +636,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                 </td>
                 <td data-label="操作" style={{ padding: '14px 18px', borderTop: '1px solid rgba(255,183,197,0.28)', textAlign: 'right' }}>
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    <TrackApplicationButton link={link} />
                     {link.referralUrl ? <ReferralApplyLink link={link} compact tooltipPlacement="left" /> : (
                       <a
                         href={link.url}
