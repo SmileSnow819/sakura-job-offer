@@ -12,36 +12,24 @@
           "referralQrCode": "img/QR-CODE/bilibili.webp"
         },
         {
-          "title": "安克创新校园招聘",
-          "url": "https://career.anker.com.cn/universities/recruitment/"
-        },
-        {
           "title": "字节跳动校园招聘",
           "url": "https://jobs.bytedance.com/campus/position"
-        },
-        {
-          "title": "腾讯校园招聘",
-          "url": "https://join.qq.com/post.html"
-        },
-        {
-          "title": "腾讯音乐校园招聘",
-          "url": "https://join.tencentmusic.com/campus/faq/"
-        },
-        {
-          "title": "中国电信校园招聘",
-          "url": "https://wejob.chinatelecom.com.cn/wt/TELE/web/index"
         },
         {
           "title": "阿里巴巴校园招聘",
           "url": "https://campus-talent.alibaba.com/campus/index"
         },
         {
+          "title": "腾讯校园招聘",
+          "url": "https://join.qq.com/post.html"
+        },
+        {
           "title": "美团校园招聘",
           "url": "https://zhaopin.meituan.com/web/campus"
         },
         {
-          "title": "百度校园招聘",
-          "url": "https://talent.baidu.com/jobs/list?recruitType=GRADUATE"
+          "title": "快手校园招聘",
+          "url": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/index"
         },
         {
           "title": "京东校园招聘",
@@ -52,28 +40,80 @@
           "url": "https://careers.pddglobalhr.com/campus"
         },
         {
-          "title": "快手校园招聘",
-          "url": "https://campus.kuaishou.cn/recruit/campus/e/#/campus/index"
+          "title": "百度校园招聘",
+          "url": "https://talent.baidu.com/jobs/list?recruitType=GRADUATE"
+        },
+        {
+          "title": "腾讯音乐校园招聘",
+          "url": "https://join.tencentmusic.com/campus/faq/"
+        },
+        {
+          "title": "滴滴校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/didiglobal/96064#/jobs"
+        },
+        {
+          "title": "携程校园招聘",
+          "url": "https://job.ctrip.com/"
+        },
+        {
+          "title": "米哈游校园招聘",
+          "url": "https://jobs.mihoyo.com/#/campus/position"
         },
         {
           "title": "华为校园招聘",
           "url": "https://career.huawei.com/reccampportal/portal5/index.html"
         },
         {
-          "title": "小米校园招聘",
-          "url": "https://xiaomi.jobs.f.mioffice.cn/campus/"
-        },
-        {
           "title": "OPPO校园招聘",
           "url": "https://careers.oppo.com/campus"
         },
         {
-          "title": "大疆校园招聘",
-          "url": "https://we.dji.com/zh-CN/campus"
+          "title": "vivo校园招聘",
+          "url": "https://hr-campus.vivo.com/campus/jobs"
+        },
+        {
+          "title": "小鹏汽车校园招聘",
+          "url": "https://xiaopeng.jobs.feishu.cn/campus/"
+        },
+        {
+          "title": "商汤科技招聘官网",
+          "url": "https://hr.sensetime.com/"
+        },
+        {
+          "title": "蔚来校园招聘",
+          "url": "https://nio.jobs.feishu.cn/campus/"
+        },
+        {
+          "title": "小米校园招聘",
+          "url": "https://xiaomi.jobs.f.mioffice.cn/campus/"
+        },
+        {
+          "title": "贝壳招聘官网",
+          "url": "https://campuske.zhiye.com/campus/jobs"
+        },
+        {
+          "title": "搜狐校园招聘",
+          "url": "https://app.mokahr.com/campus_apply/sohu/"
         },
         {
           "title": "科大讯飞校园招聘",
           "url": "https://campus.iflytek.com/"
+        },
+        {
+          "title": "微博招聘官网",
+          "url": "https://app.mokahr.com/campus-recruitment/sina/43536?locale=zh-CN"
+        },
+        {
+          "title": "安克创新校园招聘",
+          "url": "https://career.anker.com.cn/universities/recruitment/"
+        },
+        {
+          "title": "中国电信校园招聘",
+          "url": "https://wejob.chinatelecom.com.cn/wt/TELE/web/index"
+        },
+        {
+          "title": "大疆校园招聘",
+          "url": "https://we.dji.com/zh-CN/campus"
         },
         {
           "title": "蚂蚁集团校园招聘",
@@ -148,10 +188,6 @@
           "url": "https://www.jee-cn.com/join/way.html"
         },
         {
-          "title": "商汤科技招聘官网",
-          "url": "https://hr.sensetime.com/"
-        },
-        {
           "title": "新东方招聘官网",
           "url": "https://zhaopin.xdf.cn/"
         },
@@ -184,10 +220,6 @@
           "url": "https://talent.catl.com/"
         },
         {
-          "title": "贝壳招聘官网",
-          "url": "https://campuske.zhiye.com/campus/jobs"
-        },
-        {
           "title": "菜鸟集团招聘官网",
           "url": "https://talent.cainiao.com/"
         },
@@ -210,10 +242,6 @@
         {
           "title": "途游招聘官网",
           "url": "https://www.tuyoo.com/job/campus?site=campus"
-        },
-        {
-          "title": "微博招聘官网",
-          "url": "https://app.mokahr.com/campus-recruitment/sina/43536?locale=zh-CN"
         },
         {
           "title": "科华集团招聘官网",
@@ -286,6 +314,78 @@
         {
           "title": "基恩士2027秋季校园招聘",
           "url": "https://www.keyence.com.cn/ss/careers/recruitment.jsp"
+        },
+        {
+          "title": "微步校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/threatbook/39679?locale=zh-CN#/jobs"
+        },
+        {
+          "title": "智元机器人校园招聘",
+          "url": "https://agirobot.jobs.feishu.cn/campusrecruitment/"
+        },
+        {
+          "title": "卓驭科技校园招聘",
+          "url": "https://we.zyt.com/campus/jobs"
+        },
+        {
+          "title": "影石创新校园招聘",
+          "url": "https://arashivision.jobs.feishu.cn/campus/"
+        },
+        {
+          "title": "原力灵机校园招聘",
+          "url": "https://dexmal-inc.jobs.feishu.cn/285572/position/list"
+        },
+        {
+          "title": "合合信息校园招聘",
+          "url": "https://intsig.zhiye.com/campus/jobs"
+        },
+        {
+          "title": "沐瞳科技校园招聘",
+          "url": "https://moonton.jobs.feishu.cn/campus/"
+        },
+        {
+          "title": "陌陌校园招聘",
+          "url": "https://campus.hellogroup.com/campus-recruitment/immomo/54299/#/"
+        },
+        {
+          "title": "得物校园招聘",
+          "url": "https://poizon.jobs.feishu.cn/"
+        },
+        {
+          "title": "虾皮校园招聘",
+          "url": "https://app.mokahr.com/campus_apply/shopee/"
+        },
+        {
+          "title": "海康威视校园招聘",
+          "url": "https://campushr.hikvision.com/school?schoolType=nozxf"
+        },
+        {
+          "title": "TP-Link校园招聘",
+          "url": "https://join.tplinkglobal.com/"
+        },
+        {
+          "title": "招商银行校园招聘",
+          "url": "https://cmbnt.cmbchina.com/pages/schoolRecruit/index.html"
+        },
+        {
+          "title": "联想校园招聘",
+          "url": "https://talent.lenovo.com.cn/"
+        },
+        {
+          "title": "柠檬微趣校园招聘",
+          "url": "https://app.mokahr.com/recommendation-apply/microfunhr/36717"
+        },
+        {
+          "title": "汇川技术校园招聘",
+          "url": "https://recruit.inovance.com/"
+        },
+        {
+          "title": "顺丰校园招聘",
+          "url": "https://campus.sf-express.com/"
+        },
+        {
+          "title": "bigo校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/bigo/1018#/jobs"
         }
       ]
     },
