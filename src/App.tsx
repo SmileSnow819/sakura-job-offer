@@ -16,6 +16,7 @@ import LoadingScreen from "./components/LoadingScreen";
 import BookmarksPage from "./pages/BookmarksPage";
 import { sanitizeBookmarkData } from "./utils/sanitizeRecruitmentUrl";
 import AutumnLaunchOverlay from "./components/AutumnLaunchOverlay";
+import TrackerPage from "./pages/TrackerPage";
 
 const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
 const INTERVIEWS_JSON_URL =
@@ -112,7 +113,7 @@ const App: React.FC = () => {
   // 当前激活的 tab 从路径推导
   const pathParts = location.pathname.split("/");
   const activeTab =
-    pathParts[2] ??
+    (location.pathname.startsWith('/tracker') ? 'tracker' : pathParts[2]) ??
     bookmarkData.categories.find((c) => c.id !== "interviews")?.id ??
     "";
 
@@ -160,6 +161,8 @@ const App: React.FC = () => {
     (tabId: string) => {
       if (tabId === "interviews") {
         window.location.assign(INTERVIEWS_JSON_URL);
+      } else if (tabId === 'tracker') {
+        navigate('/tracker');
       } else {
         navigate(`/bookmarks/${tabId}`);
       }
@@ -229,6 +232,7 @@ const App: React.FC = () => {
         }}
       >
         <Routes>
+          <Route path="/tracker" element={<TrackerPage />} />
           <Route
             path="/"
             element={<BookmarksPage onShare={handleShare} />}
@@ -266,7 +270,7 @@ const App: React.FC = () => {
       >
         <div style={{ pointerEvents: "auto" }}>
           <SidebarDock
-            categories={bookmarkData.categories}
+            categories={[...bookmarkData.categories, { id: 'tracker', name: '我的投递', icon: 'BriefcaseBusiness', links: [] }]}
             activeTab={activeTab}
             launchActive={autumnLaunch}
             onTabChange={handleTabChange}

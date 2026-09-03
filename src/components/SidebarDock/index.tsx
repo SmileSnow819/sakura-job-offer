@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { CalendarDays, Compass, PenTool, BookOpen } from "lucide-react";
+import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from "lucide-react";
 
 import { ICategory } from "../../types/bookmark";
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
+  BriefcaseBusiness: <BriefcaseBusiness size={20} />,
   Compass: <Compass size={20} />,
   CalendarDays: <CalendarDays size={20} />,
   PenTool: <PenTool size={20} />,
@@ -19,11 +20,11 @@ interface ISidebarDockProps {
 
 const getIconSize = () => {
   if (typeof window === "undefined") return 44;
-  return window.innerWidth <= 768 ? 48 : 44;
+  return window.innerWidth <= 400 ? 38 : window.innerWidth <= 768 ? 42 : 44;
 };
 
 const ICON_SIZE = getIconSize();
-const ICON_GAP = 10;
+const ICON_GAP = 8;
 const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
 
 const SidebarDock: React.FC<ISidebarDockProps> = ({
@@ -167,6 +168,8 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                 </div>
 
                 <button
+                  aria-label={cat.name}
+                  aria-current={isActive ? 'page' : undefined}
                   onClick={() => onTabChange(cat.id)}
                   className="w-full h-full flex items-center justify-center rounded-[13px] relative"
                   style={{
