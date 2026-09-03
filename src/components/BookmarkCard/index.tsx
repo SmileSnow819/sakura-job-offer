@@ -15,8 +15,11 @@ interface IBookmarkCardProps {
  */
 const BookmarkCard: React.FC<IBookmarkCardProps> = ({ link, onShare }) => {
   const hostname = (() => {
-    try { return new URL(link.url).hostname.replace('www.', ''); }
-    catch { return link.url; }
+    try {
+      return new URL(link.url).hostname.replace('www.', '');
+    } catch {
+      return link.url;
+    }
   })();
 
   return (

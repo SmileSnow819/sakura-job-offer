@@ -5,7 +5,11 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-family:
+    'Manrope',
+    -apple-system,
+    BlinkMacSystemFont,
+    sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -17,21 +21,21 @@
   --pink-100: oklch(0.92 0.04 350);
   --pink-400: oklch(0.75 0.15 350);
   --pink-500: oklch(0.65 0.18 350);
-  --pink-600: oklch(0.55 0.20 350);
+  --pink-600: oklch(0.55 0.2 350);
 
   --blue-50: oklch(0.95 0.02 240);
-  --blue-100: oklch(0.90 0.04 240);
-  --blue-400: oklch(0.70 0.12 240);
-  --blue-500: oklch(0.60 0.15 240);
+  --blue-100: oklch(0.9 0.04 240);
+  --blue-400: oklch(0.7 0.12 240);
+  --blue-500: oklch(0.6 0.15 240);
 
   --neutral-50: oklch(0.98 0.01 350);
   --neutral-100: oklch(0.95 0.01 350);
-  --neutral-200: oklch(0.90 0.01 350);
-  --neutral-400: oklch(0.70 0.02 350);
-  --neutral-500: oklch(0.60 0.02 350);
-  --neutral-600: oklch(0.50 0.02 350);
-  --neutral-700: oklch(0.40 0.02 350);
-  --neutral-800: oklch(0.30 0.02 350);
+  --neutral-200: oklch(0.9 0.01 350);
+  --neutral-400: oklch(0.7 0.02 350);
+  --neutral-500: oklch(0.6 0.02 350);
+  --neutral-600: oklch(0.5 0.02 350);
+  --neutral-700: oklch(0.4 0.02 350);
+  --neutral-800: oklch(0.3 0.02 350);
 
   --white: oklch(0.99 0.008 350);
 }
@@ -69,4 +73,3 @@ body {
     --dock-icon-size: 44px;
   }
 }
-

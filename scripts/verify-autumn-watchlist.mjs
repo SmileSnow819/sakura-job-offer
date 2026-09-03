@@ -17,28 +17,25 @@ const companiesArg = process.argv.find((arg) => arg.startsWith('--companies='));
 const inputPath = resolve(inputArg?.slice('--input='.length) || DEFAULT_INPUT);
 const limit = Number(limitArg?.slice('--limit='.length) || Number.POSITIVE_INFINITY);
 const companies = new Set(
-  companiesArg
-    ?.slice('--companies='.length)
-    .split(',')
-    .filter(Boolean) ?? [],
+  companiesArg?.slice('--companies='.length).split(',').filter(Boolean) ?? [],
 );
 const shouldWrite = args.has('--write');
 
 // 将页面转换为可比较的纯文本：移除脚本和样式，解码招聘网站常见实体，并统一空白字符。
-const decodeHtml = (value) => value
-  .replace(/&nbsp;/gi, ' ')
-  .replace(/&amp;/gi, '&')
-  .replace(/&quot;/gi, '"')
-  .replace(/&#(?:x27|39);/gi, "'")
-  .replace(/<[^>]+>/g, ' ')
-  .replace(/\s+/g, ' ')
-  .trim();
+const decodeHtml = (value) =>
+  value
+    .replace(/&nbsp;/gi, ' ')
+    .replace(/&amp;/gi, '&')
+    .replace(/&quot;/gi, '"')
+    .replace(/&#(?:x27|39);/gi, "'")
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 
-const getPageText = (html) => decodeHtml(
-  html
-    .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-    .replace(/<style[\s\S]*?<\/style>/gi, ' '),
-);
+const getPageText = (html) =>
+  decodeHtml(
+    html.replace(/<script[\s\S]*?<\/script>/gi, ' ').replace(/<style[\s\S]*?<\/style>/gi, ' '),
+  );
 
 const fetchPage = async (url) => {
   const controller = new AbortController();
@@ -75,7 +72,9 @@ const verifyEntry = async (entry, checkedAt) => {
     const hasCampusRecruiting = /(?:校园招聘|秋招|应届生招聘|应届生)/.test(text);
     const keywordMatched = hasYear && hasCampusRecruiting;
     const matchAt = keywordMatched
-      ? text.search(/(?:2027\s*(?:届|年)?|27届).{0,160}(?:校园招聘|秋招|应届生招聘|应届生)|(?:校园招聘|秋招|应届生招聘|应届生).{0,160}(?:2027\s*(?:届|年)?|27届)/)
+      ? text.search(
+          /(?:2027\s*(?:届|年)?|27届).{0,160}(?:校园招聘|秋招|应届生招聘|应届生)|(?:校园招聘|秋招|应届生招聘|应届生).{0,160}(?:2027\s*(?:届|年)?|27届)/,
+        )
       : -1;
     const excerpt = matchAt >= 0 ? text.slice(matchAt, matchAt + 260) : null;
 
@@ -124,7 +123,12 @@ const runPool = async (entries, callback) => {
 // 用于安全试跑和定向检查。
 const data = JSON.parse(await readFile(inputPath, 'utf8'));
 const eligible = data.pending
-  .filter((entry) => entry.status === 'pending' && entry.officialUrl && (!companies.size || companies.has(entry.company)))
+  .filter(
+    (entry) =>
+      entry.status === 'pending' &&
+      entry.officialUrl &&
+      (!companies.size || companies.has(entry.company)),
+  )
   .slice(0, Number.isFinite(limit) ? limit : undefined);
 const checkedAt = new Date().toISOString();
 const results = await runPool(eligible, (entry) => verifyEntry(entry, checkedAt));

@@ -34,19 +34,69 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
     gsap.set(sparkleRefs.current, { opacity: 0, scale: 0 });
     gsap.set(dotRefs.current, { opacity: 0 });
 
-    tl.to(sakuraRefs.current, { opacity: 1, scale: 1, stagger: 0.055, duration: 0.45, ease: 'power4.out' })
+    tl.to(sakuraRefs.current, {
+      opacity: 1,
+      scale: 1,
+      stagger: 0.055,
+      duration: 0.45,
+      ease: 'power4.out',
+    })
       .to(emojiRef.current, { opacity: 1, y: 0, duration: 0.5, ease: 'power4.out' }, '-=0.15')
-      .to(dotRefs.current, { opacity: 1, stagger: 0.04, duration: 0.3, ease: 'power2.out' }, '-=0.2')
+      .to(
+        dotRefs.current,
+        { opacity: 1, stagger: 0.04, duration: 0.3, ease: 'power2.out' },
+        '-=0.2',
+      )
       .to(orbitRef.current, { rotation: 360, duration: 4, ease: 'none', repeat: -1 }, '<')
-      .to(charRefs.current, { opacity: 1, y: 0, rotateX: 0, stagger: 0.038, duration: 0.5, ease: 'power4.out', transformOrigin: '50% 50%' }, '-=3.5')
-      .to(subCharRefs.current, { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.28, ease: 'power4.out' }, '-=0.1')
-      .to(tagRefs.current, { opacity: 1, x: 0, scale: 1, stagger: 0.08, duration: 0.38, ease: 'power4.out' }, '-=0.2')
+      .to(
+        charRefs.current,
+        {
+          opacity: 1,
+          y: 0,
+          rotateX: 0,
+          stagger: 0.038,
+          duration: 0.5,
+          ease: 'power4.out',
+          transformOrigin: '50% 50%',
+        },
+        '-=3.5',
+      )
+      .to(
+        subCharRefs.current,
+        { opacity: 1, y: 0, scale: 1, stagger: 0.03, duration: 0.28, ease: 'power4.out' },
+        '-=0.1',
+      )
+      .to(
+        tagRefs.current,
+        { opacity: 1, x: 0, scale: 1, stagger: 0.08, duration: 0.38, ease: 'power4.out' },
+        '-=0.2',
+      )
       .to(progressBarRef.current, { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }, '-=0.1')
-      .to(progressBarRef.current?.querySelector('.bar-fill') ?? null, { width: '100%', duration: 1.5, ease: 'power1.inOut' })
-      .to(sparkleRefs.current, { opacity: 1, scale: 1, stagger: 0.07, duration: 0.28, ease: 'power4.out' }, '-=1.1')
-      .to(sparkleRefs.current, { opacity: 0, scale: 0, stagger: 0.05, duration: 0.22, ease: 'power2.in' }, '-=0.55')
-      .to(sakuraRefs.current, { y: 80, opacity: 0, stagger: 0.03, duration: 0.38, ease: 'power2.in' }, '-=0.2')
-      .to(containerRef.current, { opacity: 0, scale: 0.97, duration: 0.42, ease: 'power2.in', onComplete }, '-=0.08');
+      .to(progressBarRef.current?.querySelector('.bar-fill') ?? null, {
+        width: '100%',
+        duration: 1.5,
+        ease: 'power1.inOut',
+      })
+      .to(
+        sparkleRefs.current,
+        { opacity: 1, scale: 1, stagger: 0.07, duration: 0.28, ease: 'power4.out' },
+        '-=1.1',
+      )
+      .to(
+        sparkleRefs.current,
+        { opacity: 0, scale: 0, stagger: 0.05, duration: 0.22, ease: 'power2.in' },
+        '-=0.55',
+      )
+      .to(
+        sakuraRefs.current,
+        { y: 80, opacity: 0, stagger: 0.03, duration: 0.38, ease: 'power2.in' },
+        '-=0.2',
+      )
+      .to(
+        containerRef.current,
+        { opacity: 0, scale: 0.97, duration: 0.42, ease: 'power2.in', onComplete },
+        '-=0.08',
+      );
 
     return () => {
       tl.kill();
@@ -58,12 +108,12 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
 
   const petals = [
     { top: '10%', left: '14%', size: 44, rotate: 20 },
-    { top: '6%',  left: '52%', size: 36, rotate: -18 },
+    { top: '6%', left: '52%', size: 36, rotate: -18 },
     { top: '18%', left: '82%', size: 50, rotate: 42 },
-    { top: '68%', left: '8%',  size: 38, rotate: -28 },
+    { top: '68%', left: '8%', size: 38, rotate: -28 },
     { top: '78%', left: '74%', size: 46, rotate: 60 },
     { top: '52%', left: '90%', size: 32, rotate: -8 },
-    { top: '38%', left: '4%',  size: 36, rotate: 75 },
+    { top: '38%', left: '4%', size: 36, rotate: 75 },
     { top: '88%', left: '40%', size: 42, rotate: -52 },
     { top: '30%', left: '94%', size: 28, rotate: 30 },
     { top: '82%', left: '22%', size: 34, rotate: -40 },
@@ -77,10 +127,14 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
   });
 
   const sparklePositions = [
-    { top: '28%', left: '28%' }, { top: '22%', left: '64%' },
-    { top: '62%', left: '20%' }, { top: '68%', left: '70%' },
-    { top: '42%', left: '84%' }, { top: '48%', left: '10%' },
-    { top: '15%', left: '44%' }, { top: '78%', left: '55%' },
+    { top: '28%', left: '28%' },
+    { top: '22%', left: '64%' },
+    { top: '62%', left: '20%' },
+    { top: '68%', left: '70%' },
+    { top: '42%', left: '84%' },
+    { top: '48%', left: '10%' },
+    { top: '15%', left: '44%' },
+    { top: '78%', left: '55%' },
   ];
 
   const MARQUEE_WORDS = ['上岸', 'Offer', 'OC', 'Dream Job', '意向书'];
@@ -99,7 +153,10 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
     speed: 4 + row * 1.2,
     fontSize: 100 + (row % 2) * 18,
     theme: ROW_THEMES[row % ROW_THEMES.length],
-    words: Array.from({ length: 10 }, (__, k) => MARQUEE_WORDS[(row * 2 + k) % MARQUEE_WORDS.length]),
+    words: Array.from(
+      { length: 10 },
+      (__, k) => MARQUEE_WORDS[(row * 2 + k) % MARQUEE_WORDS.length],
+    ),
     top: `${15 + row * 32}%`,
   }));
 
@@ -108,10 +165,14 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
     <div
       ref={containerRef}
       style={{
-        position: 'fixed', inset: 0, zIndex: 9999,
+        position: 'fixed',
+        inset: 0,
+        zIndex: 9999,
         background: 'linear-gradient(135deg, #fff0f5 0%, #e8f0ff 45%, #ffe0ef 100%)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
         overflow: 'hidden',
       }}
     >
@@ -124,29 +185,51 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
         <div
           key={r.row}
           style={{
-            position: 'absolute', top: r.top, left: 0, width: '100%',
-            overflow: 'hidden', pointerEvents: 'none', lineHeight: 1.1, zIndex: 0,
+            position: 'absolute',
+            top: r.top,
+            left: 0,
+            width: '100%',
+            overflow: 'hidden',
+            pointerEvents: 'none',
+            lineHeight: 1.1,
+            zIndex: 0,
           }}
         >
-          <div style={{
-            display: 'inline-flex', whiteSpace: 'nowrap',
-            animation: `${r.dir === 1 ? 'marqueeL' : 'marqueeR'} ${r.speed}s linear infinite`,
-            willChange: 'transform',
-          }}>
+          <div
+            style={{
+              display: 'inline-flex',
+              whiteSpace: 'nowrap',
+              animation: `${r.dir === 1 ? 'marqueeL' : 'marqueeR'} ${r.speed}s linear infinite`,
+              willChange: 'transform',
+            }}
+          >
             {[0, 1].map((pass) => (
-              <span key={pass} style={{ display: 'inline-flex', gap: '0.6em', paddingRight: '0.6em' }}>
+              <span
+                key={pass}
+                style={{ display: 'inline-flex', gap: '0.6em', paddingRight: '0.6em' }}
+              >
                 {r.words.map((word, wi) => (
                   <span
                     key={wi}
                     style={{
-                      fontSize: r.fontSize, fontWeight: 900,
-                      color: wi % 3 === 1 ? 'transparent' : (wi % 3 === 0 ? r.theme.color : r.theme.color + 'cc'),
+                      fontSize: r.fontSize,
+                      fontWeight: 900,
+                      color:
+                        wi % 3 === 1
+                          ? 'transparent'
+                          : wi % 3 === 0
+                            ? r.theme.color
+                            : r.theme.color + 'cc',
                       WebkitTextStroke: wi % 3 === 1 ? `2px ${r.theme.stroke}` : '0px transparent',
-                      letterSpacing: '0.04em', opacity: 0.45,
+                      letterSpacing: '0.04em',
+                      opacity: 0.45,
                       textShadow: wi % 3 === 0 ? `0 0 18px ${r.theme.color}55` : 'none',
-                      userSelect: 'none', paddingRight: '0.5em',
+                      userSelect: 'none',
+                      paddingRight: '0.5em',
                     }}
-                  >{word}</span>
+                  >
+                    {word}
+                  </span>
                 ))}
               </span>
             ))}
@@ -155,26 +238,44 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
       ))}
 
       {/* ── 磨砂遮罩（zIndex:1，隔开跑马灯与内容） ── */}
-      <div style={{
-        position: 'absolute', inset: 0, zIndex: 1,
-        background: 'rgba(255,245,250,0.18)',
-        backdropFilter: 'blur(1px)',
-        WebkitBackdropFilter: 'blur(1px)',
-        pointerEvents: 'none',
-      }} />
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          zIndex: 1,
+          background: 'rgba(255,245,250,0.18)',
+          backdropFilter: 'blur(1px)',
+          WebkitBackdropFilter: 'blur(1px)',
+          pointerEvents: 'none',
+        }}
+      />
 
       {/* ── 背景花瓣（absolute，zIndex:2） ── */}
       {petals.map((p, i) => (
         <div
           key={i}
-          ref={(el) => { sakuraRefs.current[i] = el; }}
-          style={{ position: 'absolute', top: p.top, left: p.left, transform: `rotate(${p.rotate}deg)`, zIndex: 2 }}
+          ref={(el) => {
+            sakuraRefs.current[i] = el;
+          }}
+          style={{
+            position: 'absolute',
+            top: p.top,
+            left: p.left,
+            transform: `rotate(${p.rotate}deg)`,
+            zIndex: 2,
+          }}
         >
           <svg viewBox="0 0 100 100" width={p.size} height={p.size} fill="none">
             {[0, 72, 144, 216, 288].map((rot, j) => (
-              <ellipse key={j} cx="50" cy="30" rx="18" ry="28"
+              <ellipse
+                key={j}
+                cx="50"
+                cy="30"
+                rx="18"
+                ry="28"
                 fill={`rgba(255,183,197,${0.4 + j * 0.03})`}
-                transform={`rotate(${rot} 50 50)`} />
+                transform={`rotate(${rot} 50 50)`}
+              />
             ))}
             <circle cx="50" cy="50" r="8" fill="rgba(255,220,230,0.9)" />
           </svg>
@@ -185,36 +286,65 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
       {sparklePositions.map((s, i) => (
         <span
           key={i}
-          ref={(el) => { sparkleRefs.current[i] = el; }}
+          ref={(el) => {
+            sparkleRefs.current[i] = el;
+          }}
           style={{
-            position: 'absolute', top: s.top, left: s.left, zIndex: 2,
+            position: 'absolute',
+            top: s.top,
+            left: s.left,
+            zIndex: 2,
             fontSize: i % 3 === 0 ? 22 : 16,
             color: i % 2 === 0 ? '#FFB7C5' : '#a1c4fd',
-            lineHeight: 1, display: 'block', transformOrigin: 'center',
+            lineHeight: 1,
+            display: 'block',
+            transformOrigin: 'center',
           }}
-        >✦</span>
+        >
+          ✦
+        </span>
       ))}
 
       {/* ── 中心内容（zIndex:2，永远在跑马灯前面） ── */}
-      <div style={{ position: 'relative', zIndex: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-
+      <div
+        style={{
+          position: 'relative',
+          zIndex: 3,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
         {/* 轨道圆点系统 */}
-        <div style={{ position: 'relative', width: 180, height: 180, marginBottom: 8, flexShrink: 0 }}>
-          <div style={{ position: 'absolute', inset: 4, borderRadius: '50%', border: '1.5px dashed rgba(255,183,197,0.3)' }} />
+        <div
+          style={{ position: 'relative', width: 180, height: 180, marginBottom: 8, flexShrink: 0 }}
+        >
+          <div
+            style={{
+              position: 'absolute',
+              inset: 4,
+              borderRadius: '50%',
+              border: '1.5px dashed rgba(255,183,197,0.3)',
+            }}
+          />
           <div ref={orbitRef} style={{ position: 'absolute', inset: 0 }}>
             {orbitDots.map((dot, i) => (
               <div
                 key={i}
-                ref={(el) => { dotRefs.current[i] = el; }}
+                ref={(el) => {
+                  dotRefs.current[i] = el;
+                }}
                 style={{
                   position: 'absolute',
                   width: i % 3 === 0 ? 8 : 5,
                   height: i % 3 === 0 ? 8 : 5,
                   borderRadius: '50%',
-                  background: i % 2 === 0
-                    ? `rgba(255,107,158,${0.5 + (i % 4) * 0.12})`
-                    : `rgba(161,196,253,${0.5 + (i % 4) * 0.12})`,
-                  left: '50%', top: '50%',
+                  background:
+                    i % 2 === 0
+                      ? `rgba(255,107,158,${0.5 + (i % 4) * 0.12})`
+                      : `rgba(161,196,253,${0.5 + (i % 4) * 0.12})`,
+                  left: '50%',
+                  top: '50%',
                   transform: `translate(calc(-50% + ${dot.x}px), calc(-50% + ${dot.y}px))`,
                   boxShadow: i % 3 === 0 ? '0 0 6px rgba(255,107,158,0.6)' : 'none',
                 }}
@@ -223,37 +353,79 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
           </div>
           <div
             ref={emojiRef}
-            style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 64, lineHeight: 1 }}
-          >🌸</div>
+            style={{
+              position: 'absolute',
+              inset: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontSize: 64,
+              lineHeight: 1,
+            }}
+          >
+            🌸
+          </div>
         </div>
 
         {/* 主标题 */}
-        <div style={{ display: 'flex', alignItems: 'baseline', gap: 0, marginBottom: 10, perspective: 600 }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'baseline',
+            gap: 0,
+            marginBottom: 10,
+            perspective: 600,
+          }}
+        >
           {TITLE.split('').map((ch, i) => (
             <span
               key={i}
-              ref={(el) => { charRefs.current[i] = el; }}
+              ref={(el) => {
+                charRefs.current[i] = el;
+              }}
               style={{
                 display: 'inline-block',
-                fontSize: ch === ' ' ? 14 : (ch === '·' ? 32 : 34),
-                fontWeight: 900, letterSpacing: 1,
+                fontSize: ch === ' ' ? 14 : ch === '·' ? 32 : 34,
+                fontWeight: 900,
+                letterSpacing: 1,
                 background: `linear-gradient(135deg, hsl(${340 + i * 8},90%,65%) 0%, hsl(${200 + i * 6},85%,68%) 100%)`,
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent',
-                transformOrigin: '50% 100%', lineHeight: 1.2,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                transformOrigin: '50% 100%',
+                lineHeight: 1.2,
                 minWidth: ch === ' ' ? 10 : undefined,
               }}
-            >{ch === ' ' ? '\u00A0' : ch}</span>
+            >
+              {ch === ' ' ? '\u00A0' : ch}
+            </span>
           ))}
         </div>
 
         {/* 副标题 */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: 14, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: 14,
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
           {SUBTITLE.split('').map((ch, i) => (
             <span
               key={i}
-              ref={(el) => { subCharRefs.current[i] = el; }}
-              style={{ display: 'inline-block', fontSize: 15, color: '#c07888', letterSpacing: 0.5 }}
-            >{ch}</span>
+              ref={(el) => {
+                subCharRefs.current[i] = el;
+              }}
+              style={{
+                display: 'inline-block',
+                fontSize: 15,
+                color: '#c07888',
+                letterSpacing: 0.5,
+              }}
+            >
+              {ch}
+            </span>
           ))}
           <span style={{ fontSize: 15, marginLeft: 4 }}>✨</span>
         </div>
@@ -263,35 +435,56 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
           {TAGS.map((tag, i) => (
             <span
               key={tag}
-              ref={(el) => { tagRefs.current[i] = el; }}
+              ref={(el) => {
+                tagRefs.current[i] = el;
+              }}
               style={{
-                fontSize: 12, fontWeight: 700,
-                padding: '4px 14px', borderRadius: 999,
-                background: i % 2 === 0
-                  ? 'linear-gradient(135deg, rgba(255,183,197,0.3), rgba(255,183,197,0.1))'
-                  : 'linear-gradient(135deg, rgba(161,196,253,0.3), rgba(161,196,253,0.1))',
+                fontSize: 12,
+                fontWeight: 700,
+                padding: '4px 14px',
+                borderRadius: 999,
+                background:
+                  i % 2 === 0
+                    ? 'linear-gradient(135deg, rgba(255,183,197,0.3), rgba(255,183,197,0.1))'
+                    : 'linear-gradient(135deg, rgba(161,196,253,0.3), rgba(161,196,253,0.1))',
                 border: `1.5px solid ${i % 2 === 0 ? 'rgba(255,183,197,0.55)' : 'rgba(161,196,253,0.55)'}`,
                 color: i % 2 === 0 ? '#d06080' : '#6090d0',
                 backdropFilter: 'blur(1px)',
               }}
-            >{tag}</span>
+            >
+              {tag}
+            </span>
           ))}
         </div>
 
         {/* 进度条 */}
         <div
           ref={progressBarRef}
-          style={{ width: 240, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7 }}
+          style={{
+            width: 240,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: 7,
+          }}
         >
-          <div style={{
-            width: '100%', height: 7, borderRadius: 999,
-            background: 'rgba(255,183,197,0.18)', border: '1px solid rgba(255,183,197,0.35)',
-            overflow: 'hidden', position: 'relative',
-          }}>
+          <div
+            style={{
+              width: '100%',
+              height: 7,
+              borderRadius: 999,
+              background: 'rgba(255,183,197,0.18)',
+              border: '1px solid rgba(255,183,197,0.35)',
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
             <div
               className="bar-fill"
               style={{
-                width: '0%', height: '100%', borderRadius: 999,
+                width: '0%',
+                height: '100%',
+                borderRadius: 999,
                 background: 'linear-gradient(90deg, #FF6B9E, #c58aff, #a1c4fd)',
                 boxShadow: '0 0 10px rgba(255,107,158,0.55)',
               }}
@@ -319,8 +512,8 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
             跳过动画
           </button>
         )}
-
-      </div>{/* end 中心内容 */}
+      </div>
+      {/* end 中心内容 */}
     </div>
   );
 };

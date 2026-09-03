@@ -31,16 +31,37 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
       },
     });
 
-    gsap.set([iconRef.current, titleRef.current, subtitleRef.current, lineRef.current], { opacity: 0 });
+    gsap.set([iconRef.current, titleRef.current, subtitleRef.current, lineRef.current], {
+      opacity: 0,
+    });
     gsap.set(bloomRefs.current, { opacity: 0, scale: 0, rotate: -30 });
     timeline
       .to(overlay, { opacity: 1, duration: 0.24, ease: 'power2.out' })
-      .to(bloomRefs.current, { opacity: 1, scale: 1, rotate: 0, duration: 0.5, stagger: 0.06, ease: 'back.out(2.2)' }, '<0.05')
+      .to(
+        bloomRefs.current,
+        { opacity: 1, scale: 1, rotate: 0, duration: 0.5, stagger: 0.06, ease: 'back.out(2.2)' },
+        '<0.05',
+      )
       .to(iconRef.current, { opacity: 1, scale: 1, duration: 0.42, ease: 'back.out(2.4)' }, '<0.12')
-      .fromTo(titleRef.current, { clipPath: 'inset(0 100% 0 0)', y: 18 }, { opacity: 1, clipPath: 'inset(0 0% 0 0)', y: 0, duration: 0.64, ease: 'power4.out' }, '<0.12')
+      .fromTo(
+        titleRef.current,
+        { clipPath: 'inset(0 100% 0 0)', y: 18 },
+        { opacity: 1, clipPath: 'inset(0 0% 0 0)', y: 0, duration: 0.64, ease: 'power4.out' },
+        '<0.12',
+      )
       .to(lineRef.current, { opacity: 1, width: 116, duration: 0.38, ease: 'power3.out' }, '<0.2')
-      .fromTo(subtitleRef.current, { y: 12 }, { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' }, '<0.08')
-      .fromTo(shimmerRef.current, { xPercent: -150, opacity: 0 }, { xPercent: 170, opacity: 0.9, duration: 0.75, ease: 'power2.inOut' }, '<0.05')
+      .fromTo(
+        subtitleRef.current,
+        { y: 12 },
+        { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out' },
+        '<0.08',
+      )
+      .fromTo(
+        shimmerRef.current,
+        { xPercent: -150, opacity: 0 },
+        { xPercent: 170, opacity: 0.9, duration: 0.75, ease: 'power2.inOut' },
+        '<0.05',
+      )
       .to(shimmerRef.current, { opacity: 0, duration: 0.1 })
       .to({}, { duration: 1.15 });
 
@@ -69,7 +90,8 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'hidden',
-        background: 'linear-gradient(135deg, rgba(255,237,246,0.94), rgba(234,244,255,0.92) 52%, rgba(255,228,240,0.94))',
+        background:
+          'linear-gradient(135deg, rgba(255,237,246,0.94), rgba(234,244,255,0.92) 52%, rgba(255,228,240,0.94))',
         backdropFilter: 'blur(22px) saturate(1.18)',
         WebkitBackdropFilter: 'blur(22px) saturate(1.18)',
       }}
@@ -77,7 +99,9 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
       {blooms.map((bloom, index) => (
         <span
           key={index}
-          ref={(element) => { bloomRefs.current[index] = element; }}
+          ref={(element) => {
+            bloomRefs.current[index] = element;
+          }}
           aria-hidden="true"
           style={{
             position: 'absolute',
@@ -88,7 +112,10 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
             borderRadius: '55% 45% 55% 45%',
             transform: 'rotate(45deg)',
             background: index % 2 === 0 ? 'rgba(255,107,158,0.42)' : 'rgba(161,196,253,0.5)',
-            boxShadow: index % 2 === 0 ? '0 0 24px rgba(255,107,158,0.22)' : '0 0 24px rgba(161,196,253,0.26)',
+            boxShadow:
+              index % 2 === 0
+                ? '0 0 24px rgba(255,107,158,0.22)'
+                : '0 0 24px rgba(161,196,253,0.26)',
           }}
         />
       ))}
@@ -129,7 +156,8 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
               bottom: -18,
               left: 0,
               width: 48,
-              background: 'linear-gradient(100deg, transparent, rgba(255,255,255,0.98), transparent)',
+              background:
+                'linear-gradient(100deg, transparent, rgba(255,255,255,0.98), transparent)',
               transform: 'skewX(-20deg)',
             }}
           />
@@ -157,10 +185,23 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
             background: 'linear-gradient(90deg, var(--pink-400), var(--blue-400))',
           }}
         />
-        <p ref={subtitleRef} style={{ margin: 0, color: 'var(--neutral-700)', fontSize: 14, fontWeight: 700 }}>
+        <p
+          ref={subtitleRef}
+          style={{ margin: 0, color: 'var(--neutral-700)', fontSize: 14, fontWeight: 700 }}
+        >
           每天自动更新秋招公司
         </p>
-        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, marginTop: 18, color: 'var(--pink-500)', fontSize: 12, fontWeight: 800 }}>
+        <span
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 6,
+            marginTop: 18,
+            color: 'var(--pink-500)',
+            fontSize: 12,
+            fontWeight: 800,
+          }}
+        >
           <Sparkles size={14} /> LIVE UPDATE
         </span>
       </div>

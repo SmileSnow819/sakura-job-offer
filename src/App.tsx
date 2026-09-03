@@ -1,40 +1,32 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Routes,
-  Route,
-  Navigate,
-  useNavigate,
-  useLocation,
-} from "react-router-dom";
-import { Check } from "lucide-react";
-import gsap from "gsap";
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
+import { Check } from 'lucide-react';
+import gsap from 'gsap';
 
-import bookmarkDataRaw from "./bookmarks.json";
-import { IBookmarkData } from "./types/bookmark";
-import SidebarDock from "./components/SidebarDock";
-import LoadingScreen from "./components/LoadingScreen";
-import BookmarksPage from "./pages/BookmarksPage";
-import { sanitizeBookmarkData } from "./utils/sanitizeRecruitmentUrl";
-import AutumnLaunchOverlay from "./components/AutumnLaunchOverlay";
-import TrackerPage from "./pages/TrackerPage";
+import bookmarkDataRaw from './bookmarks.json';
+import { IBookmarkData } from './types/bookmark';
+import SidebarDock from './components/SidebarDock';
+import LoadingScreen from './components/LoadingScreen';
+import BookmarksPage from './pages/BookmarksPage';
+import { sanitizeBookmarkData } from './utils/sanitizeRecruitmentUrl';
+import AutumnLaunchOverlay from './components/AutumnLaunchOverlay';
+import TrackerPage from './pages/TrackerPage';
 
 const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
-const INTERVIEWS_JSON_URL =
-  "https://yuki-bloom.vercel.app/categories/interview";
-const INTRO_SEEN_KEY = "sakura-offer-hub:intro-seen";
-const AUTUMN_LAUNCH_SEEN_KEY = "sakura-offer-hub:autumn-launch-seen";
-const shouldReplayIntro = () =>
-  new URLSearchParams(window.location.search).get("debug") === "-1";
+const INTERVIEWS_JSON_URL = 'https://yuki-bloom.vercel.app/categories/interview';
+const INTRO_SEEN_KEY = 'sakura-offer-hub:intro-seen';
+const AUTUMN_LAUNCH_SEEN_KEY = 'sakura-offer-hub:autumn-launch-seen';
+const shouldReplayIntro = () => new URLSearchParams(window.location.search).get('debug') === '-1';
 const isAutumnLaunchPath = () => {
   const path = window.location.pathname;
-  const basePath = import.meta.env.BASE_URL.replace(/\/$/, "");
-  return path === basePath || path === `${basePath}/` || path.endsWith("/bookmarks/autumn");
+  const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
+  return path === basePath || path === `${basePath}/` || path.endsWith('/bookmarks/autumn');
 };
 const shouldShowAutumnLaunch = () => {
   if (!isAutumnLaunchPath()) return false;
   if (shouldReplayIntro()) return true;
   try {
-    return window.localStorage.getItem(AUTUMN_LAUNCH_SEEN_KEY) !== "true";
+    return window.localStorage.getItem(AUTUMN_LAUNCH_SEEN_KEY) !== 'true';
   } catch {
     return true;
   }
@@ -45,12 +37,12 @@ const SakuraPetals: React.FC = () => {
   const [reducedMotion, setReducedMotion] = React.useState(false);
 
   React.useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mediaQuery.matches);
 
     const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
   }, []);
 
   if (reducedMotion) return null;
@@ -68,26 +60,22 @@ const SakuraPetals: React.FC = () => {
         style={
           {
             left: `${left}%`,
-            top: "-20px",
+            top: '-20px',
             width: `${size}px`,
             height: `${size}px`,
-            backgroundColor: "var(--pink-400)",
+            backgroundColor: 'var(--pink-400)',
             opacity,
-            boxShadow: "0 0 10px var(--pink-400)",
+            boxShadow: '0 0 10px var(--pink-400)',
             animation: `fall ${duration}s linear infinite`,
             animationDelay: `-${delay}s`,
-            transform: "rotate(45deg)",
-            willChange: "transform",
+            transform: 'rotate(45deg)',
+            willChange: 'transform',
           } as React.CSSProperties
         }
       />
     );
   });
-  return (
-    <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
-      {petals}
-    </div>
-  );
+  return <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">{petals}</div>;
 };
 
 // ── App ───────────────────────────────────────────────────────────────────────
@@ -98,7 +86,7 @@ const App: React.FC = () => {
     if (shouldShowAutumnLaunch()) return false;
     if (shouldReplayIntro()) return true;
     try {
-      return window.localStorage.getItem(INTRO_SEEN_KEY) !== "true";
+      return window.localStorage.getItem(INTRO_SEEN_KEY) !== 'true';
     } catch {
       return true;
     }
@@ -111,15 +99,15 @@ const App: React.FC = () => {
   const location = useLocation();
 
   // 当前激活的 tab 从路径推导
-  const pathParts = location.pathname.split("/");
+  const pathParts = location.pathname.split('/');
   const activeTab =
     (location.pathname.startsWith('/tracker') ? 'tracker' : pathParts[2]) ??
-    bookmarkData.categories.find((c) => c.id !== "interviews")?.id ??
-    "";
+    bookmarkData.categories.find((c) => c.id !== 'interviews')?.id ??
+    '';
 
   const handleLoadComplete = useCallback(() => {
     try {
-      window.localStorage.setItem(INTRO_SEEN_KEY, "true");
+      window.localStorage.setItem(INTRO_SEEN_KEY, 'true');
     } catch {
       // Ignore storage failures; the intro can safely play again.
     }
@@ -127,12 +115,12 @@ const App: React.FC = () => {
     requestAnimationFrame(() => {
       gsap.fromTo(
         [mainRef.current, dockWrapRef.current],
-        { x: "100%", opacity: 0 },
+        { x: '100%', opacity: 0 },
         {
-          x: "0%",
+          x: '0%',
           opacity: 1,
           duration: 0.65,
-          ease: "power3.out",
+          ease: 'power3.out',
           stagger: 0.08,
         },
       );
@@ -141,8 +129,8 @@ const App: React.FC = () => {
 
   const handleAutumnLaunchComplete = useCallback(() => {
     try {
-      window.localStorage.setItem(AUTUMN_LAUNCH_SEEN_KEY, "true");
-      window.localStorage.setItem(INTRO_SEEN_KEY, "true");
+      window.localStorage.setItem(AUTUMN_LAUNCH_SEEN_KEY, 'true');
+      window.localStorage.setItem(INTRO_SEEN_KEY, 'true');
     } catch {
       // Ignore storage failures; the animation can safely play again.
     }
@@ -151,20 +139,20 @@ const App: React.FC = () => {
 
   useEffect(() => {
     const initialState = shouldPlayIntroRef.current
-      ? { x: "100%", opacity: 0 }
-      : { x: "0%", opacity: 1 };
+      ? { x: '100%', opacity: 0 }
+      : { x: '0%', opacity: 1 };
     if (mainRef.current) gsap.set(mainRef.current, initialState);
     if (dockWrapRef.current) gsap.set(dockWrapRef.current, initialState);
   }, []);
 
   const handleTabChange = useCallback(
     (tabId: string) => {
-      if (tabId === "interviews") {
+      if (tabId === 'interviews') {
         window.location.assign(INTERVIEWS_JSON_URL);
       } else if (tabId === 'tracker') {
-        navigate('/tracker');
+        void navigate('/tracker');
       } else {
-        navigate(`/bookmarks/${tabId}`);
+        void navigate(`/bookmarks/${tabId}`);
       }
     },
     [navigate],
@@ -173,17 +161,17 @@ const App: React.FC = () => {
   const handleShare = useCallback((e: React.MouseEvent, url: string) => {
     e.preventDefault();
     e.stopPropagation();
-    const ta = document.createElement("textarea");
+    const ta = document.createElement('textarea');
     ta.value = url;
-    ta.style.cssText = "position:fixed;opacity:0;";
+    ta.style.cssText = 'position:fixed;opacity:0;';
     document.body.appendChild(ta);
     ta.focus();
     ta.select();
     try {
-      document.execCommand("copy");
-      setToast("链接复制成功啦！(ﾉ>ω<)ﾉ");
+      document.execCommand('copy');
+      setToast('链接复制成功啦！(ﾉ>ω<)ﾉ');
     } catch {
-      setToast("复制失败了 QAQ");
+      setToast('复制失败了 QAQ');
     }
     document.body.removeChild(ta);
     setTimeout(() => setToast(null), 2000);
@@ -213,7 +201,7 @@ const App: React.FC = () => {
         className="fixed inset-0 -z-10"
         style={{
           background:
-            "linear-gradient(135deg, var(--pink-50) 0%, var(--blue-50) 50%, var(--pink-100) 100%)",
+            'linear-gradient(135deg, var(--pink-50) 0%, var(--blue-50) 50%, var(--pink-100) 100%)',
         }}
       />
       <SakuraPetals />
@@ -222,30 +210,24 @@ const App: React.FC = () => {
         ref={mainRef}
         className="relative z-10 flex flex-col"
         style={{
-          position: "fixed",
+          position: 'fixed',
           inset: 0,
           paddingBottom: 88,
-          background: "rgba(255,255,255,0.38)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          overflow: "hidden",
+          background: 'rgba(255,255,255,0.38)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          overflow: 'hidden',
         }}
       >
         <Routes>
           <Route path="/tracker" element={<TrackerPage />} />
-          <Route
-            path="/"
-            element={<BookmarksPage onShare={handleShare} />}
-          />
-          <Route
-            path="/bookmarks/:categoryId"
-            element={<BookmarksPage onShare={handleShare} />}
-          />
+          <Route path="/" element={<BookmarksPage onShare={handleShare} />} />
+          <Route path="/bookmarks/:categoryId" element={<BookmarksPage onShare={handleShare} />} />
           <Route
             path="*"
             element={
               <Navigate
-                to={`/bookmarks/${bookmarkData.categories.find((c) => c.id !== "interviews")?.id ?? "campus"}`}
+                to={`/bookmarks/${bookmarkData.categories.find((c) => c.id !== 'interviews')?.id ?? 'campus'}`}
                 replace
               />
             }
@@ -253,24 +235,25 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      {autumnLaunch && (
-        <AutumnLaunchOverlay onComplete={handleAutumnLaunchComplete} />
-      )}
+      {autumnLaunch && <AutumnLaunchOverlay onComplete={handleAutumnLaunchComplete} />}
 
       <div
         ref={dockWrapRef}
         style={{
-          position: "fixed",
+          position: 'fixed',
           bottom: 0,
           left: 0,
           right: 0,
           zIndex: 40,
-          pointerEvents: "none",
+          pointerEvents: 'none',
         }}
       >
-        <div style={{ pointerEvents: "auto" }}>
+        <div style={{ pointerEvents: 'auto' }}>
           <SidebarDock
-            categories={[...bookmarkData.categories, { id: 'tracker', name: '我的投递', icon: 'BriefcaseBusiness', links: [] }]}
+            categories={[
+              ...bookmarkData.categories,
+              { id: 'tracker', name: '我的投递', icon: 'BriefcaseBusiness', links: [] },
+            ]}
             activeTab={activeTab}
             launchActive={autumnLaunch}
             onTabChange={handleTabChange}
@@ -281,20 +264,20 @@ const App: React.FC = () => {
       {toast && (
         <div
           style={{
-            position: "fixed",
-            top: "2.5rem",
-            left: "50%",
-            transform: "translateX(-50%)",
-            background: "rgba(255,255,255,0.9)",
-            backdropFilter: "blur(24px)",
-            border: "1.5px solid var(--pink-400)",
-            color: "var(--pink-600)",
-            padding: "0.75rem 1.5rem",
-            borderRadius: "9999px",
-            boxShadow: "0 8px 30px var(--pink-400)",
-            display: "flex",
-            alignItems: "center",
-            gap: "0.5rem",
+            position: 'fixed',
+            top: '2.5rem',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(255,255,255,0.9)',
+            backdropFilter: 'blur(24px)',
+            border: '1.5px solid var(--pink-400)',
+            color: 'var(--pink-600)',
+            padding: '0.75rem 1.5rem',
+            borderRadius: '9999px',
+            boxShadow: '0 8px 30px var(--pink-400)',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
             zIndex: 50,
           }}
         >
@@ -302,8 +285,8 @@ const App: React.FC = () => {
           <span
             style={{
               fontWeight: 700,
-              letterSpacing: "0.025em",
-              fontSize: "0.875rem",
+              letterSpacing: '0.025em',
+              fontSize: '0.875rem',
             }}
           >
             {toast}

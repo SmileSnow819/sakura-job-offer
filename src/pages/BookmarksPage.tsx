@@ -6,7 +6,7 @@ import BookmarkGrid from '../components/BookmarkGrid';
 import { sanitizeBookmarkData } from '../utils/sanitizeRecruitmentUrl';
 
 const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
-const bookmarkCategories = bookmarkData.categories.filter(c => c.id !== 'interviews');
+const bookmarkCategories = bookmarkData.categories.filter((c) => c.id !== 'interviews');
 
 interface IBookmarksPageProps {
   onShare: (e: React.MouseEvent, url: string) => void;
@@ -14,18 +14,15 @@ interface IBookmarksPageProps {
 
 const BookmarksPage: React.FC<IBookmarksPageProps> = ({ onShare }) => {
   const { categoryId } = useParams<{ categoryId: string }>();
-  const activeCategory = bookmarkCategories.find(c => c.id === categoryId) ?? bookmarkCategories[0];
+  const activeCategory =
+    bookmarkCategories.find((c) => c.id === categoryId) ?? bookmarkCategories[0];
 
-  if (categoryId && !bookmarkCategories.find(c => c.id === categoryId)) {
+  if (categoryId && !bookmarkCategories.find((c) => c.id === categoryId)) {
     return <Navigate to={`/bookmarks/${bookmarkCategories[0].id}`} replace />;
   }
 
   return (
-    <BookmarkGrid
-      category={activeCategory}
-      allCategories={bookmarkCategories}
-      onShare={onShare}
-    />
+    <BookmarkGrid category={activeCategory} allCategories={bookmarkCategories} onShare={onShare} />
   );
 };
 

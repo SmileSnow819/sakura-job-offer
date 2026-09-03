@@ -1,4 +1,40 @@
-# Sakura Job Offer 秋招数据维护
+# Sakura Job Offer
+
+校招资源导航与个人投递记录网站：查找招聘入口、记录岗位进度、自定义招聘流程，并导出表格、HTML 或海报。个人投递记录保存在当前浏览器，无需登录；建议定期下载备份。
+
+## 文档导航
+
+- **日常用 AI 开发**：[提需求、确认方案、验收、提交与交接](docs/ai-development.md)。
+- **让新对话理解项目**：[AI 入口](AGENTS.md) → [项目背景与协作偏好](docs/ai/project-context.md)。
+- **代码与工具规范**：[项目开发 Skill](.agents/skills/sakura-project-conventions/SKILL.md)、[Vite+ Skill](.agents/skills/vite-plus/SKILL.md)。
+- **开发流程 Skills**：[Superpowers 入口](.agents/skills/superpowers/using-superpowers/SKILL.md)，安装来源见 [版本记录](.agents/superpowers-source.json)。
+- **功能与数据维护**：见下方「我的投递」「数据文件」「完整日常维护流程」。
+
+开始新任务可以直接说：“先读 AGENTS.md，检查 Git 状态；这次要做……，不要提交或推送。”AI 不会自动继承其他聊天，未完成任务请附交接摘要。
+
+## 开发与代码规范
+
+项目使用 Vite+ 0.3.0（内含 Vite 8），通过内置 Oxfmt 格式化、Oxlint 检查代码与类型。使用 `.node-version` 指定的 Node.js 22.23.0 和 `package.json` 固定的 pnpm 11.8.0；不需要全局安装 Vite+。
+
+```bash
+pnpm install --frozen-lockfile
+pnpm dev           # 本地开发
+pnpm format        # 格式化代码
+pnpm format:check  # 只检查格式，不写文件
+pnpm lint          # 代码与类型检查
+pnpm check         # 格式、代码和类型检查
+pnpm test:tracker  # Node 原生测试，保留现有流程回归用例
+pnpm build         # 类型检查及生产构建
+pnpm preview       # 预览构建结果
+```
+
+本地地址以终端输出为准，默认页面为 `http://localhost:5173/sakura-job-offer/`，投递页为 `/sakura-job-offer/tracker`。部署子路径保留 `/sakura-job-offer/`，不要只修改一处路由前缀。
+
+规则集中在 `vite.config.ts`：2 空格缩进、单引号、分号、100 字符目标行宽。JSX、对象和 CSS 交给格式化工具分行，不手工压缩源码。公司 JSON 数据、每日记录和静态资源不参与代码格式化。
+
+注释说明业务规则、边界条件和设计原因，尤其是阶段流转、数据恢复、跨标签页同步和导出安全；不为显而易见的赋值逐行添加注释。
+
+VS Code 安装推荐的 **Vite Plus Extension Pack** 后可保存时自动格式化。现有 GitHub Actions 在推送 `main` 后执行检查、投递回归测试、构建和 Pages 部署，不是独立的 PR 检查。依赖统一使用 `pnpm-lock.yaml`；`vite` 是指向 Vite+ core 的兼容别名，供 React 插件等依赖解析，不是另外安装一套旧版 Vite。
 
 ## 我的投递
 
@@ -10,13 +46,6 @@
 - CSV 支持不同招聘流程的阶段列；HTML 为无外部依赖的离线档案；PNG 海报每页最多 5 条，支持颜色、范围选择和预览下载。备注和官网默认不导出，海报只展示进度摘要。
 - 数据保存在 `localStorage` 的 `sakura-offer-hub:tracker:v1` 下，使用带版本号的单次原子写入。没有登录或云同步；清除浏览器网站数据会丢失记录，请在「数据备份」下载 JSON。
 - JSON 恢复前校验版本、关联关系、日期和阶段，明确确认后替换本地数据。损坏数据不会被初始化覆盖，可先导出原始数据。自定义公司可在备份弹窗中编辑，没有关联投递时可删除。
-
-```bash
-pnpm dev
-pnpm build
-# Node.js 22.6+：流程、备份校验和导出回归测试
-pnpm test:tracker
-```
 
 ## 数据文件
 

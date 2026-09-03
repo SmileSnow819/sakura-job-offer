@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from "lucide-react";
+import React, { useState } from 'react';
+import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from 'lucide-react';
 
-import { ICategory } from "../../types/bookmark";
+import { ICategory } from '../../types/bookmark';
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   BriefcaseBusiness: <BriefcaseBusiness size={20} />,
@@ -19,7 +19,7 @@ interface ISidebarDockProps {
 }
 
 const getIconSize = () => {
-  if (typeof window === "undefined") return 44;
+  if (typeof window === 'undefined') return 44;
   return window.innerWidth <= 400 ? 38 : window.innerWidth <= 768 ? 42 : 44;
 };
 
@@ -54,13 +54,10 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
           style={{
             width: ICON_SIZE,
             height: ICON_SIZE,
-            background:
-              "linear-gradient(135deg, var(--pink-400), var(--blue-400))",
-            transform: isLogoHovered ? "scale(1.08) translateY(-2px)" : "none",
-            transition: "transform 0.15s ease, box-shadow 0.15s ease",
-            boxShadow: isLogoHovered
-              ? "0 6px 18px var(--pink-400)"
-              : "0 2px 6px rgba(0,0,0,0.05)",
+            background: 'linear-gradient(135deg, var(--pink-400), var(--blue-400))',
+            transform: isLogoHovered ? 'scale(1.08) translateY(-2px)' : 'none',
+            transition: 'transform 0.15s ease, box-shadow 0.15s ease',
+            boxShadow: isLogoHovered ? '0 6px 18px var(--pink-400)' : '0 2px 6px rgba(0,0,0,0.05)',
           }}
           onMouseEnter={() => setIsLogoHovered(true)}
           onMouseLeave={() => setIsLogoHovered(false)}
@@ -68,29 +65,29 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
         >
           <div
             style={{
-              position: "absolute",
+              position: 'absolute',
               bottom: ICON_SIZE + 10,
-              left: "50%",
+              left: '50%',
               transform: `translateX(-50%) translateY(${isLogoHovered ? 0 : 6}px)`,
               opacity: isLogoHovered ? 1 : 0,
-              pointerEvents: "none",
-              transition: "opacity 0.15s ease, transform 0.15s ease",
-              whiteSpace: "nowrap",
+              pointerEvents: 'none',
+              transition: 'opacity 0.15s ease, transform 0.15s ease',
+              whiteSpace: 'nowrap',
               zIndex: 999,
             }}
           >
             <div
               style={{
-                background: "rgba(255,255,255,0.96)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                color: "var(--neutral-800)",
+                background: 'rgba(255,255,255,0.96)',
+                backdropFilter: 'blur(12px)',
+                WebkitBackdropFilter: 'blur(12px)',
+                color: 'var(--neutral-800)',
                 fontSize: 12,
                 fontWeight: 700,
-                padding: "5px 14px",
+                padding: '5px 14px',
                 borderRadius: 12,
-                border: "1px solid var(--pink-300)",
-                boxShadow: "0 4px 18px var(--pink-400)",
+                border: '1px solid var(--pink-300)',
+                boxShadow: '0 4px 18px var(--pink-400)',
                 letterSpacing: 0.3,
               }}
             >
@@ -105,8 +102,8 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
               width: ICON_SIZE - 8,
               height: ICON_SIZE - 8,
               borderRadius: 11,
-              display: "block",
-              objectFit: "cover",
+              display: 'block',
+              objectFit: 'cover',
             }}
           />
         </div>
@@ -114,18 +111,15 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
         {/* 分隔线 */}
         <div
           className="h-6 w-px rounded-full flex-shrink-0"
-          style={{ margin: "0 2px", background: "var(--pink-300)" }}
+          style={{ margin: '0 2px', background: 'var(--pink-300)' }}
         />
 
         {/* Tab 图标列表 */}
-        <ul
-          className="flex flex-row items-center list-none m-0 p-0"
-          style={{ gap: ICON_GAP }}
-        >
+        <ul className="flex flex-row items-center list-none m-0 p-0" style={{ gap: ICON_GAP }}>
           {categories.map((cat, i) => {
             const isActive = cat.id === activeTab;
             const isHovered = hoveredIndex === i;
-            const isLaunchTarget = launchActive && cat.id === "autumn";
+            const isLaunchTarget = launchActive && cat.id === 'autumn';
             return (
               <li
                 key={cat.id}
@@ -137,33 +131,33 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                 {/* Tooltip */}
                 <div
                   style={{
-                    position: "absolute",
+                    position: 'absolute',
                     bottom: ICON_SIZE + 10,
-                    left: "50%",
+                    left: '50%',
                     transform: `translateX(-50%) translateY(${isHovered || isLaunchTarget ? 0 : 6}px)`,
                     opacity: isHovered || isLaunchTarget ? 1 : 0,
-                    pointerEvents: "none",
-                    transition: "opacity 0.15s ease, transform 0.15s ease",
-                    whiteSpace: "nowrap",
+                    pointerEvents: 'none',
+                    transition: 'opacity 0.15s ease, transform 0.15s ease',
+                    whiteSpace: 'nowrap',
                     zIndex: 999,
                   }}
                 >
                   <div
                     style={{
-                      background: "rgba(255,255,255,0.96)",
-                      backdropFilter: "blur(12px)",
-                      WebkitBackdropFilter: "blur(12px)",
-                      color: "var(--neutral-800)",
+                      background: 'rgba(255,255,255,0.96)',
+                      backdropFilter: 'blur(12px)',
+                      WebkitBackdropFilter: 'blur(12px)',
+                      color: 'var(--neutral-800)',
                       fontSize: 12,
                       fontWeight: 700,
-                      padding: "5px 14px",
+                      padding: '5px 14px',
                       borderRadius: 12,
-                      border: "1px solid var(--pink-300)",
-                      boxShadow: "0 4px 18px var(--pink-400)",
+                      border: '1px solid var(--pink-300)',
+                      boxShadow: '0 4px 18px var(--pink-400)',
                       letterSpacing: 0.3,
                     }}
                   >
-                    {isLaunchTarget ? "秋招专场上线" : cat.name}
+                    {isLaunchTarget ? '秋招专场上线' : cat.name}
                   </div>
                 </div>
 
@@ -174,32 +168,29 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                   className="w-full h-full flex items-center justify-center rounded-[13px] relative"
                   style={{
                     background: isActive
-                      ? "linear-gradient(135deg, var(--pink-50), var(--neutral-50))"
+                      ? 'linear-gradient(135deg, var(--pink-50), var(--neutral-50))'
                       : isHovered
-                        ? "rgba(255,255,255,0.9)"
-                        : "rgba(255,255,255,0.6)",
+                        ? 'rgba(255,255,255,0.9)'
+                        : 'rgba(255,255,255,0.6)',
                     border: isActive
-                      ? "1.5px solid var(--pink-400)"
-                      : "1.5px solid rgba(255,255,255,0.75)",
-                    color:
-                      isActive || isHovered
-                        ? "var(--pink-500)"
-                        : "var(--neutral-600)",
+                      ? '1.5px solid var(--pink-400)'
+                      : '1.5px solid rgba(255,255,255,0.75)',
+                    color: isActive || isHovered ? 'var(--pink-500)' : 'var(--neutral-600)',
                     boxShadow: isLaunchTarget
-                      ? "0 0 0 5px rgba(255,107,158,0.16), 0 12px 28px rgba(255,107,158,0.48)"
+                      ? '0 0 0 5px rgba(255,107,158,0.16), 0 12px 28px rgba(255,107,158,0.48)'
                       : isActive
-                      ? "0 4px 14px var(--pink-400)"
-                      : isHovered
-                        ? "0 6px 18px var(--pink-400)"
-                        : "0 2px 6px rgba(0,0,0,0.05)",
+                        ? '0 4px 14px var(--pink-400)'
+                        : isHovered
+                          ? '0 6px 18px var(--pink-400)'
+                          : '0 2px 6px rgba(0,0,0,0.05)',
                     transform: isLaunchTarget
-                      ? "scale(1.28) translateY(-8px)"
+                      ? 'scale(1.28) translateY(-8px)'
                       : isHovered && !isActive
-                        ? "scale(1.12) translateY(-3px)"
-                        : "none",
-                    transition: "all 0.15s ease",
-                    animation: isLaunchTarget ? "autumnDockPulse 0.75s ease-in-out 3" : "none",
-                    cursor: "pointer",
+                        ? 'scale(1.12) translateY(-3px)'
+                        : 'none',
+                    transition: 'all 0.15s ease',
+                    animation: isLaunchTarget ? 'autumnDockPulse 0.75s ease-in-out 3' : 'none',
+                    cursor: 'pointer',
                   }}
                 >
                   {ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />}
@@ -208,14 +199,14 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                 {isActive && (
                   <span
                     style={{
-                      position: "absolute",
-                      bottom: "-0.375rem",
-                      left: "50%",
-                      transform: "translateX(-50%)",
-                      width: "0.25rem",
-                      height: "0.25rem",
-                      borderRadius: "9999px",
-                      background: "var(--pink-500)",
+                      position: 'absolute',
+                      bottom: '-0.375rem',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      width: '0.25rem',
+                      height: '0.25rem',
+                      borderRadius: '9999px',
+                      background: 'var(--pink-500)',
                     }}
                   />
                 )}

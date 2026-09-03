@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -10,7 +10,7 @@
         var redirect = sessionStorage.redirect;
         delete sessionStorage.redirect;
         if (redirect && redirect !== location.href) {
-          history.replaceState(null, "", redirect);
+          history.replaceState(null, '', redirect);
         }
       })();
     </script>

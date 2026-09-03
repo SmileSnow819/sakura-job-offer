@@ -1,8 +1,11 @@
 import { IBookmarkData, ILink } from '../types/bookmark';
 
-const REFERRAL_PARAM = /^(?:ref(?:errer|eral)?(?:[_-]?(?:code|id))?|recommend(?:ation)?(?:[_-]?(?:code|id))?|invite(?:[_-]?(?:code|id))?|referral(?:[_-]?(?:code|id))?|internal(?:[_-]?(?:referral|recommend(?:ation)?))?|employee(?:[_-]?(?:id|code))?|promoter(?:[_-]?id)?|utm_[a-z_]+|spm)$/i;
+const REFERRAL_PARAM =
+  /^(?:ref(?:errer|eral)?(?:[_-]?(?:code|id))?|recommend(?:ation)?(?:[_-]?(?:code|id))?|invite(?:[_-]?(?:code|id))?|referral(?:[_-]?(?:code|id))?|internal(?:[_-]?(?:referral|recommend(?:ation)?))?|employee(?:[_-]?(?:id|code))?|promoter(?:[_-]?id)?|utm_[a-z_]+|spm)$/i;
 
 const removeReferralParams = (params: URLSearchParams) => {
+  // 删除参数会改变迭代器位置，先复制键名，避免相邻的推广参数被漏掉。
+  // oxlint-disable-next-line unicorn/no-useless-spread
   for (const key of [...params.keys()]) {
     if (REFERRAL_PARAM.test(key)) params.delete(key);
   }
