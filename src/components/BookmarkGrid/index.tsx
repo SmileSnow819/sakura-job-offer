@@ -33,20 +33,19 @@ interface IBookmarkGridProps {
 }
 
 type ViewMode = 'cards' | 'table';
-interface ILinkGroup {
-  id: string;
-  name: string;
-  links: ILink[];
-}
 
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
 
+/** 根据当前视口宽高返回不会被底部导航遮挡的卡片尺寸。 */
 const getResponsiveCardSize = () => {
   if (typeof window === 'undefined') return { width: 280, height: 390 };
-  return window.innerWidth <= 768
-    ? { width: Math.min(window.innerWidth - 56, 248), height: 322 }
-    : { width: 280, height: 390 };
+  if (window.innerWidth <= 768) {
+    return { width: Math.min(window.innerWidth - 56, 248), height: 322 };
+  }
+
+  // 浏览器 100% 缩放时，常见笔记本的页面可用高度不足 820px；使用紧凑卡片避免被底部导航遮挡。
+  return { width: 280, height: window.innerHeight <= 820 ? 340 : 390 };
 };
 
 const { width: CARD_W, height: CARD_H } = getResponsiveCardSize();
@@ -71,61 +70,6 @@ const getHostname = (url: string) => {
 };
 
 const normalizeText = (value: string) => value.trim().toLowerCase();
-
-const getCampusGroupName = (link: ILink) => {
-  const haystack = normalizeText(`${link.title} ${getHostname(link.url)} ${link.url}`);
-
-  if (
-    /(mihoyo|米哈游|papergames|叠纸|腾讯音乐|网易互娱|game|lilith|莉莉丝|心动|4399|kuro|库洛|hypergryph|鹰角|iqiyi|爱奇艺|阅文)/i.test(
-      haystack,
-    )
-  ) {
-    return '游戏文娱';
-  }
-  if (/(moonshot|kimi|minimax|deepseek|momenta|iflytek|讯飞|夸克|百度|360|高德)/i.test(haystack)) {
-    return 'AI智能';
-  }
-  if (/(huawei|华为|oppo|vivo|xiaomi|小米|honor|荣耀|dji|大疆|lenovo|联想)/i.test(haystack)) {
-    return '硬件制造';
-  }
-  if (/(meituan|美团|didi|滴滴|sf-express|顺丰|ctrip|携程|nio|蔚来|dewu|得物)/i.test(haystack)) {
-    return '生活出行';
-  }
-  if (/(alibaba|阿里|antgroup|蚂蚁|taotian|淘天|jd|京东|pdd|拼多多|shein|有赞)/i.test(haystack)) {
-    return '电商平台';
-  }
-  return '互联网综合';
-};
-
-const getToolGroupName = (link: ILink) => {
-  const haystack = normalizeText(`${link.title} ${link.url}`);
-  if (/(简历|codecv|watermark|水印)/i.test(haystack)) return '简历工具';
-  if (/(面经|nowcoder|博客|juejin)/i.test(haystack)) return '面经资料';
-  return '其他工具';
-};
-
-const buildLinkGroups = (categoryId: string, links: ILink[]): ILinkGroup[] => {
-  if (links.length === 0) return [{ id: 'all', name: '全部', links: [] }];
-
-  const getGroupName = categoryId === 'tools' ? getToolGroupName : getCampusGroupName;
-  const groups = new Map<string, ILink[]>();
-  links.forEach((link) => {
-    const name = getGroupName(link);
-    groups.set(name, [...(groups.get(name) ?? []), link]);
-  });
-
-  const orderedNames =
-    categoryId === 'tools'
-      ? ['简历工具', '面经资料', '其他工具']
-      : ['互联网综合', '电商平台', 'AI智能', '游戏文娱', '硬件制造', '生活出行'];
-
-  return [
-    { id: 'all', name: '全部', links },
-    ...orderedNames
-      .filter((name) => groups.has(name))
-      .map((name) => ({ id: name, name, links: groups.get(name) ?? [] })),
-  ];
-};
 
 interface IReferralApplyLinkProps {
   link: ILink;
@@ -1033,6 +977,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({
   </div>
 );
 
+/** 展示可重播的秋招上线提示，并在桌面端与搜索框共享工具栏。 */
 const AutumnLaunchNotice: React.FC = () => {
   const noticeRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLSpanElement>(null);
@@ -1111,7 +1056,7 @@ const AutumnLaunchNotice: React.FC = () => {
   };
 
   return (
-    <div className="autumn-launch-wrap px-8 pb-3 flex-shrink-0">
+    <div className="autumn-launch-wrap flex-shrink-0">
       <div
         ref={noticeRef}
         className="autumn-launch-notice"
@@ -1133,10 +1078,10 @@ const AutumnLaunchNotice: React.FC = () => {
           alignItems: 'center',
           gap: 10,
           maxWidth: '100%',
-          padding: '10px 11px 10px 14px',
+          padding: '3px 5px 3px 8px',
           overflow: 'hidden',
           transformStyle: 'preserve-3d',
-          borderRadius: 16,
+          borderRadius: 14,
           color: 'var(--pink-600)',
           background: 'linear-gradient(110deg, rgba(255,240,246,0.8), rgba(235,245,255,0.7))',
           border: '1px solid rgba(255,183,197,0.72)',
@@ -1220,7 +1165,6 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const [displayedCategory, setDisplayedCategory] = useState<ICategory>(category);
   const [activeIndex, setActiveIndex] = useState(0);
   const [viewMode, setViewMode] = useState<ViewMode>('cards');
-  const [activeGroupId, setActiveGroupId] = useState('all');
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [isComposing, setIsComposing] = useState(false);
@@ -1242,20 +1186,14 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const dragStartXRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
 
-  const groups = useMemo(
-    () => buildLinkGroups(displayedCategory.id, displayedCategory.links),
-    [displayedCategory.id, displayedCategory.links],
-  );
-  const activeGroup = groups.find((group) => group.id === activeGroupId) ?? groups[0];
   const filteredLinks = useMemo(() => {
     const keyword = normalizeText(searchTerm);
-    const sourceLinks = activeGroup?.links ?? displayedCategory.links;
-    if (!keyword) return sourceLinks;
-    return sourceLinks.filter((link) => {
+    if (!keyword) return displayedCategory.links;
+    return displayedCategory.links.filter((link) => {
       const hostname = getHostname(link.url);
       return normalizeText(`${link.title} ${hostname} ${link.url}`).includes(keyword);
     });
-  }, [activeGroup, displayedCategory.links, searchTerm]);
+  }, [displayedCategory.links, searchTerm]);
   const links = filteredLinks;
   const total = links.length;
   const isCardsView = viewMode === 'cards';
@@ -1379,7 +1317,6 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   }, [activeIndex]);
 
   useEffect(() => {
-    setActiveGroupId('all');
     setSearchInput('');
     setSearchTerm('');
   }, [displayedCategory.id]);
@@ -1950,8 +1887,6 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         </div>
       </header>
 
-      {isAutumnCategory && <AutumnLaunchNotice />}
-
       <div
         className="bookmark-filter-bar flex items-center gap-3 flex-shrink-0 px-8 pb-4"
         style={{ flexWrap: 'wrap' }}
@@ -2026,58 +1961,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           )}
         </div>
 
-        <div
-          className="bookmark-group-tabs bookmark-toolbar-scroll"
-          role="tablist"
-          aria-label={`${displayedCategory.name}分类`}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: 8,
-            overflowX: 'auto',
-            padding: '2px',
-            flex: 1,
-            minWidth: 0,
-          }}
-        >
-          {groups.map((group) => {
-            const selected = group.id === activeGroupId;
-            return (
-              <button
-                key={group.id}
-                type="button"
-                role="tab"
-                aria-selected={selected}
-                onClick={() => setActiveGroupId(group.id)}
-                style={{
-                  height: 34,
-                  padding: '0 13px',
-                  borderRadius: 999,
-                  border: selected
-                    ? '1px solid var(--pink-400)'
-                    : '1px solid rgba(255,255,255,0.85)',
-                  background: selected
-                    ? 'linear-gradient(135deg, var(--pink-50), var(--blue-50))'
-                    : 'rgba(255,255,255,0.56)',
-                  color: selected ? 'var(--pink-600)' : 'var(--neutral-600)',
-                  boxShadow: selected ? '0 5px 16px rgba(255,107,158,0.16)' : 'none',
-                  fontSize: 12,
-                  fontWeight: 800,
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer',
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: 6,
-                }}
-              >
-                <span>{group.name}</span>
-                <span style={{ color: selected ? 'var(--pink-500)' : 'var(--neutral-400)' }}>
-                  {group.links.length}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        {isAutumnCategory && <AutumnLaunchNotice />}
       </div>
 
       {links.length === 0 ? (

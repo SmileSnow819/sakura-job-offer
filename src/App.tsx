@@ -13,7 +13,7 @@ import AutumnLaunchOverlay from './components/AutumnLaunchOverlay';
 import TrackerPage from './pages/TrackerPage';
 
 const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
-const INTERVIEWS_JSON_URL = 'https://yuki-bloom.vercel.app/categories/interview';
+const INTERVIEWS_JSON_URL = 'https://www.yukibloom.app/categories/interview';
 const INTRO_SEEN_KEY = 'sakura-offer-hub:intro-seen';
 const AUTUMN_LAUNCH_SEEN_KEY = 'sakura-offer-hub:autumn-launch-seen';
 const shouldReplayIntro = () => new URLSearchParams(window.location.search).get('debug') === '-1';
