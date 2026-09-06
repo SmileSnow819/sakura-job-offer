@@ -37,6 +37,8 @@ metadata:
 
 现有测试使用 Node 原生测试框架，不是 Vitest。不要用 `vp test` 代替 `pnpm test:tracker`；迁移测试框架是另一项改动。
 
+日常实现完成运行 `pnpm check` 和受影响的测试。生产构建由 `.githooks/pre-commit` 在每次提交前执行；没有提交动作时，仅在发布、部署或用户明确要求完整验证时手动运行 `pnpm build`。
+
 ## 配置与依赖约束
 
 - Oxfmt 规则写在 `vite.config.ts` 的 `fmt`，Oxlint 规则写在 `lint`，不重复引入 Prettier 或 ESLint 配置。

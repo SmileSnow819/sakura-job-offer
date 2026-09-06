@@ -52,7 +52,7 @@ Sakura Job Offer 是校招资源与投递进度记录网站。主要包含公司
 ## Git、自动化与权限
 
 - 用户要求 commit 时按逻辑拆分；不等于允许 push、合并或部署。
-- 仓库有 [提交信息检查脚本](../../.githooks/commit-msg)，要求 `类型(可选范围): 中文主题`，主题不超过 50 字；允许类型以脚本为准。脚本存在不代表当前 checkout 已启用，先用 `git config --get core.hooksPath` 检查；不要为文档任务修改 Git 配置。
+- 仓库使用 [pre-commit 脚本](../../.githooks/pre-commit) 在每次提交前运行生产构建，并由 [commit-msg 脚本](../../.githooks/commit-msg) 校验 `类型(可选范围): 中文主题`。当前 checkout 应配置 `core.hooksPath=.githooks`；这是仓库本地配置，不修改全局 Git 配置。
 - [Pages 工作流](../../.github/workflows/deploy.yml) 在推送 `main` 时执行检查、测试、构建和部署；它不是已经独立配置好的 PR 检查流程。
 - 数据维护与前端开发分开处理。每日数据文件可能由其他任务维护，不能顺手格式化、暂存或删除。
 - Superpowers 是项目内第三方 Skills，版本与来源记录在 [来源文件](../../.agents/superpowers-source.json)。不修改上游原文来记项目偏好，不擅自升级或启用全局配置。

@@ -106,6 +106,19 @@
 每项给出位置、影响、触发条件；没有证据的问题不要凑数。
 ```
 
+需要更严格、可以直接复制的 CR 请求：
+
+```text
+请按 .agents/skills/sakura-code-review/SKILL.md 审查 <工作区 diff / BASE..HEAD / PR>，只读，不修改文件。
+需求或验收依据：<文档路径或简述；没有则写“按现有行为与 diff 意图”>。
+先检查需求遗漏、数据丢失、状态流转、隐私导出、交互与测试，再检查可维护性。
+Findings 按 P0-P3 排序，每项必须给出最小位置、触发条件、实际影响、代码依据和最小修复方向。
+个人偏好、自动格式问题、无触发路径的猜测和未触及的历史债务不要列为 finding。
+没有可证实问题时直接说明，并列出未运行或无法证明的验证缺口。
+```
+
+本项目 CR 规范采用 [Google Engineering Practices](https://google.github.io/eng-practices/review/reviewer/) 的正确性与可维护性优先原则，并使用 [Conventional Comments](https://conventionalcomments.org/) 的 `suggestion`、`question`、`nitpick` 区分非阻塞意见。无需原样搬运外部整套手册；项目 Skill 已加入 localStorage 数据保护、流程状态、备注隐私、导出转义和实际交互验收等本地风险。
+
 ### 拆分提交
 
 ```text
@@ -119,17 +132,21 @@
 | 改动             | 至少检查                                                                |
 | ---------------- | ----------------------------------------------------------------------- |
 | 纯文档           | 格式、相对链接、命令与配置是否一致、是否写入了未经确认的承诺            |
-| 前端代码或工具链 | `pnpm check`、`pnpm test:tracker`、`pnpm build`，根据影响补场景测试     |
+| 前端代码或工具链 | `pnpm check`、受影响的测试，根据影响补场景测试                          |
 | 页面交互与样式   | 正常与空状态、窄屏、长文本、焦点和键盘；相关浏览器操作实际通过          |
 | 状态与存储       | 跳转、回退、刷新保留、损坏数据、保存失败；保护真实记录                  |
 | 导出             | 实际文件能打开、多页不截断、隐私选项生效、特殊字符安全、视觉可读        |
 | 公司数据维护     | 官网来源、URL 去重、JSON 有效、构建；不把页面关键词命中当成最终人工确认 |
 
+这里的 `pnpm check` 是 Vite+ 聚合静态检查，会同时执行格式检查、lint 和 TypeScript 类型检查；它不包含投递回归测试。修改投递功能时仍需运行 `pnpm test:tracker`。
+
+生产构建由 `.githooks/pre-commit` 在每次提交前执行，失败会阻止提交。日常实现完成时不再重复 build；如果本轮不会提交，只在发布、部署或明确要求完整验证时手动运行 `pnpm build`。GitHub Actions 仍会在推送 `main` 后再次构建，作为部署前的远端兜底。
+
 AI 交付时应分别说明“改了什么 / 本轮验证 / 未完成或未验证 / 是否提交推送”。旧对话里测试通过，不能证明新改动也通过。
 
 仓库的 [Pages 工作流](../.github/workflows/deploy.yml) 目前由推送 `main` 触发，包含检查、测试、构建和部署；并未独立配置 `pull_request` 检查。不要把“本地通过”说成“远端 CI 通过”，也不要以为失败的代码一定在提交前被拦截。
 
-提交消息按 [commit-msg 脚本](../.githooks/commit-msg) 的规则组织，例如 `docs(协作): 补充 AI 开发指南`。本地是否启用 hook 需检查 `git config --get core.hooksPath`；文档不自动启用它，也不要求每个贡献者改变全局 Git 配置。
+提交前由 [pre-commit 脚本](../.githooks/pre-commit) 运行生产构建；提交消息再按 [commit-msg 脚本](../.githooks/commit-msg) 校验，例如 `docs(协作): 补充 AI 开发指南`。本仓库通过本地 `core.hooksPath=.githooks` 启用它们，不修改全局 Git 配置。
 
 ## 切换新对话时如何交接
 

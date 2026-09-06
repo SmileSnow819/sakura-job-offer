@@ -24,7 +24,7 @@ pnpm format:check  # 只检查格式，不写文件
 pnpm lint          # 代码与类型检查
 pnpm check         # 格式、代码和类型检查
 pnpm test:tracker  # Node 原生测试，保留现有流程回归用例
-pnpm build         # 类型检查及生产构建
+pnpm build         # 生产构建，通常由 pre-commit hook 在提交前执行
 pnpm preview       # 预览构建结果
 ```
 
@@ -34,7 +34,7 @@ pnpm preview       # 预览构建结果
 
 注释说明业务规则、边界条件和设计原因，尤其是阶段流转、数据恢复、跨标签页同步和导出安全；不为显而易见的赋值逐行添加注释。
 
-VS Code 安装推荐的 **Vite Plus Extension Pack** 后可保存时自动格式化。现有 GitHub Actions 在推送 `main` 后执行检查、投递回归测试、构建和 Pages 部署，不是独立的 PR 检查。依赖统一使用 `pnpm-lock.yaml`；`vite` 是指向 Vite+ core 的兼容别名，供 React 插件等依赖解析，不是另外安装一套旧版 Vite。
+VS Code 安装推荐的 **Vite Plus Extension Pack** 后可保存时自动格式化。日常开发完成运行 `pnpm check` 和受影响的测试；仓库的 `pre-commit` hook 会在每次提交前运行 `pnpm build`，失败时阻止提交。现有 GitHub Actions 在推送 `main` 后再次执行检查、投递回归测试、构建和 Pages 部署，不是独立的 PR 检查。依赖统一使用 `pnpm-lock.yaml`；`vite` 是指向 Vite+ core 的兼容别名，供 React 插件等依赖解析，不是另外安装一套旧版 Vite。
 
 ## 我的投递
 
