@@ -5,6 +5,7 @@ import {
   currentStage,
   outcome,
   OUTCOME_LABELS,
+  positionLabel,
   STAGE_LABELS,
   type Application,
   type Company,
@@ -91,7 +92,7 @@ export default function ApplicationTable({
                     <button
                       type="button"
                       className="tracker-row-toggle"
-                      aria-label={`${open ? '收起' : '展开'}${company.name} ${application.position}的招聘流程`}
+                      aria-label={`${open ? '收起' : '展开'}${company.name} ${positionLabel(application.position)}的招聘流程`}
                       aria-expanded={open}
                       aria-controls={timelineId}
                       onClick={() => toggle(application.id)}
@@ -102,7 +103,7 @@ export default function ApplicationTable({
                   <td>
                     <input
                       type="checkbox"
-                      aria-label={`选择${company.name} ${application.position}`}
+                      aria-label={`选择${company.name} ${positionLabel(application.position)}`}
                       checked={selected.includes(application.id)}
                       onChange={() => onSelect(application.id)}
                     />
@@ -112,7 +113,7 @@ export default function ApplicationTable({
                       <CompanyLogo name={company.name} website={company.website} />
                       <div>
                         <strong>{company.name}</strong>
-                        <p>{application.position}</p>
+                        <p>{positionLabel(application.position)}</p>
                       </div>
                     </div>
                   </td>
@@ -141,7 +142,7 @@ export default function ApplicationTable({
                       id={timelineId}
                       className="tracker-row-timeline"
                       role="region"
-                      aria-label={`${company.name} ${application.position}的招聘流程`}
+                      aria-label={`${company.name} ${positionLabel(application.position)}的招聘流程`}
                     >
                       {open && (
                         <>

@@ -10,9 +10,13 @@ import {
   normalizeWebsite,
   outcome,
   parseData,
+  positionLabel,
+  quickAddApplication,
+  quickRemoveApplication,
   validateFlow,
 } from '../src/features/tracker/model.ts';
 import { makeCsv, makeHtml } from '../src/features/tracker/export.ts';
+import { trackerMotion } from '../src/features/tracker/motion.ts';
 
 function fixture() {
   const data = emptyData();
@@ -105,6 +109,67 @@ test('官网补全协议、移除路径、拒绝危险协议和凭据', () => {
     'invalid',
   ])
     assert.throws(() => normalizeWebsite(website));
+});
+test('快捷添加只创建一条待设置职位的投递，并能持久化读取', () => {
+  const initial = emptyData();
+  const first = quickAddApplication(initial, {
+    name: '测试公司招聘',
+    website: 'https://example.com/campus',
+  });
+  const duplicate = quickAddApplication(first, {
+    name: '测试公司招聘',
+    website: 'https://example.com/campus',
+  });
+
+  assert.equal(first.companies.length, 1);
+  assert.equal(first.companies[0].name, '测试公司');
+  assert.equal(first.applications.length, 1);
+  assert.equal(first.applications[0].position, '');
+  assert.equal(duplicate.applications.length, 1);
+  assert.deepEqual(parseData(JSON.stringify(first)), first);
+});
+test('快捷移除仅删除来源匹配的投递，保留同公司手动添加的其他职位', () => {
+  const added = quickAddApplication(emptyData(), {
+    name: '测试公司',
+    website: 'https://example.com/jobs',
+  });
+  const manual = {
+    ...added.applications[0],
+    id: 'manual-position',
+    position: '后端开发',
+    sourceKey: undefined,
+  };
+  const removed = quickRemoveApplication(
+    { ...added, applications: [...added.applications, manual] },
+    { name: '测试公司', website: 'https://example.com/jobs' },
+  );
+
+  assert.deepEqual(
+    removed.applications.map((application) => application.id),
+    ['manual-position'],
+  );
+  assert.equal(removed.companies.length, 1);
+});
+test('未设置职位时统一显示待设置职位', () => {
+  assert.equal(positionLabel(''), '待设置职位');
+  assert.equal(positionLabel('  '), '待设置职位');
+  assert.equal(positionLabel('前端开发'), '前端开发');
+});
+test('投递页动效区分分层进入、内容切换和减少动态效果', () => {
+  assert.deepEqual(trackerMotion(false), {
+    enterDuration: 0.42,
+    enterOffset: 18,
+    enterStagger: 0.055,
+    contentDuration: 0.2,
+    contentOffset: 8,
+  });
+  assert.deepEqual(trackerMotion(true), {
+    enterDuration: 0,
+    enterOffset: 0,
+    enterStagger: 0,
+    contentDuration: 0,
+    contentOffset: 0,
+  });
 });
 test('JSON 备份完整往返，忽略额外字段', () => {
   const data = fixture();

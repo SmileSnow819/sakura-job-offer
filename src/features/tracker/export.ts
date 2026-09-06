@@ -2,6 +2,7 @@ import {
   currentStage,
   outcome,
   OUTCOME_LABELS,
+  positionLabel,
   progress,
   STAGE_LABELS,
   today,
@@ -65,7 +66,7 @@ export function makeCsv(
   ];
   const rows = records.map(({ application: a, company: c }) => [
     c.name,
-    a.position,
+    positionLabel(a.position),
     a.appliedAt,
     currentStage(a)?.name ?? OUTCOME_LABELS[outcome(a)],
     OUTCOME_LABELS[outcome(a)],
@@ -94,7 +95,7 @@ export function makeHtml(records: ExportRecord[], options: ExportOptions): strin
   const cards = records
     .map(
       ({ application: a, company: c }) =>
-        `<article><header><span class="avatar">${e(Array.from(c.name)[0] ?? '?')}</span><div><h2>${e(c.name)}</h2><p>${e(a.position)}</p></div><span class="badge">${e(OUTCOME_LABELS[outcome(a)])}${a.archived ? ' · 已归档' : ''}</span></header><div class="meta">投递于 ${e(a.appliedAt)} · 更新于 ${e(new Date(a.updatedAt).toLocaleDateString('zh-CN'))}</div>${options.websites && c.website ? `<p><a href="${e(c.website)}" rel="noopener noreferrer">${e(c.website)}</a></p>` : ''}<ol>${a.stages.map((s) => `<li class="${s.status}"><span class="dot"></span><div><strong>${e(s.name)}</strong><span class="meta">${STAGE_LABELS[s.status]}${s.completedAt ? ` · ${e(s.completedAt)}` : ''}</span>${options.notes && s.note ? `<p class="note">${e(s.note)}</p>` : ''}</div></li>`).join('')}</ol>${options.notes && a.note ? `<p class="note application-note">${e(a.note)}</p>` : ''}</article>`,
+        `<article><header><span class="avatar">${e(Array.from(c.name)[0] ?? '?')}</span><div><h2>${e(c.name)}</h2><p>${e(positionLabel(a.position))}</p></div><span class="badge">${e(OUTCOME_LABELS[outcome(a)])}${a.archived ? ' · 已归档' : ''}</span></header><div class="meta">投递于 ${e(a.appliedAt)} · 更新于 ${e(new Date(a.updatedAt).toLocaleDateString('zh-CN'))}</div>${options.websites && c.website ? `<p><a href="${e(c.website)}" rel="noopener noreferrer">${e(c.website)}</a></p>` : ''}<ol>${a.stages.map((s) => `<li class="${s.status}"><span class="dot"></span><div><strong>${e(s.name)}</strong><span class="meta">${STAGE_LABELS[s.status]}${s.completedAt ? ` · ${e(s.completedAt)}` : ''}</span>${options.notes && s.note ? `<p class="note">${e(s.note)}</p>` : ''}</div></li>`).join('')}</ol>${options.notes && a.note ? `<p class="note application-note">${e(a.note)}</p>` : ''}</article>`,
     )
     .join('');
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${e(options.title)}</title><style>
@@ -139,7 +140,7 @@ export async function makePosters(
       ctx.font = 'bold 26px sans-serif';
       const names = lines(ctx, c.name, 554);
       ctx.font = '20px sans-serif';
-      const roles = lines(ctx, a.position, 554);
+      const roles = lines(ctx, positionLabel(a.position), 554);
       ctx.font = '17px sans-serif';
       const website = options.websites && c.website ? lines(ctx, c.website, 740) : [];
       // 海报只显示摘要；完整阶段备注保留在 HTML / CSV，避免长文本撑坏版面。

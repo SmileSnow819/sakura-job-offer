@@ -9,6 +9,7 @@ import {
   normalizeWebsite,
   outcome,
   OUTCOME_LABELS,
+  positionLabel,
   STAGE_LABELS,
   today,
   uid,
@@ -287,7 +288,7 @@ export function ApplicationDetail({
     else onClose();
   };
   return (
-    <Modal title={company.name} subtitle={draft.position} onClose={close} wide>
+    <Modal title={company.name} subtitle={positionLabel(draft.position)} onClose={close} wide>
       <div className="tracker-detail">
         {discardConfirm && (
           <div className="tracker-warning">

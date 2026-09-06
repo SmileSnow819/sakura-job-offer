@@ -16,6 +16,12 @@ import gsap from 'gsap';
 import { ICategory, ILink } from '../../types/bookmark';
 import mottosRaw from '../../mottos.json';
 import TrackApplicationButton from '../TrackApplicationButton';
+import { useTracker } from '../../features/tracker/useTracker';
+import {
+  findQuickApplication,
+  quickAddApplication,
+  quickRemoveApplication,
+} from '../../features/tracker/model';
 
 const MOTTOS: string[] = mottosRaw as string[];
 import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
@@ -247,6 +253,9 @@ interface ICarouselCardProps {
   onShare: (e: React.MouseEvent, url: string) => void;
   onClick: () => void;
   innerRef: (el: HTMLDivElement | null) => void;
+  isAdded: boolean;
+  onAdd?: () => boolean;
+  onRemove?: () => boolean;
 }
 
 const CarouselCard: React.FC<ICarouselCardProps> = ({
@@ -255,6 +264,9 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
   onShare,
   onClick,
   innerRef,
+  isAdded,
+  onAdd,
+  onRemove,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const faviconWrapRef = useRef<HTMLDivElement>(null);
@@ -495,7 +507,13 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
         }}
       />
 
-      <TrackApplicationButton link={link} corner />
+      <TrackApplicationButton
+        link={link}
+        corner
+        isAdded={isAdded}
+        onAdd={onAdd}
+        onRemove={onRemove}
+      />
 
       {/* Favicon（可点击跳转）*/}
       <a
@@ -723,9 +741,21 @@ interface IBookmarkTableProps {
   links: ILink[];
   onShare: (e: React.MouseEvent, url: string) => void;
   innerRef: (el: HTMLDivElement | null) => void;
+  isAdded: (link: ILink) => boolean;
+  onAdd: (link: ILink) => boolean;
+  onRemove: (link: ILink) => boolean;
+  quickAddEnabled: boolean;
 }
 
-const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef }) => (
+const BookmarkTable: React.FC<IBookmarkTableProps> = ({
+  links,
+  onShare,
+  innerRef,
+  isAdded,
+  onAdd,
+  onRemove,
+  quickAddEnabled,
+}) => (
   <div
     ref={innerRef}
     className="bookmark-table-panel mx-6 mb-4 flex-1 overflow-hidden"
@@ -766,7 +796,12 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                 </a>
               </div>
               <div className="bookmark-mobile-actions">
-                <TrackApplicationButton link={link} />
+                <TrackApplicationButton
+                  link={link}
+                  isAdded={quickAddEnabled && isAdded(link)}
+                  onAdd={quickAddEnabled ? () => onAdd(link) : undefined}
+                  onRemove={quickAddEnabled ? () => onRemove(link) : undefined}
+                />
                 {link.referralUrl ? (
                   <ReferralApplyLink link={link} compact />
                 ) : (
@@ -938,7 +973,12 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({ links, onShare, innerRef
                   }}
                 >
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
-                    <TrackApplicationButton link={link} />
+                    <TrackApplicationButton
+                      link={link}
+                      isAdded={quickAddEnabled && isAdded(link)}
+                      onAdd={quickAddEnabled ? () => onAdd(link) : undefined}
+                      onRemove={quickAddEnabled ? () => onRemove(link) : undefined}
+                    />
                     {link.referralUrl ? (
                       <ReferralApplyLink link={link} compact tooltipPlacement="left" />
                     ) : (
@@ -1176,6 +1216,7 @@ const AutumnLaunchNotice: React.FC = () => {
 
 // ── BookmarkGrid ──────────────────────────────────────────────────────────────
 const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, onShare }) => {
+  const { data: trackerData, save: saveTracker, error: trackerError } = useTracker();
   const [displayedCategory, setDisplayedCategory] = useState<ICategory>(category);
   const [activeIndex, setActiveIndex] = useState(0);
   const [viewMode, setViewMode] = useState<ViewMode>('cards');
@@ -1219,6 +1260,20 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const total = links.length;
   const isCardsView = viewMode === 'cards';
   const isAutumnCategory = displayedCategory.id === 'autumn';
+  const isApplicationAdded = useCallback(
+    (link: ILink) => !!findQuickApplication(trackerData, { name: link.title, website: link.url }),
+    [trackerData],
+  );
+  const addApplication = useCallback(
+    (link: ILink) =>
+      saveTracker(quickAddApplication(trackerData, { name: link.title, website: link.url })),
+    [saveTracker, trackerData],
+  );
+  const removeApplication = useCallback(
+    (link: ILink) =>
+      saveTracker(quickRemoveApplication(trackerData, { name: link.title, website: link.url })),
+    [saveTracker, trackerData],
+  );
   const getCurrentContent = useCallback(
     () =>
       viewMode === 'cards' ? (stageRef.current ?? cardsWrapRef.current) : tableWrapRef.current,
@@ -1530,6 +1585,10 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
       return;
     }
     const nextCategory = category;
+    const header = headerRef.current;
+    const content = getCurrentContent();
+    // 路由切离书签页时组件可能先收到 fallback 分类再卸载；目标已消失就不再启动过渡。
+    if (!header || !content) return;
     const oldIndex = allCategories.findIndex((c) => c.id === displayedCategory.id);
     const newIndex = allCategories.findIndex((c) => c.id === nextCategory.id);
     const exitDir = newIndex > oldIndex ? -1 : 1;
@@ -1539,22 +1598,22 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
     }
     const tl = gsap.timeline();
     tlRef.current = tl;
+    let enterRaf: number | undefined;
     // header + 卡片整体同时出场
-    tl.to(headerRef.current, { x: exitDir * 80, opacity: 0, duration: 0.22, ease: 'power2.in' });
-    tl.to(
-      getCurrentContent(),
-      { x: exitDir * 120, opacity: 0, duration: 0.25, ease: 'power2.in' },
-      '<',
-    );
+    tl.to(header, { x: exitDir * 80, opacity: 0, duration: 0.22, ease: 'power2.in' });
+    tl.to(content, { x: exitDir * 120, opacity: 0, duration: 0.25, ease: 'power2.in' }, '<');
     tl.call(() => {
       setDisplayedCategory(nextCategory);
       // 立刻把入场起始位置设好（React 会在下一 tick 渲染新卡片）
-      requestAnimationFrame(() => {
+      enterRaf = requestAnimationFrame(() => {
+        const nextHeader = headerRef.current;
+        const nextContent = getCurrentContent();
+        if (!nextHeader || !nextContent) return;
         const enterDir = -exitDir;
-        gsap.set(headerRef.current, { x: enterDir * 80, opacity: 0 });
-        gsap.to(headerRef.current, { x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
-        gsap.set(getCurrentContent(), { x: enterDir * 120, opacity: 0 });
-        gsap.to(getCurrentContent(), {
+        gsap.set(nextHeader, { x: enterDir * 80, opacity: 0 });
+        gsap.to(nextHeader, { x: 0, opacity: 1, duration: 0.35, ease: 'power3.out' });
+        gsap.set(nextContent, { x: enterDir * 120, opacity: 0 });
+        gsap.to(nextContent, {
           x: 0,
           opacity: 1,
           duration: 0.38,
@@ -1563,6 +1622,11 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         });
       });
     });
+    return () => {
+      tl.kill();
+      if (enterRaf !== undefined) cancelAnimationFrame(enterRaf);
+      if (tlRef.current === tl) tlRef.current = null;
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [category.id]);
 
@@ -2075,6 +2139,9 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
                   innerRef={(el) => {
                     cardRefs.current[i] = el;
                   }}
+                  isAdded={isAutumnCategory && isApplicationAdded(link)}
+                  onAdd={isAutumnCategory ? () => addApplication(link) : undefined}
+                  onRemove={isAutumnCategory ? () => removeApplication(link) : undefined}
                 />
               ))}
             </div>
@@ -2107,10 +2174,19 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         <BookmarkTable
           links={links}
           onShare={onShare}
+          isAdded={isApplicationAdded}
+          onAdd={addApplication}
+          onRemove={removeApplication}
+          quickAddEnabled={isAutumnCategory}
           innerRef={(el) => {
             tableWrapRef.current = el;
           }}
         />
+      )}
+      {trackerError && (
+        <p role="alert" style={{ margin: '0 24px 12px', color: '#a33b51', fontSize: 12 }}>
+          {trackerError}
+        </p>
       )}
     </section>
   );

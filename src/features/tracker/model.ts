@@ -27,6 +27,7 @@ export interface Application {
   archived: boolean;
   createdAt: string;
   updatedAt: string;
+  sourceKey?: string;
 }
 export interface TrackerData {
   version: 1;
@@ -66,6 +67,77 @@ export const emptyData = (): TrackerData => ({
   applications: [],
   template: defaultTemplate(),
 });
+
+export interface QuickApplicationSeed {
+  name: string;
+  website: string;
+}
+
+const normalizeCompanyName = (name: string) =>
+  name
+    .replace(/(?:校园招聘|校招|招聘官网|招聘)$/, '')
+    .trim()
+    .slice(0, 100);
+
+export function quickApplicationKey(seed: QuickApplicationSeed): string {
+  const name = normalizeCompanyName(seed.name).toLocaleLowerCase();
+  const website = normalizeWebsite(seed.website);
+  return `bookmark:${name}:${website}`;
+}
+
+export function findQuickApplication(
+  data: TrackerData,
+  seed: QuickApplicationSeed,
+): Application | undefined {
+  const sourceKey = quickApplicationKey(seed);
+  return data.applications.find((application) => application.sourceKey === sourceKey);
+}
+
+export function quickAddApplication(data: TrackerData, seed: QuickApplicationSeed): TrackerData {
+  if (findQuickApplication(data, seed)) return data;
+  const name = normalizeCompanyName(seed.name);
+  if (!name) throw new Error('公司名称不能为空');
+  const website = normalizeWebsite(seed.website);
+  const company = data.companies.find(
+    (item) =>
+      item.name.toLocaleLowerCase() === name.toLocaleLowerCase() && item.website === website,
+  ) ?? { id: uid(), name, website, isCustom: false };
+  const timestamp = new Date().toISOString();
+  const application: Application = {
+    id: uid(),
+    companyId: company.id,
+    position: '',
+    appliedAt: today(),
+    note: '',
+    stages: makeStages(data.template),
+    withdrawn: false,
+    archived: false,
+    createdAt: timestamp,
+    updatedAt: timestamp,
+    sourceKey: quickApplicationKey(seed),
+  };
+  return {
+    ...data,
+    companies: data.companies.some((item) => item.id === company.id)
+      ? data.companies
+      : [...data.companies, company],
+    applications: [...data.applications, application],
+  };
+}
+
+export function quickRemoveApplication(data: TrackerData, seed: QuickApplicationSeed): TrackerData {
+  const application = findQuickApplication(data, seed);
+  if (!application) return data;
+  const applications = data.applications.filter((item) => item.id !== application.id);
+  const companyStillUsed = applications.some((item) => item.companyId === application.companyId);
+  return {
+    ...data,
+    applications,
+    companies: companyStillUsed
+      ? data.companies
+      : data.companies.filter((item) => item.id !== application.companyId),
+  };
+}
 // 为每条投递生成独立阶段 ID，后续编辑模板不会改动历史投递的流程。
 export const makeStages = (template: StageDefinition[]): Stage[] =>
   template.map((s, i) => ({
@@ -119,6 +191,8 @@ export const progress = (app: Application) =>
       app.stages.length) *
       100,
   );
+
+export const positionLabel = (position: string) => position.trim() || '待设置职位';
 
 /**
  * 直接跳到后续轮次时，前面未完成的轮次标记为跳过，而不是虚构为已通过。
@@ -240,13 +314,14 @@ export function parseData(raw: string): TrackerData {
       !nonempty(a.id) ||
       !nonempty(a.companyId) ||
       !companies.some((c) => c.id === a.companyId) ||
-      !nonempty(a.position, 100) ||
+      !string(a.position, 100) ||
       !isDate(a.appliedAt) ||
       !string(a.note) ||
       typeof a.withdrawn !== 'boolean' ||
       typeof a.archived !== 'boolean' ||
       !timestamp(a.createdAt) ||
       !timestamp(a.updatedAt) ||
+      !(a.sourceKey === undefined || string(a.sourceKey, 2048)) ||
       !Array.isArray(a.stages)
     )
       throw new Error('投递记录无效或关联公司缺失');
@@ -281,6 +356,7 @@ export function parseData(raw: string): TrackerData {
       archived: a.archived,
       createdAt: a.createdAt,
       updatedAt: a.updatedAt,
+      ...(string(a.sourceKey, 2048) && a.sourceKey ? { sourceKey: a.sourceKey } : {}),
     };
   });
   const template = value.template.map(definition);

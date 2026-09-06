@@ -1,5 +1,6 @@
-import { lazy, Suspense, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import gsap from 'gsap';
 import {
   ArrowRight,
   BarChart3,
@@ -21,6 +22,7 @@ import {
   normalizeWebsite,
   outcome,
   OUTCOME_LABELS,
+  positionLabel,
   progress,
   type Application,
   type Company,
@@ -33,6 +35,7 @@ import { ApplicationDetail, ApplicationForm } from '../features/tracker/RecordDi
 import { ExportDialog } from '../features/tracker/ExportDialog';
 import { DataDialog } from '../features/tracker/DataDialog';
 import ApplicationTable from '../features/tracker/ApplicationTable';
+import { trackerMotion } from '../features/tracker/motion';
 import '../features/tracker/tracker.css';
 
 const Analytics = lazy(() => import('../features/tracker/Analytics'));
@@ -60,6 +63,9 @@ type Dialog =
   | null;
 
 export default function TrackerPage() {
+  const pageRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const contentReadyRef = useRef(false);
   const { data, save, error } = useTracker();
   const [params, setParams] = useSearchParams();
   const [dialog, setDialog] = useState<Dialog>(null);
@@ -131,6 +137,69 @@ export default function TrackerPage() {
   );
   const picked = all.filter((r) => selected.includes(r.application.id));
   const activeRecords = data.applications.filter((a) => !a.archived);
+  useLayoutEffect(() => {
+    const page = pageRef.current;
+    if (!page) return;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motion = trackerMotion(reduced);
+    const context = gsap.context(() => {
+      const sections = page.querySelectorAll<HTMLElement>('[data-tracker-enter]');
+      if (reduced) {
+        gsap.set([page, ...sections], { clearProps: 'all' });
+        return;
+      }
+      const timeline = gsap.timeline();
+      timeline.fromTo(
+        page,
+        { opacity: 0 },
+        { opacity: 1, duration: motion.enterDuration * 0.7, ease: 'power2.out' },
+      );
+      timeline.fromTo(
+        sections,
+        { opacity: 0, y: motion.enterOffset },
+        {
+          opacity: 1,
+          y: 0,
+          duration: motion.enterDuration,
+          stagger: motion.enterStagger,
+          ease: 'power3.out',
+          clearProps: 'opacity,transform',
+        },
+        0.04,
+      );
+    }, page);
+    return () => context.revert();
+  }, []);
+
+  useLayoutEffect(() => {
+    const content = contentRef.current;
+    if (!content) return;
+    if (!contentReadyRef.current) {
+      contentReadyRef.current = true;
+      return;
+    }
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motion = trackerMotion(reduced);
+    if (reduced) {
+      gsap.set(content, { clearProps: 'all' });
+      return;
+    }
+    const tween = gsap.fromTo(
+      content,
+      { opacity: 0, y: motion.contentOffset },
+      {
+        opacity: 1,
+        y: 0,
+        duration: motion.contentDuration,
+        ease: 'power2.out',
+        overwrite: 'auto',
+        clearProps: 'opacity,transform',
+      },
+    );
+    return () => {
+      tween.kill();
+    };
+  }, [archive, filter, filtered.length, query, showAnalytics, sort, view]);
   function commit(next: TrackerData, message: string, close = true) {
     if (!save(next)) return false;
     setNotice(message);
@@ -179,9 +248,9 @@ export default function TrackerPage() {
     </span>
   );
   return (
-    <section className="tracker-page" aria-label="我的投递">
+    <section ref={pageRef} className="tracker-page" aria-label="我的投递">
       <div className="tracker-container">
-        <header className="tracker-header">
+        <header className="tracker-header" data-tracker-enter>
           <div>
             <h1>投递记录</h1>
             <p>记录岗位与招聘进度</p>
@@ -191,7 +260,7 @@ export default function TrackerPage() {
             新增投递
           </button>
         </header>
-        <div className="tracker-stats">
+        <div className="tracker-stats" data-tracker-enter>
           {[
             {
               label: '投递记录',
@@ -233,7 +302,7 @@ export default function TrackerPage() {
             </button>
           ))}
         </div>
-        <div className="tracker-workspace-heading">
+        <div className="tracker-workspace-heading" data-tracker-enter>
           <h2>
             全部投递 <span>{filtered.length}</span>
           </h2>
@@ -280,7 +349,7 @@ export default function TrackerPage() {
             </button>
           </div>
         )}
-        <div className="tracker-toolbar">
+        <div className="tracker-toolbar" data-tracker-enter>
           <div className="tracker-search">
             <Search size={17} />
             <input
@@ -334,7 +403,7 @@ export default function TrackerPage() {
           </div>
         </div>
         {all.length > 0 && (
-          <div className="tracker-selection">
+          <div className="tracker-selection" data-tracker-enter>
             <label className="tracker-check">
               <input
                 type="checkbox"
@@ -357,117 +426,119 @@ export default function TrackerPage() {
             {picked.length > 0 && <button onClick={() => setSelected([])}>清除选择</button>}
           </div>
         )}
-        {showAnalytics && (
-          <Suspense fallback={<p className="tracker-help">加载统计图表…</p>}>
-            <Analytics applications={filtered.map((r) => r.application)} />
-          </Suspense>
-        )}
-        {!filtered.length ? (
-          <div className="tracker-empty">
-            <BriefcaseBusiness size={28} />
-            <h2>{all.length ? '这里还没有匹配的记录' : '还没有投递记录'}</h2>
-            <p>
-              {all.length ? '试试其他关键词或筛选条件。' : '添加公司和岗位，开始跟进招聘流程。'}
-            </p>
-            <button
-              className="tracker-button primary"
-              onClick={() =>
-                all.length
-                  ? (setQuery(''), setFilter('all'), setArchive('all'))
-                  : setDialog({ type: 'new' })
-              }
-            >
-              {all.length ? '重置筛选' : '记录第一份投递'}
-              <ArrowRight size={16} />
-            </button>
-            <small>无需登录 · 本地保存 · 随时导出</small>
-          </div>
-        ) : view === 'cards' ? (
-          <div className="tracker-card-grid">
-            {filtered.map(({ application: a, company: c }) => (
-              <article key={a.id} className="tracker-card">
-                <div className="tracker-card-top">
-                  <CompanyLogo name={c.name} website={c.website} />
-                  <div>
+        <div ref={contentRef} className="tracker-results" data-tracker-enter>
+          {showAnalytics && (
+            <Suspense fallback={<p className="tracker-help">加载统计图表…</p>}>
+              <Analytics applications={filtered.map((r) => r.application)} />
+            </Suspense>
+          )}
+          {!filtered.length ? (
+            <div className="tracker-empty">
+              <BriefcaseBusiness size={28} />
+              <h2>{all.length ? '这里还没有匹配的记录' : '还没有投递记录'}</h2>
+              <p>
+                {all.length ? '试试其他关键词或筛选条件。' : '添加公司和岗位，开始跟进招聘流程。'}
+              </p>
+              <button
+                className="tracker-button primary"
+                onClick={() =>
+                  all.length
+                    ? (setQuery(''), setFilter('all'), setArchive('all'))
+                    : setDialog({ type: 'new' })
+                }
+              >
+                {all.length ? '重置筛选' : '记录第一份投递'}
+                <ArrowRight size={16} />
+              </button>
+              <small>无需登录 · 本地保存 · 随时导出</small>
+            </div>
+          ) : view === 'cards' ? (
+            <div className="tracker-card-grid">
+              {filtered.map(({ application: a, company: c }) => (
+                <article key={a.id} className="tracker-card">
+                  <div className="tracker-card-top">
+                    <CompanyLogo name={c.name} website={c.website} />
+                    <div>
+                      <button
+                        className="tracker-company-name"
+                        onClick={() => setDialog({ type: 'detail', id: a.id })}
+                      >
+                        {c.name}
+                      </button>
+                      <p>{positionLabel(a.position)}</p>
+                    </div>
+                    <input
+                      type="checkbox"
+                      aria-label={`选择${c.name} ${positionLabel(a.position)}`}
+                      checked={selected.includes(a.id)}
+                      onChange={() => toggleSelected(a.id)}
+                    />
+                  </div>
+                  <div className="tracker-card-status">
+                    {badge(a)}
+                    <span>投递于 {a.appliedAt}</span>
+                  </div>
+                  <div className="tracker-card-stage">
+                    <span>{a.withdrawn ? '取消前进度' : '当前阶段'}</span>
+                    <strong>{currentStage(a)?.name ?? OUTCOME_LABELS[outcome(a)]}</strong>
+                    <small>{progress(a)}%</small>
+                  </div>
+                  <div className="tracker-progress" aria-label={`流程进度 ${progress(a)}%`}>
+                    {a.stages.map((s) => (
+                      <span
+                        key={s.id}
+                        className={s.status}
+                        title={`${s.name} · ${{ pending: '未开始', active: '进行中', completed: '已完成', skipped: '已跳过', rejected: '未通过' }[s.status]}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="tracker-card-footer">
                     <button
-                      className="tracker-company-name"
+                      className="tracker-text-button"
                       onClick={() => setDialog({ type: 'detail', id: a.id })}
                     >
-                      {c.name}
+                      查看详情
+                      <ArrowRight size={14} />
                     </button>
-                    <p>{a.position}</p>
+                    {outcome(a) === 'active' && !a.archived && currentStage(a) && (
+                      <button
+                        className="tracker-button small"
+                        onClick={() => {
+                          const updated = {
+                            ...a,
+                            stages: changeStage(a.stages, currentStage(a)!.id, 'completed'),
+                            updatedAt: new Date().toISOString(),
+                          };
+                          commit(
+                            {
+                              ...data,
+                              applications: data.applications.map((item) =>
+                                item.id === a.id ? updated : item,
+                              ),
+                            },
+                            '进度已更新，可在详情中回退',
+                            false,
+                          );
+                        }}
+                      >
+                        完成当前阶段
+                      </button>
+                    )}
                   </div>
-                  <input
-                    type="checkbox"
-                    aria-label={`选择${c.name} ${a.position}`}
-                    checked={selected.includes(a.id)}
-                    onChange={() => toggleSelected(a.id)}
-                  />
-                </div>
-                <div className="tracker-card-status">
-                  {badge(a)}
-                  <span>投递于 {a.appliedAt}</span>
-                </div>
-                <div className="tracker-card-stage">
-                  <span>{a.withdrawn ? '取消前进度' : '当前阶段'}</span>
-                  <strong>{currentStage(a)?.name ?? OUTCOME_LABELS[outcome(a)]}</strong>
-                  <small>{progress(a)}%</small>
-                </div>
-                <div className="tracker-progress" aria-label={`流程进度 ${progress(a)}%`}>
-                  {a.stages.map((s) => (
-                    <span
-                      key={s.id}
-                      className={s.status}
-                      title={`${s.name} · ${{ pending: '未开始', active: '进行中', completed: '已完成', skipped: '已跳过', rejected: '未通过' }[s.status]}`}
-                    />
-                  ))}
-                </div>
-                <div className="tracker-card-footer">
-                  <button
-                    className="tracker-text-button"
-                    onClick={() => setDialog({ type: 'detail', id: a.id })}
-                  >
-                    查看详情
-                    <ArrowRight size={14} />
-                  </button>
-                  {outcome(a) === 'active' && !a.archived && currentStage(a) && (
-                    <button
-                      className="tracker-button small"
-                      onClick={() => {
-                        const updated = {
-                          ...a,
-                          stages: changeStage(a.stages, currentStage(a)!.id, 'completed'),
-                          updatedAt: new Date().toISOString(),
-                        };
-                        commit(
-                          {
-                            ...data,
-                            applications: data.applications.map((item) =>
-                              item.id === a.id ? updated : item,
-                            ),
-                          },
-                          '进度已更新，可在详情中回退',
-                          false,
-                        );
-                      }}
-                    >
-                      完成当前阶段
-                    </button>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <ApplicationTable
-            onStageChange={updateStage}
-            records={filtered}
-            selected={selected}
-            onSelect={toggleSelected}
-            onDetail={(id) => setDialog({ type: 'detail', id })}
-          />
-        )}
-        <footer className="tracker-footer">
+                </article>
+              ))}
+            </div>
+          ) : (
+            <ApplicationTable
+              onStageChange={updateStage}
+              records={filtered}
+              selected={selected}
+              onSelect={toggleSelected}
+              onDetail={(id) => setDialog({ type: 'detail', id })}
+            />
+          )}
+        </div>
+        <footer className="tracker-footer" data-tracker-enter>
           <span>
             <span className="tracker-local-dot" />
             数据仅保存在当前浏览器，清除网站数据会丢失记录。
