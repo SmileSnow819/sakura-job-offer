@@ -3,7 +3,11 @@ import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from 'luc
 import gsap from 'gsap';
 
 import { ICategory } from '../../types/bookmark';
-import { getDockScale } from '../../utils/dockMagnification';
+import {
+  getDockItemWidth,
+  getDockScale,
+  getDockTooltipBottom,
+} from '../../utils/dockMagnification';
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   BriefcaseBusiness: <BriefcaseBusiness size={20} />,
@@ -20,6 +24,7 @@ interface ISidebarDockProps {
   onTabChange: (tabId: string) => void;
 }
 
+/** 根据当前视口返回 Dock 图标的基础尺寸。 */
 const getIconSize = () => {
   if (typeof window === 'undefined') return 44;
   return window.innerWidth <= 400 ? 38 : window.innerWidth <= 768 ? 42 : 44;
@@ -27,8 +32,84 @@ const getIconSize = () => {
 
 const ICON_SIZE = getIconSize();
 const ICON_GAP = 8;
+const DOCK_MAX_SCALE = 1.65;
+const DOCK_BUTTON_LIFT = 22;
+const DOCK_TOOLTIP_GAP = 8;
 const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
 
+interface IDockTooltipProps {
+  label: string;
+  isVisible: boolean;
+  iconSize: number;
+  scale: number;
+  verticalLift: number;
+}
+
+/**
+ * 显示贴近图标顶部的粉色胶囊提示，尾巴与放大的图标保持连续的视觉关系。
+ */
+const DockTooltip: React.FC<IDockTooltipProps> = ({
+  label,
+  isVisible,
+  iconSize,
+  scale,
+  verticalLift,
+}) => (
+  <div
+    role="tooltip"
+    aria-hidden={!isVisible}
+    style={{
+      position: 'absolute',
+      bottom: getDockTooltipBottom(iconSize, scale, verticalLift, DOCK_TOOLTIP_GAP),
+      left: '50%',
+      transform: `translateX(-50%) translateY(${isVisible ? 0 : 6}px)`,
+      opacity: isVisible ? 1 : 0,
+      pointerEvents: 'none',
+      transition: 'opacity 0.15s ease, transform 0.15s ease',
+      whiteSpace: 'nowrap',
+      zIndex: 999,
+    }}
+  >
+    <div
+      style={{
+        position: 'relative',
+        padding: '6px 14px',
+        border: '1px solid var(--pink-400)',
+        borderRadius: 999,
+        background: 'var(--pink-100)',
+        boxShadow: '0 6px 18px rgba(255, 107, 158, 0.3)',
+        color: 'var(--pink-600)',
+        fontSize: 12,
+        fontWeight: 700,
+        letterSpacing: 0.3,
+      }}
+    >
+      {label}
+      <span
+        aria-hidden="true"
+        style={{
+          position: 'absolute',
+          bottom: -6,
+          left: '50%',
+          width: 11,
+          height: 11,
+          transform: 'translateX(-50%) rotate(45deg)',
+          borderRight: '1px solid var(--pink-400)',
+          borderBottom: '1px solid var(--pink-400)',
+          borderRadius: 2,
+          background: 'var(--pink-100)',
+          zIndex: -1,
+        }}
+      />
+    </div>
+  </div>
+);
+
+/**
+ * 展示分类导航的底部 Dock，并在鼠标靠近时按 macOS 风格放大相邻图标。
+ *
+ * 放大项同步扩展其布局宽度，确保按钮和提示文字不会压住相邻项目。
+ */
 const SidebarDock: React.FC<ISidebarDockProps> = ({
   categories,
   activeTab,
@@ -55,7 +136,13 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
       const scale = getDockScale(event.clientX, rect.left + rect.width / 2, ICON_SIZE);
       gsap.to(button, {
         scale,
-        y: -(scale - 1) * 22,
+        y: -(scale - 1) * DOCK_BUTTON_LIFT,
+        duration: 0.12,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+      gsap.to(item, {
+        width: getDockItemWidth(ICON_SIZE, scale),
         duration: 0.12,
         ease: 'power2.out',
         overwrite: true,
@@ -72,10 +159,16 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
       ease: 'back.out(1.8)',
       overwrite: true,
     });
+    gsap.to(itemRefs.current, {
+      width: ICON_SIZE,
+      duration: 0.34,
+      ease: 'back.out(1.8)',
+      overwrite: true,
+    });
   };
 
   return (
-    <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40">
+    <div className="fixed bottom-5 left-1/2 z-50 -translate-x-1/2 overflow-visible">
       <style>{`
         @keyframes autumnDockPulse {
           0%, 100% { box-shadow: 0 4px 14px var(--pink-400); }
@@ -83,7 +176,7 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
         }
       `}</style>
       <div
-        className="flex flex-row items-center px-4 py-2 rounded-[26px] bg-white/55 backdrop-blur-2xl border border-white/80 shadow-[0_8px_32px_rgba(0,0,0,0.1),0_2px_8px_rgba(255,183,197,0.2)]"
+        className="flex flex-row items-center overflow-visible rounded-[26px] border border-white/80 bg-white/55 px-4 py-2 shadow-[0_8px_32px_rgba(0,0,0,0.1),0_2px_8px_rgba(255,183,197,0.2)] backdrop-blur-2xl"
         style={{ gap: ICON_GAP }}
       >
         {/* Logo */}
@@ -101,37 +194,13 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
           onMouseLeave={() => setIsLogoHovered(false)}
           aria-label="Sakura Offer Hub"
         >
-          <div
-            style={{
-              position: 'absolute',
-              bottom: ICON_SIZE + 10,
-              left: '50%',
-              transform: `translateX(-50%) translateY(${isLogoHovered ? 0 : 6}px)`,
-              opacity: isLogoHovered ? 1 : 0,
-              pointerEvents: 'none',
-              transition: 'opacity 0.15s ease, transform 0.15s ease',
-              whiteSpace: 'nowrap',
-              zIndex: 999,
-            }}
-          >
-            <div
-              style={{
-                background: 'rgba(255,255,255,0.96)',
-                backdropFilter: 'blur(12px)',
-                WebkitBackdropFilter: 'blur(12px)',
-                color: 'var(--neutral-800)',
-                fontSize: 12,
-                fontWeight: 700,
-                padding: '5px 14px',
-                borderRadius: 12,
-                border: '1px solid var(--pink-300)',
-                boxShadow: '0 4px 18px var(--pink-400)',
-                letterSpacing: 0.3,
-              }}
-            >
-              Sakura Offer Hub
-            </div>
-          </div>
+          <DockTooltip
+            label="Sakura Offer Hub"
+            isVisible={isLogoHovered}
+            iconSize={ICON_SIZE}
+            scale={1.08}
+            verticalLift={2 / 0.08}
+          />
           <img
             src={LOGO_URL}
             alt=""
@@ -154,7 +223,7 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
 
         {/* Tab 图标列表 */}
         <ul
-          className="flex flex-row items-end list-none m-0 p-0"
+          className="m-0 flex list-none flex-row items-end overflow-visible p-0"
           style={{ gap: ICON_GAP }}
           onPointerMove={handlePointerMove}
           onPointerLeave={handlePointerLeave}
@@ -169,43 +238,22 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                 ref={(element) => {
                   itemRefs.current[i] = element;
                 }}
-                className="relative flex flex-col items-center"
-                style={{ width: ICON_SIZE, height: ICON_SIZE }}
+                className="relative flex shrink-0 flex-col items-center"
+                style={{
+                  width: ICON_SIZE,
+                  height: ICON_SIZE,
+                  zIndex: isHovered || isLaunchTarget ? 10 : 1,
+                }}
                 onMouseEnter={() => setHoveredIndex(i)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
-                {/* Tooltip */}
-                <div
-                  style={{
-                    position: 'absolute',
-                    bottom: ICON_SIZE + 10,
-                    left: '50%',
-                    transform: `translateX(-50%) translateY(${isHovered || isLaunchTarget ? 0 : 6}px)`,
-                    opacity: isHovered || isLaunchTarget ? 1 : 0,
-                    pointerEvents: 'none',
-                    transition: 'opacity 0.15s ease, transform 0.15s ease',
-                    whiteSpace: 'nowrap',
-                    zIndex: 999,
-                  }}
-                >
-                  <div
-                    style={{
-                      background: 'rgba(255,255,255,0.96)',
-                      backdropFilter: 'blur(12px)',
-                      WebkitBackdropFilter: 'blur(12px)',
-                      color: 'var(--neutral-800)',
-                      fontSize: 12,
-                      fontWeight: 700,
-                      padding: '5px 14px',
-                      borderRadius: 12,
-                      border: '1px solid var(--pink-300)',
-                      boxShadow: '0 4px 18px var(--pink-400)',
-                      letterSpacing: 0.3,
-                    }}
-                  >
-                    {isLaunchTarget ? '秋招专场上线' : cat.name}
-                  </div>
-                </div>
+                <DockTooltip
+                  label={isLaunchTarget ? '秋招专场上线' : cat.name}
+                  isVisible={isHovered || isLaunchTarget}
+                  iconSize={ICON_SIZE}
+                  scale={isLaunchTarget ? 1.28 : DOCK_MAX_SCALE}
+                  verticalLift={isLaunchTarget ? 8 / 0.28 : DOCK_BUTTON_LIFT}
+                />
 
                 <button
                   ref={(element) => {
@@ -214,8 +262,10 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                   aria-label={cat.name}
                   aria-current={isActive ? 'page' : undefined}
                   onClick={() => onTabChange(cat.id)}
-                  className="w-full h-full flex items-center justify-center rounded-[13px] relative"
+                  className="relative flex items-center justify-center rounded-[13px]"
                   style={{
+                    width: ICON_SIZE,
+                    height: ICON_SIZE,
                     background: isActive
                       ? 'linear-gradient(135deg, var(--pink-50), var(--neutral-50))'
                       : isHovered
