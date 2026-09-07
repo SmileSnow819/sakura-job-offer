@@ -28,13 +28,6 @@ const getIconSize = () => {
 const ICON_SIZE = getIconSize();
 const ICON_GAP = 8;
 const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
-const DOCK_ARTWORK: Record<string, string> = {
-  autumn: `${import.meta.env.BASE_URL}assets/dock/autumn.png`,
-  campus: `${import.meta.env.BASE_URL}assets/dock/internship.png`,
-  tools: `${import.meta.env.BASE_URL}assets/dock/tools.png`,
-  interviews: `${import.meta.env.BASE_URL}assets/dock/interviews.png`,
-  tracker: `${import.meta.env.BASE_URL}assets/dock/tracker.png`,
-};
 
 const SidebarDock: React.FC<ISidebarDockProps> = ({
   categories,
@@ -246,16 +239,7 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                     cursor: 'pointer',
                   }}
                 >
-                  {DOCK_ARTWORK[cat.id] ? (
-                    <img
-                      src={DOCK_ARTWORK[cat.id]}
-                      alt=""
-                      aria-hidden="true"
-                      style={{ width: '88%', height: '88%', objectFit: 'contain' }}
-                    />
-                  ) : (
-                    (ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />)
-                  )}
+                  {ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />}
                 </button>
 
                 {isActive && (
