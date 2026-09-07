@@ -11,11 +11,13 @@
 .screen::before {
   position: absolute;
   inset: 0;
-  background: rgba(255, 251, 246, 0.23);
+  z-index: 0;
+  background: rgba(255, 251, 246, 0.46);
   content: '';
 }
 .halo {
   position: absolute;
+  z-index: 1;
   width: min(72vw, 760px);
   aspect-ratio: 1;
   border: 1px solid rgba(255, 255, 255, 0.58);
@@ -27,6 +29,7 @@
 .grain {
   position: absolute;
   inset: 0;
+  z-index: 1;
   opacity: 0.25;
   background-image: radial-gradient(rgba(103, 87, 117, 0.14) 0.55px, transparent 0.55px);
   background-size: 7px 7px;
@@ -35,6 +38,7 @@
 .marquees {
   position: absolute;
   inset: 0;
+  z-index: 1;
   overflow: hidden;
   pointer-events: none;
 }
@@ -67,22 +71,22 @@
   padding-right: 1.3em;
 }
 .toLeft {
-  animation: marquee-left 24s linear infinite;
+  animation: marquee-left var(--marquee-duration) linear infinite;
 }
 .toRight {
-  animation: marquee-right 28s linear infinite;
+  animation: marquee-right var(--marquee-duration) linear infinite;
 }
 @keyframes marquee-left {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-30%);
+    transform: translateX(-50%);
   }
 }
 @keyframes marquee-right {
   from {
-    transform: translateX(-30%);
+    transform: translateX(-50%);
   }
   to {
     transform: translateX(0);
@@ -90,9 +94,9 @@
 }
 .content {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   display: flex;
-  width: min(92vw, 660px);
+  width: min(92vw, 960px);
   flex-direction: column;
   align-items: center;
   text-align: center;
@@ -130,38 +134,79 @@
   letter-spacing: -0.055em;
   line-height: 1;
 }
+.artworkStage {
+  position: relative;
+  width: 100%;
+  height: clamp(330px, 42vw, 430px);
+  margin-top: 54px;
+}
 .mainArtwork {
-  width: clamp(178px, 23vw, 292px);
-  height: clamp(178px, 23vw, 292px);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: clamp(190px, 24vw, 304px);
+  margin: 0;
+  padding: 10px 12px 8px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  border-radius: 38px;
+  background: rgba(255, 252, 249, 0.68);
+  box-shadow: 0 18px 42px rgba(83, 60, 72, 0.16);
+  translate: -50% -50%;
+  backdrop-filter: blur(8px);
+}
+.mainArtwork img {
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: contain;
-  filter: drop-shadow(0 18px 17px rgba(83, 60, 72, 0.2));
+  filter: drop-shadow(0 14px 13px rgba(83, 60, 72, 0.16));
+}
+.mainArtwork figcaption,
+.floatingArtwork figcaption {
+  color: #695765;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+.floatingArtwork figure {
+  position: absolute;
+  z-index: 4;
+  display: grid;
+  width: clamp(82px, 10vw, 132px);
+  margin: 0;
+  padding: 8px 9px 7px;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.76);
+  border-radius: 28px;
+  background: rgba(255, 252, 249, 0.72);
+  box-shadow: 0 14px 30px rgba(83, 60, 72, 0.14);
+  backdrop-filter: blur(7px);
 }
 .floatingArtwork img {
-  position: absolute;
-  z-index: 1;
-  width: clamp(72px, 11vw, 142px);
-  height: clamp(72px, 11vw, 142px);
+  width: 100%;
+  aspect-ratio: 1;
   object-fit: contain;
-  filter: drop-shadow(0 12px 12px rgba(83, 60, 72, 0.14));
+  filter: drop-shadow(0 9px 9px rgba(83, 60, 72, 0.12));
 }
-.floatingArtwork img:nth-child(1) {
-  top: 13%;
-  left: 12%;
+.floatingArtwork figure:nth-child(1) {
+  top: 10%;
+  left: 8%;
   transform: rotate(-14deg);
 }
-.floatingArtwork img:nth-child(2) {
-  top: 16%;
-  right: 11%;
+.floatingArtwork figure:nth-child(2) {
+  top: 12%;
+  right: 8%;
   transform: rotate(12deg);
 }
-.floatingArtwork img:nth-child(3) {
-  bottom: 12%;
+.floatingArtwork figure:nth-child(3) {
+  bottom: 2%;
   left: 15%;
   transform: rotate(10deg);
 }
-.floatingArtwork img:nth-child(4) {
-  right: 13%;
-  bottom: 10%;
+.floatingArtwork figure:nth-child(4) {
+  right: 15%;
+  bottom: 1%;
   transform: rotate(-8deg);
 }
 .bloom {
@@ -190,12 +235,36 @@
   background: rgba(255, 255, 255, 0.88);
 }
 @media (max-width: 520px) {
+  .content {
+    width: 96vw;
+  }
   .copy h1 {
     font-size: 2.2rem;
   }
+  .artworkStage {
+    height: 390px;
+    margin-top: 42px;
+  }
+  .mainArtwork {
+    width: 186px;
+  }
   .floatingArtwork img {
-    width: 68px;
-    height: 68px;
+    width: 72px;
+  }
+  .floatingArtwork figure {
+    width: 76px;
+    padding: 6px;
+  }
+  .floatingArtwork figure:nth-child(1),
+  .floatingArtwork figure:nth-child(3) {
+    left: 0;
+  }
+  .floatingArtwork figure:nth-child(2),
+  .floatingArtwork figure:nth-child(4) {
+    right: 0;
+  }
+  .floatingArtwork figcaption {
+    font-size: 10px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

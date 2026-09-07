@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from 'lucide-react';
+import gsap from 'gsap';
 
 import { ICategory } from '../../types/bookmark';
+import { getDockScale } from '../../utils/dockMagnification';
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   BriefcaseBusiness: <BriefcaseBusiness size={20} />,
@@ -26,6 +28,13 @@ const getIconSize = () => {
 const ICON_SIZE = getIconSize();
 const ICON_GAP = 8;
 const LOGO_URL = `${import.meta.env.BASE_URL}sakura-offer-icon.svg`;
+const DOCK_ARTWORK: Record<string, string> = {
+  autumn: `${import.meta.env.BASE_URL}assets/dock/autumn.png`,
+  campus: `${import.meta.env.BASE_URL}assets/dock/internship.png`,
+  tools: `${import.meta.env.BASE_URL}assets/dock/tools.png`,
+  interviews: `${import.meta.env.BASE_URL}assets/dock/interviews.png`,
+  tracker: `${import.meta.env.BASE_URL}assets/dock/tracker.png`,
+};
 
 const SidebarDock: React.FC<ISidebarDockProps> = ({
   categories,
@@ -35,6 +44,42 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
 }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [isLogoHovered, setIsLogoHovered] = useState(false);
+  const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
+  const buttonRefs = useRef<(HTMLButtonElement | null)[]>([]);
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLUListElement>) => {
+    if (
+      event.pointerType !== 'mouse' ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    )
+      return;
+
+    itemRefs.current.forEach((item, index) => {
+      const button = buttonRefs.current[index];
+      if (!item || !button) return;
+
+      const rect = item.getBoundingClientRect();
+      const scale = getDockScale(event.clientX, rect.left + rect.width / 2, ICON_SIZE);
+      gsap.to(button, {
+        scale,
+        y: -(scale - 1) * 22,
+        duration: 0.12,
+        ease: 'power2.out',
+        overwrite: true,
+      });
+    });
+  };
+
+  const handlePointerLeave = () => {
+    setHoveredIndex(null);
+    gsap.to(buttonRefs.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.34,
+      ease: 'back.out(1.8)',
+      overwrite: true,
+    });
+  };
 
   return (
     <div className="fixed bottom-5 left-1/2 -translate-x-1/2 z-40">
@@ -115,7 +160,12 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
         />
 
         {/* Tab 图标列表 */}
-        <ul className="flex flex-row items-center list-none m-0 p-0" style={{ gap: ICON_GAP }}>
+        <ul
+          className="flex flex-row items-end list-none m-0 p-0"
+          style={{ gap: ICON_GAP }}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={handlePointerLeave}
+        >
           {categories.map((cat, i) => {
             const isActive = cat.id === activeTab;
             const isHovered = hoveredIndex === i;
@@ -123,6 +173,9 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
             return (
               <li
                 key={cat.id}
+                ref={(element) => {
+                  itemRefs.current[i] = element;
+                }}
                 className="relative flex flex-col items-center"
                 style={{ width: ICON_SIZE, height: ICON_SIZE }}
                 onMouseEnter={() => setHoveredIndex(i)}
@@ -162,6 +215,9 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                 </div>
 
                 <button
+                  ref={(element) => {
+                    buttonRefs.current[i] = element;
+                  }}
                   aria-label={cat.name}
                   aria-current={isActive ? 'page' : undefined}
                   onClick={() => onTabChange(cat.id)}
@@ -183,17 +239,23 @@ const SidebarDock: React.FC<ISidebarDockProps> = ({
                         : isHovered
                           ? '0 6px 18px var(--pink-400)'
                           : '0 2px 6px rgba(0,0,0,0.05)',
-                    transform: isLaunchTarget
-                      ? 'scale(1.28) translateY(-8px)'
-                      : isHovered && !isActive
-                        ? 'scale(1.12) translateY(-3px)'
-                        : 'none',
-                    transition: 'all 0.15s ease',
+                    transform: isLaunchTarget ? 'scale(1.28) translateY(-8px)' : undefined,
+                    transformOrigin: 'bottom center',
+                    transition: 'box-shadow 0.15s ease, background 0.15s ease',
                     animation: isLaunchTarget ? 'autumnDockPulse 0.75s ease-in-out 3' : 'none',
                     cursor: 'pointer',
                   }}
                 >
-                  {ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />}
+                  {DOCK_ARTWORK[cat.id] ? (
+                    <img
+                      src={DOCK_ARTWORK[cat.id]}
+                      alt=""
+                      aria-hidden="true"
+                      style={{ width: '88%', height: '88%', objectFit: 'contain' }}
+                    />
+                  ) : (
+                    (ICON_COMPONENTS[cat.icon] ?? <Compass size={20} />)
+                  )}
                 </button>
 
                 {isActive && (

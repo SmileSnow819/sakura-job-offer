@@ -4,6 +4,7 @@ import test from 'node:test';
 import {
   BACKGROUND_MARQUEE_ROWS,
   ENTRY_ARTWORK,
+  MARQUEE_DURATION_SECONDS,
   getAutumnArtwork,
 } from '../src/utils/launchArtwork.ts';
 
@@ -23,4 +24,8 @@ test('品牌开场保留三条低密度的背景跑马灯', () => {
   assert.equal(BACKGROUND_MARQUEE_ROWS.length, 3);
   assert.ok(BACKGROUND_MARQUEE_ROWS.every(({ words }) => words.length >= 3));
   assert.ok(new Set(BACKGROUND_MARQUEE_ROWS.map(({ direction }) => direction)).size > 1);
+});
+
+test('背景跑马灯在五秒内完成一轮', () => {
+  assert.equal(MARQUEE_DURATION_SECONDS, 5);
 });

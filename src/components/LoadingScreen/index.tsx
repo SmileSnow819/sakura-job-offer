@@ -3,7 +3,11 @@ import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 import styles from './index.module.css';
-import { BACKGROUND_MARQUEE_ROWS, ENTRY_ARTWORK } from '../../utils/launchArtwork.ts';
+import {
+  BACKGROUND_MARQUEE_ROWS,
+  ENTRY_ARTWORK,
+  MARQUEE_DURATION_SECONDS,
+} from '../../utils/launchArtwork.ts';
 
 interface ILoadingScreenProps {
   onComplete: () => void;
@@ -14,8 +18,8 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const sealRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
-  const mainArtworkRef = useRef<HTMLImageElement>(null);
-  const floatingArtworkRefs = useRef<(HTMLImageElement | null)[]>([]);
+  const mainArtworkRef = useRef<HTMLElement>(null);
+  const floatingArtworkRefs = useRef<(HTMLElement | null)[]>([]);
   const bloomRefs = useRef<(HTMLSpanElement | null)[]>([]);
   const completedRef = useRef(false);
 
@@ -59,10 +63,10 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
       )
       .to(
         floatingArtworkRefs.current,
-        { opacity: 0.34, scale: 1, duration: 0.5, stagger: 0.08, ease: 'power3.out' },
-        '<0.18',
+        { opacity: 1, scale: 1, duration: 0.36, stagger: 0.04, ease: 'power3.out' },
+        '<0.08',
       )
-      .to({}, { duration: 0.55 });
+      .to({}, { duration: 0.85 });
     return () => timeline.kill();
   }, [finish]);
 
@@ -75,7 +79,12 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
   ];
 
   return (
-    <section ref={containerRef} className={styles.screen} aria-label="Sakura Job Offer 品牌开场">
+    <section
+      ref={containerRef}
+      className={styles.screen}
+      style={{ '--marquee-duration': `${MARQUEE_DURATION_SECONDS}s` } as React.CSSProperties}
+      aria-label="Sakura Job Offer 品牌开场"
+    >
       <div className={styles.halo} aria-hidden="true" />
       <div className={styles.grain} aria-hidden="true" />
       <div className={styles.marquees} aria-hidden="true">
@@ -111,23 +120,24 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({ onComplete }) => {
           <p>让每一次投递，都有清楚的去处</p>
           <h1>Sakura Job Offer</h1>
         </div>
-        <img
-          ref={mainArtworkRef}
-          className={styles.mainArtwork}
-          src={ENTRY_ARTWORK[0].src}
-          alt=""
-        />
-        <div className={styles.floatingArtwork} aria-hidden="true">
-          {ENTRY_ARTWORK.slice(1).map(({ id, src }, index) => (
-            <img
-              key={id}
-              ref={(element) => {
-                floatingArtworkRefs.current[index] = element;
-              }}
-              src={src}
-              alt=""
-            />
-          ))}
+        <div className={styles.artworkStage}>
+          <figure ref={mainArtworkRef} className={styles.mainArtwork}>
+            <img src={ENTRY_ARTWORK[0].src} alt="" />
+            <figcaption>{ENTRY_ARTWORK[0].label}</figcaption>
+          </figure>
+          <div className={styles.floatingArtwork} aria-hidden="true">
+            {ENTRY_ARTWORK.slice(1).map(({ id, label, src }, index) => (
+              <figure
+                key={id}
+                ref={(element) => {
+                  floatingArtworkRefs.current[index] = element;
+                }}
+              >
+                <img src={src} alt="" />
+                <figcaption>{label}</figcaption>
+              </figure>
+            ))}
+          </div>
         </div>
       </div>
       <button type="button" className={styles.skip} onClick={finish}>

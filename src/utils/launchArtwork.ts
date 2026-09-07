@@ -39,5 +39,8 @@ export const BACKGROUND_MARQUEE_ROWS = [
   { direction: 'left', words: ['校园招聘', '新的旅程', 'Sakura'] },
 ] as const;
 
+/** 背景文字保持明显流动感，避免低速移动看起来近似静止。 */
+export const MARQUEE_DURATION_SECONDS = 5;
+
 /** 秋招第二幕延续首幕的秋招信封，避免出现无关联的专题视觉。 */
 export const getAutumnArtwork = () => ENTRY_ARTWORK[0];
