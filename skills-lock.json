@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-notes": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/agent-notes/SKILL.md",
+      "computedHash": "808d772469f24f7fb383dcfc5b29c5e2186092cd432ca1964d4869b0cb819cf9"
+    },
+    "code-review": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/code-review/SKILL.md",
+      "computedHash": "9a71e0f722765f400faefba18a5e26b0309685ce705b37aa1834db8b12e06517"
+    },
+    "find-simplifications": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/find-simplifications/SKILL.md",
+      "computedHash": "74a012898d67b6eceb4e9762d930b21946e6e57f1f9fcb31eb6cbb1ef259679c"
+    },
+    "project-bootstrap": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/project-bootstrap/SKILL.md",
+      "computedHash": "131724a1a91b9f80a13fc75bd93fe60d85cd930bc739e1ccdc2c92197772c333"
+    },
+    "trim-cot-leakage": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/trim-cot-leakage/SKILL.md",
+      "computedHash": "7716561e82060425e08f136d3d32f20df3c5cff61fb6384555694c9a64f1fcde"
+    },
+    "yuki-agent-kit": {
+      "source": "SmileSnow819/yuki-agent-kit",
+      "sourceType": "github",
+      "skillPath": "skills/yuki-agent-kit/SKILL.md",
+      "computedHash": "c782c5cce58febba751754d6592a2e8d5e167e12f8d036b5fb091f40930df24d"
+    }
+  }
+}
