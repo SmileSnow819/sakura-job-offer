@@ -10,6 +10,7 @@ import {
   JOURNAL_EXIT_START_SECONDS,
   JOURNAL_INTRO_DURATION_SECONDS,
   JOURNAL_PAGE_REVEAL_SECONDS,
+  LAUNCH_HERO_SRC,
   MARQUEE_DURATION_SECONDS,
 } from '../../utils/launchArtwork.ts';
 
@@ -177,7 +178,12 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({
     <section
       ref={containerRef}
       className={styles.screen}
-      style={{ '--marquee-duration': `${MARQUEE_DURATION_SECONDS}s` } as React.CSSProperties}
+      style={
+        {
+          '--marquee-duration': `${MARQUEE_DURATION_SECONDS}s`,
+          '--launch-hero-image': `url("${LAUNCH_HERO_SRC}")`,
+        } as React.CSSProperties
+      }
       aria-label="Sakura Job Offer 品牌开场"
     >
       <div className={styles.halo} aria-hidden="true" />

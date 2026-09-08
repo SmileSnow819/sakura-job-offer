@@ -6,8 +6,8 @@
     <title>Sakura Offer Hub</title>
     <script>
       (function () {
-        var base = "/sakura-job-offer/";
         var path = location.pathname;
+        var base = path.indexOf("/sakura-job-offer/") === 0 ? "/sakura-job-offer/" : "/";
         if (path.indexOf(base) !== 0) {
           location.replace(base);
           return;
