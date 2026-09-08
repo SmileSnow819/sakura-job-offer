@@ -1,11 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
-import { Download, FileCode2, FileSpreadsheet, Image } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { Download, FileCode2, FileSpreadsheet } from 'lucide-react';
 import { Modal } from './components';
 import {
   download,
   makeCsv,
   makeHtml,
-  makePosters,
   THEMES,
   type ExportOptions,
   type ExportRecord,
@@ -28,29 +27,13 @@ export function ExportDialog({
     title: `我的 ${new Date().getFullYear()} 秋招进度`,
     notes: false,
     websites: false,
-    theme: 'blue',
+    theme: 'rose',
   });
   const [format, setFormat] = useState('html');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const [posters, setPosters] = useState<Blob[]>([]);
-  const [page, setPage] = useState(0);
-  const [posterUrl, setPosterUrl] = useState('');
   const records = scope === 'all' ? all : scope === 'selected' ? selected : filtered;
   const html = useMemo(() => makeHtml(records, options), [records, options]);
-  useEffect(() => {
-    setPosters([]);
-    setPage(0);
-  }, [scope, options]);
-  useEffect(() => {
-    if (!posters[page]) {
-      setPosterUrl('');
-      return;
-    }
-    const url = URL.createObjectURL(posters[page]);
-    setPosterUrl(url);
-    return () => URL.revokeObjectURL(url);
-  }, [posters, page]);
   async function generate() {
     if (!options.title.trim()) {
       setError('请填写标题');
@@ -68,12 +51,8 @@ export function ExportDialog({
           new Blob([makeCsv(records, options)], { type: 'text/csv;charset=utf-8' }),
           `秋招记录-${today()}.csv`,
         );
-      else if (format === 'html')
+      else
         download(new Blob([html], { type: 'text/html;charset=utf-8' }), `秋招记录-${today()}.html`);
-      else {
-        setPosters(await makePosters(records, options));
-        setPage(0);
-      }
     } catch (cause) {
       setError(`导出失败：${(cause as Error).message}`);
     } finally {
@@ -95,7 +74,6 @@ export function ExportDialog({
             {[
               { id: 'html', label: 'HTML 档案', Icon: FileCode2 },
               { id: 'csv', label: 'CSV 表格', Icon: FileSpreadsheet },
-              { id: 'png', label: '分享海报', Icon: Image },
             ].map(({ id, label, Icon }) => (
               <button
                 type="button"
@@ -132,7 +110,7 @@ export function ExportDialog({
             )}
           </div>
           <div className="tracker-export-options">
-            {format !== 'csv' && (
+            {format !== 'csv' ? (
               <div className="tracker-theme-picker" role="group" aria-label="主题颜色">
                 {Object.entries(THEMES).map(([theme, colors]) => (
                   <button
@@ -150,23 +128,26 @@ export function ExportDialog({
                   </button>
                 ))}
               </div>
+            ) : (
+              <>
+                <label className="tracker-check">
+                  <input
+                    type="checkbox"
+                    checked={options.notes}
+                    onChange={(e) => setOptions({ ...options, notes: e.target.checked })}
+                  />
+                  包含备注
+                </label>
+                <label className="tracker-check">
+                  <input
+                    type="checkbox"
+                    checked={options.websites}
+                    onChange={(e) => setOptions({ ...options, websites: e.target.checked })}
+                  />
+                  包含官网
+                </label>
+              </>
             )}
-            <label className="tracker-check">
-              <input
-                type="checkbox"
-                checked={options.notes}
-                onChange={(e) => setOptions({ ...options, notes: e.target.checked })}
-              />
-              包含备注
-            </label>
-            <label className="tracker-check">
-              <input
-                type="checkbox"
-                checked={options.websites}
-                onChange={(e) => setOptions({ ...options, websites: e.target.checked })}
-              />
-              包含官网
-            </label>
           </div>
         </fieldset>
         {format === 'html' && (
@@ -182,51 +163,10 @@ export function ExportDialog({
             <small>UTF-8 中文 CSV，可用 Excel / Numbers 打开。JSON 备份可用于恢复数据。</small>
           </div>
         )}
-        {format === 'png' &&
-          (posterUrl ? (
-            <div className="tracker-poster-preview">
-              <img src={posterUrl} alt={`分享海报预览，第 ${page + 1} 页`} />
-              <div className="tracker-inline-actions">
-                <button
-                  className="tracker-button"
-                  disabled={page === 0}
-                  onClick={() => setPage(page - 1)}
-                >
-                  上一页
-                </button>
-                <span>
-                  {page + 1} / {posters.length}
-                </span>
-                <button
-                  className="tracker-button"
-                  disabled={page === posters.length - 1}
-                  onClick={() => setPage(page + 1)}
-                >
-                  下一页
-                </button>
-                <button
-                  className="tracker-button primary"
-                  onClick={() => download(posters[page], `秋招海报-${today()}-${page + 1}.png`)}
-                >
-                  <Download size={16} />
-                  下载第 {page + 1} 页
-                </button>
-              </div>
-            </div>
-          ) : (
-            <div className="tracker-export-explanation">
-              <Image size={40} />
-              <h3>PNG 分享海报</h3>
-              <p>
-                分享选中的公司、当前阶段和进度统计，每页最多 5
-                条记录。选择好范围和配色后，生成预览。
-              </p>
-            </div>
-          ))}
         <p className="tracker-help">
-          默认不包含备注和官网。HTML /
-          海报使用文字头像，离线查看不依赖图标服务。海报为进度摘要，投递备注最多展示 3
-          行；完整流程和阶段备注可导出 HTML / CSV。
+          {format === 'html'
+            ? 'HTML 仅展示投递统计与已拿 Offer 的公司，不包含进行中明细。'
+            : 'CSV 保留完整投递流程；默认不包含备注和官网。'}
         </p>
         {error && (
           <p className="tracker-error" role="alert">
@@ -241,7 +181,7 @@ export function ExportDialog({
             disabled={busy || !records.length}
             onClick={generate}
           >
-            {busy ? '正在生成…' : format === 'png' ? '生成海报预览' : '下载文件'}
+            {busy ? '正在导出…' : '下载文件'}
             <Download size={16} />
           </button>
         </div>

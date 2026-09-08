@@ -94,6 +94,7 @@ const App: React.FC = () => {
   const pageRevealStartedRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const isTrackerRoute = location.pathname.startsWith('/tracker');
 
   // 当前激活的 tab 从路径推导
   const pathParts = location.pathname.split('/');
@@ -233,8 +234,9 @@ const App: React.FC = () => {
       <div
         className="fixed inset-0 -z-10"
         style={{
-          background:
-            'linear-gradient(135deg, var(--pink-50) 0%, var(--blue-50) 50%, var(--pink-100) 100%)',
+          background: isTrackerRoute
+            ? '#fffaf9'
+            : 'linear-gradient(135deg, var(--pink-50) 0%, var(--blue-50) 50%, var(--pink-100) 100%)',
         }}
       />
       <SakuraPetals />
@@ -246,9 +248,9 @@ const App: React.FC = () => {
           position: 'fixed',
           inset: 0,
           paddingBottom: 88,
-          background: 'rgba(255,255,255,0.38)',
-          backdropFilter: 'blur(20px)',
-          WebkitBackdropFilter: 'blur(20px)',
+          background: isTrackerRoute ? '#fffaf9' : 'rgba(255,255,255,0.38)',
+          backdropFilter: isTrackerRoute ? 'none' : 'blur(20px)',
+          WebkitBackdropFilter: isTrackerRoute ? 'none' : 'blur(20px)',
           overflow: 'hidden',
         }}
       >

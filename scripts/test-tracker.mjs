@@ -16,7 +16,7 @@ import {
   validateFlow,
 } from '../src/features/tracker/model.ts';
 import { makeCsv, makeHtml } from '../src/features/tracker/export.ts';
-import { trackerMotion } from '../src/features/tracker/motion.ts';
+import { trackerMotion, trackerTimelineMotion } from '../src/features/tracker/motion.ts';
 
 function fixture() {
   const data = emptyData();
@@ -157,11 +157,14 @@ test('未设置职位时统一显示待设置职位', () => {
 });
 test('投递页动效区分分层进入、内容切换和减少动态效果', () => {
   assert.deepEqual(trackerMotion(false), {
-    enterDuration: 0.42,
-    enterOffset: 18,
-    enterStagger: 0.055,
-    contentDuration: 0.2,
-    contentOffset: 8,
+    enterDuration: 0.56,
+    enterOffset: 24,
+    enterStagger: 0.075,
+    contentDuration: 0.28,
+    contentOffset: 10,
+    itemDuration: 0.42,
+    itemOffset: 14,
+    itemStagger: 0.045,
   });
   assert.deepEqual(trackerMotion(true), {
     enterDuration: 0,
@@ -169,6 +172,19 @@ test('投递页动效区分分层进入、内容切换和减少动态效果', ()
     enterStagger: 0,
     contentDuration: 0,
     contentOffset: 0,
+    itemDuration: 0,
+    itemOffset: 0,
+    itemStagger: 0,
+  });
+});
+test('表格展开动效在正常模式下有过渡，减少动态效果时立即完成', () => {
+  const motion = trackerTimelineMotion(false);
+  assert.ok(motion.expandDuration > 0 && motion.stageDuration > 0 && motion.stageStagger > 0);
+  assert.deepEqual(trackerTimelineMotion(true), {
+    expandDuration: 0,
+    stageDuration: 0,
+    stageOffset: 0,
+    stageStagger: 0,
   });
 });
 test('JSON 备份完整往返，忽略额外字段', () => {
@@ -222,9 +238,51 @@ test('导出转义 HTML 注入和 CSV 公式，HTML 不含外部依赖', () => {
   data.companies[0].name = '<script>alert(1)</script>';
   data.applications[0].position = '=HYPERLINK("https://evil.test")';
   data.applications[0].stages[0].note = '<img src=x onerror=alert(1)>';
+  const offerStage = data.applications[0].stages.at(-1);
+  assert.ok(offerStage);
+  data.applications[0].stages = changeStage(
+    data.applications[0].stages,
+    offerStage.id,
+    'completed',
+  );
   const records = [{ application: data.applications[0], company: data.companies[0] }];
   const html = makeHtml(records, { title: '<测试>', theme: 'rose', notes: true, websites: false });
   assert.ok(!html.includes('<script>') && !html.includes('<img') && !html.includes('<link'));
+  assert.ok(!html.includes('share-cover'));
   assert.ok(html.includes('&lt;script&gt;') && html.includes('&lt;测试&gt;'));
   assert.ok(makeCsv(records, { notes: false, websites: false }).includes("'="));
+});
+test('HTML 导出只展示 offer 公司与三项统计，并使用不同语义色', () => {
+  const data = fixture();
+  data.companies.push({
+    id: 'c2',
+    name: 'Offer 公司',
+    website: '',
+    isCustom: true,
+  });
+  const offerApplication = structuredClone(data.applications[0]);
+  offerApplication.id = 'a2';
+  offerApplication.companyId = 'c2';
+  const offerStage = offerApplication.stages.at(-1);
+  assert.ok(offerStage);
+  offerApplication.stages = changeStage(offerApplication.stages, offerStage.id, 'completed');
+  const html = makeHtml(
+    [
+      { application: data.applications[0], company: data.companies[0] },
+      { application: offerApplication, company: data.companies[1] },
+    ],
+    { title: '秋招进度', theme: 'rose', notes: false, websites: false },
+  );
+
+  assert.ok(html.includes('<b>2</b>投递数量'));
+  assert.ok(html.includes('<b>1</b>进行中'));
+  assert.ok(html.includes('<b>1</b>Offer 数量'));
+  assert.ok(html.includes('Offer 公司'));
+  assert.ok(!html.includes('测试公司'));
+  assert.equal(html.match(/进行中/g)?.length, 1);
+  assert.ok(!html.includes('测试岗位'));
+  assert.ok(!html.includes('投递于'));
+  assert.ok(html.includes('.stat.total{color:#a23f65'));
+  assert.ok(html.includes('.stat.active{color:#8a5700'));
+  assert.ok(html.includes('.stat.offer{color:#087a4c'));
 });

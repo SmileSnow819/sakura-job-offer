@@ -91,16 +91,24 @@ export function makeHtml(records: ExportRecord[], options: ExportOptions): strin
   const e = escapeHtml;
   const active = records.filter((r) => outcome(r.application) === 'active').length;
   const offers = records.filter((r) => outcome(r.application) === 'offer').length;
+  const offerCompanies = [
+    ...new Map(
+      records
+        .filter((record) => outcome(record.application) === 'offer')
+        .map((record) => [record.company.id, record.company]),
+    ).values(),
+  ];
   // 使用文字头像，确保导出的 HTML 离线打开时不依赖第三方图片服务。
-  const cards = records
+  const cards = offerCompanies
     .map(
-      ({ application: a, company: c }) =>
-        `<article><header><span class="avatar">${e(Array.from(c.name)[0] ?? '?')}</span><div><h2>${e(c.name)}</h2><p>${e(positionLabel(a.position))}</p></div><span class="badge">${e(OUTCOME_LABELS[outcome(a)])}${a.archived ? ' · 已归档' : ''}</span></header><div class="meta">投递于 ${e(a.appliedAt)} · 更新于 ${e(new Date(a.updatedAt).toLocaleDateString('zh-CN'))}</div>${options.websites && c.website ? `<p><a href="${e(c.website)}" rel="noopener noreferrer">${e(c.website)}</a></p>` : ''}<ol>${a.stages.map((s) => `<li class="${s.status}"><span class="dot"></span><div><strong>${e(s.name)}</strong><span class="meta">${STAGE_LABELS[s.status]}${s.completedAt ? ` · ${e(s.completedAt)}` : ''}</span>${options.notes && s.note ? `<p class="note">${e(s.note)}</p>` : ''}</div></li>`).join('')}</ol>${options.notes && a.note ? `<p class="note application-note">${e(a.note)}</p>` : ''}</article>`,
+      (company) =>
+        `<article><span class="avatar">${e(Array.from(company.name)[0] ?? '?')}</span><h2>${e(company.name)}</h2></article>`,
     )
     .join('');
+  const offerContent = cards || '<div class="empty">当前导出范围内还没有 Offer</div>';
   return `<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>${e(options.title)}</title><style>
-*{box-sizing:border-box}body{margin:0;color:#332d38;background:${pale};font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:1100px;margin:auto;padding:60px 24px}h1{font-size:clamp(26px,5vw,34px);letter-spacing:-1.5px;margin:12px 0;overflow-wrap:anywhere}.eyebrow{font-size:12px;letter-spacing:3px;color:${accent};font-weight:700}.intro{color:#786c7d}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0 36px}.stat{padding:20px;border:1px solid #fff;background:#ffffffa8;border-radius:8px}.stat b{display:block;font-size:32px;color:${accent}}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}article{background:#fff;border:1px solid #e9e3e9;border-radius:8px;padding:24px;break-inside:avoid}header{display:flex;align-items:center;gap:12px}header>div{min-width:0;flex:1}h2{font-size:19px;margin:0;overflow-wrap:anywhere}p{margin:4px 0;overflow-wrap:anywhere}a{color:${accent}}.avatar{flex-shrink:0;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:${pale};color:${accent};font-size:22px;font-weight:700}.badge{font-size:11px;background:${pale};color:${accent};padding:5px 10px;border-radius:8px;flex-shrink:0}.meta{display:block;color:#817684;font-size:12px;margin-top:8px}ol{list-style:none;padding:0;margin:24px 0 0}li{display:flex;gap:12px;position:relative;padding:0 0 20px}li:last-child{padding-bottom:0}li:not(:last-child):before{content:"";position:absolute;top:13px;bottom:0;left:5px;border-left:2px solid #ede7ee}.dot{width:12px;height:12px;flex-shrink:0;margin-top:6px;border:2px solid #d9cedb;border-radius:50%;background:white;z-index:1}.completed .dot{background:#41806b;border-color:#41806b}.active .dot{background:${accent};border-color:${accent};box-shadow:0 0 0 4px ${pale}}.rejected .dot{background:#bc5555;border-color:#bc5555}.skipped .dot{background:#d9cedb}.note{white-space:pre-wrap;font-size:13px;color:#62546b}.application-note{padding:12px;background:${pale};border-radius:12px;margin-top:20px}footer{margin-top:36px;color:#817684;font-size:12px}@media(max-width:650px){main{padding:30px 16px}.grid{grid-template-columns:1fr}.stat{padding:14px}article{padding:20px}header{flex-wrap:wrap}.badge{margin-left:auto}}@media print{body{background:white}main{padding:0}.grid{display:block}article{margin:16px 0}.stats{margin:16px 0}}
-</style></head><body><main><div class="eyebrow">SAKURA OFFER HUB</div><h1>${e(options.title)}</h1><p class="intro">公司、岗位与招聘流程记录</p><div class="stats"><div class="stat"><b>${records.length}</b>投递记录 · ${new Set(records.map((r) => r.company.id)).size} 家公司</div><div class="stat"><b>${active}</b>进行中</div><div class="stat"><b>${offers}</b>已拿 offer</div></div><div class="grid">${cards}</div><footer>Sakura Offer Hub · 导出于 ${today()} · 此文件为离线快照</footer></main></body></html>`;
+*{box-sizing:border-box}body{margin:0;color:#332d38;background:${pale};font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}main{max-width:980px;margin:auto;padding:60px 24px}h1{font-size:clamp(26px,5vw,38px);letter-spacing:-1.5px;margin:12px 0;overflow-wrap:anywhere}.eyebrow{font-size:12px;letter-spacing:3px;color:${accent};font-weight:700}.intro{color:#786c7d}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:30px 0 42px}.stat{padding:20px;border:1px solid;border-radius:16px}.stat b{display:block;font-size:36px;line-height:1.2;margin-bottom:5px}.stat.total{color:#a23f65;border-color:#efb8cc;background:#fff1f6}.stat.active{color:#8a5700;border-color:#e8c46e;background:#fff5d9}.stat.offer{color:#087a4c;border-color:#72cda6;background:#e7faef}.section-title{font-size:16px;margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}article{display:flex;align-items:center;gap:12px;background:#fff;border:1px solid #bde5d3;border-radius:16px;padding:18px 20px;break-inside:avoid;box-shadow:0 10px 32px #275c4510}h2{font-size:19px;margin:0;overflow-wrap:anywhere}.avatar{flex-shrink:0;display:grid;place-items:center;width:44px;height:44px;border-radius:14px;background:#e5f8ef;color:#087a4c;font-size:22px;font-weight:700}.empty{grid-column:1/-1;padding:52px 20px;border:1px dashed #d8cdd2;border-radius:16px;background:#ffffff91;color:#8a7d83;text-align:center}footer{margin-top:36px;color:#817684;font-size:12px}@media(max-width:650px){main{padding:30px 16px}.stats{gap:8px}.stat{padding:14px}.stat b{font-size:28px}.grid{grid-template-columns:1fr}article{padding:16px}}@media print{body{background:white}main{padding:0}.grid{display:block}article{margin:16px 0}.stats{margin:16px 0}}
+</style></head><body><main><div class="eyebrow">SAKURA OFFER HUB</div><h1>${e(options.title)}</h1><p class="intro">投递概览与 Offer 记录</p><div class="stats"><div class="stat total"><b>${records.length}</b>投递数量</div><div class="stat active"><b>${active}</b>进行中</div><div class="stat offer"><b>${offers}</b>Offer 数量</div></div><h2 class="section-title">已拿 Offer 的公司</h2><div class="grid">${offerContent}</div><footer>Sakura Offer Hub · 导出于 ${today()} · 此文件为离线快照</footer></main></body></html>`;
 }
 
 function lines(ctx: CanvasRenderingContext2D, text: string, maxWidth: number): string[] {
@@ -128,6 +136,7 @@ export async function makePosters(
   const theme = THEMES[options.theme];
   const chunks: ExportRecord[][] = [];
   for (let i = 0; i < records.length; i += 5) chunks.push(records.slice(i, i + 5));
+
   for (const [page, chunk] of chunks.entries()) {
     const canvas = document.createElement('canvas');
     const ctx = canvas.getContext('2d');
