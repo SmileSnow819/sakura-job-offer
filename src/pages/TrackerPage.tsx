@@ -12,6 +12,7 @@ import {
   Plus,
   RotateCcw,
   Search,
+  Share2,
   SlidersHorizontal,
 } from 'lucide-react';
 import bookmarks from '../bookmarks.json';
@@ -39,6 +40,8 @@ import { trackerMotion } from '../features/tracker/motion';
 import '../features/tracker/tracker.css';
 
 const Analytics = lazy(() => import('../features/tracker/Analytics'));
+// 分享功能的入口先保留在界面结构中，待独立方案完成后再开放。
+const SHARE_ENABLED = false;
 const catalog: Company[] = [];
 for (const category of bookmarks.categories.filter((c) => c.id !== 'interviews')) {
   for (const link of category.links) {
@@ -145,15 +148,10 @@ export default function TrackerPage() {
     const context = gsap.context(() => {
       const sections = page.querySelectorAll<HTMLElement>('[data-tracker-enter]');
       if (reduced) {
-        gsap.set([page, ...sections], { clearProps: 'all' });
+        gsap.set(sections, { clearProps: 'all' });
         return;
       }
       const timeline = gsap.timeline();
-      timeline.fromTo(
-        page,
-        { opacity: 0 },
-        { opacity: 1, duration: motion.enterDuration * 0.7, ease: 'power2.out' },
-      );
       timeline.fromTo(
         sections,
         { opacity: 0, y: motion.enterOffset },
@@ -165,8 +163,17 @@ export default function TrackerPage() {
           ease: 'power3.out',
           clearProps: 'opacity,transform',
         },
-        0.04,
+        0,
       );
+      gsap.to('[data-tracker-float]', {
+        y: -7,
+        rotation: 7,
+        duration: 2.8,
+        stagger: { each: 0.28, from: 'random' },
+        ease: 'sine.inOut',
+        repeat: -1,
+        yoyo: true,
+      });
     }, page);
     return () => context.revert();
   }, []);
@@ -184,7 +191,11 @@ export default function TrackerPage() {
       gsap.set(content, { clearProps: 'all' });
       return;
     }
-    const tween = gsap.fromTo(
+    const items = content.querySelectorAll<HTMLElement>(
+      '.tracker-card, .tracker-table-wrap, .tracker-empty, .tracker-analytics > section',
+    );
+    const timeline = gsap.timeline();
+    timeline.fromTo(
       content,
       { opacity: 0, y: motion.contentOffset },
       {
@@ -196,8 +207,22 @@ export default function TrackerPage() {
         clearProps: 'opacity,transform',
       },
     );
+    timeline.fromTo(
+      items,
+      { opacity: 0, y: motion.itemOffset, scale: 0.985 },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: motion.itemDuration,
+        stagger: motion.itemStagger,
+        ease: 'power3.out',
+        clearProps: 'opacity,transform',
+      },
+      0.04,
+    );
     return () => {
-      tween.kill();
+      timeline.kill();
     };
   }, [archive, filter, filtered.length, query, showAnalytics, sort, view]);
   function commit(next: TrackerData, message: string, close = true) {
@@ -250,15 +275,26 @@ export default function TrackerPage() {
   return (
     <section ref={pageRef} className="tracker-page" aria-label="我的投递">
       <div className="tracker-container">
-        <header className="tracker-header" data-tracker-enter>
-          <div>
-            <h1>投递记录</h1>
-            <p>记录岗位与招聘进度</p>
+        <header className="tracker-header tracker-hero" data-tracker-enter>
+          <div className="tracker-hero-copy">
+            <span className="tracker-eyebrow">
+              <span /> SAKURA TRACKER
+            </span>
+            <h1>我的投递</h1>
+            <p>把每一次尝试认真收好，也把下一步看得清清楚楚。</p>
           </div>
           <button className="tracker-button primary" onClick={() => setDialog({ type: 'new' })}>
             <Plus size={18} />
             新增投递
           </button>
+          <div className="tracker-sakura-art" aria-hidden="true">
+            <span className="tracker-branch" />
+            <span className="tracker-blossom blossom-one" data-tracker-float />
+            <span className="tracker-blossom blossom-two" data-tracker-float />
+            <span className="tracker-blossom blossom-three" data-tracker-float />
+            <span className="tracker-petal petal-one" data-tracker-float />
+            <span className="tracker-petal petal-two" data-tracker-float />
+          </div>
         </header>
         <div className="tracker-stats" data-tracker-enter>
           {[
@@ -337,8 +373,14 @@ export default function TrackerPage() {
               onClick={() => setDialog({ type: 'export' })}
             >
               <Download size={15} />
-              导出与分享
+              导出
             </button>
+            {SHARE_ENABLED && (
+              <button className="tracker-button small" disabled={!all.length}>
+                <Share2 size={15} />
+                分享
+              </button>
+            )}
           </div>
         </div>
         {error && (

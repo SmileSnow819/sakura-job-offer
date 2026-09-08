@@ -1,6 +1,8 @@
-import { Fragment, useEffect, useId, useRef, useState } from 'react';
+import { Fragment, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 import { Check, ChevronRight, Minus, X } from 'lucide-react';
 import { CompanyLogo } from './components';
+import { trackerTimelineMotion } from './motion';
 import {
   currentStage,
   outcome,
@@ -35,7 +37,47 @@ export default function ApplicationTable({
   const [saveFailed, setSaveFailed] = useState(false);
   const actionPanel = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
+  const timelinePanels = useRef(new Map<string, HTMLDivElement>());
+  const timelineToggles = useRef(new Map<string, HTMLButtonElement>());
   const prefix = useId();
+
+  useLayoutEffect(() => {
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const motion = trackerTimelineMotion(reduced);
+    for (const { application } of records) {
+      const panel = timelinePanels.current.get(application.id);
+      const toggleButton = timelineToggles.current.get(application.id);
+      if (!panel || !toggleButton) continue;
+      const open = expanded.has(application.id);
+      panel.inert = !open;
+      gsap.killTweensOf([panel, toggleButton.querySelector('svg')]);
+      gsap.to(toggleButton.querySelector('svg'), {
+        rotation: open ? 90 : 0,
+        duration: motion.expandDuration * 0.75,
+        ease: open ? 'back.out(1.8)' : 'power2.inOut',
+      });
+      gsap.to(panel, {
+        height: open ? 'auto' : 0,
+        opacity: open ? 1 : 0,
+        duration: motion.expandDuration,
+        ease: 'power3.inOut',
+        overwrite: true,
+      });
+      if (open && motion.stageDuration > 0)
+        gsap.fromTo(
+          panel.querySelectorAll('.tracker-inline-stage'),
+          { opacity: 0, x: -motion.stageOffset },
+          {
+            opacity: 1,
+            x: 0,
+            duration: motion.stageDuration,
+            stagger: motion.stageStagger,
+            ease: 'power3.out',
+            clearProps: 'opacity,transform',
+          },
+        );
+    }
+  }, [expanded, records]);
 
   useEffect(() => {
     if (editingStage)
@@ -90,6 +132,10 @@ export default function ApplicationTable({
                 <tr className={open ? 'tracker-record-expanded' : undefined}>
                   <td className="tracker-expand-column">
                     <button
+                      ref={(element) => {
+                        if (element) timelineToggles.current.set(application.id, element);
+                        else timelineToggles.current.delete(application.id);
+                      }}
                       type="button"
                       className="tracker-row-toggle"
                       aria-label={`${open ? '收起' : '展开'}${company.name} ${positionLabel(application.position)}的招聘流程`}
@@ -136,152 +182,155 @@ export default function ApplicationTable({
                     </button>
                   </td>
                 </tr>
-                <tr className="tracker-timeline-row" hidden={!open}>
+                <tr className="tracker-timeline-row" aria-hidden={!open}>
                   <td colSpan={8}>
                     <div
+                      ref={(element) => {
+                        if (element) {
+                          element.inert = !open;
+                          timelinePanels.current.set(application.id, element);
+                        } else timelinePanels.current.delete(application.id);
+                      }}
                       id={timelineId}
-                      className="tracker-row-timeline"
+                      className={`tracker-row-timeline${open ? ' is-open' : ''}`}
                       role="region"
                       aria-label={`${company.name} ${positionLabel(application.position)}的招聘流程`}
                     >
-                      {open && (
-                        <>
-                          <div className="tracker-row-timeline-heading">
-                            <span>招聘流程</span>
-                            <small>点击阶段更新状态</small>
-                            {application.withdrawn && (
-                              <small>已取消投递 · 修改阶段不会恢复投递</small>
-                            )}
-                          </div>
-                          <div
-                            className="tracker-row-timeline-scroll"
-                            tabIndex={0}
-                            aria-label="横向招聘时间轴，可左右滚动"
-                          >
-                            <ol className="tracker-inline-timeline">
-                              {application.stages.map((stage, index) => (
-                                <li
-                                  key={stage.id}
-                                  className={`tracker-inline-stage ${stage.status}`}
-                                  aria-current={
-                                    stage.status === 'active' && !application.withdrawn
-                                      ? 'step'
-                                      : undefined
-                                  }
+                      <div className="tracker-row-timeline-inner">
+                        <div className="tracker-row-timeline-heading">
+                          <span>
+                            <i aria-hidden="true">✦</i> 招聘旅程
+                          </span>
+                          <small>点击阶段更新状态</small>
+                          {application.withdrawn && (
+                            <small>已取消投递 · 修改阶段不会恢复投递</small>
+                          )}
+                        </div>
+                        <div
+                          className="tracker-row-timeline-scroll"
+                          tabIndex={0}
+                          aria-label="横向招聘时间轴，可左右滚动"
+                        >
+                          <ol className="tracker-inline-timeline">
+                            {application.stages.map((stage, index) => (
+                              <li
+                                key={stage.id}
+                                className={`tracker-inline-stage ${stage.status}`}
+                                aria-current={
+                                  stage.status === 'active' && !application.withdrawn
+                                    ? 'step'
+                                    : undefined
+                                }
+                              >
+                                <button
+                                  type="button"
+                                  className="tracker-inline-stage-button"
+                                  aria-label={`更新${stage.name}状态，当前${STAGE_LABELS[stage.status]}`}
+                                  aria-expanded={chosenStage?.id === stage.id}
+                                  aria-controls={`${timelineId}-actions`}
+                                  onClick={(event) => {
+                                    trigger.current = event.currentTarget;
+                                    setSaveFailed(false);
+                                    setEditingStage(
+                                      chosenStage?.id === stage.id
+                                        ? null
+                                        : { applicationId: application.id, stageId: stage.id },
+                                    );
+                                  }}
                                 >
+                                  <span className="tracker-inline-stage-marker" aria-hidden="true">
+                                    {stage.status === 'completed' ? (
+                                      <Check size={13} />
+                                    ) : stage.status === 'skipped' ? (
+                                      <Minus size={13} />
+                                    ) : stage.status === 'rejected' ? (
+                                      <X size={13} />
+                                    ) : (
+                                      index + 1
+                                    )}
+                                  </span>
+                                  <strong>{stage.name}</strong>
+                                  <span className="tracker-inline-stage-status">
+                                    {STAGE_LABELS[stage.status]}
+                                  </span>
+                                  {stage.completedAt && (
+                                    <time dateTime={stage.completedAt}>{stage.completedAt}</time>
+                                  )}
+                                </button>
+                                {index < application.stages.length - 1 && (
+                                  <span className="tracker-inline-connector" aria-hidden="true">
+                                    <ChevronRight size={12} />
+                                  </span>
+                                )}
+                              </li>
+                            ))}
+                          </ol>
+                        </div>
+                        <div id={`${timelineId}-actions`} hidden={!chosenStage}>
+                          {chosenStage && (
+                            <div
+                              ref={actionPanel}
+                              className="tracker-stage-actions"
+                              role="group"
+                              aria-label={`设置${chosenStage.name}状态`}
+                              onKeyDown={(event) => {
+                                if (event.key === 'Escape') {
+                                  event.stopPropagation();
+                                  closeActions();
+                                }
+                              }}
+                            >
+                              <div className="tracker-stage-actions-heading">
+                                <strong>{chosenStage.name}</strong>
+                                <span>选择新状态，自动保存</span>
+                                <button
+                                  type="button"
+                                  className="tracker-icon-button"
+                                  aria-label="关闭阶段状态选择"
+                                  onClick={closeActions}
+                                >
+                                  <X size={15} />
+                                </button>
+                              </div>
+                              <div className="tracker-inline-actions">
+                                {(
+                                  [
+                                    'active',
+                                    'completed',
+                                    'skipped',
+                                    'rejected',
+                                    'pending',
+                                  ] as StageStatus[]
+                                ).map((status) => (
                                   <button
                                     type="button"
-                                    className="tracker-inline-stage-button"
-                                    aria-label={`更新${stage.name}状态，当前${STAGE_LABELS[stage.status]}`}
-                                    aria-expanded={chosenStage?.id === stage.id}
-                                    aria-controls={`${timelineId}-actions`}
-                                    onClick={(event) => {
-                                      trigger.current = event.currentTarget;
-                                      setSaveFailed(false);
-                                      setEditingStage(
-                                        chosenStage?.id === stage.id
-                                          ? null
-                                          : { applicationId: application.id, stageId: stage.id },
-                                      );
+                                    key={status}
+                                    data-stage-action
+                                    className={`tracker-button small${chosenStage.status === status ? ' primary' : ''}`}
+                                    disabled={chosenStage.status === status}
+                                    aria-pressed={chosenStage.status === status}
+                                    onClick={() => {
+                                      if (onStageChange(application.id, chosenStage.id, status))
+                                        closeActions();
+                                      else setSaveFailed(true);
                                     }}
                                   >
-                                    <span
-                                      className="tracker-inline-stage-marker"
-                                      aria-hidden="true"
-                                    >
-                                      {stage.status === 'completed' ? (
-                                        <Check size={13} />
-                                      ) : stage.status === 'skipped' ? (
-                                        <Minus size={13} />
-                                      ) : stage.status === 'rejected' ? (
-                                        <X size={13} />
-                                      ) : (
-                                        index + 1
-                                      )}
-                                    </span>
-                                    <strong>{stage.name}</strong>
-                                    <span className="tracker-inline-stage-status">
-                                      {STAGE_LABELS[stage.status]}
-                                    </span>
-                                    {stage.completedAt && (
-                                      <time dateTime={stage.completedAt}>{stage.completedAt}</time>
-                                    )}
+                                    {STAGE_LABELS[status]}
                                   </button>
-                                  {index < application.stages.length - 1 && (
-                                    <span className="tracker-inline-connector" aria-hidden="true">
-                                      <ChevronRight size={12} />
-                                    </span>
-                                  )}
-                                </li>
-                              ))}
-                            </ol>
-                          </div>
-                          <div id={`${timelineId}-actions`} hidden={!chosenStage}>
-                            {chosenStage && (
-                              <div
-                                ref={actionPanel}
-                                className="tracker-stage-actions"
-                                role="group"
-                                aria-label={`设置${chosenStage.name}状态`}
-                                onKeyDown={(event) => {
-                                  if (event.key === 'Escape') {
-                                    event.stopPropagation();
-                                    closeActions();
-                                  }
-                                }}
-                              >
-                                <div className="tracker-stage-actions-heading">
-                                  <strong>{chosenStage.name}</strong>
-                                  <span>选择新状态，自动保存</span>
-                                  <button
-                                    type="button"
-                                    className="tracker-icon-button"
-                                    aria-label="关闭阶段状态选择"
-                                    onClick={closeActions}
-                                  >
-                                    <X size={15} />
-                                  </button>
-                                </div>
-                                <div className="tracker-inline-actions">
-                                  {(
-                                    [
-                                      'active',
-                                      'completed',
-                                      'skipped',
-                                      'rejected',
-                                      'pending',
-                                    ] as StageStatus[]
-                                  ).map((status) => (
-                                    <button
-                                      type="button"
-                                      key={status}
-                                      data-stage-action
-                                      className={`tracker-button small${chosenStage.status === status ? ' primary' : ''}`}
-                                      disabled={chosenStage.status === status}
-                                      aria-pressed={chosenStage.status === status}
-                                      onClick={() => {
-                                        if (onStageChange(application.id, chosenStage.id, status))
-                                          closeActions();
-                                        else setSaveFailed(true);
-                                      }}
-                                    >
-                                      {STAGE_LABELS[status]}
-                                    </button>
-                                  ))}
-                                </div>
-                                <p className="tracker-help">
-                                  完成或跳过会进入下一阶段；直接推进会跳过之前未完成的阶段，回退会重置后续状态，保留备注。
-                                </p>
-                                {saveFailed && (
-                                  <p className="tracker-error" role="alert">
-                                    未能保存，原状态已保留。请查看页面上的存储错误提示后重试。
-                                  </p>
-                                )}
+                                ))}
                               </div>
-                            )}
-                          </div>
-                        </>
-                      )}
+                              <p className="tracker-help">
+                                完成或跳过会进入下一阶段；直接推进会跳过之前未完成的阶段，回退会重置后续状态，保留备注。
+                              </p>
+                              {saveFailed && (
+                                <p className="tracker-error" role="alert">
+                                  未能保存，原状态已保留。请查看页面上的存储错误提示后重试。
+                                </p>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </td>
                 </tr>
