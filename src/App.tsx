@@ -9,6 +9,7 @@ import SidebarDock from './components/SidebarDock';
 import LoadingScreen from './components/LoadingScreen';
 import BookmarksPage from './pages/BookmarksPage';
 import { sanitizeBookmarkData } from './utils/sanitizeRecruitmentUrl';
+import { getInitialLaunchScreen, getNextLaunchScreen, TLaunchScreen } from './utils/launchSequence';
 import AutumnLaunchOverlay from './components/AutumnLaunchOverlay';
 import TrackerPage from './pages/TrackerPage';
 
@@ -16,21 +17,25 @@ const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
 const INTERVIEWS_JSON_URL = 'https://www.yukibloom.app/categories/interview';
 const INTRO_SEEN_KEY = 'sakura-offer-hub:intro-seen';
 const AUTUMN_LAUNCH_SEEN_KEY = 'sakura-offer-hub:autumn-launch-seen';
-const shouldReplayIntro = () => new URLSearchParams(window.location.search).get('debug') === '-1';
 const isAutumnLaunchPath = () => {
   const path = window.location.pathname;
   const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
   return path === basePath || path === `${basePath}/` || path.endsWith('/bookmarks/autumn');
 };
-const shouldShowAutumnLaunch = () => {
-  if (!isAutumnLaunchPath()) return false;
-  if (shouldReplayIntro()) return true;
+const getStoredLaunchState = (key: string) => {
   try {
-    return window.localStorage.getItem(AUTUMN_LAUNCH_SEEN_KEY) !== 'true';
+    return window.localStorage.getItem(key) === 'true';
   } catch {
-    return true;
+    return false;
   }
 };
+const getLaunchScreen = (): TLaunchScreen =>
+  getInitialLaunchScreen({
+    search: window.location.search,
+    isAutumnPath: isAutumnLaunchPath(),
+    introSeen: getStoredLaunchState(INTRO_SEEN_KEY),
+    autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
+  });
 
 // ── Sakura petals ─────────────────────────────────────────────────────────────
 const SakuraPetals: React.FC = () => {
@@ -80,21 +85,13 @@ const SakuraPetals: React.FC = () => {
 
 // ── App ───────────────────────────────────────────────────────────────────────
 const App: React.FC = () => {
-  const [autumnLaunch, setAutumnLaunch] = useState(shouldShowAutumnLaunch);
-  const [loading, setLoading] = useState(() => {
-    // The autumn launch experience replaces the generic first-load screen.
-    if (shouldShowAutumnLaunch()) return false;
-    if (shouldReplayIntro()) return true;
-    try {
-      return window.localStorage.getItem(INTRO_SEEN_KEY) !== 'true';
-    } catch {
-      return true;
-    }
-  });
-  const shouldPlayIntroRef = useRef(loading);
+  const [launchScreen, setLaunchScreen] = useState<TLaunchScreen>(getLaunchScreen);
+  const [isAutumnPrepared, setIsAutumnPrepared] = useState(false);
+  const shouldPlayIntroRef = useRef(launchScreen !== 'none');
   const [toast, setToast] = useState<string | null>(null);
   const mainRef = useRef<HTMLElement>(null);
   const dockWrapRef = useRef<HTMLDivElement>(null);
+  const pageRevealStartedRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -105,37 +102,67 @@ const App: React.FC = () => {
     bookmarkData.categories.find((c) => c.id !== 'interviews')?.id ??
     '';
 
+  const revealPage = useCallback(() => {
+    if (pageRevealStartedRef.current) return;
+    pageRevealStartedRef.current = true;
+    requestAnimationFrame(() => {
+      gsap.fromTo(
+        [mainRef.current, dockWrapRef.current],
+        { x: 28, opacity: 0.72 },
+        { x: '0%', opacity: 1, duration: 0.65, ease: 'power3.out', stagger: 0.08 },
+      );
+    });
+  }, []);
+
+  const handleIntroExitStart = useCallback(() => {
+    const nextScreen = getNextLaunchScreen({
+      search: window.location.search,
+      isAutumnPath: isAutumnLaunchPath(),
+      autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
+    });
+    if (nextScreen === 'autumn') {
+      // 第一幕收页时先将第二幕挂到下层，让裁切直接露出秋招画面。
+      setIsAutumnPrepared(true);
+    }
+  }, []);
+
+  const handleIntroRevealStart = useCallback(() => {
+    const nextScreen = getNextLaunchScreen({
+      search: window.location.search,
+      isAutumnPath: isAutumnLaunchPath(),
+      autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
+    });
+    if (nextScreen === 'none') revealPage();
+  }, [revealPage]);
+
   const handleLoadComplete = useCallback(() => {
     try {
       window.localStorage.setItem(INTRO_SEEN_KEY, 'true');
     } catch {
       // Ignore storage failures; the intro can safely play again.
     }
-    setLoading(false);
-    requestAnimationFrame(() => {
-      gsap.fromTo(
-        [mainRef.current, dockWrapRef.current],
-        { x: '100%', opacity: 0 },
-        {
-          x: '0%',
-          opacity: 1,
-          duration: 0.65,
-          ease: 'power3.out',
-          stagger: 0.08,
-        },
-      );
+    const nextScreen = getNextLaunchScreen({
+      search: window.location.search,
+      isAutumnPath: isAutumnLaunchPath(),
+      autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
     });
-  }, []);
+    setLaunchScreen(nextScreen);
+    if (nextScreen === 'none') {
+      setIsAutumnPrepared(false);
+      revealPage();
+    }
+  }, [revealPage]);
 
   const handleAutumnLaunchComplete = useCallback(() => {
     try {
       window.localStorage.setItem(AUTUMN_LAUNCH_SEEN_KEY, 'true');
-      window.localStorage.setItem(INTRO_SEEN_KEY, 'true');
     } catch {
       // Ignore storage failures; the animation can safely play again.
     }
-    setAutumnLaunch(false);
-  }, []);
+    setIsAutumnPrepared(false);
+    setLaunchScreen('none');
+    revealPage();
+  }, [revealPage]);
 
   useEffect(() => {
     const initialState = shouldPlayIntroRef.current
@@ -179,7 +206,13 @@ const App: React.FC = () => {
 
   return (
     <>
-      {loading && <LoadingScreen onComplete={handleLoadComplete} />}
+      {launchScreen === 'intro' && (
+        <LoadingScreen
+          onComplete={handleLoadComplete}
+          onExitStart={handleIntroExitStart}
+          onRevealStart={handleIntroRevealStart}
+        />
+      )}
 
       <style>{`
         html, body, #root { height: 100%; margin: 0; padding: 0; }
@@ -235,7 +268,12 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      {autumnLaunch && <AutumnLaunchOverlay onComplete={handleAutumnLaunchComplete} />}
+      {(launchScreen === 'autumn' || isAutumnPrepared) && (
+        <AutumnLaunchOverlay
+          active={launchScreen === 'autumn'}
+          onComplete={handleAutumnLaunchComplete}
+        />
+      )}
 
       <div
         ref={dockWrapRef}
@@ -255,7 +293,7 @@ const App: React.FC = () => {
               { id: 'tracker', name: '我的投递', icon: 'BriefcaseBusiness', links: [] },
             ]}
             activeTab={activeTab}
-            launchActive={autumnLaunch}
+            launchActive={launchScreen === 'autumn'}
             onTabChange={handleTabChange}
           />
         </div>

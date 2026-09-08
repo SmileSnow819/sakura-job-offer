@@ -1,0 +1,109 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 35;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  opacity: 0;
+  color: #45394a;
+  background: rgba(250, 246, 241, 0.9) url('/sakura-job-offer/assets/launch/sakura-campus-hero.png')
+    center / cover;
+}
+.overlay::before {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 249, 245, 0.54);
+  content: '';
+}
+.card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  width: min(86vw, 430px);
+  align-items: center;
+  gap: 10px;
+  padding: 27px;
+  border: 1px solid rgba(255, 255, 255, 0.86);
+  border-radius: 28px;
+  background: rgba(255, 255, 255, 0.64);
+  box-shadow: 0 22px 52px rgba(190, 122, 151, 0.14);
+  backdrop-filter: blur(16px);
+}
+.artwork {
+  width: 132px;
+  height: 132px;
+  flex: 0 0 auto;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 11px rgba(95, 66, 75, 0.14));
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #d8729c;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+}
+.card h1 {
+  margin: 5px 0;
+  font-size: clamp(1.85rem, 6vw, 2.65rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+.card p {
+  margin: 0;
+  color: #7b6a7b;
+  font-size: 13px;
+  font-weight: 650;
+}
+.bloom {
+  position: absolute;
+  width: 42px;
+  height: 42px;
+  border-radius: 55% 45% 55% 45%;
+  transform: rotate(45deg);
+  background: linear-gradient(135deg, rgba(255, 161, 193, 0.66), rgba(255, 238, 246, 0.92));
+  box-shadow: 0 8px 26px rgba(236, 129, 169, 0.2);
+}
+.bloomOne {
+  top: 21%;
+  left: 18%;
+}
+.bloomTwo {
+  right: 17%;
+  bottom: 21%;
+  width: 27px;
+  height: 27px;
+}
+.skip {
+  position: absolute;
+  right: 22px;
+  bottom: 22px;
+  padding: 8px 13px;
+  border: 1px solid rgba(117, 98, 121, 0.16);
+  border-radius: 999px;
+  color: #786878;
+  background: rgba(255, 255, 255, 0.54);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.skip:hover {
+  background: rgba(255, 255, 255, 0.88);
+}
+@media (max-width: 480px) {
+  .card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .overlay *,
+  .overlay {
+    transition: none !important;
+    animation: none !important;
+  }
+}

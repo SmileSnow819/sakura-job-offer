@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# commit-msg 只做快速、确定的格式校验，不运行构建或测试。
+commit_msg_file="$1"
+commit_msg=$(cat "$commit_msg_file")
+
+if echo "$commit_msg" | grep -qiE '^Merge'; then
+  # 合并提交由 Git 生成，保留 Git 自己的提交信息格式。
+  exit 0
+fi
+
+pattern='^(upd|feat|fix|docs|style|refactor|chore|revert)(\(.+\))?: .{1,50}$'
+
+if ! echo "$commit_msg" | grep -qE "$pattern"; then
+  echo ""
+  echo "✖ commit message 格式不正确"
+  echo ""
+  echo "格式要求: <type>(<scope>): <中文主题>，主题不超过 50 个字符"
+  echo "允许的 type: upd feat fix docs style refactor chore revert"
+  echo "示例: feat(阅读器): 增加双页阅读模式"
+  echo ""
+  exit 1
+fi
+
+subject=$(echo "$commit_msg" | sed -E 's/^[^:]+: //')
+# 团队提交主题约定使用中文，便于统一查看历史。
+if ! printf '%s' "$subject" | grep -q '[一-龥]'; then
+  echo ""
+  echo "✖ commit message 主题必须使用中文"
+  echo "示例: fix(登录): 修复会话过期处理"
+  echo ""
+  exit 1
+fi
+
+exit 0
