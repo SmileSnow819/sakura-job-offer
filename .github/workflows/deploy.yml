@@ -35,6 +35,9 @@ jobs:
       - name: Test tracker
         run: pnpm test:tracker
 
+      - name: Test bookmark timeline
+        run: pnpm test:bookmarks
+
       - name: Build
         run: pnpm build
 

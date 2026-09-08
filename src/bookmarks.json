@@ -37,7 +37,8 @@
         },
         {
           "title": "拼多多校园招聘",
-          "url": "https://careers.pddglobalhr.com/campus"
+          "url": "https://careers.pddglobalhr.com/campus",
+          "openedAt": "2026-09-01"
         },
         {
           "title": "百度校园招聘",
@@ -393,7 +394,13 @@
     },
     {
       "title": "蓝色光标招聘",
-      "url": "https://bluefocus.jobs.feishu.cn/066083/position/list"
+      "url": "https://bluefocus.jobs.feishu.cn/066083/position/list",
+      "openedAt": "2026-09-07"
+    },
+    {
+      "title": "小红书校园招聘",
+      "url": "https://job.xiaohongshu.com/campus/position",
+      "openedAt": "2026-09-08"
     }
       ]
     },
