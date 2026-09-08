@@ -3,7 +3,7 @@ import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 import styles from './index.module.css';
-import { getAutumnArtwork } from '../../utils/launchArtwork.ts';
+import { getAutumnArtwork, LAUNCH_HERO_SRC } from '../../utils/launchArtwork.ts';
 
 interface IAutumnLaunchOverlayProps {
   active: boolean;
@@ -58,7 +58,12 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ active, onCo
   }, [active, finish]);
 
   return (
-    <section ref={overlayRef} className={styles.overlay} aria-label="秋招专场开场">
+    <section
+      ref={overlayRef}
+      className={styles.overlay}
+      style={{ '--launch-hero-image': `url("${LAUNCH_HERO_SRC}")` } as React.CSSProperties}
+      aria-label="秋招专场开场"
+    >
       <span className={`${styles.bloom} ${styles.bloomOne}`} aria-hidden="true" />
       <span className={`${styles.bloom} ${styles.bloomTwo}`} aria-hidden="true" />
       <div ref={cardRef} className={styles.card}>
