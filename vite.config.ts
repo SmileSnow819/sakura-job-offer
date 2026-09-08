@@ -1,9 +1,12 @@
 import { defineConfig } from 'vite-plus';
 import react from '@vitejs/plugin-react';
 
+// GitHub Pages 挂载在仓库子路径，EdgeOne Pages 则直接服务域名根路径；构建时必须匹配部署平台。
+const base = process.env.DEPLOY_TARGET === 'edgeone' ? '/' : '/sakura-job-offer/';
+
 export default defineConfig({
   plugins: [react()],
-  base: '/sakura-job-offer/',
+  base,
   fmt: {
     tabWidth: 2,
     useTabs: false,
