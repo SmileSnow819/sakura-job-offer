@@ -36,7 +36,7 @@ export function getInitialLaunchScreen({
 }
 
 /**
- * 品牌开场结束后，只在正常首次访问秋招页时衔接秋招开场。
+ * 品牌开场结束后，在首次访问秋招页或完整调试模式下衔接秋招开场。
  *
  * @param options 当前 URL、页面位置和秋招开场已播放状态
  * @returns 下一段开场，或直接展示页面

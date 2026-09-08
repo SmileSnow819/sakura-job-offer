@@ -48,7 +48,7 @@ export const JOURNAL_CARD_REVEAL_ORDER = [1, 2, 0, 3, 4] as const;
 /** 手账开场从封面显现到纸页翻走的完整演出时长。 */
 export const JOURNAL_INTRO_DURATION_SECONDS = 4.7;
 
-/** 五张卡完整展示后开始收拢纸页，并同步唤起底层页面。 */
+/** 五张卡完整展示后开始收拢纸页，并准备露出下一层画面。 */
 export const JOURNAL_EXIT_START_SECONDS = 4;
 
 /** 纸页收拢约四分之一后接入底层页面，避免底页过早抢走视觉焦点。 */
