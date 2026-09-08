@@ -43,18 +43,18 @@ export default {
 
 ## 文件职责
 
-| 文件 | 职责 |
-| --- | --- |
-| `src/bookmarks/autumn.json` | 维护秋招专场的静态招聘入口 |
-| `src/bookmarks/campus.json` | 维护实习生招聘的静态入口 |
-| `src/bookmarks/tools.json` | 维护求职工具入口 |
-| `src/bookmarks/interviews.json` | 维护面经分类的静态配置 |
-| `src/bookmarks/index.ts` | 组装分类并提供统一的类型化导入 |
-| `src/types/bookmark.ts` | 继续作为分类和链接的类型来源 |
-| `src/App.tsx` | 使用聚合数据渲染导航和路由 |
-| `src/pages/BookmarksPage.tsx` | 使用聚合数据渲染书签页 |
-| `src/pages/TrackerPage.tsx` | 使用聚合数据生成投递预填选项 |
-| `README.md` | 记录拆分后的维护入口和官网校验文件边界 |
+| 文件                            | 职责                                   |
+| ------------------------------- | -------------------------------------- |
+| `src/bookmarks/autumn.json`     | 维护秋招专场的静态招聘入口             |
+| `src/bookmarks/campus.json`     | 维护实习生招聘的静态入口               |
+| `src/bookmarks/tools.json`      | 维护求职工具入口                       |
+| `src/bookmarks/interviews.json` | 维护面经分类的静态配置                 |
+| `src/bookmarks/index.ts`        | 组装分类并提供统一的类型化导入         |
+| `src/types/bookmark.ts`         | 继续作为分类和链接的类型来源           |
+| `src/App.tsx`                   | 使用聚合数据渲染导航和路由             |
+| `src/pages/BookmarksPage.tsx`   | 使用聚合数据渲染书签页                 |
+| `src/pages/TrackerPage.tsx`     | 使用聚合数据生成投递预填选项           |
+| `README.md`                     | 记录拆分后的维护入口和官网校验文件边界 |
 
 ## 迁移与兼容
 
@@ -68,4 +68,3 @@ export default {
 2. 运行 `pnpm test:tracker`，确认投递流程回归测试不受静态数据导入调整影响。
 3. 运行 `pnpm check`，确认 TypeScript、格式和 lint 检查通过。
 4. 检查 `git diff`，确认只涉及书签文件、聚合入口和维护文档，不包含 `data/autumn-watchlist.json` 或其他用户未提交修改。
-

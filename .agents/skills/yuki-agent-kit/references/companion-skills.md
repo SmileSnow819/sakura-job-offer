@@ -4,13 +4,13 @@
 
 ## 选择范围
 
-| Skill | 用途 |
-| --- | --- |
-| `project-bootstrap` | 根据真实产品信息和技术栈完善新建的协作规范 |
-| `agent-notes` | 维护有长期价值的决策记录 |
-| `code-review` | 审查正确性和回归风险 |
-| `find-simplifications` | 查找有证据支持的简化机会 |
-| `trim-cot-leakage` | 清理文档和代码中的开发过程残留 |
+| Skill                  | 用途                                       |
+| ---------------------- | ------------------------------------------ |
+| `project-bootstrap`    | 根据真实产品信息和技术栈完善新建的协作规范 |
+| `agent-notes`          | 维护有长期价值的决策记录                   |
+| `code-review`          | 审查正确性和回归风险                       |
+| `find-simplifications` | 查找有证据支持的简化机会                   |
+| `trim-cot-leakage`     | 清理文档和代码中的开发过程残留             |
 
 完整接入默认安装以上五个；用户指定子集时按子集安装。不附带 Superpowers 或其它第三方包。
 
