@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "test:bookmarks": "node --experimental-strip-types --test scripts/test-recruitment-timeline.mjs",
     "test:tracker": "node --experimental-strip-types --test scripts/test-tracker.mjs",
     "dev": "vp dev",
     "build": "tsc && vp build",
