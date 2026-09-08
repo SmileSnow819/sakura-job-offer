@@ -86,10 +86,12 @@ const SakuraPetals: React.FC = () => {
 // ── App ───────────────────────────────────────────────────────────────────────
 const App: React.FC = () => {
   const [launchScreen, setLaunchScreen] = useState<TLaunchScreen>(getLaunchScreen);
+  const [isAutumnPrepared, setIsAutumnPrepared] = useState(false);
   const shouldPlayIntroRef = useRef(launchScreen !== 'none');
   const [toast, setToast] = useState<string | null>(null);
   const mainRef = useRef<HTMLElement>(null);
   const dockWrapRef = useRef<HTMLDivElement>(null);
+  const pageRevealStartedRef = useRef(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -101,14 +103,37 @@ const App: React.FC = () => {
     '';
 
   const revealPage = useCallback(() => {
+    if (pageRevealStartedRef.current) return;
+    pageRevealStartedRef.current = true;
     requestAnimationFrame(() => {
       gsap.fromTo(
         [mainRef.current, dockWrapRef.current],
-        { x: '100%', opacity: 0 },
+        { x: 28, opacity: 0.72 },
         { x: '0%', opacity: 1, duration: 0.65, ease: 'power3.out', stagger: 0.08 },
       );
     });
   }, []);
+
+  const handleIntroExitStart = useCallback(() => {
+    const nextScreen = getNextLaunchScreen({
+      search: window.location.search,
+      isAutumnPath: isAutumnLaunchPath(),
+      autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
+    });
+    if (nextScreen === 'autumn') {
+      // 第一幕收页时先将第二幕挂到下层，让裁切直接露出秋招画面。
+      setIsAutumnPrepared(true);
+    }
+  }, []);
+
+  const handleIntroRevealStart = useCallback(() => {
+    const nextScreen = getNextLaunchScreen({
+      search: window.location.search,
+      isAutumnPath: isAutumnLaunchPath(),
+      autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
+    });
+    if (nextScreen === 'none') revealPage();
+  }, [revealPage]);
 
   const handleLoadComplete = useCallback(() => {
     try {
@@ -122,7 +147,10 @@ const App: React.FC = () => {
       autumnLaunchSeen: getStoredLaunchState(AUTUMN_LAUNCH_SEEN_KEY),
     });
     setLaunchScreen(nextScreen);
-    if (nextScreen === 'none') revealPage();
+    if (nextScreen === 'none') {
+      setIsAutumnPrepared(false);
+      revealPage();
+    }
   }, [revealPage]);
 
   const handleAutumnLaunchComplete = useCallback(() => {
@@ -131,6 +159,7 @@ const App: React.FC = () => {
     } catch {
       // Ignore storage failures; the animation can safely play again.
     }
+    setIsAutumnPrepared(false);
     setLaunchScreen('none');
     revealPage();
   }, [revealPage]);
@@ -177,7 +206,13 @@ const App: React.FC = () => {
 
   return (
     <>
-      {launchScreen === 'intro' && <LoadingScreen onComplete={handleLoadComplete} />}
+      {launchScreen === 'intro' && (
+        <LoadingScreen
+          onComplete={handleLoadComplete}
+          onExitStart={handleIntroExitStart}
+          onRevealStart={handleIntroRevealStart}
+        />
+      )}
 
       <style>{`
         html, body, #root { height: 100%; margin: 0; padding: 0; }
@@ -233,7 +268,12 @@ const App: React.FC = () => {
         </Routes>
       </main>
 
-      {launchScreen === 'autumn' && <AutumnLaunchOverlay onComplete={handleAutumnLaunchComplete} />}
+      {(launchScreen === 'autumn' || isAutumnPrepared) && (
+        <AutumnLaunchOverlay
+          active={launchScreen === 'autumn'}
+          onComplete={handleAutumnLaunchComplete}
+        />
+      )}
 
       <div
         ref={dockWrapRef}

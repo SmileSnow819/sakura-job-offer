@@ -28,7 +28,7 @@ export function getInitialLaunchScreen({
   autumnLaunchSeen,
 }: IInitialLaunchScreenOptions): TLaunchScreen {
   const debugMode = getIntroReplayMode(search);
-  if (debugMode === 'initial') return 'intro';
+  if (debugMode === 'initial' || debugMode === 'sequence') return 'intro';
   if (debugMode === 'autumn') return 'autumn';
   if (!introSeen) return 'intro';
   if (isAutumnPath && !autumnLaunchSeen) return 'autumn';
@@ -46,7 +46,9 @@ export function getNextLaunchScreen({
   isAutumnPath,
   autumnLaunchSeen,
 }: INextLaunchScreenOptions): TLaunchScreen {
-  if (getIntroReplayMode(search)) return 'none';
+  const debugMode = getIntroReplayMode(search);
+  if (debugMode === 'sequence') return 'autumn';
+  if (debugMode) return 'none';
   if (isAutumnPath && !autumnLaunchSeen) return 'autumn';
   return 'none';
 }

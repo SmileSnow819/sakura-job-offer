@@ -118,7 +118,9 @@
   letter-spacing: 0.17em;
 }
 .copy {
-  margin: 20px 0 27px;
+  position: relative;
+  z-index: 6;
+  margin: 16px 0 0;
 }
 .copy p {
   margin: 0 0 8px;
@@ -137,15 +139,21 @@
 .artworkStage {
   position: relative;
   width: 100%;
-  height: clamp(330px, 42vw, 430px);
-  margin-top: 54px;
+  height: clamp(320px, 39vw, 400px);
+  margin-top: 92px;
+  transform-origin: right bottom;
+  transform-style: preserve-3d;
 }
-.mainArtwork {
+.mainArtworkSlot {
   position: absolute;
   top: 50%;
   left: 50%;
+  width: clamp(184px, 21vw, 274px);
+  translate: -50% -50%;
+}
+.mainArtwork {
   display: grid;
-  width: clamp(190px, 24vw, 304px);
+  width: 100%;
   margin: 0;
   padding: 10px 12px 8px;
   place-items: center;
@@ -153,8 +161,8 @@
   border-radius: 38px;
   background: rgba(255, 252, 249, 0.68);
   box-shadow: 0 18px 42px rgba(83, 60, 72, 0.16);
-  translate: -50% -50%;
   backdrop-filter: blur(8px);
+  backface-visibility: hidden;
 }
 .mainArtwork img {
   width: 100%;
@@ -169,11 +177,15 @@
   font-weight: 800;
   letter-spacing: 0.08em;
 }
+.floatingArtwork {
+  position: absolute;
+  inset: 0;
+}
 .floatingArtwork figure {
   position: absolute;
   z-index: 4;
   display: grid;
-  width: clamp(82px, 10vw, 132px);
+  width: clamp(78px, 9vw, 118px);
   margin: 0;
   padding: 8px 9px 7px;
   place-items: center;
@@ -182,6 +194,7 @@
   background: rgba(255, 252, 249, 0.72);
   box-shadow: 0 14px 30px rgba(83, 60, 72, 0.14);
   backdrop-filter: blur(7px);
+  backface-visibility: hidden;
 }
 .floatingArtwork img {
   width: 100%;
@@ -191,22 +204,22 @@
 }
 .floatingArtwork figure:nth-child(1) {
   top: 10%;
-  left: 8%;
+  left: 13%;
   transform: rotate(-14deg);
 }
 .floatingArtwork figure:nth-child(2) {
   top: 12%;
-  right: 8%;
+  right: 13%;
   transform: rotate(12deg);
 }
 .floatingArtwork figure:nth-child(3) {
-  bottom: 2%;
-  left: 15%;
+  bottom: 4%;
+  left: 19%;
   transform: rotate(10deg);
 }
 .floatingArtwork figure:nth-child(4) {
-  right: 15%;
-  bottom: 1%;
+  right: 19%;
+  bottom: 3%;
   transform: rotate(-8deg);
 }
 .bloom {
@@ -242,8 +255,8 @@
     font-size: 2.2rem;
   }
   .artworkStage {
-    height: 390px;
-    margin-top: 42px;
+    height: 370px;
+    margin-top: 72px;
   }
   .mainArtwork {
     width: 186px;

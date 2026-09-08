@@ -19,7 +19,7 @@ test('品牌开场结束后进入尚未播放的秋招开场', () => {
   assert.equal(getNextLaunchScreen({ isAutumnPath: true, autumnLaunchSeen: false }), 'autumn');
 });
 
-test('调试参数只播放指定动画', () => {
+test('调试参数可以单独播放动画或串联完整开场', () => {
   assert.equal(
     getInitialLaunchScreen({
       search: '?debug=-1',
@@ -34,6 +34,23 @@ test('调试参数只播放指定动画', () => {
       search: '?debug=-2',
       isAutumnPath: true,
       introSeen: true,
+      autumnLaunchSeen: true,
+    }),
+    'autumn',
+  );
+  assert.equal(
+    getInitialLaunchScreen({
+      search: '?debug=-3',
+      isAutumnPath: false,
+      introSeen: true,
+      autumnLaunchSeen: true,
+    }),
+    'intro',
+  );
+  assert.equal(
+    getNextLaunchScreen({
+      search: '?debug=-3',
+      isAutumnPath: false,
       autumnLaunchSeen: true,
     }),
     'autumn',

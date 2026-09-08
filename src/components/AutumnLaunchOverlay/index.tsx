@@ -6,11 +6,12 @@ import styles from './index.module.css';
 import { getAutumnArtwork } from '../../utils/launchArtwork.ts';
 
 interface IAutumnLaunchOverlayProps {
+  active: boolean;
   onComplete: () => void;
 }
 
 /** 品牌开场的第二幕：沿用书签与樱花构图，将注意力收束到秋招专场。 */
-const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }) => {
+const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ active, onComplete }) => {
   const overlayRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
@@ -29,6 +30,12 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
   }, [onComplete]);
 
   useEffect(() => {
+    if (!active) {
+      // 预挂载阶段只露出第二幕背景，正式切换后再启动卡片与文案。
+      gsap.set(overlayRef.current, { opacity: 1 });
+      gsap.set([cardRef.current, copyRef.current], { opacity: 0, y: 20 });
+      return;
+    }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       const timer = window.setTimeout(finish, 900);
       return () => window.clearTimeout(timer);
@@ -48,7 +55,7 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ onComplete }
       })
       .to({}, { duration: 0.55 });
     return () => timeline.kill();
-  }, [finish]);
+  }, [active, finish]);
 
   return (
     <section ref={overlayRef} className={styles.overlay} aria-label="秋招专场开场">
