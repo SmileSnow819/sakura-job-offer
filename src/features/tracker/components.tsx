@@ -1,27 +1,18 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
 import { ArrowDown, ArrowUp, Check, GripVertical, Plus, Trash2, X } from 'lucide-react';
-import { getFavicon } from '../../utils/getFavicon';
+import { getCompanyIcon, handleImgError } from '../../utils/getFavicon';
 import { uid, validateFlow, type StageDefinition } from './model';
 
 export function CompanyLogo({ name, website }: { name: string; website: string }) {
-  const [failed, setFailed] = useState(false);
-  useEffect(() => setFailed(false), [website]);
   return (
     <span className="tracker-logo" aria-hidden="true">
-      {website && !failed ? (
-        <img
-          src={getFavicon(website)}
-          alt=""
-          loading="lazy"
-          referrerPolicy="no-referrer"
-          onError={() => setFailed(true)}
-          onLoad={(e) => {
-            if (e.currentTarget.naturalWidth <= 16) setFailed(true);
-          }}
-        />
-      ) : (
-        (Array.from(name)[0] ?? '?')
-      )}
+      <img
+        src={getCompanyIcon(name, website)}
+        alt=""
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        onError={handleImgError}
+      />
     </span>
   );
 }

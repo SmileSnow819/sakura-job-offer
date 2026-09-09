@@ -10,6 +10,8 @@
     "lint": "vp lint",
     "format": "vp fmt",
     "format:check": "vp fmt --check",
+    "icons:generate": "node scripts/generate-company-icons.mjs",
+    "icons:retry": "node scripts/generate-company-icons.mjs --retry-fallback",
     "check": "vp check",
     "preview": "vp preview"
   },
@@ -28,6 +30,7 @@
     "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.4.20",
     "postcss": "^8.4.41",
+    "sharp": "0.35.4",
     "tailwindcss": "^3.4.10",
     "typescript": "^6.0.2",
     "vite": "npm:@voidzero-dev/vite-plus-core@0.3.0",
