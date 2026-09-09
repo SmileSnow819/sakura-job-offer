@@ -26,6 +26,11 @@ import {
 
 const MOTTOS: string[] = mottosRaw as string[];
 import { getCompanyIcon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
+import {
+  getResponsiveCardStageSize,
+  getResponsiveCardSize,
+  getResponsiveCardVerticalPosition,
+} from '../../utils/responsiveCardSize';
 
 interface IBookmarkGridProps {
   category: ICategory;
@@ -38,18 +43,18 @@ type ViewMode = 'cards' | 'table';
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
 
-/** 根据当前视口宽高返回不会被底部导航遮挡的卡片尺寸。 */
-const getResponsiveCardSize = () => {
-  if (typeof window === 'undefined') return { width: 280, height: 390 };
-  if (window.innerWidth <= 768) {
-    return { width: Math.min(window.innerWidth - 56, 248), height: 322 };
-  }
-
-  // 浏览器 100% 缩放时，常见笔记本的页面可用高度不足 820px；使用紧凑卡片避免被底部导航遮挡。
-  return { width: 280, height: window.innerHeight <= 820 ? 340 : 390 };
-};
-
-const { width: CARD_W, height: CARD_H } = getResponsiveCardSize();
+const { width: CARD_W, height: CARD_H } =
+  typeof window === 'undefined'
+    ? { width: 280, height: 390 }
+    : getResponsiveCardSize(window.innerWidth, window.innerHeight);
+const CARD_VERTICAL_POSITION = getResponsiveCardVerticalPosition(
+  typeof window === 'undefined' ? 1024 : window.innerWidth,
+  CARD_H,
+);
+const CARD_STAGE_SIZE = getResponsiveCardStageSize(
+  typeof window === 'undefined' ? 1024 : window.innerWidth,
+  CARD_H,
+);
 const X_GAP = typeof window !== 'undefined' && window.innerWidth <= 768 ? 24 : 40;
 const PITCH = CARD_W + X_GAP;
 
@@ -396,9 +401,8 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
         width: CARD_W,
         height: CARD_H,
         left: '50%',
-        top: '50%',
+        ...CARD_VERTICAL_POSITION,
         marginLeft: -CARD_W / 2,
-        marginTop: -CARD_H / 2,
         borderRadius: 20,
         background: 'linear-gradient(145deg, var(--neutral-50), var(--pink-50))',
         backdropFilter: 'blur(16px)',
@@ -1572,7 +1576,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
 
   return (
     <section
-      className="flex flex-col"
+      className="bookmark-grid-section flex flex-col"
       style={{ height: '100%' }}
       role="region"
       aria-label={`${displayedCategory.name}书签轮播`}
@@ -1603,6 +1607,11 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         .bookmark-toolbar-scroll { -ms-overflow-style: none; scrollbar-width: none; }
         .bookmark-mobile-list { display: none; }
         @media (max-width: 768px) {
+          .bookmark-grid-section {
+            flex: 0 0 auto;
+            height: auto !important;
+            min-height: 100%;
+          }
           .bookmark-section-header {
             padding: 16px 16px 0 !important;
             margin-bottom: 12px !important;
@@ -1991,7 +2000,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
           <div
             ref={stageRef}
             className="bookmark-card-stage flex-1 relative"
-            style={{ overflow: 'visible', touchAction: 'pan-y' }}
+            style={{ ...CARD_STAGE_SIZE, overflow: 'visible', touchAction: 'pan-y' }}
           >
             {/* 左右渐变遮罩 */}
             <div

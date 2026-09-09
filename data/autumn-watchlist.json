@@ -7426,6 +7426,13 @@
   ],
   "opened": [
     {
+      "company": "库洛游戏",
+      "status": "opened",
+      "officialUrl": "https://kurogame.jobs.feishu.cn/campus/",
+      "officialDomain": "kurogame.jobs.feishu.cn",
+      "confirmedAt": "2026-09-09T00:00:00.000Z"
+    },
+    {
       "company": "bilibili",
       "status": "opened",
       "officialUrl": "https://jobs.bilibili.com/campus/records",

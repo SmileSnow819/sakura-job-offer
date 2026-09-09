@@ -229,6 +229,13 @@ const App: React.FC = () => {
         .hover-pink:hover { color: var(--pink-500); }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        @media (max-width: 768px) {
+          .app-main {
+            overflow-x: hidden !important;
+            overflow-y: auto !important;
+            padding-bottom: calc(112px + env(safe-area-inset-bottom)) !important;
+          }
+        }
       `}</style>
 
       <div
@@ -243,7 +250,7 @@ const App: React.FC = () => {
 
       <main
         ref={mainRef}
-        className="relative z-10 flex flex-col"
+        className="app-main relative z-10 flex flex-col"
         style={{
           position: 'fixed',
           inset: 0,
