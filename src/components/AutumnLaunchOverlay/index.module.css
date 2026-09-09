@@ -7,8 +7,7 @@
   overflow: hidden;
   opacity: 0;
   color: #45394a;
-  background: rgba(250, 246, 241, 0.9) url('/sakura-job-offer/assets/launch/sakura-campus-hero.png')
-    center / cover;
+  background: rgba(250, 246, 241, 0.9) var(--launch-hero-image) center / cover;
 }
 .overlay::before {
   position: absolute;

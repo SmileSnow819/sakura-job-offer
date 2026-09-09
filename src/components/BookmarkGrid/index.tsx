@@ -15,6 +15,7 @@ import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
 import mottosRaw from '../../mottos.json';
+import AutumnRecruitmentTimeline from '../AutumnRecruitmentTimeline';
 import TrackApplicationButton from '../TrackApplicationButton';
 import { useTracker } from '../../features/tracker/useTracker';
 import {
@@ -1963,6 +1964,8 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
 
         {isAutumnCategory && <AutumnLaunchNotice />}
       </div>
+
+      {isAutumnCategory && <AutumnRecruitmentTimeline links={displayedCategory.links} />}
 
       {links.length === 0 ? (
         <div

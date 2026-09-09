@@ -1,33 +1,38 @@
 /** 开场动画共用的插画清单，静态资源保持在 public 中以便首屏直接加载。 */
+const CONFIGURED_BASE_URL = import.meta.env?.BASE_URL ?? '/sakura-job-offer/';
+const LAUNCH_ASSET_BASE_URL = `${CONFIGURED_BASE_URL}assets/launch/`;
+
+export const LAUNCH_HERO_SRC = `${LAUNCH_ASSET_BASE_URL}sakura-campus-hero.png`;
+
 export const ENTRY_ARTWORK = [
   {
     id: 'autumn',
     label: '秋招专场',
-    src: '/sakura-job-offer/assets/launch/autumn-letter.png',
+    src: `${LAUNCH_ASSET_BASE_URL}autumn-letter.png`,
     accent: 'pink',
   },
   {
     id: 'internship',
     label: '实习生招聘',
-    src: '/sakura-job-offer/assets/launch/internship-tote.png',
+    src: `${LAUNCH_ASSET_BASE_URL}internship-tote.png`,
     accent: 'blue',
   },
   {
     id: 'tools',
     label: '求职工具',
-    src: '/sakura-job-offer/assets/launch/tools-notebook.png',
+    src: `${LAUNCH_ASSET_BASE_URL}tools-notebook.png`,
     accent: 'yellow',
   },
   {
     id: 'interviews',
     label: '面经分享',
-    src: '/sakura-job-offer/assets/launch/interview-notes.png',
+    src: `${LAUNCH_ASSET_BASE_URL}interview-notes.png`,
     accent: 'violet',
   },
   {
     id: 'tracker',
     label: '我的投递',
-    src: '/sakura-job-offer/assets/launch/tracker-folder.png',
+    src: `${LAUNCH_ASSET_BASE_URL}tracker-folder.png`,
     accent: 'pink',
   },
 ] as const;

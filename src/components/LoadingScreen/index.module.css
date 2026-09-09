@@ -6,7 +6,7 @@
   place-items: center;
   overflow: hidden;
   color: #45394a;
-  background: #f8f2eb url('/sakura-job-offer/assets/launch/sakura-campus-hero.png') center / cover;
+  background: #f8f2eb var(--launch-hero-image) center / cover;
 }
 .screen::before {
   position: absolute;
