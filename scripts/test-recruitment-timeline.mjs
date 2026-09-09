@@ -16,6 +16,14 @@ test('秋招记录开放日期，实习生分类不记录开放日期', () => {
   assert.ok(internship?.links.every((link) => !('openedAt' in link)));
 });
 
+test('库洛游戏已加入秋招开放列表', () => {
+  const autumn = bookmarkData.categories.find((category) => category.id === 'autumn');
+  const kuroGames = autumn?.links.find((link) => link.title === '库洛游戏招聘');
+
+  assert.equal(kuroGames?.url, 'https://kurogame.jobs.feishu.cn/campus/');
+  assert.equal(kuroGames?.openedAt, '2026-09-09');
+});
+
 test('时间线只保留最近七天并按开放日期倒序排列', async () => {
   const { buildRecruitmentTimeline } = await import('../src/utils/recruitmentTimeline.ts');
   const links = [
