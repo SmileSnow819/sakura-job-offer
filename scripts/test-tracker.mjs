@@ -17,6 +17,7 @@ import {
 } from '../src/features/tracker/model.ts';
 import { makeCsv, makeHtml } from '../src/features/tracker/export.ts';
 import { trackerMotion, trackerTimelineMotion } from '../src/features/tracker/motion.ts';
+import { getCompanyIcon } from '../src/utils/getFavicon.ts';
 
 function fixture() {
   const data = emptyData();
@@ -40,6 +41,14 @@ function fixture() {
   });
   return data;
 }
+test('公司图标只使用本地 WebP，未知公司回退到本站图标', () => {
+  const known = getCompanyIcon('字节跳动', 'https://jobs.bytedance.com/campus/position');
+  const fallback = getCompanyIcon('不存在的公司', 'https://example.com');
+
+  assert.match(known, /\.webp$/);
+  assert.match(fallback, /sakura-offer-icon\.webp$/);
+  assert.ok(!known.includes('google.com') && !fallback.includes('google.com'));
+});
 test('默认流程复制独立 ID，模板修改不会影响已有投递', () => {
   const data = fixture();
   assert.equal(data.template.length, 8);

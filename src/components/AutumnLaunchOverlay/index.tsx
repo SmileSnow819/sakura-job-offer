@@ -3,44 +3,107 @@ import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 import styles from './index.module.css';
-import { getAutumnArtwork, LAUNCH_HERO_SRC } from '../../utils/launchArtwork.ts';
+import {
+  getAutumnArtwork,
+  LAUNCH_EXIT_MOTION,
+  LAUNCH_HERO_SRC,
+} from '../../utils/launchArtwork.ts';
 
 interface IAutumnLaunchOverlayProps {
   active: boolean;
   onComplete: () => void;
+  onRevealStart: () => void;
 }
 
 /** 品牌开场的第二幕：沿用书签与樱花构图，将注意力收束到秋招专场。 */
-const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ active, onComplete }) => {
+const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({
+  active,
+  onComplete,
+  onRevealStart,
+}) => {
   const overlayRef = useRef<HTMLElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const copyRef = useRef<HTMLDivElement>(null);
+  const entranceTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const exitTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const completedRef = useRef(false);
+  const exitStartedRef = useRef(false);
+  const revealStartedRef = useRef(false);
   const autumnArtwork = getAutumnArtwork();
 
-  const finish = useCallback(() => {
+  const complete = useCallback(() => {
     if (completedRef.current) return;
     completedRef.current = true;
+    onComplete();
+  }, [onComplete]);
+
+  const startReveal = useCallback(() => {
+    if (revealStartedRef.current) return;
+    revealStartedRef.current = true;
+    onRevealStart();
+  }, [onRevealStart]);
+
+  const startExit = useCallback(() => {
+    if (exitStartedRef.current) return;
+    exitStartedRef.current = true;
+    entranceTimelineRef.current?.kill();
+
     const overlay = overlayRef.current;
     if (!overlay) {
-      onComplete();
+      startReveal();
+      complete();
       return;
     }
-    gsap.to(overlay, { opacity: 0, duration: 0.34, ease: 'power2.in', onComplete });
-  }, [onComplete]);
+
+    const timeline = gsap.timeline({ onComplete: complete });
+    exitTimelineRef.current = timeline;
+    timeline
+      .to(
+        cardRef.current,
+        {
+          rotateX: 5,
+          rotateY: -12,
+          x: -28,
+          y: -14,
+          scale: 0.975,
+          duration: 0.45,
+          ease: 'power2.inOut',
+        },
+        0,
+      )
+      .call(startReveal, [], LAUNCH_EXIT_MOTION.revealDelaySeconds)
+      .to(
+        overlay,
+        {
+          clipPath: LAUNCH_EXIT_MOTION.clipPath,
+          duration: LAUNCH_EXIT_MOTION.durationSeconds,
+          ease: LAUNCH_EXIT_MOTION.ease,
+        },
+        0,
+      );
+  }, [complete, startReveal]);
 
   useEffect(() => {
     if (!active) {
       // 预挂载阶段只露出第二幕背景，正式切换后再启动卡片与文案。
-      gsap.set(overlayRef.current, { opacity: 1 });
+      gsap.set(overlayRef.current, {
+        clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+        opacity: 1,
+      });
       gsap.set([cardRef.current, copyRef.current], { opacity: 0, y: 20 });
       return;
     }
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      const timer = window.setTimeout(finish, 900);
+      const timer = window.setTimeout(startExit, 900);
       return () => window.clearTimeout(timer);
     }
-    const timeline = gsap.timeline({ onComplete: finish });
+    const timeline = gsap.timeline({ onComplete: startExit });
+    entranceTimelineRef.current = timeline;
+    gsap.set(overlayRef.current, {
+      clipPath: 'polygon(0 0, 100% 0, 100% 100%, 0 100%)',
+      opacity: 1,
+    });
+    gsap.set(cardRef.current, { perspective: 1100, transformStyle: 'preserve-3d' });
     gsap.set([cardRef.current, copyRef.current], { opacity: 0, y: 20 });
     timeline
       .to(overlayRef.current, { opacity: 1, duration: 0.22, ease: 'power2.out' })
@@ -54,8 +117,13 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ active, onCo
         ease: 'sine.inOut',
       })
       .to({}, { duration: 0.55 });
-    return () => timeline.kill();
-  }, [active, finish]);
+    return () => {
+      timeline.kill();
+      exitTimelineRef.current?.kill();
+    };
+  }, [active, startExit]);
+
+  const handleSkip = useCallback(() => startExit(), [startExit]);
 
   return (
     <section
@@ -76,7 +144,7 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({ active, onCo
           <p>从这一页，开启你的下一段旅程</p>
         </div>
       </div>
-      <button type="button" className={styles.skip} onClick={finish}>
+      <button type="button" className={styles.skip} onClick={handleSkip}>
         跳过开场
       </button>
     </section>

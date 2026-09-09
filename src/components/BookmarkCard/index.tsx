@@ -2,7 +2,7 @@ import React from 'react';
 import { ExternalLink, Share2 } from 'lucide-react';
 
 import { ILink } from '../../types/bookmark';
-import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
+import { getCompanyIcon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
 import styles from './index.module.css';
 
 interface IBookmarkCardProps {
@@ -28,7 +28,7 @@ const BookmarkCard: React.FC<IBookmarkCardProps> = ({ link, onShare }) => {
 
       <div className={styles['card-favicon-wrap']}>
         <img
-          src={getFavicon(link.url)}
+          src={getCompanyIcon(link.title, link.url)}
           alt={link.title}
           className={styles['card-favicon']}
           onError={handleImgError}

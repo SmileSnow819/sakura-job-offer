@@ -274,6 +274,7 @@ const App: React.FC = () => {
         <AutumnLaunchOverlay
           active={launchScreen === 'autumn'}
           onComplete={handleAutumnLaunchComplete}
+          onRevealStart={revealPage}
         />
       )}
 

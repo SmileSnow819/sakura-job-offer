@@ -25,7 +25,7 @@ import {
 } from '../../features/tracker/model';
 
 const MOTTOS: string[] = mottosRaw as string[];
-import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
+import { getCompanyIcon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
 
 interface IBookmarkGridProps {
   category: ICategory;
@@ -502,7 +502,7 @@ const CarouselCard: React.FC<ICarouselCardProps> = ({
           }}
         >
           <img
-            src={getFavicon(link.url)}
+            src={getCompanyIcon(link.title, link.url)}
             alt={link.title}
             style={{
               width: CARD_H < 350 ? 42 : 52,
@@ -722,7 +722,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({
               <div className="bookmark-mobile-rank">{String(index + 1).padStart(2, '0')}</div>
               <div className="bookmark-mobile-logo">
                 <img
-                  src={getFavicon(link.url)}
+                  src={getCompanyIcon(link.title, link.url)}
                   alt=""
                   onError={handleImgError}
                   onLoad={handleFaviconLoad}
@@ -853,7 +853,7 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({
                       }}
                     >
                       <img
-                        src={getFavicon(link.url)}
+                        src={getCompanyIcon(link.title, link.url)}
                         alt=""
                         style={{ width: 20, height: 20, objectFit: 'contain', borderRadius: 4 }}
                         onError={handleImgError}

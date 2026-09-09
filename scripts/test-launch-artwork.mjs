@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
+import * as launchArtwork from '../src/utils/launchArtwork.ts';
 import {
   BACKGROUND_MARQUEE_ROWS,
   ENTRY_ARTWORK,
@@ -11,6 +12,15 @@ import {
   MARQUEE_DURATION_SECONDS,
   getAutumnArtwork,
 } from '../src/utils/launchArtwork.ts';
+
+test('两幕开场共用同一组收页过渡参数', () => {
+  assert.deepEqual(launchArtwork.LAUNCH_EXIT_MOTION, {
+    clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
+    durationSeconds: 0.7,
+    ease: 'power3.inOut',
+    revealDelaySeconds: 0.28,
+  });
+});
 
 test('手账开场按上排、主卡、下排的阅读顺序翻开五张卡片', () => {
   assert.deepEqual(JOURNAL_CARD_REVEAL_ORDER, [1, 2, 0, 3, 4]);
