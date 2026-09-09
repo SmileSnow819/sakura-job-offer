@@ -8,8 +8,8 @@ import {
   ENTRY_ARTWORK,
   JOURNAL_CARD_REVEAL_ORDER,
   JOURNAL_EXIT_START_SECONDS,
-  JOURNAL_INTRO_DURATION_SECONDS,
   JOURNAL_PAGE_REVEAL_SECONDS,
+  LAUNCH_EXIT_MOTION,
   MARQUEE_DURATION_SECONDS,
 } from '../../utils/launchArtwork.ts';
 
@@ -156,9 +156,9 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({
       .to(
         containerRef.current,
         {
-          clipPath: 'polygon(100% 0, 100% 0, 100% 100%, 100% 100%)',
-          duration: JOURNAL_INTRO_DURATION_SECONDS - JOURNAL_EXIT_START_SECONDS,
-          ease: 'power3.inOut',
+          clipPath: LAUNCH_EXIT_MOTION.clipPath,
+          duration: LAUNCH_EXIT_MOTION.durationSeconds,
+          ease: LAUNCH_EXIT_MOTION.ease,
         },
         JOURNAL_EXIT_START_SECONDS,
       );
