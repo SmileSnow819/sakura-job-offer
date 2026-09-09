@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import { decodeIco, isIco } from 'icojs';
 import sharp from 'sharp';
 
 const OUTPUT_DIR = resolve('public/assets/company-icons');
@@ -53,6 +54,22 @@ const iconCandidates = (html, pageUrl) => {
   return [...new Set(candidates)];
 };
 
+/**
+ * 将 favicon 转为 Sharp 可读取的输入；ICO 先解码最大尺寸帧，避免被当作无效图片。
+ *
+ * @param {Buffer} buffer 下载得到的图标字节。
+ * @returns {Promise<Buffer>} 可交给 Sharp 统一缩放的图片字节。
+ */
+const decodeIcon = async (buffer) => {
+  if (!isIco(buffer)) return buffer;
+  const images = await decodeIco(buffer, 'image/png');
+  const largest = images.toSorted(
+    (left, right) => right.width * right.height - left.width * left.height,
+  )[0];
+  if (!largest) throw new Error('ICO contains no images');
+  return Buffer.from(largest.buffer);
+};
+
 const fetchIcon = async (url) => {
   let pageUrl = url;
   let candidates = [];
@@ -71,7 +88,8 @@ const fetchIcon = async (url) => {
         candidate,
         'image/avif,image/webp,image/png,image/*,*/*;q=0.5',
       );
-      const output = await sharp(image.buffer, { animated: false })
+      const decoded = await decodeIcon(image.buffer);
+      const output = await sharp(decoded, { animated: false })
         .resize(64, 64, { fit: 'contain', background: { r: 0, g: 0, b: 0, alpha: 0 } })
         .webp({ quality: 82, alphaQuality: 90 })
         .toBuffer();
@@ -130,9 +148,28 @@ const results = await runPool(selectedLinks, async (link) => {
   return { link, filename: icon ? filename : 'sakura-offer-icon.webp', cached: Boolean(icon) };
 });
 
+const iconCompanies = new Map();
+for (const { link, filename } of results) {
+  if (filename === FALLBACK_FILENAME) continue;
+  const companies = iconCompanies.get(filename) ?? new Set();
+  companies.add(normalizeCompanyName(link.title));
+  iconCompanies.set(filename, companies);
+}
+const genericIconFiles = new Set(
+  [...iconCompanies].filter(([, companies]) => companies.size >= 3).map(([filename]) => filename),
+);
+await Promise.all(
+  [...genericIconFiles].map((filename) => rm(resolve(OUTPUT_DIR, filename), { force: true })),
+);
+const filteredResults = results.map((result) =>
+  genericIconFiles.has(result.filename)
+    ? { ...result, filename: FALLBACK_FILENAME, cached: false }
+    : result,
+);
+
 const manifest = { ...previousManifest };
 const hostCounts = new Map();
-for (const { link } of results) {
+for (const { link } of filteredResults) {
   try {
     const host = new URL(link.url).hostname.toLocaleLowerCase();
     hostCounts.set(host, (hostCounts.get(host) ?? 0) + 1);
@@ -140,7 +177,7 @@ for (const { link } of results) {
     // 非网页入口只使用名称映射。
   }
 }
-for (const { link, filename } of results) {
+for (const { link, filename } of filteredResults) {
   manifest[`name:${normalizeCompanyName(link.title)}`] = filename;
   try {
     const host = new URL(link.url).hostname.toLocaleLowerCase();
@@ -154,7 +191,7 @@ await writeFile(
   MANIFEST_PATH,
   `// 此文件由 pnpm icons:generate 生成，请勿手工编辑。\nexport const COMPANY_ICONS = ${JSON.stringify(manifest, null, 2)} as const;\n`,
 );
-const cached = results.reduce((sum, result) => sum + (result.cached ? 1 : 0), 0);
+const cached = filteredResults.reduce((sum, result) => sum + (result.cached ? 1 : 0), 0);
 console.log(
   JSON.stringify(
     {
@@ -162,6 +199,7 @@ console.log(
       attempted: results.length,
       cached,
       fallback: results.length - cached,
+      rejectedGenericIcons: genericIconFiles.size,
       output: OUTPUT_DIR,
     },
     null,
