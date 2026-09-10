@@ -20,7 +20,7 @@ const AutumnRecruitmentTimeline: React.FC<IAutumnRecruitmentTimelineProps> = ({ 
           <CalendarClock size={17} />
         </span>
         <div>
-          <h3>最近开放</h3>
+          <h3>一周内正式开放公司</h3>
           <p>按招聘正式开放时间更新</p>
         </div>
       </div>
