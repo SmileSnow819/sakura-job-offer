@@ -1,16 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import {
-  ExternalLink,
-  Grid3X3,
-  Hash,
-  List,
-  RotateCcw,
-  Search,
-  Send,
-  Share2,
-  Sparkles,
-  X,
-} from 'lucide-react';
+import { ExternalLink, Grid3X3, Hash, List, Search, Send, Share2, Sparkles, X } from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory, ILink } from '../../types/bookmark';
@@ -26,6 +15,11 @@ import {
 
 const MOTTOS: string[] = mottosRaw as string[];
 import { getFavicon, handleFaviconLoad, handleImgError } from '../../utils/getFavicon';
+import {
+  filterRecruitmentLinksByOpeningRange,
+  getNextRecruitmentOpeningRange,
+  TRecruitmentOpeningRange,
+} from '../../utils/recruitmentTimeline';
 
 interface IBookmarkGridProps {
   category: ICategory;
@@ -34,6 +28,13 @@ interface IBookmarkGridProps {
 }
 
 type ViewMode = 'cards' | 'table';
+type TOpeningRange = TRecruitmentOpeningRange;
+
+const OPENING_RANGE_OPTIONS: Array<{ label: string; value: Exclude<TOpeningRange, null> }> = [
+  { label: '今天', value: 0 },
+  { label: '三天内', value: 3 },
+  { label: '一周内', value: 7 },
+];
 
 // ── 轮播参数 ──────────────────────────────────────────────────────────────────
 const VISIBLE = 5;
@@ -978,21 +979,19 @@ const BookmarkTable: React.FC<IBookmarkTableProps> = ({
   </div>
 );
 
-/** 展示可重播的秋招上线提示，并在桌面端与搜索框共享工具栏。 */
+/** 展示秋招专场上线提示，并在桌面端与搜索框共享工具栏。 */
 const AutumnLaunchNotice: React.FC = () => {
   const noticeRef = useRef<HTMLDivElement>(null);
   const iconRef = useRef<HTMLSpanElement>(null);
   const beamRef = useRef<HTMLSpanElement>(null);
   const copyRef = useRef<HTMLSpanElement>(null);
-  const sparklesRef = useRef<HTMLSpanElement>(null);
-
-  const replay = useCallback(() => {
+  const playEntrance = useCallback(() => {
     const notice = noticeRef.current;
     if (!notice) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(notice, { opacity: 1, y: 0, rotateX: 0, rotateY: 0, clipPath: 'none' });
-      gsap.set([iconRef.current, copyRef.current, sparklesRef.current], {
+      gsap.set([iconRef.current, copyRef.current], {
         opacity: 1,
         x: 0,
         scale: 1,
@@ -1022,12 +1021,6 @@ const AutumnLaunchNotice: React.FC = () => {
         '<0.04',
       )
       .fromTo(
-        sparklesRef.current,
-        { scale: 0.45, opacity: 0, rotate: -20 },
-        { scale: 1, opacity: 1, rotate: 0, duration: 0.38, ease: 'back.out(2.4)' },
-        '<0.08',
-      )
-      .fromTo(
         beamRef.current,
         { xPercent: -135, opacity: 0 },
         { xPercent: 175, opacity: 0.9, duration: 0.75, ease: 'power2.inOut' },
@@ -1037,8 +1030,8 @@ const AutumnLaunchNotice: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    replay();
-  }, [replay]);
+    playEntrance();
+  }, [playEntrance]);
 
   const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     const element = noticeRef.current;
@@ -1079,7 +1072,7 @@ const AutumnLaunchNotice: React.FC = () => {
           alignItems: 'center',
           gap: 10,
           maxWidth: '100%',
-          padding: '3px 5px 3px 8px',
+          padding: '3px 8px',
           overflow: 'hidden',
           transformStyle: 'preserve-3d',
           borderRadius: 14,
@@ -1130,31 +1123,6 @@ const AutumnLaunchNotice: React.FC = () => {
         >
           秋招专场现已上线，每天自动更新秋招公司
         </span>
-        <button
-          type="button"
-          onClick={replay}
-          aria-label="重播秋招专场上线动画"
-          title="重播上线动画"
-          style={{
-            position: 'relative',
-            width: 30,
-            height: 30,
-            padding: 0,
-            borderRadius: 9,
-            border: '1px solid rgba(255,255,255,0.88)',
-            background: 'rgba(255,255,255,0.56)',
-            color: 'var(--pink-600)',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            cursor: 'pointer',
-            flexShrink: 0,
-          }}
-        >
-          <span ref={sparklesRef} style={{ display: 'inline-flex' }}>
-            <RotateCcw size={14} />
-          </span>
-        </button>
       </div>
     </div>
   );
@@ -1168,6 +1136,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const [viewMode, setViewMode] = useState<ViewMode>('cards');
   const [searchInput, setSearchInput] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
+  const [openingRange, setOpeningRange] = useState<TOpeningRange>(null);
   const [isComposing, setIsComposing] = useState(false);
 
   const headerRef = useRef<HTMLElement>(null);
@@ -1187,18 +1156,23 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const dragStartXRef = useRef<number | null>(null);
   const isDraggingRef = useRef(false);
 
+  const isAutumnCategory = displayedCategory.id === 'autumn';
   const filteredLinks = useMemo(() => {
     const keyword = normalizeText(searchTerm);
-    if (!keyword) return displayedCategory.links;
-    return displayedCategory.links.filter((link) => {
-      const hostname = getHostname(link.url);
-      return normalizeText(`${link.title} ${hostname} ${link.url}`).includes(keyword);
-    });
-  }, [displayedCategory.links, searchTerm]);
+    const searchMatchedLinks = keyword
+      ? displayedCategory.links.filter((link) => {
+          const hostname = getHostname(link.url);
+          return normalizeText(`${link.title} ${hostname} ${link.url}`).includes(keyword);
+        })
+      : displayedCategory.links;
+
+    return isAutumnCategory && openingRange !== null
+      ? filterRecruitmentLinksByOpeningRange(searchMatchedLinks, openingRange)
+      : searchMatchedLinks;
+  }, [displayedCategory.links, isAutumnCategory, openingRange, searchTerm]);
   const links = filteredLinks;
   const total = links.length;
   const isCardsView = viewMode === 'cards';
-  const isAutumnCategory = displayedCategory.id === 'autumn';
   const isApplicationAdded = useCallback(
     (link: ILink) => !!findQuickApplication(trackerData, { name: link.title, website: link.url }),
     [trackerData],
@@ -1320,6 +1294,7 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   useEffect(() => {
     setSearchInput('');
     setSearchTerm('');
+    setOpeningRange(null);
   }, [displayedCategory.id]);
 
   useEffect(() => {
@@ -1619,18 +1594,23 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             gap: 10px !important;
           }
           .autumn-launch-wrap {
+            width: 100%;
+            flex-basis: 100%;
             padding: 0 16px 12px !important;
           }
           .autumn-launch-notice {
+            width: 100%;
             min-height: 44px;
             padding: 9px 12px !important;
             border-radius: 14px !important;
-            align-items: flex-start !important;
+            align-items: center !important;
+            justify-content: center;
           }
           .autumn-launch-copy {
             white-space: normal !important;
             font-size: 12px !important;
             line-height: 1.45 !important;
+            text-align: center;
           }
           .bookmark-search-box {
             width: 100% !important;
@@ -1961,6 +1941,73 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
             </button>
           )}
         </div>
+
+        {isAutumnCategory && (
+          <div
+            aria-label="按正式开放时间筛选"
+            role="group"
+            style={{ display: 'inline-flex', alignItems: 'center', gap: 6, flexWrap: 'wrap' }}
+          >
+            <button
+              type="button"
+              aria-pressed={openingRange === null}
+              onClick={() => setOpeningRange(null)}
+              style={{
+                height: 32,
+                padding: '0 11px',
+                borderRadius: 10,
+                border:
+                  openingRange === null
+                    ? '1px solid rgba(255,107,158,0.52)'
+                    : '1px solid rgba(255,255,255,0.84)',
+                background:
+                  openingRange === null
+                    ? 'linear-gradient(135deg, rgba(255,226,239,0.95), rgba(230,242,255,0.9))'
+                    : 'rgba(255,255,255,0.52)',
+                color: openingRange === null ? 'var(--pink-600)' : 'var(--neutral-600)',
+                fontSize: 12,
+                fontWeight: 750,
+                cursor: 'pointer',
+                boxShadow: openingRange === null ? '0 4px 12px rgba(255,107,158,0.12)' : 'none',
+              }}
+            >
+              全部
+            </button>
+            {OPENING_RANGE_OPTIONS.map((option) => {
+              const selected = openingRange === option.value;
+              return (
+                <button
+                  key={option.value}
+                  type="button"
+                  aria-pressed={selected}
+                  onClick={() =>
+                    setOpeningRange((current) =>
+                      getNextRecruitmentOpeningRange(current, option.value),
+                    )
+                  }
+                  style={{
+                    height: 32,
+                    padding: '0 11px',
+                    borderRadius: 10,
+                    border: selected
+                      ? '1px solid rgba(255,107,158,0.52)'
+                      : '1px solid rgba(255,255,255,0.84)',
+                    background: selected
+                      ? 'linear-gradient(135deg, rgba(255,226,239,0.95), rgba(230,242,255,0.9))'
+                      : 'rgba(255,255,255,0.52)',
+                    color: selected ? 'var(--pink-600)' : 'var(--neutral-600)',
+                    fontSize: 12,
+                    fontWeight: 750,
+                    cursor: 'pointer',
+                    boxShadow: selected ? '0 4px 12px rgba(255,107,158,0.12)' : 'none',
+                  }}
+                >
+                  {option.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
 
         {isAutumnCategory && <AutumnLaunchNotice />}
       </div>

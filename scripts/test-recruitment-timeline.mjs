@@ -3,6 +3,39 @@ import test from 'node:test';
 
 import bookmarkData from '../src/bookmarks.json' with { type: 'json' };
 
+test('可从小红书原帖 URL 或笔记 ID 还原北京时间创建时间', async () => {
+  const { getXiaohongshuNoteCreatedAt } = await import('../src/utils/xiaohongshuNoteTime.ts');
+  const noteId = '6aa22879000000002701401c';
+
+  assert.deepEqual(getXiaohongshuNoteCreatedAt(noteId), {
+    date: '2026-09-10',
+    dateTime: '2026-09-10 11:48:09',
+    noteId,
+  });
+  assert.deepEqual(
+    getXiaohongshuNoteCreatedAt(`https://www.xiaohongshu.com/explore/${noteId}?xsec_token=test`),
+    {
+      date: '2026-09-10',
+      dateTime: '2026-09-10 11:48:09',
+      noteId,
+    },
+  );
+});
+
+test('小红书笔记 ID 缺失或不合法时不生成创建时间', async () => {
+  const { getXiaohongshuNoteCreatedAt } = await import('../src/utils/xiaohongshuNoteTime.ts');
+
+  assert.equal(getXiaohongshuNoteCreatedAt('6aa22879'), null);
+  assert.equal(
+    getXiaohongshuNoteCreatedAt('https://www.xiaohongshu.com/explore/not-a-note-id'),
+    null,
+  );
+  assert.equal(
+    getXiaohongshuNoteCreatedAt('https://example.com/explore/6aa22879000000002701401c'),
+    null,
+  );
+});
+
 test('秋招记录开放日期，实习生分类不记录开放日期', () => {
   const autumn = bookmarkData.categories.find((category) => category.id === 'autumn');
   const internship = bookmarkData.categories.find((category) => category.id === 'campus');
@@ -38,6 +71,34 @@ test('时间线只保留最近七天并按开放日期倒序排列', async () =>
       ['七天前开放', '9月1日'],
     ],
   );
+});
+
+test('秋招开放日期筛选支持今天、三天内和一周内', async () => {
+  const { filterRecruitmentLinksByOpeningRange, getNextRecruitmentOpeningRange } =
+    await import('../src/utils/recruitmentTimeline.ts');
+  const links = [
+    { title: '今天', url: 'https://today.example', openedAt: '2026-09-10' },
+    { title: '三天前', url: 'https://three-days.example', openedAt: '2026-09-07' },
+    { title: '一周前', url: 'https://week.example', openedAt: '2026-09-03' },
+    { title: '更早', url: 'https://earlier.example', openedAt: '2026-09-02' },
+    { title: '未知时间', url: 'https://unknown.example' },
+  ];
+
+  assert.deepEqual(
+    filterRecruitmentLinksByOpeningRange(links, 0, '2026-09-10').map((link) => link.title),
+    ['今天'],
+  );
+  assert.deepEqual(
+    filterRecruitmentLinksByOpeningRange(links, 3, '2026-09-10').map((link) => link.title),
+    ['今天', '三天前'],
+  );
+  assert.deepEqual(
+    filterRecruitmentLinksByOpeningRange(links, 7, '2026-09-10').map((link) => link.title),
+    ['今天', '三天前', '一周前'],
+  );
+  assert.equal(getNextRecruitmentOpeningRange(0, 0), null);
+  assert.equal(getNextRecruitmentOpeningRange(0, 3), 3);
+  assert.equal(getNextRecruitmentOpeningRange(null, 7), 7);
 });
 
 test('没有最近七天内开放的秋招公司时返回空时间线', async () => {

@@ -12,6 +12,8 @@ export interface IRecruitmentTimelineItem {
   openedAt: string;
 }
 
+export type TRecruitmentOpeningRange = 0 | 3 | 7 | null;
+
 /** “最近开放”包含今天以及此前七个自然日。 */
 const RECENT_OPENING_DAY_LIMIT = 7;
 
@@ -42,6 +44,37 @@ const parseDateKey = (value: string): IParsedDateKey | null => {
   }
 
   return { day, dayNumber: timestamp / 86_400_000, month };
+};
+
+/** 切换秋招日期筛选；再次点击当前筛选时回到全部公司。 */
+export const getNextRecruitmentOpeningRange = (
+  current: TRecruitmentOpeningRange,
+  next: Exclude<TRecruitmentOpeningRange, null>,
+): TRecruitmentOpeningRange => (current === next ? null : next);
+
+/**
+ * 按招聘正式开放日筛选秋招公司；没有记录开放时间的公司不能归入任意时间范围。
+ *
+ * @param links 秋招分类中的公司链接。
+ * @param dayLimit 包含今天在内、向前回溯的自然日数；`0` 仅表示今天。
+ * @param todayKey 用于比较的本地日期，默认取用户当天。
+ * @returns 保持原有顺序的符合时间范围的公司链接。
+ */
+export const filterRecruitmentLinksByOpeningRange = (
+  links: ILink[],
+  dayLimit: number,
+  todayKey = getLocalDateKey(new Date()),
+): ILink[] => {
+  const today = parseDateKey(todayKey);
+  if (!today || dayLimit < 0) return [];
+
+  return links.filter((link) => {
+    if (!link.openedAt) return false;
+    const openedAt = parseDateKey(link.openedAt);
+    if (!openedAt || openedAt.dayNumber > today.dayNumber) return false;
+
+    return today.dayNumber - openedAt.dayNumber <= dayLimit;
+  });
 };
 
 /**
