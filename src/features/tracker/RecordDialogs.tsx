@@ -19,6 +19,7 @@ import {
   type TrackerData,
 } from './model';
 import { CompanyLogo, FlowEditor, Modal } from './components';
+import { AiImportCard } from './AiImportCard';
 
 export function ApplicationForm({
   data,
@@ -28,12 +29,14 @@ export function ApplicationForm({
   onSave,
   onClose,
   storageError,
+  onImport,
 }: {
   data: TrackerData;
   catalog: Company[];
   seed?: { name: string; website: string };
   existing?: Application;
   onSave: (company: Company, application: Application) => boolean;
+  onImport?: (data: TrackerData) => void;
   onClose: () => void;
   storageError?: string;
 }) {
@@ -111,6 +114,7 @@ export function ApplicationForm({
           submit();
         }}
       >
+        {!existing && onImport && <AiImportCard data={data} onImport={onImport} />}
         <label className="tracker-field">
           公司名称 <span className="tracker-required">*</span>
           <div className="tracker-input-icon">
@@ -215,20 +219,22 @@ export function ApplicationForm({
         </label>
         <details className="tracker-more" open={existing ? true : undefined}>
           <summary>更多信息 · 投递日期与备注</summary>
-          <label className="tracker-field">
-            投递日期
-            <input required type="date" value={date} onChange={(e) => setDate(e.target.value)} />
-          </label>
-          <label className="tracker-field">
-            备注
-            <textarea
-              maxLength={2000}
-              rows={3}
-              value={note}
-              onChange={(e) => setNote(e.target.value)}
-              placeholder="填写投递备注"
-            />
-          </label>
+          <div className="tracker-collapse-content">
+            <label className="tracker-field">
+              投递日期
+              <input required type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+            </label>
+            <label className="tracker-field">
+              备注
+              <textarea
+                maxLength={2000}
+                rows={3}
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="填写投递备注"
+              />
+            </label>
+          </div>
         </details>
         {!existing && (
           <p className="tracker-help">
@@ -408,21 +414,23 @@ export function ApplicationDetail({
                     )}
                     <details open={s.note ? true : undefined}>
                       <summary>{s.note ? '阶段备注' : '添加备注'}</summary>
-                      <textarea
-                        aria-label={`${s.name}备注`}
-                        maxLength={2000}
-                        rows={2}
-                        value={s.note}
-                        onChange={(e) =>
-                          setDraft({
-                            ...draft,
-                            stages: draft.stages.map((stage) =>
-                              stage.id === s.id ? { ...stage, note: e.target.value } : stage,
-                            ),
-                          })
-                        }
-                        placeholder="面试情况、准备事项…"
-                      />
+                      <div className="tracker-collapse-content">
+                        <textarea
+                          aria-label={`${s.name}备注`}
+                          maxLength={2000}
+                          rows={2}
+                          value={s.note}
+                          onChange={(e) =>
+                            setDraft({
+                              ...draft,
+                              stages: draft.stages.map((stage) =>
+                                stage.id === s.id ? { ...stage, note: e.target.value } : stage,
+                              ),
+                            })
+                          }
+                          placeholder="面试情况、准备事项…"
+                        />
+                      </div>
                     </details>
                   </div>
                 </div>

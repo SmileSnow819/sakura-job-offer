@@ -776,6 +776,159 @@
   background: #141b284d;
   backdrop-filter: none;
 }
+.tracker-ai-prompt {
+  padding: 20px 26px 26px;
+}
+.tracker-ai-prompt textarea {
+  display: block;
+  width: 100%;
+  height: 280px;
+  box-sizing: border-box;
+  padding: 14px 16px;
+  resize: none;
+  border: 1px solid var(--sakura-line, #eadce1);
+  border-radius: 12px;
+  background: #fffafb;
+  color: #5f5258;
+  font:
+    12px/1.65 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+.tracker-ai-prompt > .tracker-button {
+  margin-top: 14px;
+}
+.tracker-ai-import-input {
+  display: block;
+  width: 100%;
+  min-height: 120px;
+  box-sizing: border-box;
+  margin: 12px 0;
+  padding: 10px 12px;
+  resize: vertical;
+  border: 1px solid var(--sakura-line, #eadce1);
+  border-radius: 10px;
+  background: #fffafb;
+  font:
+    12px/1.6 ui-monospace,
+    SFMono-Regular,
+    Menlo,
+    monospace;
+}
+.tracker-ai-card {
+  margin: 0 0 18px;
+  overflow: hidden;
+  border: 1px solid var(--sakura-line, #eadce1);
+  border-radius: 12px;
+  background: #fff;
+}
+.tracker-ai-card summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 13px 14px;
+  list-style: none;
+  color: var(--sakura-700);
+  font-size: 13px;
+  font-weight: 650;
+}
+.tracker-ai-card summary::-webkit-details-marker {
+  display: none;
+}
+.tracker-ai-card summary::before {
+  content: '›';
+  display: inline-grid;
+  width: 18px;
+  height: 18px;
+  place-items: center;
+  border-radius: 50%;
+  background: #fff1f6;
+  color: var(--sakura-700);
+  font-size: 17px;
+  line-height: 1;
+  transition: transform 180ms ease;
+}
+.tracker-ai-card[open] summary::before {
+  transform: rotate(90deg);
+}
+.tracker-ai-card summary small {
+  color: #9a8b92;
+  font-size: 11px;
+  font-weight: 400;
+}
+.tracker-ai-card > .tracker-collapse-content {
+  border-top: 1px solid #f0e5e9;
+}
+.tracker-ai-card-body {
+  min-width: 0;
+  padding: 14px;
+}
+.tracker-ai-block + .tracker-ai-block {
+  margin-top: 14px;
+}
+.tracker-ai-block-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 7px;
+  color: #65565d;
+  font-size: 12px;
+  font-weight: 650;
+}
+.tracker-ai-block-head small {
+  color: #a3939a;
+  font-size: 11px;
+  font-weight: 400;
+}
+.tracker-ai-card-prompt {
+  display: block;
+  width: 100%;
+  height: 142px;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 10px 11px;
+  resize: none;
+  border: 1px solid #eadfe4;
+  border-radius: 8px;
+  outline: none;
+  background: #fffafb;
+  color: #75666d;
+  font:
+    11px/1.55 ui-monospace,
+    monospace;
+}
+.tracker-ai-card-prompt:focus,
+.tracker-ai-card-prompt:focus-visible,
+.tracker-ai-import-input:focus-visible,
+.tracker-ai-import-input:focus {
+  border-color: #d9b8c6;
+  outline: 2px solid #f8e8ee;
+  outline-offset: 1px;
+  box-shadow: none;
+}
+.tracker-ai-import-input {
+  min-height: 112px;
+  margin: 0;
+}
+.tracker-ai-block > .tracker-button {
+  margin-top: 12px;
+}
+.tracker-ai-preview {
+  display: grid;
+  gap: 8px;
+  padding: 20px 26px;
+}
+.tracker-ai-preview > div {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 100px 90px 80px;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--sakura-line);
+  font-size: 12px;
+}
 .tracker-dialog-header {
   display: flex;
   align-items: flex-start;
@@ -887,6 +1040,22 @@
 }
 .tracker-more .tracker-field {
   margin: 15px 0 5px;
+}
+.tracker-collapse-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    grid-template-rows 220ms ease,
+    opacity 180ms ease;
+}
+.tracker-collapse-content > * {
+  min-height: 0;
+}
+details[open] > .tracker-collapse-content {
+  grid-template-rows: 1fr;
+  opacity: 1;
 }
 .tracker-help {
   font-size: 11px;
@@ -1707,7 +1876,31 @@
 }
 .tracker-page :focus-visible,
 .tracker-dialog :focus-visible {
-  outline-color: var(--sakura-500, #d9678d);
+  outline-color: #829ab3;
+  outline-offset: 1px;
+}
+.tracker-dialog input:not([type='checkbox']):focus,
+.tracker-dialog input:not([type='checkbox']):focus-visible,
+.tracker-dialog select:focus,
+.tracker-dialog select:focus-visible,
+.tracker-dialog textarea:focus,
+.tracker-dialog textarea:focus-visible {
+  /* 表单用边框表达焦点，不再叠加一圈脱离控件的粉色 outline。 */
+  border-color: var(--sakura-500, #d9678d);
+  outline: none;
+  outline-offset: 0;
+  box-shadow: 0 0 0 1px var(--sakura-500, #d9678d);
+}
+.tracker-dialog .tracker-input-icon:focus-within {
+  border-color: var(--sakura-500, #d9678d);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--sakura-500, #d9678d);
+}
+.tracker-dialog .tracker-input-icon input:focus,
+.tracker-dialog .tracker-input-icon input:focus-visible {
+  border: 0;
+  outline: none;
+  box-shadow: none;
 }
 .tracker-page input[type='checkbox'],
 .tracker-dialog input[type='checkbox'] {

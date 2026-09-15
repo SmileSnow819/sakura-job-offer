@@ -6,6 +6,7 @@ import {
   currentStage,
   defaultTemplate,
   emptyData,
+  importAiRecords,
   makeStages,
   normalizeWebsite,
   outcome,
@@ -158,6 +159,28 @@ test('快捷移除仅删除来源匹配的投递，保留同公司手动添加�
     ['manual-position'],
   );
   assert.equal(removed.companies.length, 1);
+});
+test('AI 轻量 JSON 追加记录并使用指定当前阶段', () => {
+  const initial = fixture();
+  const imported = importAiRecords(
+    JSON.stringify([
+      {
+        companyName: '新公司',
+        website: 'https://example.com/jobs?recommendCode=remove-me',
+        appliedAt: '2026-09-16',
+        position: '前端工程师',
+        status: 'active',
+        currentStage: '一面',
+      },
+    ]),
+    initial,
+  );
+
+  assert.equal(imported.applications.length, initial.applications.length + 1);
+  assert.equal(imported.companies.at(-1)?.website, 'https://example.com');
+  const application = imported.applications.at(-1);
+  assert.equal(currentStage(application)?.name, '一面');
+  assert.equal(application?.position, '前端工程师');
 });
 test('未设置岗位时统一显示待设置岗位', () => {
   assert.equal(positionLabel(''), '待设置岗位');

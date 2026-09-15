@@ -343,6 +343,9 @@ export default function TrackerPage() {
             全部投递 <span>{filtered.length}</span>
           </h2>
           <div className="tracker-inline-actions">
+            <button className="tracker-button small" onClick={() => setDialog({ type: 'data' })}>
+              导入 JSON
+            </button>
             <button
               className="tracker-button small"
               aria-pressed={showAnalytics}
@@ -603,6 +606,9 @@ export default function TrackerPage() {
           catalog={catalog}
           seed={dialog.seed}
           onSave={saveApplication}
+          onImport={(next) => {
+            if (commit(next, '已追加导入投递记录')) setDialog(null);
+          }}
           onClose={() => setDialog(null)}
         />
       )}

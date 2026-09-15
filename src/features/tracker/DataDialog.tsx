@@ -6,6 +6,7 @@ import {
   emptyData,
   normalizeWebsite,
   parseData,
+  importAiRecords,
   STORAGE_KEY,
   today,
   type Company,
@@ -24,6 +25,7 @@ export function DataDialog({
   storageError?: string;
 }) {
   const [incoming, setIncoming] = useState<TrackerData | null>(null);
+  const [replaceIncoming, setReplaceIncoming] = useState(true);
   const [error, setError] = useState('');
   const [clearConfirm, setClearConfirm] = useState(false);
   const [acknowledged, setAcknowledged] = useState(false);
@@ -39,12 +41,17 @@ export function DataDialog({
     );
   async function importFile(file?: File) {
     setIncoming(null);
+    setReplaceIncoming(true);
     setError('');
     setAcknowledged(false);
     if (!file) return;
     try {
       if (file.size > 10 * 1024 * 1024) throw new Error('备份文件不能超过 10 MB');
-      setIncoming(parseData(await file.text()));
+      const raw = await file.text();
+      if (raw.trimStart().startsWith('[')) {
+        setIncoming(importAiRecords(raw, data));
+        setReplaceIncoming(false);
+      } else setIncoming(parseData(raw));
     } catch (cause) {
       setError(`无法导入：${(cause as Error).message}。现有记录未改动。`);
     }
@@ -85,20 +92,26 @@ export function DataDialog({
               <strong>
                 已读取 {incoming.applications.length} 条投递、{incoming.companies.length} 家公司
               </strong>
-              <p>当前 {data.applications.length} 条投递将被替换。请先下载当前备份。</p>
-              <label className="tracker-check">
-                <input
-                  type="checkbox"
-                  checked={acknowledged}
-                  onChange={(e) => setAcknowledged(e.target.checked)}
-                />
-                我已备份，确认替换当前数据
-              </label>
+              <p>
+                {replaceIncoming
+                  ? `当前 ${data.applications.length} 条投递将被替换。请先下载当前备份。`
+                  : `当前数据不会被替换，将新增 ${incoming.applications.length - data.applications.length} 条投递。`}
+              </p>
+              {replaceIncoming && (
+                <label className="tracker-check">
+                  <input
+                    type="checkbox"
+                    checked={acknowledged}
+                    onChange={(e) => setAcknowledged(e.target.checked)}
+                  />
+                  我已备份，确认替换当前数据
+                </label>
+              )}
               <button
                 className="tracker-button primary"
-                disabled={!acknowledged}
+                disabled={replaceIncoming && !acknowledged}
                 onClick={() => {
-                  if (onSave(incoming, true)) onClose();
+                  if (onSave(incoming, replaceIncoming)) onClose();
                   else setError('恢复失败，未替换当前数据。');
                 }}
               >
