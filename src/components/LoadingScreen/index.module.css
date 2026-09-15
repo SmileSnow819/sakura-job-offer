@@ -104,8 +104,9 @@
 .seal {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 16px;
+  gap: 10px;
+  max-width: 92vw;
+  padding: 11px 18px;
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 999px;
   color: #fff;
@@ -113,21 +114,16 @@
   box-shadow: 0 14px 34px rgba(225, 126, 167, 0.27);
 }
 .seal span {
-  font-size: 11px;
+  font-size: clamp(11px, 1.2vw, 15px);
   font-weight: 800;
-  letter-spacing: 0.17em;
+  letter-spacing: 0.04em;
+  line-height: 1.35;
+  white-space: nowrap;
 }
 .copy {
   position: relative;
   z-index: 6;
   margin: 16px 0 0;
-}
-.copy p {
-  margin: 0 0 8px;
-  color: #7c6a7b;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.05em;
 }
 .copy h1 {
   margin: 0;

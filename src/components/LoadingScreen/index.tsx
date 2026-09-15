@@ -3,6 +3,7 @@ import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 import styles from './index.module.css';
+import { SITE_TAGLINE } from '../../constants/branding';
 import {
   BACKGROUND_MARQUEE_ROWS,
   ENTRY_ARTWORK,
@@ -215,10 +216,9 @@ const LoadingScreen: React.FC<ILoadingScreenProps> = ({
       <div className={styles.content}>
         <div ref={sealRef} className={styles.seal}>
           <Sparkles size={27} strokeWidth={1.8} />
-          <span>SAKURA</span>
+          <span>{SITE_TAGLINE}</span>
         </div>
         <div ref={copyRef} className={styles.copy}>
-          <p>让每一次投递，都有清楚的去处</p>
           <h1>Sakura Job Offer</h1>
         </div>
         <div ref={stageRef} className={styles.artworkStage}>

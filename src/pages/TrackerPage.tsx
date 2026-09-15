@@ -16,6 +16,7 @@ import {
   SlidersHorizontal,
 } from 'lucide-react';
 import bookmarks from '../bookmarks.json';
+import { SITE_TAGLINE } from '../constants/branding';
 import {
   changeStage,
   currentStage,
@@ -277,11 +278,8 @@ export default function TrackerPage() {
       <div className="tracker-container">
         <header className="tracker-header tracker-hero" data-tracker-enter>
           <div className="tracker-hero-copy">
-            <span className="tracker-eyebrow">
-              <span /> SAKURA TRACKER
-            </span>
             <h1>我的投递</h1>
-            <p>把每一次尝试认真收好，也把下一步看得清清楚楚。</p>
+            <p>{SITE_TAGLINE}</p>
           </div>
           <button className="tracker-button primary" onClick={() => setDialog({ type: 'new' })}>
             <Plus size={18} />

@@ -3,6 +3,7 @@ import { Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 
 import styles from './index.module.css';
+import { SITE_TAGLINE } from '../../constants/branding';
 import {
   getAutumnArtwork,
   LAUNCH_EXIT_MOTION,
@@ -141,7 +142,7 @@ const AutumnLaunchOverlay: React.FC<IAutumnLaunchOverlayProps> = ({
             <Sparkles size={13} /> AUTUMN LETTER
           </span>
           <h1>秋招专场</h1>
-          <p>从这一页，开启你的下一段旅程</p>
+          <p>{SITE_TAGLINE}</p>
         </div>
       </div>
       <button type="button" className={styles.skip} onClick={handleSkip}>
