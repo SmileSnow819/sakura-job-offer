@@ -12,6 +12,7 @@ import { sanitizeBookmarkData } from './utils/sanitizeRecruitmentUrl';
 import { getInitialLaunchScreen, getNextLaunchScreen, TLaunchScreen } from './utils/launchSequence';
 import AutumnLaunchOverlay from './components/AutumnLaunchOverlay';
 import TrackerPage from './pages/TrackerPage';
+import ContactPage from './pages/ContactPage';
 
 const bookmarkData = sanitizeBookmarkData(bookmarkDataRaw as IBookmarkData);
 const INTERVIEWS_JSON_URL = 'https://www.yukibloom.app/categories/interview';
@@ -99,7 +100,11 @@ const App: React.FC = () => {
   // 当前激活的 tab 从路径推导
   const pathParts = location.pathname.split('/');
   const activeTab =
-    (location.pathname.startsWith('/tracker') ? 'tracker' : pathParts[2]) ??
+    (location.pathname.startsWith('/tracker')
+      ? 'tracker'
+      : location.pathname.startsWith('/contact')
+        ? 'contact'
+        : pathParts[2]) ??
     bookmarkData.categories.find((c) => c.id !== 'interviews')?.id ??
     '';
 
@@ -179,6 +184,8 @@ const App: React.FC = () => {
         window.location.assign(INTERVIEWS_JSON_URL);
       } else if (tabId === 'tracker') {
         void navigate('/tracker');
+      } else if (tabId === 'contact') {
+        void navigate('/contact');
       } else {
         void navigate(`/bookmarks/${tabId}`);
       }
@@ -263,6 +270,7 @@ const App: React.FC = () => {
       >
         <Routes>
           <Route path="/tracker" element={<TrackerPage />} />
+          <Route path="/contact" element={<ContactPage />} />
           <Route path="/" element={<BookmarksPage onShare={handleShare} />} />
           <Route path="/bookmarks/:categoryId" element={<BookmarksPage onShare={handleShare} />} />
           <Route
@@ -301,6 +309,7 @@ const App: React.FC = () => {
             categories={[
               ...bookmarkData.categories,
               { id: 'tracker', name: '我的投递', icon: 'BriefcaseBusiness', links: [] },
+              { id: 'contact', name: '意见反馈', icon: 'CircleHelp', links: [] },
             ]}
             activeTab={activeTab}
             launchActive={launchScreen === 'autumn'}
