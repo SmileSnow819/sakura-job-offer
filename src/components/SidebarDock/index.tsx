@@ -1,5 +1,12 @@
 import React, { useRef, useState } from 'react';
-import { CalendarDays, Compass, PenTool, BookOpen, BriefcaseBusiness } from 'lucide-react';
+import {
+  CalendarDays,
+  Compass,
+  PenTool,
+  BookOpen,
+  BriefcaseBusiness,
+  CircleHelp,
+} from 'lucide-react';
 import gsap from 'gsap';
 
 import { ICategory } from '../../types/bookmark';
@@ -11,6 +18,7 @@ import {
 
 const ICON_COMPONENTS: Record<string, React.ReactNode> = {
   BriefcaseBusiness: <BriefcaseBusiness size={20} />,
+  CircleHelp: <CircleHelp size={20} />,
   Compass: <Compass size={20} />,
   CalendarDays: <CalendarDays size={20} />,
   PenTool: <PenTool size={20} />,
