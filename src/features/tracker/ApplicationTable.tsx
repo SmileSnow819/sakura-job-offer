@@ -34,11 +34,13 @@ export default function ApplicationTable({
     applicationId: string;
     stageId: string;
   } | null>(null);
+  const [actionPosition, setActionPosition] = useState<{ left: number; top: number } | null>(null);
   const [saveFailed, setSaveFailed] = useState(false);
   const actionPanel = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement | null>(null);
   const timelinePanels = useRef(new Map<string, HTMLDivElement>());
   const timelineToggles = useRef(new Map<string, HTMLButtonElement>());
+  const stageButtons = useRef(new Map<string, HTMLButtonElement>());
   const prefix = useId();
 
   useLayoutEffect(() => {
@@ -88,8 +90,19 @@ export default function ApplicationTable({
 
   function closeActions() {
     setEditingStage(null);
+    setActionPosition(null);
     setSaveFailed(false);
     trigger.current?.focus();
+  }
+
+  function updateActionPosition(element = trigger.current) {
+    if (!element) return;
+    const anchor = element.querySelector('strong') ?? element;
+    const textNode = anchor.firstChild;
+    const range = textNode ? document.createRange() : null;
+    if (range && textNode) range.selectNodeContents(textNode);
+    const rect = range?.getBoundingClientRect() ?? anchor.getBoundingClientRect();
+    setActionPosition({ left: rect.right + 10, top: rect.top + rect.height / 2 });
   }
 
   function toggle(id: string) {
@@ -129,7 +142,18 @@ export default function ApplicationTable({
                 : undefined;
             return (
               <Fragment key={application.id}>
-                <tr className={open ? 'tracker-record-expanded' : undefined}>
+                <tr
+                  className={open ? 'tracker-record-expanded' : undefined}
+                  onClick={() => toggle(application.id)}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      toggle(application.id);
+                    }
+                  }}
+                  tabIndex={0}
+                  title="点击展开招聘流程"
+                >
                   <td className="tracker-expand-column">
                     <button
                       ref={(element) => {
@@ -141,7 +165,10 @@ export default function ApplicationTable({
                       aria-label={`${open ? '收起' : '展开'}${company.name} ${positionLabel(application.position)}的招聘流程`}
                       aria-expanded={open}
                       aria-controls={timelineId}
-                      onClick={() => toggle(application.id)}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        toggle(application.id);
+                      }}
                     >
                       <ChevronRight size={16} aria-hidden="true" />
                     </button>
@@ -151,6 +178,7 @@ export default function ApplicationTable({
                       type="checkbox"
                       aria-label={`选择${company.name} ${positionLabel(application.position)}`}
                       checked={selected.includes(application.id)}
+                      onClick={(event) => event.stopPropagation()}
                       onChange={() => onSelect(application.id)}
                     />
                   </td>
@@ -176,7 +204,10 @@ export default function ApplicationTable({
                     <button
                       type="button"
                       className="tracker-text-button"
-                      onClick={() => onDetail(application.id)}
+                      onClick={(event) => {
+                        event.stopPropagation();
+                        onDetail(application.id);
+                      }}
                     >
                       查看详情
                     </button>
@@ -201,7 +232,7 @@ export default function ApplicationTable({
                           <span>
                             <i aria-hidden="true">✦</i> 招聘旅程
                           </span>
-                          <small>点击阶段更新状态</small>
+                          <small>点击阶段更新状态 · 双击标记完成 · ← → 切换阶段</small>
                           {application.withdrawn && (
                             <small>已取消投递 · 修改阶段不会恢复投递</small>
                           )}
@@ -210,6 +241,7 @@ export default function ApplicationTable({
                           className="tracker-row-timeline-scroll"
                           tabIndex={0}
                           aria-label="横向招聘时间轴，可左右滚动"
+                          onScroll={() => updateActionPosition()}
                         >
                           <ol className="tracker-inline-timeline">
                             {application.stages.map((stage, index) => (
@@ -222,8 +254,67 @@ export default function ApplicationTable({
                                     : undefined
                                 }
                               >
+                                {chosenStage?.id === stage.id && (
+                                  <div
+                                    ref={actionPanel}
+                                    className="tracker-stage-actions tracker-stage-actions-popover"
+                                    id={`${timelineId}-actions`}
+                                    style={
+                                      actionPosition
+                                        ? {
+                                            position: 'fixed',
+                                            left: actionPosition.left,
+                                            top: actionPosition.top,
+                                            transform: 'translateY(-50%)',
+                                            zIndex: 1000,
+                                          }
+                                        : undefined
+                                    }
+                                    hidden={!actionPosition}
+                                    role="group"
+                                    aria-label={`设置${stage.name}状态`}
+                                    onKeyDown={(event) => {
+                                      if (event.key === 'Escape') {
+                                        event.stopPropagation();
+                                        closeActions();
+                                      }
+                                    }}
+                                  >
+                                    <strong>{stage.name}</strong>
+                                    {(
+                                      [
+                                        'active',
+                                        'completed',
+                                        'skipped',
+                                        'rejected',
+                                        'pending',
+                                      ] as StageStatus[]
+                                    ).map((status) => (
+                                      <button
+                                        type="button"
+                                        key={status}
+                                        data-stage-action
+                                        className={`tracker-button small${stage.status === status ? ' primary' : ''}`}
+                                        disabled={stage.status === status}
+                                        aria-pressed={stage.status === status}
+                                        onClick={() => {
+                                          if (onStageChange(application.id, stage.id, status))
+                                            closeActions();
+                                          else setSaveFailed(true);
+                                        }}
+                                      >
+                                        {STAGE_LABELS[status]}
+                                      </button>
+                                    ))}
+                                  </div>
+                                )}
                                 <button
                                   type="button"
+                                  ref={(element) => {
+                                    const key = application.id + ':' + stage.id;
+                                    if (element) stageButtons.current.set(key, element);
+                                    else stageButtons.current.delete(key);
+                                  }}
                                   className="tracker-inline-stage-button"
                                   aria-label={`更新${stage.name}状态，当前${STAGE_LABELS[stage.status]}`}
                                   aria-expanded={chosenStage?.id === stage.id}
@@ -231,11 +322,30 @@ export default function ApplicationTable({
                                   onClick={(event) => {
                                     trigger.current = event.currentTarget;
                                     setSaveFailed(false);
-                                    setEditingStage(
-                                      chosenStage?.id === stage.id
-                                        ? null
-                                        : { applicationId: application.id, stageId: stage.id },
-                                    );
+                                    if (chosenStage?.id === stage.id) closeActions();
+                                    else {
+                                      updateActionPosition(event.currentTarget);
+                                      setEditingStage({
+                                        applicationId: application.id,
+                                        stageId: stage.id,
+                                      });
+                                    }
+                                  }}
+                                  onDoubleClick={() => {
+                                    if (onStageChange(application.id, stage.id, 'completed')) {
+                                      closeActions();
+                                    }
+                                  }}
+                                  onKeyDown={(event) => {
+                                    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight')
+                                      return;
+                                    event.preventDefault();
+                                    const nextIndex = index + (event.key === 'ArrowRight' ? 1 : -1);
+                                    const nextStage = application.stages[nextIndex];
+                                    if (nextStage)
+                                      stageButtons.current
+                                        .get(application.id + ':' + nextStage.id)
+                                        ?.focus();
                                   }}
                                 >
                                   <span className="tracker-inline-stage-marker" aria-hidden="true">
@@ -265,70 +375,6 @@ export default function ApplicationTable({
                               </li>
                             ))}
                           </ol>
-                        </div>
-                        <div id={`${timelineId}-actions`} hidden={!chosenStage}>
-                          {chosenStage && (
-                            <div
-                              ref={actionPanel}
-                              className="tracker-stage-actions"
-                              role="group"
-                              aria-label={`设置${chosenStage.name}状态`}
-                              onKeyDown={(event) => {
-                                if (event.key === 'Escape') {
-                                  event.stopPropagation();
-                                  closeActions();
-                                }
-                              }}
-                            >
-                              <div className="tracker-stage-actions-heading">
-                                <strong>{chosenStage.name}</strong>
-                                <span>选择新状态，自动保存</span>
-                                <button
-                                  type="button"
-                                  className="tracker-icon-button"
-                                  aria-label="关闭阶段状态选择"
-                                  onClick={closeActions}
-                                >
-                                  <X size={15} />
-                                </button>
-                              </div>
-                              <div className="tracker-inline-actions">
-                                {(
-                                  [
-                                    'active',
-                                    'completed',
-                                    'skipped',
-                                    'rejected',
-                                    'pending',
-                                  ] as StageStatus[]
-                                ).map((status) => (
-                                  <button
-                                    type="button"
-                                    key={status}
-                                    data-stage-action
-                                    className={`tracker-button small${chosenStage.status === status ? ' primary' : ''}`}
-                                    disabled={chosenStage.status === status}
-                                    aria-pressed={chosenStage.status === status}
-                                    onClick={() => {
-                                      if (onStageChange(application.id, chosenStage.id, status))
-                                        closeActions();
-                                      else setSaveFailed(true);
-                                    }}
-                                  >
-                                    {STAGE_LABELS[status]}
-                                  </button>
-                                ))}
-                              </div>
-                              <p className="tracker-help">
-                                完成或跳过会进入下一阶段；直接推进会跳过之前未完成的阶段，回退会重置后续状态，保留备注。
-                              </p>
-                              {saveFailed && (
-                                <p className="tracker-error" role="alert">
-                                  未能保存，原状态已保留。请查看页面上的存储错误提示后重试。
-                                </p>
-                              )}
-                            </div>
-                          )}
                         </div>
                       </div>
                     </div>

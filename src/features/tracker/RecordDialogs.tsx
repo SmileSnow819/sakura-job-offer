@@ -62,7 +62,7 @@ export function ApplicationForm({
     .slice(0, 6);
   const submit = () => {
     try {
-      if (!name.trim() || !position.trim()) throw new Error('请填写公司名称和岗位');
+      if (!name.trim()) throw new Error('请填写公司名称');
       if (!isDate(date)) throw new Error('请填写有效的投递日期');
       const matching = selected ?? allCompanies.find((c) => c.name === name.trim());
       const company: Company = matching
@@ -76,7 +76,7 @@ export function ApplicationForm({
         ? {
             ...existing,
             companyId: company.id,
-            position: position.trim(),
+            position: position.trim() || '待设置岗位',
             appliedAt: date,
             note,
             updatedAt: timestamp,
@@ -205,13 +205,12 @@ export function ApplicationForm({
           </div>
         )}
         <label className="tracker-field">
-          岗位名称 <span className="tracker-required">*</span>
+          岗位名称 <span className="tracker-optional">选填</span>
           <input
-            required
             maxLength={100}
             value={position}
             onChange={(e) => setPosition(e.target.value)}
-            placeholder="例如 前端开发工程师"
+            placeholder="例如 前端开发工程师，暂时不确定可留空"
           />
         </label>
         <details className="tracker-more" open={existing ? true : undefined}>

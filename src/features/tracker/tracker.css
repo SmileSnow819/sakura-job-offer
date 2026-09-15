@@ -2224,6 +2224,44 @@
   background: #fffdfd;
   box-shadow: 0 10px 30px #8643570d;
 }
+.tracker-stage-actions-popover {
+  position: fixed;
+  z-index: 1000;
+  margin-top: 0;
+  width: 128px;
+  max-width: min(460px, calc(100vw - 24px));
+  min-width: 132px;
+  padding: 6px;
+  border-radius: 16px;
+  box-shadow:
+    0 14px 34px #86435726,
+    0 2px 8px #86435714;
+}
+.tracker-stage-actions-popover > strong {
+  display: block;
+  padding: 5px 8px 7px;
+  color: var(--sakura-700);
+  font-size: 12px;
+}
+.tracker-stage-actions-popover .tracker-inline-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 4px;
+}
+.tracker-stage-actions-popover .tracker-button.small {
+  min-height: 32px;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 5px 10px;
+  border: 0;
+  border-radius: 9px;
+  white-space: nowrap;
+}
+.tracker-stage-actions-popover .tracker-button.small:hover:not(:disabled),
+.tracker-stage-actions-popover .tracker-button.small:focus-visible {
+  background: var(--sakura-100);
+}
 .tracker-dialog {
   border-color: var(--sakura-line);
   border-radius: 20px;

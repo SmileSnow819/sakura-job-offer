@@ -106,7 +106,7 @@ export function quickAddApplication(data: TrackerData, seed: QuickApplicationSee
   const application: Application = {
     id: uid(),
     companyId: company.id,
-    position: '',
+    position: '待设置岗位',
     appliedAt: today(),
     note: '',
     stages: makeStages(data.template),
@@ -192,7 +192,7 @@ export const progress = (app: Application) =>
       100,
   );
 
-export const positionLabel = (position: string) => position.trim() || '待设置职位';
+export const positionLabel = (position: string) => position.trim() || '待设置岗位';
 
 /**
  * 直接跳到后续轮次时，前面未完成的轮次标记为跳过，而不是虚构为已通过。
