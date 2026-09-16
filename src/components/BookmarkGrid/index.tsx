@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useSta
 import { ExternalLink, Grid3X3, Hash, List, Search, Send, Share2, Sparkles, X } from 'lucide-react';
 import gsap from 'gsap';
 
+import { SITE_TAGLINE } from '../../constants/branding';
 import { ICategory, ILink } from '../../types/bookmark';
 import mottosRaw from '../../mottos.json';
 import AutumnRecruitmentTimeline from '../AutumnRecruitmentTimeline';
@@ -1785,12 +1786,27 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         style={{ flexWrap: 'wrap' }}
       >
         <Hash size={24} style={{ color: 'var(--pink-400)' }} />
-        <h2
-          className="bookmark-section-title"
-          style={{ fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}
-        >
-          {displayedCategory.name}
-        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+          <h2
+            className="bookmark-section-title"
+            style={{ margin: 0, fontSize: '1.5rem', fontWeight: 800, color: 'var(--neutral-800)' }}
+          >
+            {displayedCategory.name}
+          </h2>
+          {isAutumnCategory && (
+            <p
+              style={{
+                margin: 0,
+                color: 'var(--pink-600)',
+                fontSize: 12,
+                fontWeight: 700,
+                lineHeight: 1.4,
+              }}
+            >
+              {SITE_TAGLINE}
+            </p>
+          )}
+        </div>
         <div
           role="group"
           aria-label="视图切换"
@@ -2021,7 +2037,14 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         {isAutumnCategory && <AutumnLaunchNotice />}
       </div>
 
-      {isAutumnCategory && <AutumnRecruitmentTimeline links={displayedCategory.links} />}
+      {isAutumnCategory && (
+        <AutumnRecruitmentTimeline
+          links={displayedCategory.links}
+          isAdded={isApplicationAdded}
+          onAdd={addApplication}
+          onRemove={removeApplication}
+        />
+      )}
 
       {links.length === 0 ? (
         <div

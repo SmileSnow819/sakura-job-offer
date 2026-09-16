@@ -56,6 +56,30 @@
   background: var(--pink-500);
 }
 
+.plain .button,
+.plain .button.added {
+  width: 20px;
+  min-width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 0;
+  color: var(--neutral-600);
+  background: transparent;
+  transition:
+    color 150ms ease,
+    transform 150ms ease;
+}
+
+.plain .button:hover {
+  color: var(--pink-600);
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+.plain .button.added {
+  color: var(--pink-600);
+}
+
 .corner .button.added {
   color: white;
   background: var(--pink-500);

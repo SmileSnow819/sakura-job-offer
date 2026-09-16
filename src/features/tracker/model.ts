@@ -106,7 +106,7 @@ export function quickAddApplication(data: TrackerData, seed: QuickApplicationSee
   const application: Application = {
     id: uid(),
     companyId: company.id,
-    position: '',
+    position: '待设置岗位',
     appliedAt: today(),
     note: '',
     stages: makeStages(data.template),
@@ -192,7 +192,7 @@ export const progress = (app: Application) =>
       100,
   );
 
-export const positionLabel = (position: string) => position.trim() || '待设置职位';
+export const positionLabel = (position: string) => position.trim() || '待设置岗位';
 
 /**
  * 直接跳到后续轮次时，前面未完成的轮次标记为跳过，而不是虚构为已通过。
@@ -364,4 +364,73 @@ export function parseData(raw: string): TrackerData {
   if (!uniqueIds(companies) || !uniqueIds(applications) || !uniqueIds(template))
     throw new Error('备份中存在重复 ID');
   return { version: 1, companies, applications, template };
+}
+
+/**
+ * 将 AI 输出的轻量投递数组转换为网站内部结构，并追加到现有记录。
+ * @param raw AI 返回的 JSON 数组文本
+ * @param data 当前本地投递数据
+ * @returns 包含新增公司和投递记录的数据
+ */
+export function importAiRecords(raw: string, data: TrackerData): TrackerData {
+  let value: unknown;
+  try {
+    value = JSON.parse(raw);
+  } catch {
+    throw new Error('数据不是有效的 JSON');
+  }
+  if (!Array.isArray(value) || value.length > 10000) throw new Error('AI 数据必须是 JSON 数组');
+  const companies = [...data.companies];
+  const applications = [...data.applications];
+  for (const item of value) {
+    if (!isObject(item) || !nonempty(item.companyName, 100)) throw new Error('缺少公司名称');
+    const name = item.companyName.trim();
+    const website = string(item.website, 2048) ? normalizeWebsite(item.website) : '';
+    const company = companies.find(
+      (candidate) =>
+        candidate.name.toLocaleLowerCase() === name.toLocaleLowerCase() &&
+        candidate.website === website,
+    ) ?? { id: uid(), name, website, isCustom: true };
+    if (!companies.some((candidate) => candidate.id === company.id)) companies.push(company);
+    const position =
+      string(item.position, 100) && item.position.trim() ? item.position.trim() : '待设置岗位';
+    const appliedAt = isDate(item.appliedAt) ? item.appliedAt : today();
+    const timestamp = new Date().toISOString();
+    const stages = makeStages(data.template);
+    const completed = Array.isArray(item.completedStages) ? item.completedStages : [];
+    for (const stage of stages) {
+      const completedStage = completed.find(
+        (entry) => isObject(entry) && entry.name === stage.name,
+      );
+      if (completedStage) {
+        stage.status = 'completed';
+        stage.completedAt = isDate(completedStage.completedAt)
+          ? completedStage.completedAt
+          : appliedAt;
+      }
+    }
+    const current = string(item.currentStage, 30) ? item.currentStage.trim() : '';
+    const currentStageRecord = stages.find((stage) => stage.name === current);
+    if (currentStageRecord) {
+      // AI 可能同时返回“当前阶段”和默认流程首阶段；以用户明确填写的阶段为准，保持单一进行中阶段。
+      for (const stage of stages) {
+        if (stage.id !== currentStageRecord.id && stage.status === 'active')
+          stage.status = 'pending';
+      }
+      currentStageRecord.status = item.status === 'rejected' ? 'rejected' : 'active';
+    }
+    applications.push({
+      id: uid(),
+      companyId: company.id,
+      position,
+      appliedAt,
+      note: string(item.note) ? item.note : '',
+      stages,
+      withdrawn: item.status === 'withdrawn',
+      archived: false,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    });
+  }
+  return { ...data, companies, applications };
 }

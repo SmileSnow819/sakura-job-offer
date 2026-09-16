@@ -1,16 +1,25 @@
 import { CalendarClock, ExternalLink } from 'lucide-react';
 import React, { useMemo } from 'react';
 
+import TrackApplicationButton from '../TrackApplicationButton';
 import type { ILink } from '../../types/bookmark';
 import { buildRecruitmentTimeline } from '../../utils/recruitmentTimeline';
 import styles from './index.module.css';
 
 interface IAutumnRecruitmentTimelineProps {
   links: ILink[];
+  isAdded: (link: ILink) => boolean;
+  onAdd: (link: ILink) => boolean;
+  onRemove: (link: ILink) => boolean;
 }
 
 /** 秋招开放时间线：按实际开放日期展示最近上线的招聘公司。 */
-const AutumnRecruitmentTimeline: React.FC<IAutumnRecruitmentTimelineProps> = ({ links }) => {
+const AutumnRecruitmentTimeline: React.FC<IAutumnRecruitmentTimelineProps> = ({
+  links,
+  isAdded,
+  onAdd,
+  onRemove,
+}) => {
   const items = useMemo(() => buildRecruitmentTimeline(links), [links]);
 
   return (
@@ -34,10 +43,19 @@ const AutumnRecruitmentTimeline: React.FC<IAutumnRecruitmentTimelineProps> = ({ 
               <li key={`${link.url}-${openedAt}`} className={styles.item}>
                 <time dateTime={openedAt}>{dateLabel}</time>
                 <span className={styles.dot} aria-hidden="true" />
-                <a href={link.url} target="_blank" rel="noopener noreferrer">
-                  <span>{link.title}</span>
-                  <ExternalLink size={13} aria-hidden="true" />
-                </a>
+                <div className={styles.actions}>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    <span>{link.title}</span>
+                    <ExternalLink size={13} aria-hidden="true" />
+                  </a>
+                  <TrackApplicationButton
+                    link={link}
+                    plain
+                    isAdded={isAdded(link)}
+                    onAdd={() => onAdd(link)}
+                    onRemove={() => onRemove(link)}
+                  />
+                </div>
               </li>
             ))}
           </ol>

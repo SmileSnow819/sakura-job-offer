@@ -1,5 +1,6 @@
 import React from 'react';
 import { Sparkles } from 'lucide-react';
+import { SITE_TAGLINE } from '../../constants/branding';
 
 const SiteLogo: React.FC = () => (
   <div className="bg-white/60 backdrop-blur-xl border border-white/80 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] text-center flex flex-col items-center">
@@ -7,7 +8,7 @@ const SiteLogo: React.FC = () => (
       <Sparkles size={28} />
     </div>
     <h1 className="text-lg font-bold text-brown mb-1 tracking-wide">sakura-offer-hub</h1>
-    <p className="text-xs text-[#8D6E63] font-medium opacity-80">Anime Job Hub</p>
+    <p className="text-xs text-[#8D6E63] font-medium opacity-80">{SITE_TAGLINE}</p>
   </div>
 );
 

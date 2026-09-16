@@ -6,6 +6,7 @@ import {
   currentStage,
   defaultTemplate,
   emptyData,
+  importAiRecords,
   makeStages,
   normalizeWebsite,
   outcome,
@@ -119,7 +120,7 @@ test('官网补全协议、移除路径、拒绝危险协议和凭据', () => {
   ])
     assert.throws(() => normalizeWebsite(website));
 });
-test('快捷添加只创建一条待设置职位的投递，并能持久化读取', () => {
+test('快捷添加只创建一条待设置岗位的投递，并能持久化读取', () => {
   const initial = emptyData();
   const first = quickAddApplication(initial, {
     name: '测试公司招聘',
@@ -133,7 +134,7 @@ test('快捷添加只创建一条待设置职位的投递，并能持久化读�
   assert.equal(first.companies.length, 1);
   assert.equal(first.companies[0].name, '测试公司');
   assert.equal(first.applications.length, 1);
-  assert.equal(first.applications[0].position, '');
+  assert.equal(first.applications[0].position, '待设置岗位');
   assert.equal(duplicate.applications.length, 1);
   assert.deepEqual(parseData(JSON.stringify(first)), first);
 });
@@ -159,9 +160,31 @@ test('快捷移除仅删除来源匹配的投递，保留同公司手动添加�
   );
   assert.equal(removed.companies.length, 1);
 });
-test('未设置职位时统一显示待设置职位', () => {
-  assert.equal(positionLabel(''), '待设置职位');
-  assert.equal(positionLabel('  '), '待设置职位');
+test('AI 轻量 JSON 追加记录并使用指定当前阶段', () => {
+  const initial = fixture();
+  const imported = importAiRecords(
+    JSON.stringify([
+      {
+        companyName: '新公司',
+        website: 'https://example.com/jobs?recommendCode=remove-me',
+        appliedAt: '2026-09-16',
+        position: '前端工程师',
+        status: 'active',
+        currentStage: '一面',
+      },
+    ]),
+    initial,
+  );
+
+  assert.equal(imported.applications.length, initial.applications.length + 1);
+  assert.equal(imported.companies.at(-1)?.website, 'https://example.com');
+  const application = imported.applications.at(-1);
+  assert.equal(currentStage(application)?.name, '一面');
+  assert.equal(application?.position, '前端工程师');
+});
+test('未设置岗位时统一显示待设置岗位', () => {
+  assert.equal(positionLabel(''), '待设置岗位');
+  assert.equal(positionLabel('  '), '待设置岗位');
   assert.equal(positionLabel('前端开发'), '前端开发');
 });
 test('投递页动效区分分层进入、内容切换和减少动态效果', () => {
