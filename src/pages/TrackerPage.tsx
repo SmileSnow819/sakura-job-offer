@@ -648,6 +648,7 @@ export default function TrackerPage() {
               selected={selected}
               onSelect={toggleSelected}
               onDetail={(id) => setDialog({ type: 'detail', id })}
+              onDelete={(id) => requestDelete([id])}
               onEdit={(id) => setDialog({ type: 'edit', id })}
             />
           )}

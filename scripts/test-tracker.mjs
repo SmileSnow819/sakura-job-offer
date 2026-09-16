@@ -202,6 +202,17 @@ test('未设置岗位时统一显示待设置岗位', () => {
   assert.equal(positionLabel('  '), '待设置岗位');
   assert.equal(positionLabel('前端开发'), '前端开发');
 });
+test('表格操作列提供纵向详情和删除入口', () => {
+  const source = readFileSync(
+    resolve(import.meta.dirname, '../src/features/tracker/ApplicationTable.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /className="tracker-card-actions tracker-table-actions"/);
+  assert.match(source, /<span>详情<\/span>/);
+  assert.match(source, /<span>删除<\/span>/);
+  assert.match(source, /onDelete\(application\.id\)/);
+});
 test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
   const data = fixture();
   const makeApplication = (id, stageName, updatedAt, stageStatus = 'active') => {

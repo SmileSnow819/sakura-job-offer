@@ -509,6 +509,10 @@
   align-items: flex-start;
   gap: 10px;
 }
+.tracker-table-actions {
+  justify-content: center;
+  gap: 14px;
+}
 .tracker-card-action {
   display: inline-flex;
   align-items: center;
