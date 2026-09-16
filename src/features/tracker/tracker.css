@@ -553,22 +553,30 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 13px;
-  padding: 10px 0 2px;
-  color: #b34f55;
+  gap: 8px;
+  padding: 20px 26px 24px;
   text-align: center;
 }
 .tracker-delete-confirm p {
   margin: 0;
   color: #667482;
-  font-size: 13px;
+  font-size: 14px;
 }
 .tracker-delete-confirm p strong {
   color: #b34f55;
 }
-.tracker-delete-confirm .tracker-actions {
+.tracker-delete-confirm small {
+  color: #9a858c;
+  font-size: 11px;
+}
+.tracker-delete-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
   width: 100%;
-  margin-top: 4px;
+  margin-top: 8px;
+  padding-top: 16px;
+  border-top: 1px solid #e8eaed;
 }
 .tracker-empty {
   color: #909dab;

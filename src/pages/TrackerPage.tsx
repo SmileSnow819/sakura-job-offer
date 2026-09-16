@@ -736,11 +736,11 @@ export default function TrackerPage() {
           onClose={() => setDialog(null)}
         >
           <div className="tracker-delete-confirm">
-            <Trash2 size={24} aria-hidden="true" />
             <p>
-              即将删除 <strong>{dialog.ids.length}</strong> 条投递记录
+              确定删除 <strong>{dialog.ids.length} 条投递记录</strong>吗？
             </p>
-            <div className="tracker-actions">
+            <small>删除后只能通过备份恢复。</small>
+            <div className="tracker-delete-actions">
               <button type="button" className="tracker-button" onClick={() => setDialog(null)}>
                 取消
               </button>
