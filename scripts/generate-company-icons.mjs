@@ -167,6 +167,8 @@ const filteredResults = results.map((result) =>
     : result,
 );
 
+const quoteTsString = (value) => `'${value.replaceAll('\\', '\\\\').replaceAll("'", "\\'")}'`;
+
 const manifest = { ...previousManifest };
 const hostCounts = new Map();
 for (const { link } of filteredResults) {
@@ -187,9 +189,12 @@ for (const { link, filename } of filteredResults) {
     // 非网页入口只使用名称映射。
   }
 }
+const manifestEntries = Object.entries(manifest)
+  .map(([key, value]) => `  ${quoteTsString(key)}: ${quoteTsString(value)},`)
+  .join('\n');
 await writeFile(
   MANIFEST_PATH,
-  `// 此文件由 pnpm icons:generate 生成，请勿手工编辑。\nexport const COMPANY_ICONS = ${JSON.stringify(manifest, null, 2)} as const;\n`,
+  `// 此文件由 pnpm icons:generate 生成，请勿手工编辑。\nexport const COMPANY_ICONS = {\n${manifestEntries}\n} as const;\n`,
 );
 const cached = filteredResults.reduce((sum, result) => sum + (result.cached ? 1 : 0), 0);
 console.log(

@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { resolve } from 'node:path';
 import {
   applyFlow,
   changeStage,
@@ -42,6 +44,17 @@ function fixture() {
   });
   return data;
 }
+
+test('缓存图标清单使用仓库约定的单引号格式', () => {
+  const source = readFileSync(resolve(import.meta.dirname, '../src/companyIcons.ts'), 'utf8');
+  const entries = source
+    .split('\n')
+    .filter((line) => /^\s*["'][^"']+["']:\s*["'][^"']+["'],?$/.test(line));
+
+  assert.ok(entries.length > 0);
+  assert.ok(entries.every((line) => line.trimStart().startsWith("'")));
+});
+
 test('公司图标只使用本地 WebP，未知公司回退到本站图标', () => {
   const known = getCompanyIcon('字节跳动', 'https://jobs.bytedance.com/campus/position');
   const fallback = getCompanyIcon('不存在的公司', 'https://example.com');
