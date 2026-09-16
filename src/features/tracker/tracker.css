@@ -551,32 +551,13 @@
 }
 .tracker-delete-confirm {
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 8px;
-  padding: 20px 26px 24px;
-  text-align: center;
-}
-.tracker-delete-confirm p {
-  margin: 0;
-  color: #667482;
-  font-size: 14px;
-}
-.tracker-delete-confirm p strong {
-  color: #b34f55;
-}
-.tracker-delete-confirm small {
-  color: #9a858c;
-  font-size: 11px;
+  padding: 18px 26px 22px;
 }
 .tracker-delete-actions {
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   gap: 10px;
   width: 100%;
-  margin-top: 8px;
-  padding-top: 16px;
-  border-top: 1px solid #e8eaed;
 }
 .tracker-empty {
   color: #909dab;

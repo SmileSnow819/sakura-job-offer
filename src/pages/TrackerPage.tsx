@@ -731,15 +731,11 @@ export default function TrackerPage() {
       )}
       {dialog?.type === 'delete' && (
         <Modal
-          title="确认删除投递记录"
+          title={`确认删除 ${dialog.ids.length} 条投递记录`}
           subtitle="删除后只能通过之前导出的备份恢复，请确认这次操作。"
           onClose={() => setDialog(null)}
         >
           <div className="tracker-delete-confirm">
-            <p>
-              确定删除 <strong>{dialog.ids.length} 条投递记录</strong>吗？
-            </p>
-            <small>删除后只能通过备份恢复。</small>
             <div className="tracker-delete-actions">
               <button type="button" className="tracker-button" onClick={() => setDialog(null)}>
                 取消

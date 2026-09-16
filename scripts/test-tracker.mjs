@@ -228,9 +228,10 @@ test('详情弹窗将公司岗位状态合并到头部并移除重复进度标�
 test('删除确认弹窗使用紧凑正文，不再渲染独立的大图标区', () => {
   const source = readFileSync(resolve(import.meta.dirname, '../src/pages/TrackerPage.tsx'), 'utf8');
 
-  assert.match(source, /确定删除/);
-  assert.match(source, /删除后只能通过备份恢复/);
-  assert.doesNotMatch(source, /即将删除/);
+  assert.match(source, /title=\{`确认删除 \$\{dialog\.ids\.length\} 条投递记录`\}/);
+  assert.match(source, /subtitle="删除后只能通过之前导出的备份恢复，请确认这次操作。"/);
+  assert.doesNotMatch(source, /确定删除 <strong>/);
+  assert.doesNotMatch(source, /删除后只能通过备份恢复/);
   assert.doesNotMatch(source, /<Trash2 size=\{24\}/);
 });
 test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
