@@ -20,12 +20,14 @@ export function CompanyLogo({ name, website }: { name: string; website: string }
 export function Modal({
   title,
   subtitle,
+  headerActions,
   children,
   onClose,
   wide = false,
 }: {
-  title: string;
+  title: ReactNode;
   subtitle?: string;
+  headerActions?: ReactNode;
   children: ReactNode;
   onClose: () => void;
   wide?: boolean;
@@ -69,14 +71,17 @@ export function Modal({
           <h2 id={id}>{title}</h2>
           {subtitle && <p>{subtitle}</p>}
         </div>
-        <button
-          type="button"
-          className="tracker-icon-button"
-          aria-label="关闭弹窗"
-          onClick={onClose}
-        >
-          <X size={20} />
-        </button>
+        <div className="tracker-dialog-header-actions">
+          {headerActions}
+          <button
+            type="button"
+            className="tracker-icon-button"
+            aria-label="关闭弹窗"
+            onClick={onClose}
+          >
+            <X size={20} />
+          </button>
+        </div>
       </header>
       {children}
     </dialog>

@@ -7,6 +7,7 @@ import {
   changeStage,
   currentStage,
   defaultTemplate,
+  findApplicationForBookmark,
   emptyData,
   importAiRecords,
   makeStages,
@@ -16,6 +17,8 @@ import {
   positionLabel,
   quickAddApplication,
   quickRemoveApplication,
+  compareApplicationsByProgress,
+  removeApplications,
   validateFlow,
 } from '../src/features/tracker/model.ts';
 import { makeCsv, makeHtml } from '../src/features/tracker/export.ts';
@@ -173,6 +176,18 @@ test('快捷移除仅删除来源匹配的投递，保留同公司手动添加�
   );
   assert.equal(removed.companies.length, 1);
 });
+test('秋招卡片能识别没有来源标记的导入投递', () => {
+  const data = fixture();
+  data.applications[0].sourceKey = undefined;
+
+  assert.equal(
+    findApplicationForBookmark(data, {
+      name: '测试公司校园招聘',
+      website: 'https://example.com/jobs',
+    }),
+    data.applications[0],
+  );
+});
 test('AI 轻量 JSON 追加记录并使用指定当前阶段', () => {
   const initial = fixture();
   const imported = importAiRecords(
@@ -199,6 +214,114 @@ test('未设置岗位时统一显示待设置岗位', () => {
   assert.equal(positionLabel(''), '待设置岗位');
   assert.equal(positionLabel('  '), '待设置岗位');
   assert.equal(positionLabel('前端开发'), '前端开发');
+});
+test('表格操作列提供纵向详情和删除入口', () => {
+  const source = readFileSync(
+    resolve(import.meta.dirname, '../src/features/tracker/ApplicationTable.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /className="tracker-card-actions tracker-table-actions"/);
+  assert.match(source, /<span>详情<\/span>/);
+  assert.match(source, /<span>删除<\/span>/);
+  assert.match(source, /onDelete\(application\.id\)/);
+});
+test('详情弹窗将公司岗位状态合并到头部并移除重复进度标题', () => {
+  const source = readFileSync(
+    resolve(import.meta.dirname, '../src/features/tracker/RecordDialogs.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /tracker-dialog-title-inline/);
+  assert.match(source, /OUTCOME_LABELS\[outcome\(draft\)\]/);
+  assert.match(source, /headerActions=/);
+  assert.doesNotMatch(source, /tracker-detail-toolbar/);
+  assert.doesNotMatch(source, /<h3>招聘进度<\/h3>/);
+});
+test('删除确认弹窗使用紧凑正文，不再渲染独立的大图标区', () => {
+  const source = readFileSync(resolve(import.meta.dirname, '../src/pages/TrackerPage.tsx'), 'utf8');
+
+  assert.match(source, /title=\{`确认删除 \$\{dialog\.ids\.length\} 条投递记录`\}/);
+  assert.match(source, /subtitle="删除后只能通过之前导出的备份恢复，请确认这次操作。"/);
+  assert.doesNotMatch(source, /确定删除 <strong>/);
+  assert.doesNotMatch(source, /删除后只能通过备份恢复/);
+  assert.doesNotMatch(source, /<Trash2 size=\{24\}/);
+});
+test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
+  const data = fixture();
+  const makeApplication = (id, stageName, updatedAt, stageStatus = 'active') => {
+    const application = structuredClone(data.applications[0]);
+    application.id = id;
+    application.updatedAt = updatedAt;
+    application.stages = application.stages.map((stage) => ({
+      ...stage,
+      status: stage.name === stageName ? stageStatus : 'pending',
+    }));
+    return application;
+  };
+  const firstInterview = makeApplication('a-first', '一面', '2026-09-16T08:00:00Z');
+  const secondInterview = makeApplication('a-second', '二面', '2026-09-15T08:00:00Z');
+  const newerFirstInterview = makeApplication('a-newer-first', '一面', '2026-09-17T08:00:00Z');
+
+  const sorted = [firstInterview, secondInterview, newerFirstInterview].sort((left, right) =>
+    compareApplicationsByProgress(left, right, data.template, false),
+  );
+
+  assert.deepEqual(
+    sorted.map((application) => application.id),
+    ['a-second', 'a-newer-first', 'a-first'],
+  );
+});
+test('全部状态时未通过排在最后，未通过内部仍按阶段倒序', () => {
+  const data = fixture();
+  const makeApplication = (id, stageName, status) => {
+    const application = structuredClone(data.applications[0]);
+    application.id = id;
+    application.updatedAt = '2026-09-16T08:00:00Z';
+    application.stages = application.stages.map((stage) => ({
+      ...stage,
+      status: stage.name === stageName ? status : 'pending',
+    }));
+    return application;
+  };
+  const activeFirstInterview = makeApplication('a-active-first', '一面', 'active');
+  const rejectedFirstInterview = makeApplication('a-rejected-first', '一面', 'rejected');
+  const rejectedSecondInterview = makeApplication('a-rejected-second', '二面', 'rejected');
+
+  const allStatuses = [activeFirstInterview, rejectedFirstInterview, rejectedSecondInterview].sort(
+    (left, right) => compareApplicationsByProgress(left, right, data.template, true),
+  );
+  assert.deepEqual(
+    allStatuses.map((application) => application.id),
+    ['a-active-first', 'a-rejected-second', 'a-rejected-first'],
+  );
+
+  const rejectedOnly = [rejectedFirstInterview, rejectedSecondInterview].sort((left, right) =>
+    compareApplicationsByProgress(left, right, data.template, false),
+  );
+  assert.deepEqual(
+    rejectedOnly.map((application) => application.id),
+    ['a-rejected-second', 'a-rejected-first'],
+  );
+});
+test('批量删除投递记录并清理不再使用的自定义公司', () => {
+  const data = fixture();
+  data.companies.push({
+    id: 'c2',
+    name: '待删除公司',
+    website: 'https://unused.example.com',
+    isCustom: true,
+  });
+  const second = structuredClone(data.applications[0]);
+  second.id = 'a2';
+  second.companyId = 'c2';
+  data.applications.push(second);
+
+  const removed = removeApplications(data, ['a1', 'a2']);
+
+  assert.equal(removed.applications.length, 0);
+  assert.equal(removed.companies.length, 0);
+  assert.equal(data.applications.length, 2);
 });
 test('投递页动效区分分层进入、内容切换和减少动态效果', () => {
   assert.deepEqual(trackerMotion(false), {

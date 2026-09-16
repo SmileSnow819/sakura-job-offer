@@ -293,32 +293,30 @@ export function ApplicationDetail({
     else onClose();
   };
   return (
-    <Modal title={company.name} subtitle={positionLabel(draft.position)} onClose={close} wide>
-      <div className="tracker-detail">
-        {discardConfirm && (
-          <div className="tracker-warning">
-            有尚未保存的修改。
-            <div className="tracker-inline-actions">
-              <button className="tracker-button" onClick={() => setDiscardConfirm(false)}>
-                继续编辑
-              </button>
-              <button className="tracker-button danger" onClick={onClose}>
-                放弃修改并关闭
-              </button>
-            </div>
-          </div>
-        )}
-        <div className="tracker-detail-summary">
+    <Modal
+      title={
+        <span className="tracker-dialog-title-inline">
           <CompanyLogo name={company.name} website={company.website} />
-          <div>
-            <span className={`tracker-badge ${outcome(draft)}`}>
-              {OUTCOME_LABELS[outcome(draft)]}
+          <span className="tracker-dialog-title-copy">
+            <span className="tracker-dialog-title-main">
+              <strong>{company.name}</strong>
+              <span className="tracker-dialog-title-separator" aria-hidden="true">
+                ·
+              </span>
+              <span className="tracker-dialog-title-position">{positionLabel(draft.position)}</span>
+              <span className={`tracker-badge ${outcome(draft)}`}>
+                {OUTCOME_LABELS[outcome(draft)]}
+              </span>
             </span>
-            <p>
+            <small className="tracker-dialog-title-meta">
               投递于 {draft.appliedAt} · 更新于{' '}
               {new Date(application.updatedAt).toLocaleDateString('zh-CN')}
-            </p>
-          </div>
+            </small>
+          </span>
+        </span>
+      }
+      headerActions={
+        <>
           {company.website && (
             <a
               className="tracker-icon-button"
@@ -330,9 +328,6 @@ export function ApplicationDetail({
               <ExternalLink size={18} />
             </a>
           )}
-        </div>
-        <div className="tracker-section-title">
-          <h3>招聘进度</h3>
           <button
             type="button"
             className="tracker-button small"
@@ -350,7 +345,25 @@ export function ApplicationDetail({
             <SlidersHorizontal size={14} />
             编辑流程
           </button>
-        </div>
+        </>
+      }
+      onClose={close}
+      wide
+    >
+      <div className="tracker-detail">
+        {discardConfirm && (
+          <div className="tracker-warning">
+            有尚未保存的修改。
+            <div className="tracker-inline-actions">
+              <button className="tracker-button" onClick={() => setDiscardConfirm(false)}>
+                继续编辑
+              </button>
+              <button className="tracker-button danger" onClick={onClose}>
+                放弃修改并关闭
+              </button>
+            </div>
+          </div>
+        )}
         {editingFlow ? (
           <FlowEditor
             initial={draft.stages}

@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Check, ChevronRight, Minus, X } from 'lucide-react';
+import { Check, ChevronRight, FileText, Minus, Trash2, X } from 'lucide-react';
 import { CompanyLogo } from './components';
 import { trackerTimelineMotion } from './motion';
 import {
@@ -19,6 +19,7 @@ interface ApplicationTableProps {
   selected: string[];
   onSelect: (id: string) => void;
   onDetail: (id: string) => void;
+  onDelete: (id: string) => void;
   onEdit: (id: string) => void;
   onStageChange: (applicationId: string, stageId: string, status: StageStatus) => boolean;
 }
@@ -28,6 +29,7 @@ export default function ApplicationTable({
   selected,
   onSelect,
   onDetail,
+  onDelete,
   onEdit,
   onStageChange,
 }: ApplicationTableProps) {
@@ -217,16 +219,32 @@ export default function ApplicationTable({
                   </td>
                   <td>{new Date(application.updatedAt).toLocaleDateString('zh-CN')}</td>
                   <td>
-                    <button
-                      type="button"
-                      className="tracker-text-button"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        onDetail(application.id);
-                      }}
-                    >
-                      查看详情
-                    </button>
+                    <div className="tracker-card-actions tracker-table-actions">
+                      <button
+                        type="button"
+                        className="tracker-card-action"
+                        aria-label={`查看${company.name}详情`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onDetail(application.id);
+                        }}
+                      >
+                        <FileText size={17} strokeWidth={1.8} />
+                        <span>详情</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="tracker-card-action danger"
+                        aria-label={`删除${company.name}投递记录`}
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onDelete(application.id);
+                        }}
+                      >
+                        <Trash2 size={17} strokeWidth={1.8} />
+                        <span>删除</span>
+                      </button>
+                    </div>
                   </td>
                 </tr>
                 <tr className="tracker-timeline-row" aria-hidden={!open}>

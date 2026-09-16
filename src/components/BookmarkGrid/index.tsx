@@ -9,7 +9,7 @@ import AutumnRecruitmentTimeline from '../AutumnRecruitmentTimeline';
 import TrackApplicationButton from '../TrackApplicationButton';
 import { useTracker } from '../../features/tracker/useTracker';
 import {
-  findQuickApplication,
+  findApplicationForBookmark,
   quickAddApplication,
   quickRemoveApplication,
 } from '../../features/tracker/model';
@@ -1179,7 +1179,8 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
   const total = links.length;
   const isCardsView = viewMode === 'cards';
   const isApplicationAdded = useCallback(
-    (link: ILink) => !!findQuickApplication(trackerData, { name: link.title, website: link.url }),
+    (link: ILink) =>
+      !!findApplicationForBookmark(trackerData, { name: link.title, website: link.url }),
     [trackerData],
   );
   const addApplication = useCallback(
