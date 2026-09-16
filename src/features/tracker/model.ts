@@ -93,6 +93,32 @@ export function findQuickApplication(
   return data.applications.find((application) => application.sourceKey === sourceKey);
 }
 
+/**
+ * 查找与招聘入口对应的投递记录，兼容没有来源标记的手动或 AI 导入记录。
+ *
+ * @param data 当前本地投递数据
+ * @param seed 招聘入口的公司名称和官网地址
+ * @returns 匹配的投递记录，未找到时返回 undefined
+ */
+export function findApplicationForBookmark(
+  data: TrackerData,
+  seed: QuickApplicationSeed,
+): Application | undefined {
+  const quickApplication = findQuickApplication(data, seed);
+  if (quickApplication) return quickApplication;
+
+  const name = normalizeCompanyName(seed.name).toLocaleLowerCase();
+  const website = normalizeWebsite(seed.website);
+  return data.applications.find((application) => {
+    const company = data.companies.find((candidate) => candidate.id === application.companyId);
+    return (
+      company &&
+      normalizeCompanyName(company.name).toLocaleLowerCase() === name &&
+      company.website === website
+    );
+  });
+}
+
 export function quickAddApplication(data: TrackerData, seed: QuickApplicationSeed): TrackerData {
   if (findQuickApplication(data, seed)) return data;
   const name = normalizeCompanyName(seed.name);

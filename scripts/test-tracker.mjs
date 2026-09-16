@@ -7,6 +7,7 @@ import {
   changeStage,
   currentStage,
   defaultTemplate,
+  findApplicationForBookmark,
   emptyData,
   importAiRecords,
   makeStages,
@@ -174,6 +175,18 @@ test('快捷移除仅删除来源匹配的投递，保留同公司手动添加�
     ['manual-position'],
   );
   assert.equal(removed.companies.length, 1);
+});
+test('秋招卡片能识别没有来源标记的导入投递', () => {
+  const data = fixture();
+  data.applications[0].sourceKey = undefined;
+
+  assert.equal(
+    findApplicationForBookmark(data, {
+      name: '测试公司校园招聘',
+      website: 'https://example.com/jobs',
+    }),
+    data.applications[0],
+  );
 });
 test('AI 轻量 JSON 追加记录并使用指定当前阶段', () => {
   const initial = fixture();
