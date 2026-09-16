@@ -7,6 +7,7 @@ import {
   BriefcaseBusiness,
   Database,
   Download,
+  Hash,
   LayoutGrid,
   List,
   Plus,
@@ -63,7 +64,7 @@ for (const category of bookmarks.categories.filter((c) => c.id !== 'interviews')
 type Dialog =
   | { type: 'new'; seed?: { name: string; website: string } }
   | { type: 'detail' | 'edit'; id: string }
-  | { type: 'template' | 'export' | 'data' }
+  | { type: 'template' | 'export' | 'data' | 'bulk-position' }
   | null;
 
 export default function TrackerPage() {
@@ -84,6 +85,8 @@ export default function TrackerPage() {
   const [templateKey, setTemplateKey] = useState(0);
   const [templateInitial, setTemplateInitial] = useState(data.template);
   const [restoreConfirm, setRestoreConfirm] = useState(false);
+  const [bulkPosition, setBulkPosition] = useState('');
+  const [bulkPositionError, setBulkPositionError] = useState('');
   useEffect(() => {
     const name = params.get('company');
     if (!name) return;
@@ -141,6 +144,9 @@ export default function TrackerPage() {
   );
   const picked = all.filter((r) => selected.includes(r.application.id));
   const activeRecords = data.applications.filter((a) => !a.archived);
+  const unsetPositionCount = data.applications.filter(
+    (application) => positionLabel(application.position) === '待设置岗位',
+  ).length;
   useLayoutEffect(() => {
     const page = pageRef.current;
     if (!page) return;
@@ -166,15 +172,6 @@ export default function TrackerPage() {
         },
         0,
       );
-      gsap.to('[data-tracker-float]', {
-        y: -7,
-        rotation: 7,
-        duration: 2.8,
-        stagger: { each: 0.28, from: 'random' },
-        ease: 'sine.inOut',
-        repeat: -1,
-        yoyo: true,
-      });
     }, page);
     return () => context.revert();
   }, []);
@@ -246,6 +243,23 @@ export default function TrackerPage() {
       '投递记录已保存',
     );
   }
+  /**
+   * 一次补齐所有尚未设置岗位的记录，保留用户已经手动填写的岗位。
+   */
+  function applyBulkPosition() {
+    const position = bulkPosition.trim();
+    if (!position) {
+      setBulkPositionError('请填写岗位名称');
+      return;
+    }
+    const timestamp = new Date().toISOString();
+    const applications = data.applications.map((application) =>
+      positionLabel(application.position) === '待设置岗位'
+        ? { ...application, position, updatedAt: timestamp }
+        : application,
+    );
+    commit({ ...data, applications }, `已设置 ${unsetPositionCount} 条投递的岗位名称`);
+  }
   function updateStage(applicationId: string, stageId: string, status: StageStatus) {
     const application = data.applications.find((item) => item.id === applicationId);
     if (!application || !application.stages.some((stage) => stage.id === stageId)) return false;
@@ -277,6 +291,7 @@ export default function TrackerPage() {
     <section ref={pageRef} className="tracker-page" aria-label="我的投递">
       <div className="tracker-container">
         <header className="tracker-header tracker-hero" data-tracker-enter>
+          <Hash className="tracker-heading-icon" size={24} aria-hidden="true" />
           <div className="tracker-hero-copy">
             <h1>我的投递</h1>
             <p>{SITE_TAGLINE}</p>
@@ -285,39 +300,27 @@ export default function TrackerPage() {
             <Plus size={18} />
             新增投递
           </button>
-          <div className="tracker-sakura-art" aria-hidden="true">
-            <span className="tracker-branch" />
-            <span className="tracker-blossom blossom-one" data-tracker-float />
-            <span className="tracker-blossom blossom-two" data-tracker-float />
-            <span className="tracker-blossom blossom-three" data-tracker-float />
-            <span className="tracker-petal petal-one" data-tracker-float />
-            <span className="tracker-petal petal-two" data-tracker-float />
-          </div>
         </header>
         <div className="tracker-stats" data-tracker-enter>
           {[
             {
               label: '投递记录',
               value: activeRecords.length,
-              hint: `${new Set(activeRecords.map((a) => a.companyId)).size} 家公司`,
               status: 'all',
             },
             {
               label: '进行中',
               value: activeRecords.filter((a) => outcome(a) === 'active').length,
-              hint: '等待后续进展',
               status: 'active',
             },
             {
               label: '已拿 offer',
               value: activeRecords.filter((a) => outcome(a) === 'offer').length,
-              hint: '已收到录用通知',
               status: 'offer',
             },
             {
               label: '未通过',
               value: activeRecords.filter((a) => outcome(a) === 'rejected').length,
-              hint: '已结束的流程',
               status: 'rejected',
             },
           ].map((stat) => (
@@ -332,7 +335,6 @@ export default function TrackerPage() {
             >
               <span className="tracker-stat-label">{stat.label}</span>
               <strong>{stat.value}</strong>
-              <small>{stat.hint}</small>
             </button>
           ))}
         </div>
@@ -341,9 +343,19 @@ export default function TrackerPage() {
             全部投递 <span>{filtered.length}</span>
           </h2>
           <div className="tracker-inline-actions">
-            <button className="tracker-button small" onClick={() => setDialog({ type: 'data' })}>
-              导入 JSON
-            </button>
+            {unsetPositionCount > 0 && (
+              <button
+                className="tracker-button small"
+                onClick={() => {
+                  setBulkPosition('');
+                  setBulkPositionError('');
+                  setDialog({ type: 'bulk-position' });
+                }}
+              >
+                <BriefcaseBusiness size={15} />
+                一键设置岗位
+              </button>
+            )}
             <button
               className="tracker-button small"
               aria-pressed={showAnalytics}
@@ -508,7 +520,18 @@ export default function TrackerPage() {
                       >
                         {c.name}
                       </button>
-                      <p>{positionLabel(a.position)}</p>
+                      <div className="tracker-card-position">
+                        <p>{positionLabel(a.position)}</p>
+                        {positionLabel(a.position) === '待设置岗位' && (
+                          <button
+                            type="button"
+                            className="tracker-position-edit"
+                            onClick={() => setDialog({ type: 'edit', id: a.id })}
+                          >
+                            设置岗位
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <input
                       type="checkbox"
@@ -578,6 +601,7 @@ export default function TrackerPage() {
               selected={selected}
               onSelect={toggleSelected}
               onDetail={(id) => setDialog({ type: 'detail', id })}
+              onEdit={(id) => setDialog({ type: 'edit', id })}
             />
           )}
         </div>
@@ -692,6 +716,52 @@ export default function TrackerPage() {
               </div>
             )}
           </div>
+        </Modal>
+      )}
+      {dialog?.type === 'bulk-position' && (
+        <Modal
+          title="一键设置岗位"
+          subtitle={`将岗位名称填入 ${unsetPositionCount} 条待设置记录，已有岗位不会修改。`}
+          onClose={() => setDialog(null)}
+        >
+          <form
+            className="tracker-form"
+            onSubmit={(event) => {
+              event.preventDefault();
+              applyBulkPosition();
+            }}
+          >
+            <label className="tracker-field">
+              岗位名称 <span className="tracker-required">*</span>
+              <input
+                data-autofocus
+                autoFocus
+                required
+                maxLength={100}
+                value={bulkPosition}
+                placeholder="例如 前端开发工程师"
+                onChange={(event) => {
+                  setBulkPosition(event.target.value);
+                  if (bulkPositionError) setBulkPositionError('');
+                }}
+              />
+              <small>提交后会同步更新这些记录的最近更新时间。</small>
+            </label>
+            {bulkPositionError && (
+              <p role="alert" className="tracker-error">
+                {bulkPositionError}
+              </p>
+            )}
+            <div className="tracker-actions">
+              <button type="button" className="tracker-button" onClick={() => setDialog(null)}>
+                取消
+              </button>
+              <button className="tracker-button primary" type="submit">
+                设置 {unsetPositionCount} 条记录
+                <ArrowRight size={16} />
+              </button>
+            </div>
+          </form>
         </Modal>
       )}
       {dialog?.type === 'export' && (

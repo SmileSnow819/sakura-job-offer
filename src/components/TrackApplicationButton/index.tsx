@@ -7,12 +7,14 @@ import styles from './index.module.css';
 export default function TrackApplicationButton({
   link,
   corner = false,
+  plain = false,
   isAdded,
   onAdd,
   onRemove,
 }: {
   link: ILink;
   corner?: boolean;
+  plain?: boolean;
   isAdded?: boolean;
   onAdd?: () => boolean;
   onRemove?: () => boolean;
@@ -24,7 +26,7 @@ export default function TrackApplicationButton({
   const directAdd = onAdd && onRemove;
   const closeDialog = () => dialogRef.current?.close();
   return (
-    <span className={`${styles.root} ${corner ? styles.corner : ''}`}>
+    <span className={`${styles.root} ${corner ? styles.corner : ''} ${plain ? styles.plain : ''}`}>
       <button
         type="button"
         className={`${styles.button} ${isAdded ? styles.added : ''}`}

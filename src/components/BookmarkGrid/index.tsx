@@ -2037,7 +2037,14 @@ const BookmarkGrid: React.FC<IBookmarkGridProps> = ({ category, allCategories, o
         {isAutumnCategory && <AutumnLaunchNotice />}
       </div>
 
-      {isAutumnCategory && <AutumnRecruitmentTimeline links={displayedCategory.links} />}
+      {isAutumnCategory && (
+        <AutumnRecruitmentTimeline
+          links={displayedCategory.links}
+          isAdded={isApplicationAdded}
+          onAdd={addApplication}
+          onRemove={removeApplication}
+        />
+      )}
 
       {links.length === 0 ? (
         <div

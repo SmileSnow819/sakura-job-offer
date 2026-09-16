@@ -19,6 +19,7 @@ interface ApplicationTableProps {
   selected: string[];
   onSelect: (id: string) => void;
   onDetail: (id: string) => void;
+  onEdit: (id: string) => void;
   onStageChange: (applicationId: string, stageId: string, status: StageStatus) => boolean;
 }
 
@@ -27,6 +28,7 @@ export default function ApplicationTable({
   selected,
   onSelect,
   onDetail,
+  onEdit,
   onStageChange,
 }: ApplicationTableProps) {
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
@@ -187,7 +189,21 @@ export default function ApplicationTable({
                       <CompanyLogo name={company.name} website={company.website} />
                       <div>
                         <strong>{company.name}</strong>
-                        <p>{positionLabel(application.position)}</p>
+                        <div className="tracker-table-position">
+                          <p>{positionLabel(application.position)}</p>
+                          {positionLabel(application.position) === '待设置岗位' && (
+                            <button
+                              type="button"
+                              className="tracker-position-edit"
+                              onClick={(event) => {
+                                event.stopPropagation();
+                                onEdit(application.id);
+                              }}
+                            >
+                              设置岗位
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </td>
