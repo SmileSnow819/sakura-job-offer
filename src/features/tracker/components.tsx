@@ -24,7 +24,7 @@ export function Modal({
   onClose,
   wide = false,
 }: {
-  title: string;
+  title: ReactNode;
   subtitle?: string;
   children: ReactNode;
   onClose: () => void;

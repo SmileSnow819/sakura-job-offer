@@ -293,7 +293,31 @@ export function ApplicationDetail({
     else onClose();
   };
   return (
-    <Modal title={company.name} subtitle={positionLabel(draft.position)} onClose={close} wide>
+    <Modal
+      title={
+        <span className="tracker-dialog-title-inline">
+          <CompanyLogo name={company.name} website={company.website} />
+          <span className="tracker-dialog-title-copy">
+            <span className="tracker-dialog-title-main">
+              <strong>{company.name}</strong>
+              <span className="tracker-dialog-title-separator" aria-hidden="true">
+                ·
+              </span>
+              <span className="tracker-dialog-title-position">{positionLabel(draft.position)}</span>
+              <span className={`tracker-badge ${outcome(draft)}`}>
+                {OUTCOME_LABELS[outcome(draft)]}
+              </span>
+            </span>
+            <small className="tracker-dialog-title-meta">
+              投递于 {draft.appliedAt} · 更新于{' '}
+              {new Date(application.updatedAt).toLocaleDateString('zh-CN')}
+            </small>
+          </span>
+        </span>
+      }
+      onClose={close}
+      wide
+    >
       <div className="tracker-detail">
         {discardConfirm && (
           <div className="tracker-warning">
@@ -308,17 +332,7 @@ export function ApplicationDetail({
             </div>
           </div>
         )}
-        <div className="tracker-detail-summary">
-          <CompanyLogo name={company.name} website={company.website} />
-          <div>
-            <span className={`tracker-badge ${outcome(draft)}`}>
-              {OUTCOME_LABELS[outcome(draft)]}
-            </span>
-            <p>
-              投递于 {draft.appliedAt} · 更新于{' '}
-              {new Date(application.updatedAt).toLocaleDateString('zh-CN')}
-            </p>
-          </div>
+        <div className="tracker-section-title tracker-detail-toolbar">
           {company.website && (
             <a
               className="tracker-icon-button"
@@ -330,9 +344,6 @@ export function ApplicationDetail({
               <ExternalLink size={18} />
             </a>
           )}
-        </div>
-        <div className="tracker-section-title">
-          <h3>招聘进度</h3>
           <button
             type="button"
             className="tracker-button small"

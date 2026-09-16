@@ -1079,6 +1079,51 @@
   letter-spacing: -0.5px;
   overflow-wrap: anywhere;
 }
+.tracker-dialog-title-inline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+.tracker-dialog-title-inline > .tracker-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  flex-shrink: 0;
+}
+.tracker-dialog-title-copy {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+.tracker-dialog-title-main {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 0;
+}
+.tracker-dialog-title-main > strong {
+  font-size: 21px;
+  font-weight: 750;
+}
+.tracker-dialog-title-separator {
+  color: #a5aeb8;
+  font-weight: 500;
+}
+.tracker-dialog-title-position {
+  color: #66778a;
+  font-size: 14px;
+  font-weight: 550;
+}
+.tracker-dialog-title-main .tracker-badge {
+  font-size: 10px;
+}
+.tracker-dialog-title-meta {
+  color: #8b96a2;
+  font-size: 11px;
+  font-weight: 400;
+}
 .tracker-dialog-header p {
   font-size: 12px;
   color: #8b96a2;
@@ -1293,6 +1338,10 @@ details[open] > .tracker-collapse-content {
   font-size: 11px;
   color: #8d9aa5;
   margin-top: 8px;
+}
+.tracker-detail-toolbar {
+  justify-content: flex-end;
+  margin-top: 0;
 }
 .tracker-timeline-step {
   display: flex;

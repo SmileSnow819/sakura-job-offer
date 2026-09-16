@@ -213,6 +213,16 @@ test('表格操作列提供纵向详情和删除入口', () => {
   assert.match(source, /<span>删除<\/span>/);
   assert.match(source, /onDelete\(application\.id\)/);
 });
+test('详情弹窗将公司岗位状态合并到头部并移除重复进度标题', () => {
+  const source = readFileSync(
+    resolve(import.meta.dirname, '../src/features/tracker/RecordDialogs.tsx'),
+    'utf8',
+  );
+
+  assert.match(source, /tracker-dialog-title-inline/);
+  assert.match(source, /OUTCOME_LABELS\[outcome\(draft\)\]/);
+  assert.doesNotMatch(source, /<h3>招聘进度<\/h3>/);
+});
 test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
   const data = fixture();
   const makeApplication = (id, stageName, updatedAt, stageStatus = 'active') => {
