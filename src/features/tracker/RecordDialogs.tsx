@@ -315,24 +315,8 @@ export function ApplicationDetail({
           </span>
         </span>
       }
-      onClose={close}
-      wide
-    >
-      <div className="tracker-detail">
-        {discardConfirm && (
-          <div className="tracker-warning">
-            有尚未保存的修改。
-            <div className="tracker-inline-actions">
-              <button className="tracker-button" onClick={() => setDiscardConfirm(false)}>
-                继续编辑
-              </button>
-              <button className="tracker-button danger" onClick={onClose}>
-                放弃修改并关闭
-              </button>
-            </div>
-          </div>
-        )}
-        <div className="tracker-section-title tracker-detail-toolbar">
+      headerActions={
+        <>
           {company.website && (
             <a
               className="tracker-icon-button"
@@ -361,7 +345,25 @@ export function ApplicationDetail({
             <SlidersHorizontal size={14} />
             编辑流程
           </button>
-        </div>
+        </>
+      }
+      onClose={close}
+      wide
+    >
+      <div className="tracker-detail">
+        {discardConfirm && (
+          <div className="tracker-warning">
+            有尚未保存的修改。
+            <div className="tracker-inline-actions">
+              <button className="tracker-button" onClick={() => setDiscardConfirm(false)}>
+                继续编辑
+              </button>
+              <button className="tracker-button danger" onClick={onClose}>
+                放弃修改并关闭
+              </button>
+            </div>
+          </div>
+        )}
         {editingFlow ? (
           <FlowEditor
             initial={draft.stages}

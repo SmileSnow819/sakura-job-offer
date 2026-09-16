@@ -1130,6 +1130,13 @@
   margin: 6px 0 0;
   overflow-wrap: anywhere;
 }
+.tracker-dialog-header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
 .tracker-form,
 .tracker-detail,
 .tracker-template,
@@ -1338,10 +1345,6 @@ details[open] > .tracker-collapse-content {
   font-size: 11px;
   color: #8d9aa5;
   margin-top: 8px;
-}
-.tracker-detail-toolbar {
-  justify-content: flex-end;
-  margin-top: 0;
 }
 .tracker-timeline-step {
   display: flex;

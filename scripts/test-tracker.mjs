@@ -221,6 +221,8 @@ test('详情弹窗将公司岗位状态合并到头部并移除重复进度标�
 
   assert.match(source, /tracker-dialog-title-inline/);
   assert.match(source, /OUTCOME_LABELS\[outcome\(draft\)\]/);
+  assert.match(source, /headerActions=/);
+  assert.doesNotMatch(source, /tracker-detail-toolbar/);
   assert.doesNotMatch(source, /<h3>招聘进度<\/h3>/);
 });
 test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
