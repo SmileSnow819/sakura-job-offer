@@ -16,6 +16,8 @@ import {
   positionLabel,
   quickAddApplication,
   quickRemoveApplication,
+  compareApplicationsByProgress,
+  removeApplications,
   validateFlow,
 } from '../src/features/tracker/model.ts';
 import { makeCsv, makeHtml } from '../src/features/tracker/export.ts';
@@ -199,6 +201,82 @@ test('未设置岗位时统一显示待设置岗位', () => {
   assert.equal(positionLabel(''), '待设置岗位');
   assert.equal(positionLabel('  '), '待设置岗位');
   assert.equal(positionLabel('前端开发'), '前端开发');
+});
+test('默认排序按流程阶段倒序，同阶段按最近更新时间倒序', () => {
+  const data = fixture();
+  const makeApplication = (id, stageName, updatedAt, stageStatus = 'active') => {
+    const application = structuredClone(data.applications[0]);
+    application.id = id;
+    application.updatedAt = updatedAt;
+    application.stages = application.stages.map((stage) => ({
+      ...stage,
+      status: stage.name === stageName ? stageStatus : 'pending',
+    }));
+    return application;
+  };
+  const firstInterview = makeApplication('a-first', '一面', '2026-09-16T08:00:00Z');
+  const secondInterview = makeApplication('a-second', '二面', '2026-09-15T08:00:00Z');
+  const newerFirstInterview = makeApplication('a-newer-first', '一面', '2026-09-17T08:00:00Z');
+
+  const sorted = [firstInterview, secondInterview, newerFirstInterview].sort((left, right) =>
+    compareApplicationsByProgress(left, right, data.template, false),
+  );
+
+  assert.deepEqual(
+    sorted.map((application) => application.id),
+    ['a-second', 'a-newer-first', 'a-first'],
+  );
+});
+test('全部状态时未通过排在最后，未通过内部仍按阶段倒序', () => {
+  const data = fixture();
+  const makeApplication = (id, stageName, status) => {
+    const application = structuredClone(data.applications[0]);
+    application.id = id;
+    application.updatedAt = '2026-09-16T08:00:00Z';
+    application.stages = application.stages.map((stage) => ({
+      ...stage,
+      status: stage.name === stageName ? status : 'pending',
+    }));
+    return application;
+  };
+  const activeFirstInterview = makeApplication('a-active-first', '一面', 'active');
+  const rejectedFirstInterview = makeApplication('a-rejected-first', '一面', 'rejected');
+  const rejectedSecondInterview = makeApplication('a-rejected-second', '二面', 'rejected');
+
+  const allStatuses = [activeFirstInterview, rejectedFirstInterview, rejectedSecondInterview].sort(
+    (left, right) => compareApplicationsByProgress(left, right, data.template, true),
+  );
+  assert.deepEqual(
+    allStatuses.map((application) => application.id),
+    ['a-active-first', 'a-rejected-second', 'a-rejected-first'],
+  );
+
+  const rejectedOnly = [rejectedFirstInterview, rejectedSecondInterview].sort((left, right) =>
+    compareApplicationsByProgress(left, right, data.template, false),
+  );
+  assert.deepEqual(
+    rejectedOnly.map((application) => application.id),
+    ['a-rejected-second', 'a-rejected-first'],
+  );
+});
+test('批量删除投递记录并清理不再使用的自定义公司', () => {
+  const data = fixture();
+  data.companies.push({
+    id: 'c2',
+    name: '待删除公司',
+    website: 'https://unused.example.com',
+    isCustom: true,
+  });
+  const second = structuredClone(data.applications[0]);
+  second.id = 'a2';
+  second.companyId = 'c2';
+  data.applications.push(second);
+
+  const removed = removeApplications(data, ['a1', 'a2']);
+
+  assert.equal(removed.applications.length, 0);
+  assert.equal(removed.companies.length, 0);
+  assert.equal(data.applications.length, 2);
 });
 test('投递页动效区分分层进入、内容切换和减少动态效果', () => {
   assert.deepEqual(trackerMotion(false), {

@@ -7,6 +7,7 @@ import {
   BriefcaseBusiness,
   Database,
   Download,
+  FileText,
   Hash,
   LayoutGrid,
   List,
@@ -15,11 +16,13 @@ import {
   Search,
   Share2,
   SlidersHorizontal,
+  Trash2,
 } from 'lucide-react';
 import bookmarks from '../bookmarks.json';
 import { SITE_TAGLINE } from '../constants/branding';
 import {
   changeStage,
+  compareApplicationsByProgress,
   currentStage,
   defaultTemplate,
   normalizeWebsite,
@@ -27,6 +30,7 @@ import {
   OUTCOME_LABELS,
   positionLabel,
   progress,
+  removeApplications,
   type Application,
   type Company,
   type StageStatus,
@@ -64,6 +68,7 @@ for (const category of bookmarks.categories.filter((c) => c.id !== 'interviews')
 type Dialog =
   | { type: 'new'; seed?: { name: string; website: string } }
   | { type: 'detail' | 'edit'; id: string }
+  | { type: 'delete'; ids: string[] }
   | { type: 'template' | 'export' | 'data' | 'bulk-position' }
   | null;
 
@@ -77,7 +82,7 @@ export default function TrackerPage() {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState('all');
   const [archive, setArchive] = useState('visible');
-  const [sort, setSort] = useState('updated');
+  const [sort, setSort] = useState('progress');
   const [view, setView] = useState(() => (window.innerWidth < 700 ? 'cards' : 'table'));
   const [showAnalytics, setShowAnalytics] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
@@ -134,13 +139,20 @@ export default function TrackerPage() {
           );
         })
         .sort((a, b) =>
-          sort === 'company'
-            ? a.company.name.localeCompare(b.company.name, 'zh-CN')
-            : sort === 'applied'
-              ? b.application.appliedAt.localeCompare(a.application.appliedAt)
-              : b.application.updatedAt.localeCompare(a.application.updatedAt),
+          sort === 'progress'
+            ? compareApplicationsByProgress(
+                a.application,
+                b.application,
+                data.template,
+                filter === 'all',
+              )
+            : sort === 'company'
+              ? a.company.name.localeCompare(b.company.name, 'zh-CN')
+              : sort === 'applied'
+                ? b.application.appliedAt.localeCompare(a.application.appliedAt)
+                : b.application.updatedAt.localeCompare(a.application.updatedAt),
         ),
-    [all, archive, filter, query, sort],
+    [all, archive, data.template, filter, query, sort],
   );
   const picked = all.filter((r) => selected.includes(r.application.id));
   const activeRecords = data.applications.filter((a) => !a.archived);
@@ -276,6 +288,27 @@ export default function TrackerPage() {
       '阶段状态已保存',
       false,
     );
+  }
+  /**
+   * 打开统一删除确认，避免卡片操作和批量操作各自维护一套删除流程。
+   * @param ids 要确认删除的投递 ID
+   */
+  function requestDelete(ids: string[]) {
+    const validIds = ids.filter((id) =>
+      data.applications.some((application) => application.id === id),
+    );
+    if (validIds.length) setDialog({ type: 'delete', ids: validIds });
+  }
+  /**
+   * 确认后通过现有保存入口删除记录，并同步清理当前选中状态。
+   * @param ids 已确认删除的投递 ID
+   * @returns 是否成功写入本地数据
+   */
+  function confirmDelete(ids: string[]) {
+    const next = removeApplications(data, ids);
+    const ok = commit(next, `已删除 ${ids.length} 条投递记录；如需恢复，请导入先前的备份`);
+    if (ok) setSelected((selectedIds) => selectedIds.filter((id) => !ids.includes(id)));
+    return ok;
   }
   const toggleSelected = (id: string) =>
     setSelected((prev) => (prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]));
@@ -436,6 +469,7 @@ export default function TrackerPage() {
             <option value="all">含归档</option>
           </select>
           <select aria-label="排序方式" value={sort} onChange={(e) => setSort(e.target.value)}>
+            <option value="progress">流程进度</option>
             <option value="updated">最近更新</option>
             <option value="applied">投递日期</option>
             <option value="company">公司名称</option>
@@ -559,13 +593,26 @@ export default function TrackerPage() {
                     ))}
                   </div>
                   <div className="tracker-card-footer">
-                    <button
-                      className="tracker-text-button"
-                      onClick={() => setDialog({ type: 'detail', id: a.id })}
-                    >
-                      查看详情
-                      <ArrowRight size={14} />
-                    </button>
+                    <div className="tracker-card-actions">
+                      <button
+                        type="button"
+                        className="tracker-card-action"
+                        aria-label={`查看${c.name}详情`}
+                        onClick={() => setDialog({ type: 'detail', id: a.id })}
+                      >
+                        <FileText size={17} strokeWidth={1.8} />
+                        <span>详情</span>
+                      </button>
+                      <button
+                        type="button"
+                        className="tracker-card-action danger"
+                        aria-label={`删除${c.name}投递记录`}
+                        onClick={() => requestDelete([a.id])}
+                      >
+                        <Trash2 size={17} strokeWidth={1.8} />
+                        <span>删除</span>
+                      </button>
+                    </div>
                     {outcome(a) === 'active' && !a.archived && currentStage(a) && (
                       <button
                         className="tracker-button small"
@@ -616,6 +663,22 @@ export default function TrackerPage() {
           </button>
         </footer>
       </div>
+      {picked.length > 0 && (
+        <div className="tracker-bulk-actions" role="toolbar" aria-label="批量操作">
+          <span>已选择 {picked.length} 条</span>
+          <button
+            type="button"
+            className="tracker-bulk-delete"
+            onClick={() => requestDelete(picked.map((record) => record.application.id))}
+          >
+            <Trash2 size={16} strokeWidth={1.9} />
+            批量删除
+          </button>
+          <button type="button" className="tracker-bulk-clear" onClick={() => setSelected([])}>
+            取消选择
+          </button>
+        </div>
+      )}
       {notice && (
         <div role="status" className="tracker-toast">
           ✓ {notice}
@@ -661,16 +724,35 @@ export default function TrackerPage() {
             )
           }
           onEdit={() => setDialog({ type: 'edit', id: active.id })}
-          onDelete={() => {
-            const ok = commit(
-              { ...data, applications: data.applications.filter((a) => a.id !== active.id) },
-              '已删除投递记录；如需恢复，请导入先前的备份',
-            );
-            if (ok) setSelected((ids) => ids.filter((id) => id !== active.id));
-            return ok;
-          }}
+          onDelete={() => confirmDelete([active.id])}
           onClose={() => setDialog(null)}
         />
+      )}
+      {dialog?.type === 'delete' && (
+        <Modal
+          title="确认删除投递记录"
+          subtitle="删除后只能通过之前导出的备份恢复，请确认这次操作。"
+          onClose={() => setDialog(null)}
+        >
+          <div className="tracker-delete-confirm">
+            <Trash2 size={24} aria-hidden="true" />
+            <p>
+              即将删除 <strong>{dialog.ids.length}</strong> 条投递记录
+            </p>
+            <div className="tracker-actions">
+              <button type="button" className="tracker-button" onClick={() => setDialog(null)}>
+                取消
+              </button>
+              <button
+                type="button"
+                className="tracker-button danger"
+                onClick={() => confirmDelete(dialog.ids)}
+              >
+                确认删除
+              </button>
+            </div>
+          </div>
+        </Modal>
       )}
       {dialog?.type === 'template' && (
         <Modal

@@ -185,6 +185,69 @@ export function currentStage(app: Application): Stage | undefined {
     app.stages.find((s) => s.status === 'pending')
   );
 }
+
+/**
+ * 返回投递在流程中的排序位置。
+ * 已完成或已拿 offer 的记录没有当前阶段，但它们已经走完整条流程，因此排在具体阶段之后。
+ * @param application 要计算的投递记录
+ * @param template 当前默认流程，用于确定阶段先后
+ * @returns 从 0 开始的阶段位置，完整流程使用 template.length
+ */
+export function applicationStageRank(
+  application: Application,
+  template: StageDefinition[],
+): number {
+  const stage = currentStage(application);
+  if (!stage) return template.length;
+  const rank = template.findIndex((definition) => definition.name === stage.name);
+  return rank >= 0 ? rank : template.length;
+}
+
+/**
+ * 按用户在投递列表中看到的流程进度比较两条记录。
+ * “全部状态”会把未通过放到最后；其他筛选仍只按阶段位置和最近更新时间排序。
+ * @param left 左侧投递记录
+ * @param right 右侧投递记录
+ * @param template 当前默认流程，用于确定阶段先后
+ * @param rejectedLast 是否将未通过记录统一放到最后
+ * @returns 负数表示 left 应排在前面，正数表示 right 应排在前面
+ */
+export function compareApplicationsByProgress(
+  left: Application,
+  right: Application,
+  template: StageDefinition[],
+  rejectedLast: boolean,
+): number {
+  if (rejectedLast) {
+    const leftRejected = outcome(left) === 'rejected' ? 1 : 0;
+    const rightRejected = outcome(right) === 'rejected' ? 1 : 0;
+    if (leftRejected !== rightRejected) return leftRejected - rightRejected;
+  }
+  const stageDifference =
+    applicationStageRank(right, template) - applicationStageRank(left, template);
+  if (stageDifference !== 0) return stageDifference;
+  return right.updatedAt.localeCompare(left.updatedAt);
+}
+
+/**
+ * 删除指定投递并清理已经没有任何投递引用的公司。
+ * 先判断是否命中记录，避免误把调用方数据中的孤立公司当成删除副作用清理掉。
+ * @param data 当前投递数据
+ * @param ids 要删除的投递 ID
+ * @returns 删除后的新数据；没有命中时返回原数据引用
+ */
+export function removeApplications(data: TrackerData, ids: string[]): TrackerData {
+  const idSet = new Set(ids);
+  if (!data.applications.some((application) => idSet.has(application.id))) return data;
+  const applications = data.applications.filter((application) => !idSet.has(application.id));
+  const usedCompanyIds = new Set(applications.map((application) => application.companyId));
+  return {
+    ...data,
+    applications,
+    companies: data.companies.filter((company) => usedCompanyIds.has(company.id)),
+  };
+}
+
 export const progress = (app: Application) =>
   Math.round(
     (app.stages.filter((s) => ['completed', 'skipped'].includes(s.status)).length /
