@@ -6,6 +6,20 @@
       "icon": "CalendarDays",
       "links": [
         {
+          "title": "小红书校园招聘",
+          "url": "https://job.xiaohongshu.com/campus/position",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "度小满校园招聘",
+          "url": "https://campus.duxiaoman.com/051736/position/list",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "莉莉丝招聘",
+          "url": "https://lilithgames.jobs.feishu.cn/intern"
+        },
+        {
           "title": "bilibili",
           "url": "https://jobs.bilibili.com/campus/records",
           "referralUrl": "https://jobs.bilibili.com/campus/positions?token=cad7ec39-c410-4cb1-8acf-d02914a12628&type=3",
@@ -487,11 +501,6 @@
       "title": "蓝色光标招聘",
       "url": "https://bluefocus.jobs.feishu.cn/066083/position/list",
       "openedAt": "2026-09-07"
-    },
-    {
-      "title": "小红书校园招聘",
-      "url": "https://job.xiaohongshu.com/campus/position",
-      "openedAt": "2026-09-08"
     },
     {
       "title": "库洛游戏招聘",
