@@ -192,11 +192,6 @@
           "openedAt": "2026-09-01"
         },
         {
-          "title": "58同城招聘官网",
-          "url": "https://campus.58.com/Portal/Apply/Index",
-          "openedAt": "2026-09-01"
-        },
-        {
           "title": "海能达招聘官网",
           "url": "https://zpxz.hytera.com/",
           "openedAt": "2026-08-25"
@@ -1033,6 +1028,10 @@
       "title": "阅文集团",
       "url": "https://yuewen.zhiye.com/personal/deliveryRecord",
       "openedAt": "2026-09-14"
+    },
+    {
+      "title": "水滴校园招聘",
+      "url": "https://jobs.waterdrop-inc.com/campus"
     }
       ]
     },
