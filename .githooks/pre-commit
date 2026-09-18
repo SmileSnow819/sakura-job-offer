@@ -5,5 +5,8 @@ set -e
 repo_root=$(git rev-parse --show-toplevel)
 cd "$repo_root"
 
+echo "Running checks before commit..."
+pnpm check
+
 echo "Running production build before commit..."
 pnpm build
