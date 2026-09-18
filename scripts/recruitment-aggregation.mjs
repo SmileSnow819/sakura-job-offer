@@ -6,7 +6,8 @@ import process from 'node:process';
 const BOOKMARKS_PATH = new URL('../src/bookmarks.json', import.meta.url);
 const NOWCODER_URL = 'https://www.nowcoder.com/np-api/u/school-schedule/list-card';
 const execFileAsync = promisify(execFile);
-const FEISHU_URL = 'https://my.feishu.cn/wiki/TfJkwz7yIil5qvktSKOcBJj8nFd?table=tblzpVqcTKlokUA6&view=vewG7JtQCU';
+const FEISHU_URL =
+  'https://my.feishu.cn/wiki/TfJkwz7yIil5qvktSKOcBJj8nFd?table=tblzpVqcTKlokUA6&view=vewG7JtQCU';
 const FEISHU_BASE_TOKEN = 'IH8ObhOTMaqWGNslZArcMGsInNX';
 const FEISHU_TABLE_ID = 'tblzpVqcTKlokUA6';
 const FEISHU_VIEW_ID = 'vewG7JtQCU';
@@ -20,7 +21,18 @@ const normalizeUrl = (value) => {
   if (!value) return '';
   try {
     const url = new URL(value);
-    for (const key of ['recommendCode', 'spread', 'shareId', 'shareSource', 'channel', 'source', 'ref', 'qr', 'memory', 'silence']) {
+    for (const key of [
+      'recommendCode',
+      'spread',
+      'shareId',
+      'shareSource',
+      'channel',
+      'source',
+      'ref',
+      'qr',
+      'memory',
+      'silence',
+    ]) {
       url.searchParams.delete(key);
     }
     url.hash = '';
@@ -51,7 +63,11 @@ export const normalizeCandidate = (raw = {}) => {
     return { ...candidate, valid: false, reason: candidate.reason || '缺少招聘入口' };
   }
   if (!isDirectRecruitmentUrl(candidate.recruitmentUrl)) {
-    return { ...candidate, valid: false, reason: candidate.reason || '链接是公告/公众号，不是直接招聘入口' };
+    return {
+      ...candidate,
+      valid: false,
+      reason: candidate.reason || '链接是公告/公众号，不是直接招聘入口',
+    };
   }
   return { ...candidate, valid: true };
 };
@@ -160,19 +176,34 @@ export const fetchNowcoderCandidates = async ({
 /** 通过官方 lark-cli 读取飞书多维表格视图并转换为统一候选记录。 */
 export const fetchFeishuCandidates = async ({ execFileImpl = execFileAsync, limit = 200 } = {}) => {
   const { stdout, stderr } = await execFileImpl('lark-cli', [
-    'base', '+record-list', '--base-token', FEISHU_BASE_TOKEN, '--table-id', FEISHU_TABLE_ID,
-    '--view-id', FEISHU_VIEW_ID, '--limit', String(limit), '--format', 'json', '--as', 'user',
+    'base',
+    '+record-list',
+    '--base-token',
+    FEISHU_BASE_TOKEN,
+    '--table-id',
+    FEISHU_TABLE_ID,
+    '--view-id',
+    FEISHU_VIEW_ID,
+    '--limit',
+    String(limit),
+    '--format',
+    'json',
+    '--as',
+    'user',
   ]);
   if (stderr?.trim()) console.error(`lark-cli: ${stderr.trim()}`);
   const payload = JSON.parse(stdout);
-  if (!payload.ok) throw new Error(`Feishu API error: ${payload.error?.message || 'unknown error'}`);
-  return (payload.data?.data || []).map((row) => normalizeCandidate({
-    source: 'feishu',
-    company: row[0],
-    title: row[0],
-    recruitmentUrl: row[5],
-    sourceUrl: FEISHU_URL,
-  }));
+  if (!payload.ok)
+    throw new Error(`Feishu API error: ${payload.error?.message || 'unknown error'}`);
+  return (payload.data?.data || []).map((row) =>
+    normalizeCandidate({
+      source: 'feishu',
+      company: row[0],
+      title: row[0],
+      recruitmentUrl: row[5],
+      sourceUrl: FEISHU_URL,
+    }),
+  );
 };
 
 /** 读取当前仓库中的秋招书签。 */
@@ -201,8 +232,11 @@ export const applyReportToBookmarks = (data, report) => {
     byCompany.set(companyKey(link.title), link);
   }
   for (const candidate of report.enrichments) {
-    const existing = byUrl.get(normalizeUrl(candidate.existing.url)) || byCompany.get(companyKey(candidate.existing.title));
-    if (existing && candidate.openedAt && !existing.openedAt) existing.openedAt = candidate.openedAt;
+    const existing =
+      byUrl.get(normalizeUrl(candidate.existing.url)) ||
+      byCompany.get(companyKey(candidate.existing.title));
+    if (existing && candidate.openedAt && !existing.openedAt)
+      existing.openedAt = candidate.openedAt;
   }
   return data;
 };
@@ -216,7 +250,11 @@ const reportLines = (report) => {
   ];
   if (report.additions.length) {
     lines.push('- 自动加入书签：');
-    lines.push(...report.additions.map((item) => `  - ${item.company}（${item.source}）：${item.recruitmentUrl}`));
+    lines.push(
+      ...report.additions.map(
+        (item) => `  - ${item.company}（${item.source}）：${item.recruitmentUrl}`,
+      ),
+    );
   }
   if (report.errors.length) {
     lines.push('- 运行疑问/错误：');
@@ -224,7 +262,12 @@ const reportLines = (report) => {
   }
   if (report.skipped.length) {
     lines.push('- 待人工确认（未自动写入）：');
-    lines.push(...report.skipped.map((item) => `  - ${item.company || item.title || '未命名'}（${item.source || '未知来源'}）：${item.reason || '未知原因'}`));
+    lines.push(
+      ...report.skipped.map(
+        (item) =>
+          `  - ${item.company || item.title || '未命名'}（${item.source || '未知来源'}）：${item.reason || '未知原因'}`,
+      ),
+    );
   }
   return lines;
 };
@@ -232,7 +275,11 @@ const reportLines = (report) => {
 /** 将每轮采集摘要追加到仓库内的日记，便于换电脑后追溯。 */
 export const appendRunLog = async (report, { logPath, timestamp = new Date().toISOString() }) => {
   await mkdir(new URL('.', logPath), { recursive: true });
-  await appendFile(logPath, `\n## 聚合运行 ${timestamp}\n\n${reportLines(report).join('\n')}\n`, 'utf8');
+  await appendFile(
+    logPath,
+    `\n## 聚合运行 ${timestamp}\n\n${reportLines(report).join('\n')}\n`,
+    'utf8',
+  );
 };
 
 /** 将现有 Spider_XHS runner 返回的官方笔记转换为候选记录。 */
@@ -279,10 +326,12 @@ export const runAggregation = async ({
       feishu: sourceResults[1].status,
       xiaohongshu: sourceResults[2].status,
     },
-    sourceCounts: Object.fromEntries(sourceResults.map((result, index) => [
-      ['nowcoder', 'feishu', 'xiaohongshu'][index],
-      result.status === 'fulfilled' ? result.value.length : 0,
-    ])),
+    sourceCounts: Object.fromEntries(
+      sourceResults.map((result, index) => [
+        ['nowcoder', 'feishu', 'xiaohongshu'][index],
+        result.status === 'fulfilled' ? result.value.length : 0,
+      ]),
+    ),
     errors,
     ...diffCandidates(candidates, bookmarks),
   };
@@ -299,7 +348,9 @@ if (isMain) {
       const data = JSON.parse(await readFile(BOOKMARKS_PATH, 'utf8'));
       applyReportToBookmarks(data, report);
       await writeFile(BOOKMARKS_PATH, `${JSON.stringify(data, null, 2)}\n`, 'utf8');
-      const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(new Date());
+      const date = new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Shanghai' }).format(
+        new Date(),
+      );
       const logPath = new URL(`../logs/${date}.md`, import.meta.url);
       await appendRunLog(report, { logPath, timestamp: new Date().toISOString() });
       report.written = { bookmarks: BOOKMARKS_PATH.pathname, log: logPath.pathname };

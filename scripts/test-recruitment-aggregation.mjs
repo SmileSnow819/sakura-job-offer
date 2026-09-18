@@ -112,9 +112,22 @@ test('牛客适配器映射校招卡片字段', async () => {
 test('飞书适配器读取记录并清理内推参数', async () => {
   const candidates = await fetchFeishuCandidates({
     execFileImpl: async () => ({
-      stdout: JSON.stringify({ ok: true, data: { data: [[
-        '飞书示例', [], [], '技术岗', '上海', 'https://jobs.example.com/campus?recommendCode=secret&channel=x', 'secret',
-      ]] } }),
+      stdout: JSON.stringify({
+        ok: true,
+        data: {
+          data: [
+            [
+              '飞书示例',
+              [],
+              [],
+              '技术岗',
+              '上海',
+              'https://jobs.example.com/campus?recommendCode=secret&channel=x',
+              'secret',
+            ],
+          ],
+        },
+      }),
       stderr: '',
     }),
   });
@@ -140,15 +153,29 @@ test('聚合报告保留三个来源状态并合并小红书 runner', async () =
     ],
   });
 
-  assert.deepEqual(report.sources, { nowcoder: 'fulfilled', feishu: 'fulfilled', xiaohongshu: 'fulfilled' });
+  assert.deepEqual(report.sources, {
+    nowcoder: 'fulfilled',
+    feishu: 'fulfilled',
+    xiaohongshu: 'fulfilled',
+  });
   assert.equal(report.additions[0].source, 'xiaohongshu');
   assert.deepEqual(report.errors, []);
 });
 
 test('写入模式只加入明确有招聘入口的候选并补齐日期', () => {
-  const data = { categories: [{ id: 'autumn', links: [{ title: '已有公司校园招聘', url: 'https://old.example.com' }] }] };
+  const data = {
+    categories: [
+      { id: 'autumn', links: [{ title: '已有公司校园招聘', url: 'https://old.example.com' }] },
+    ],
+  };
   applyReportToBookmarks(data, {
-    additions: [{ company: '新公司', recruitmentUrl: 'https://new.example.com/campus', openedAt: '2026-09-18' }],
+    additions: [
+      {
+        company: '新公司',
+        recruitmentUrl: 'https://new.example.com/campus',
+        openedAt: '2026-09-18',
+      },
+    ],
     enrichments: [{ existing: data.categories[0].links[0], openedAt: '2026-09-17' }],
   });
   assert.equal(data.categories[0].links.length, 2);
