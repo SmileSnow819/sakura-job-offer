@@ -23,6 +23,10 @@
           "openedAt": "2026-08-05"
         },
         {
+          "title": "阿里云校园招聘",
+          "url": "https://careers.aliyun.com/campus/position-list?campusType=talentPlan&lang=zh"
+        },
+        {
           "title": "腾讯校园招聘",
           "url": "https://join.qq.com/post.html",
           "openedAt": "2026-08-11"
@@ -498,566 +502,1026 @@
           "title": "顺丰校园招聘",
           "url": "https://campus.sf-express.com/"
         },
-    {
-      "title": "bigo校园招聘",
-      "url": "https://app.mokahr.com/campus-recruitment/bigo/1018#/jobs",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "中国银行2027校园招聘",
+        {
+          "title": "bigo校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/bigo/1018#/jobs",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "中国银行2027校园招聘",
           "url": "https://www.boc.cn/aboutboc/bi4/?eqid=fcddbd84000094500000000665040e0f",
           "openedAt": "2026-09-03"
-    },
-    {
-      "title": "中国航空工业集团2027校园招聘",
-      "url": "https://www.avic.com.cn/",
-      "openedAt": "2026-09-02"
-    },
-    {
-      "title": "蓝色光标招聘",
-      "url": "https://bluefocus.jobs.feishu.cn/066083/position/list",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "库洛游戏招聘",
-      "url": "https://kurogame.jobs.feishu.cn/campus/",
-      "openedAt": "2026-09-09"
-    },
-    {
-      "title": "蜜雪集团校园招聘",
-      "url": "https://careers.mxbc.com/campus",
-      "openedAt": "2026-09-10"
-    },
-    {
-      "title": "哈啰校园招聘",
-      "url": "https://careers.hellobike.com/#/recruit/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98",
-      "openedAt": "2026-08-21",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "泡泡玛特校园招聘",
-      "url": "https://popmart.zhiye.com/",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "吉比特校园招聘",
-      "url": "https://campus.g-bits.com/index.php",
-      "openedAt": "2026-09-03"
-    },
-    {
-      "title": "名创优品校园招聘",
-      "url": "https://miniso.zhiye.com/jobs",
-      "openedAt": "2026-09-09"
-    },
-    {
-      "title": "雀巢中国校园招聘",
-      "url": "https://app.mokahr.com/campus-recruitment/nestlegcr",
-      "openedAt": "2026-09-01"
-    },
-    {
-      "title": "FunPlus校园招聘",
-      "url": "https://campus.funplus.com.cn/",
-      "openedAt": "2026-09-04"
-    },
-    {
-      "title": "完美世界校园招聘",
-      "url": "https://jobs.games.wanmei.com/school.html",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "高露洁校园招聘",
-      "url": "https://jobs.colgate.com/?locale=zh_CN",
-      "openedAt": "2026-09-11"
-    },
-    {
-      "title": "万兴科技校园招聘",
-      "url": "https://wondersharecampus.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-14"
-    },
-    {
-      "title": "树根互联招聘",
-      "url": "https://irootech.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-10"
-    },
-    {
-      "title": "禾迈电子招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/hoymiles/70377#/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "兆易创新招聘",
-      "url": "https://app.mokahr.com/su/avbqkc",
-      "openedAt": "2026-09-10"
-    },
-    {
-      "title": "美的校园招聘",
-      "url": "https://careers.midea.com/recruit-school-wechat/job?type=1",
-      "openedAt": "2026-08-28"
-    },
-    {
-      "title": "联特科技招聘",
-      "url": "https://linktel.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "飞鱼科技招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/feiyu/142123#/jobs",
-      "openedAt": "2026-08-27"
-    },
-    {
-      "title": "昂科技术招聘",
-      "url": "https://xyz.51job.com/consumer/m/home/index?ctmid=8931993",
-      "openedAt": "2026-08-25"
-    },
-    {
-      "title": "睿创微纳招聘",
-      "url": "https://raytrontek1.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-04"
-    },
-    {
-      "title": "文远知行招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/jingchi/2137#/jobs",
-      "openedAt": "2026-07-23"
-    },
-    {
-      "title": "思摩尔国际招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/smoore/150918#/jobs",
-      "openedAt": "2026-09-03"
-    },
-    {
-      "title": "寒武纪招聘",
-      "url": "https://app.mokahr.com/su/iluzya",
-      "openedAt": "2026-08-06"
-    },
-    {
-      "title": "思特威招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/smartsenstech1/56088#/jobs",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "ZURU招聘",
-      "url": "https://wecruit.hotjob.cn/SU69fd8f7f1f17c372512fdd19/mc/position/campus?projectId=100501&recruitType=1",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "地平线招聘",
-      "url": "https://wecruit.hotjob.cn/SU62d915040dcad43c775ec12c/mc/position/campus?projectId=103302&recruitType=1",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "宁波银行校园招聘",
-      "url": "https://zhaopin.nbcb.com.cn/#/campus-recruitment",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "骑士集团招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/black-unique/29232#/jobs",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "普渡机器人招聘",
-      "url": "https://pudutech1.zhiye.com/campus/jobs",
-      "openedAt": "2026-07-27"
-    },
-    {
-      "title": "途虎养车招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/tuhu/28398#/jobs",
-      "openedAt": "2026-09-03"
-    },
-    {
-      "title": "鹰角网络招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/hypergryph/26326#/jobs",
-      "openedAt": "2026-08-07"
-    },
-    {
-      "title": "启源芯动力招聘",
-      "url": "https://spicqyxdl.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "游卡校园招聘",
-      "url": "https://campus.yokaverse.com",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "易点云招聘",
-      "url": "https://recruit-pro.edianyun.com/#/wap/recruitment-collect",
-      "openedAt": "2026-08-19"
-    },
-    {
-      "title": "华宝新能招聘",
-      "url": "https://career.hello-tech.com/campus/jobs",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "李森智能招聘",
-      "url": "https://lisen.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-25"
-    },
-    {
-      "title": "CVTE视源股份校园招聘",
-      "url": "https://campus.cvte.com",
-      "openedAt": "2026-08-11"
-    },
-    {
-      "title": "三环集团招聘",
-      "url": "https://hr.cctc.cc",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "凌云光科技招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/lusterinc/44882#/jobs",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "恒生电子招聘",
-      "url": "https://campus.hundsun.com/campus/jobs",
-      "openedAt": "2026-08-13"
-    },
-    {
-      "title": "卓越教育招聘",
-      "url": "https://wecruit.hotjob.cn/SU63366959bef57c270741e2c6/mc/position/campus?recruitType=1",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "博楚电子招聘",
-      "url": "https://fscut.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-08"
-    },
-    {
-      "title": "荣耀校园招聘",
-      "url": "https://career.honor.com/SU60ee9e002f9d247b98da489e/mc/position/campus?projectId=101401%2C101601%2C101801%2C101901&recruitType=1",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "HOLLYLAND猛玛招聘",
-      "url": "https://hollyland.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "点点互动招聘",
-      "url": "https://ddhd.cn/4/jobs",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "南芯科技招聘",
-      "url": "https://nanxin.zhiye.com",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "亿道招聘",
-      "url": "https://emdoor1.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "金证科技招聘",
-      "url": "https://szkingdom1.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "万得招聘",
-      "url": "https://wcms.wind.com.cn:9006/wcmsweb/recruitH5/#/main/home",
-      "openedAt": "2026-08-22"
-    },
-    {
-      "title": "宇石空间招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/astronstone/168327#/jobs",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "巨人网络招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/ztgame/92438#/jobs",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "禾望电气招聘",
-      "url": "https://hopewind1.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "杰瑞集团招聘",
-      "url": "https://app.mokahr.com/su/qgoyzx",
-      "openedAt": "2026-07-14"
-    },
-    {
-      "title": "三七互娱招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/37/58016#/jobs",
-      "openedAt": "2026-08-14"
-    },
-    {
-      "title": "维信诺招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/newvisionox/24735#/jobs",
-      "openedAt": "2026-08-31"
-    },
-    {
-      "title": "作业帮招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/zuoyebang/39595#/jobs",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "SHEIN招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/shein/2932#/jobs",
-      "openedAt": "2026-09-04"
-    },
-    {
-      "title": "诺瓦星云招聘",
-      "url": "https://novastar.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "天赐材料招聘",
-      "url": "https://wecruit.hotjob.cn/SU62c3ea6b2f9d241e4c8e45ba/mc/position/campus?projectId=201701&recruitType=1",
-      "openedAt": "2026-09-03"
-    },
-    {
-      "title": "中芯国际招聘",
-      "url": "https://smics.zhiye.com/campus",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "群核科技招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/qunhemail/2832#/jobs",
-      "openedAt": "2026-08-11"
-    },
-    {
-      "title": "锐捷网络招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/ruijie/136206#/jobs",
-      "openedAt": "2026-09-05"
-    },
-    {
-      "title": "千里科技招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/qianli1/147197#/jobs",
-      "openedAt": "2026-08-20"
-    },
-    {
-      "title": "欣旺达招聘",
-      "url": "https://sunwodacampus.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "全志科技招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/allwinnertech/43436#/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "星纵物联招聘",
-      "url": "https://milesight.zhiye.com/campus/jobs",
-      "openedAt": "2026-07-21"
-    },
-    {
-      "title": "舜宇集团招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/sunnyoptical/45602#/jobs",
-      "openedAt": "2026-08-08"
-    },
-    {
-      "title": "三棵树招聘",
-      "url": "https://wecruit.hotjob.cn/SU6173aef0bef57c4414103348/mc/position/campus?projectId=201401&recruitType=1",
-      "openedAt": "2026-09-09"
-    },
-    {
-      "title": "埃科光电招聘",
-      "url": "http://career.i-tek.cn",
-      "openedAt": "2026-07-27"
-    },
-    {
-      "title": "智加科技招聘",
-      "url": "https://app.mokahr.com/su/jsywqd",
-      "openedAt": "2026-08-26"
-    },
-    {
-      "title": "吉利控股招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/geely/78436#/jobs",
-      "openedAt": "2026-08-13"
-    },
-    {
-      "title": "阳光保险招聘",
-      "url": "https://sunzhaopin.sinosig.com/campus/jobs",
-      "openedAt": "2026-09-10"
-    },
-    {
-      "title": "睿联技术招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/reo/136006#/jobs",
-      "openedAt": "2026-08-19"
-    },
-    {
-      "title": "韶音科技招聘",
-      "url": "https://app.mokahr.com/campus-recruitment/aftershokzhr/36940#/jobs",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "货拉拉招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/huolalahr/98660#/jobs",
-      "openedAt": "2026-08-12"
-    },
-    {
-      "title": "传音控股招聘",
-      "url": "https://transsion.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "天锐星通招聘",
-      "url": "https://t-ray.zhiye.com/campus/jobs",
-      "openedAt": "2026-07-11"
-    },
-    {
-      "title": "虹科电子招聘",
-      "url": "https://hkaco.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "海信招聘",
-      "url": "https://jobs.hisense.com/campus/jobs",
-      "openedAt": "2026-08-21"
-    },
-    {
-      "title": "宇通集团招聘",
-      "url": "https://wecruit.hotjob.cn/SU64e7157a1eb80519a8e4efcf/mc/position/campus?recruitType=1",
-      "openedAt": "2026-06-15"
-    },
-    {
-      "title": "鹏芯微招聘",
-      "url": "https://career.pxwsemi.com/campus/jobs",
-      "openedAt": "2026-08-17"
-    },
-    {
-      "title": "远景能源招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/envisiongroup/43123#/jobs",
-      "openedAt": "2026-07-27"
-    },
-    {
-      "title": "卧安机器人招聘",
-      "url": "https://woanhome.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-14"
-    },
-    {
-      "title": "大参林招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/dslyy/136052#/jobs",
-      "openedAt": "2026-08-14"
-    },
-    {
-      "title": "众安保险招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/zhongan/71908#/jobs",
-      "openedAt": "2026-09-08"
-    },
-    {
-      "title": "康冠科技招聘",
-      "url": "https://careerktc.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-22"
-    },
-    {
-      "title": "平行线教育招聘",
-      "url": "https://zzpxx.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-08"
-    },
-    {
-      "title": "格力招聘",
-      "url": "https://m-zhaopin.greeyun.com/#/main",
-      "openedAt": "2026-09-10"
-    },
-    {
-      "title": "JoinQuant聚宽招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/joinquant/92347#/jobs",
-      "openedAt": "2026-07-29"
-    },
-    {
-      "title": "NVIDIA英伟达招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/nvidia/47111?locale=zh-CN",
-      "openedAt": "2026-07-21"
-    },
-    {
-      "title": "电科金仓招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/kingbase/47259#/jobs",
-      "openedAt": "2026-08-24"
-    },
-    {
-      "title": "芯恩招聘",
-      "url": "https://wecruit.hotjob.cn/SU62b31a44bef57c0f6faa4c71/mc/position/campus?projectId=100901&recruitType=1",
-      "openedAt": "2026-08-05"
-    },
-    {
-      "title": "九识智能招聘",
-      "url": "https://app.mokahr.com/su/gupzvp",
-      "openedAt": "2026-08-20"
-    },
-    {
-      "title": "浩鲸科技招聘",
-      "url": "https://iwhalecloud1.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-01"
-    },
-    {
-      "title": "飞步科技招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/fabu/56114#/jobs",
-      "openedAt": "2026-08-18"
-    },
-    {
-      "title": "养生堂招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/yst/68367#/jobs",
-      "openedAt": "2026-09-03"
-    },
-    {
-      "title": "明源云招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/mingyuan/168644#/jobs",
-      "openedAt": "2026-09-08"
-    },
-    {
-      "title": "迅雷招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/xunlei/26600#/jobs",
-      "openedAt": "2026-08-06"
-    },
-    {
-      "title": "神州信息招聘",
-      "url": "https://dcits.zhiye.com/campus/jobs",
-      "openedAt": "2026-09-07"
-    },
-    {
-      "title": "深蓝互动招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/blueinteractive/38434#/jobs",
-      "openedAt": "2026-08-10"
-    },
-    {
-      "title": "乐学培优招聘",
-      "url": "https://qingbeikeji.zhiye.com/campus/jobs",
-      "openedAt": "2026-08-27"
-    },
-    {
-      "title": "高途教育招聘",
-      "url": "https://app.mokahr.com/m/campus_apply/bjhl/102145#/jobs",
-      "openedAt": "2026-07-02"
-    },
-    {
-      "title": "MiniMax校园招聘",
-      "url": "https://vrfi1sk8a0.jobs.feishu.cn/275376/position/list",
-      "openedAt": "2026-08-20"
-    },
-    {
-      "title": "Ampace新能安招聘",
-      "url": "https://wecruit.hotjob.cn/SU6618fd381eb8053acd5fc2b9/mc/position/campus?projectId=505401%2C505501&recruitType=1",
-      "openedAt": "2026-08-14"
-    },
-    {
-      "title": "联发科技招聘",
-      "url": "https://mediatek.zhiye.com/campus/jobs",
-      "openedAt": "2026-07-10"
-    },
-    {
-      "title": "SGS招聘",
-      "url": "https://app.mokahr.com/m/campus-recruitment/sgs/74104#/jobs",
-      "openedAt": "2026-09-11"
-    },
-    {
-      "title": "网易招聘",
-      "url": "https://campus.163.com/bolehtml/home?type=99&projectId=103",
-      "openedAt": "2026-08-20"
-    },
-    {
-      "title": "阅文集团",
-      "url": "https://yuewen.zhiye.com/personal/deliveryRecord",
-      "openedAt": "2026-09-14"
-    },
-    {
-      "title": "水滴校园招聘",
-      "url": "https://jobs.waterdrop-inc.com/campus"
-    }
+        },
+        {
+          "title": "中国航空工业集团2027校园招聘",
+          "url": "https://www.avic.com.cn/",
+          "openedAt": "2026-09-02"
+        },
+        {
+          "title": "蓝色光标招聘",
+          "url": "https://bluefocus.jobs.feishu.cn/066083/position/list",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "库洛游戏招聘",
+          "url": "https://kurogame.jobs.feishu.cn/campus/",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "蜜雪集团校园招聘",
+          "url": "https://careers.mxbc.com/campus",
+          "openedAt": "2026-09-10"
+        },
+        {
+          "title": "哈啰校园招聘",
+          "url": "https://careers.hellobike.com/#/recruit/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "泡泡玛特校园招聘",
+          "url": "https://popmart.zhiye.com/",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "吉比特校园招聘",
+          "url": "https://campus.g-bits.com/index.php",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "名创优品校园招聘",
+          "url": "https://miniso.zhiye.com/jobs",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "雀巢中国校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/nestlegcr",
+          "openedAt": "2026-09-01"
+        },
+        {
+          "title": "FunPlus校园招聘",
+          "url": "https://campus.funplus.com.cn/",
+          "openedAt": "2026-09-04"
+        },
+        {
+          "title": "完美世界校园招聘",
+          "url": "https://jobs.games.wanmei.com/school.html",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "高露洁校园招聘",
+          "url": "https://jobs.colgate.com/?locale=zh_CN",
+          "openedAt": "2026-09-11"
+        },
+        {
+          "title": "万兴科技校园招聘",
+          "url": "https://wondersharecampus.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-14"
+        },
+        {
+          "title": "树根互联招聘",
+          "url": "https://irootech.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-10"
+        },
+        {
+          "title": "禾迈电子招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/hoymiles/70377#/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "兆易创新招聘",
+          "url": "https://app.mokahr.com/su/avbqkc",
+          "openedAt": "2026-09-10"
+        },
+        {
+          "title": "美的校园招聘",
+          "url": "https://careers.midea.com/recruit-school-wechat/job?type=1",
+          "openedAt": "2026-08-28"
+        },
+        {
+          "title": "联特科技招聘",
+          "url": "https://linktel.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "飞鱼科技招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/feiyu/142123#/jobs",
+          "openedAt": "2026-08-27"
+        },
+        {
+          "title": "昂科技术招聘",
+          "url": "https://xyz.51job.com/consumer/m/home/index?ctmid=8931993",
+          "openedAt": "2026-08-25"
+        },
+        {
+          "title": "睿创微纳招聘",
+          "url": "https://raytrontek1.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-04"
+        },
+        {
+          "title": "文远知行招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/jingchi/2137#/jobs",
+          "openedAt": "2026-07-23"
+        },
+        {
+          "title": "思摩尔国际招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/smoore/150918#/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "寒武纪招聘",
+          "url": "https://app.mokahr.com/su/iluzya",
+          "openedAt": "2026-08-06"
+        },
+        {
+          "title": "思特威招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/smartsenstech1/56088#/jobs",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "ZURU招聘",
+          "url": "https://wecruit.hotjob.cn/SU69fd8f7f1f17c372512fdd19/mc/position/campus?projectId=100501&recruitType=1",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "地平线招聘",
+          "url": "https://wecruit.hotjob.cn/SU62d915040dcad43c775ec12c/mc/position/campus?projectId=103302&recruitType=1",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "宁波银行校园招聘",
+          "url": "https://zhaopin.nbcb.com.cn/#/campus-recruitment",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "骑士集团招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/black-unique/29232#/jobs",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "普渡机器人招聘",
+          "url": "https://pudutech1.zhiye.com/campus/jobs",
+          "openedAt": "2026-07-27"
+        },
+        {
+          "title": "途虎养车招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/tuhu/28398#/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "鹰角网络招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/hypergryph/26326#/jobs",
+          "openedAt": "2026-08-07"
+        },
+        {
+          "title": "启源芯动力招聘",
+          "url": "https://spicqyxdl.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "游卡校园招聘",
+          "url": "https://campus.yokaverse.com",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "易点云招聘",
+          "url": "https://recruit-pro.edianyun.com/#/wap/recruitment-collect",
+          "openedAt": "2026-08-19"
+        },
+        {
+          "title": "华宝新能招聘",
+          "url": "https://career.hello-tech.com/campus/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "李森智能招聘",
+          "url": "https://lisen.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-25"
+        },
+        {
+          "title": "CVTE视源股份校园招聘",
+          "url": "https://campus.cvte.com",
+          "openedAt": "2026-08-11"
+        },
+        {
+          "title": "三环集团招聘",
+          "url": "https://hr.cctc.cc",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "凌云光科技招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/lusterinc/44882#/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "恒生电子招聘",
+          "url": "https://campus.hundsun.com/campus/jobs",
+          "openedAt": "2026-08-13"
+        },
+        {
+          "title": "卓越教育招聘",
+          "url": "https://wecruit.hotjob.cn/SU63366959bef57c270741e2c6/mc/position/campus?recruitType=1",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "博楚电子招聘",
+          "url": "https://fscut.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "荣耀校园招聘",
+          "url": "https://career.honor.com/SU60ee9e002f9d247b98da489e/mc/position/campus?projectId=101401%2C101601%2C101801%2C101901&recruitType=1",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "HOLLYLAND猛玛招聘",
+          "url": "https://hollyland.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "点点互动招聘",
+          "url": "https://ddhd.cn/4/jobs",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "南芯科技招聘",
+          "url": "https://nanxin.zhiye.com",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "亿道招聘",
+          "url": "https://emdoor1.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "金证科技招聘",
+          "url": "https://szkingdom1.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "万得招聘",
+          "url": "https://wcms.wind.com.cn:9006/wcmsweb/recruitH5/#/main/home",
+          "openedAt": "2026-08-22"
+        },
+        {
+          "title": "宇石空间招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/astronstone/168327#/jobs",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "巨人网络招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/ztgame/92438#/jobs",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "禾望电气招聘",
+          "url": "https://hopewind1.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "杰瑞集团招聘",
+          "url": "https://app.mokahr.com/su/qgoyzx",
+          "openedAt": "2026-07-14"
+        },
+        {
+          "title": "三七互娱招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/37/58016#/jobs",
+          "openedAt": "2026-08-14"
+        },
+        {
+          "title": "维信诺招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/newvisionox/24735#/jobs",
+          "openedAt": "2026-08-31"
+        },
+        {
+          "title": "作业帮招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/zuoyebang/39595#/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "SHEIN招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/shein/2932#/jobs",
+          "openedAt": "2026-09-04"
+        },
+        {
+          "title": "诺瓦星云招聘",
+          "url": "https://novastar.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "天赐材料招聘",
+          "url": "https://wecruit.hotjob.cn/SU62c3ea6b2f9d241e4c8e45ba/mc/position/campus?projectId=201701&recruitType=1",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "中芯国际招聘",
+          "url": "https://smics.zhiye.com/campus",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "群核科技招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/qunhemail/2832#/jobs",
+          "openedAt": "2026-08-11"
+        },
+        {
+          "title": "锐捷网络招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/ruijie/136206#/jobs",
+          "openedAt": "2026-09-05"
+        },
+        {
+          "title": "千里科技招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/qianli1/147197#/jobs",
+          "openedAt": "2026-08-20"
+        },
+        {
+          "title": "欣旺达招聘",
+          "url": "https://sunwodacampus.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "全志科技招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/allwinnertech/43436#/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "星纵物联招聘",
+          "url": "https://milesight.zhiye.com/campus/jobs",
+          "openedAt": "2026-07-21"
+        },
+        {
+          "title": "舜宇集团招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/sunnyoptical/45602#/jobs",
+          "openedAt": "2026-08-08"
+        },
+        {
+          "title": "三棵树招聘",
+          "url": "https://wecruit.hotjob.cn/SU6173aef0bef57c4414103348/mc/position/campus?projectId=201401&recruitType=1",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "埃科光电招聘",
+          "url": "http://career.i-tek.cn",
+          "openedAt": "2026-07-27"
+        },
+        {
+          "title": "智加科技招聘",
+          "url": "https://app.mokahr.com/su/jsywqd",
+          "openedAt": "2026-08-26"
+        },
+        {
+          "title": "吉利控股招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/geely/78436#/jobs",
+          "openedAt": "2026-08-13"
+        },
+        {
+          "title": "阳光保险招聘",
+          "url": "https://sunzhaopin.sinosig.com/campus/jobs",
+          "openedAt": "2026-09-10"
+        },
+        {
+          "title": "睿联技术招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/reo/136006#/jobs",
+          "openedAt": "2026-08-19"
+        },
+        {
+          "title": "韶音科技招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/aftershokzhr/36940#/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "货拉拉招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/huolalahr/98660#/jobs",
+          "openedAt": "2026-08-12"
+        },
+        {
+          "title": "传音控股招聘",
+          "url": "https://transsion.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "天锐星通招聘",
+          "url": "https://t-ray.zhiye.com/campus/jobs",
+          "openedAt": "2026-07-11"
+        },
+        {
+          "title": "虹科电子招聘",
+          "url": "https://hkaco.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "海信招聘",
+          "url": "https://jobs.hisense.com/campus/jobs",
+          "openedAt": "2026-08-21"
+        },
+        {
+          "title": "宇通集团招聘",
+          "url": "https://wecruit.hotjob.cn/SU64e7157a1eb80519a8e4efcf/mc/position/campus?recruitType=1",
+          "openedAt": "2026-06-15"
+        },
+        {
+          "title": "鹏芯微招聘",
+          "url": "https://career.pxwsemi.com/campus/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "远景能源招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/envisiongroup/43123#/jobs",
+          "openedAt": "2026-07-27"
+        },
+        {
+          "title": "卧安机器人招聘",
+          "url": "https://woanhome.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-14"
+        },
+        {
+          "title": "大参林招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/dslyy/136052#/jobs",
+          "openedAt": "2026-08-14"
+        },
+        {
+          "title": "众安保险招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/zhongan/71908#/jobs",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "康冠科技招聘",
+          "url": "https://careerktc.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-22"
+        },
+        {
+          "title": "平行线教育招聘",
+          "url": "https://zzpxx.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "格力招聘",
+          "url": "https://m-zhaopin.greeyun.com/#/main",
+          "openedAt": "2026-09-10"
+        },
+        {
+          "title": "JoinQuant聚宽招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/joinquant/92347#/jobs",
+          "openedAt": "2026-07-29"
+        },
+        {
+          "title": "NVIDIA英伟达招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/nvidia/47111?locale=zh-CN",
+          "openedAt": "2026-07-21"
+        },
+        {
+          "title": "电科金仓招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/kingbase/47259#/jobs",
+          "openedAt": "2026-08-24"
+        },
+        {
+          "title": "芯恩招聘",
+          "url": "https://wecruit.hotjob.cn/SU62b31a44bef57c0f6faa4c71/mc/position/campus?projectId=100901&recruitType=1",
+          "openedAt": "2026-08-05"
+        },
+        {
+          "title": "九识智能招聘",
+          "url": "https://app.mokahr.com/su/gupzvp",
+          "openedAt": "2026-08-20"
+        },
+        {
+          "title": "浩鲸科技招聘",
+          "url": "https://iwhalecloud1.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-01"
+        },
+        {
+          "title": "飞步科技招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/fabu/56114#/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "养生堂招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/yst/68367#/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "明源云招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/mingyuan/168644#/jobs",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "迅雷招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/xunlei/26600#/jobs",
+          "openedAt": "2026-08-06"
+        },
+        {
+          "title": "神州信息招聘",
+          "url": "https://dcits.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "深蓝互动招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/blueinteractive/38434#/jobs",
+          "openedAt": "2026-08-10"
+        },
+        {
+          "title": "乐学培优招聘",
+          "url": "https://qingbeikeji.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-27"
+        },
+        {
+          "title": "高途教育招聘",
+          "url": "https://app.mokahr.com/m/campus_apply/bjhl/102145#/jobs",
+          "openedAt": "2026-07-02"
+        },
+        {
+          "title": "MiniMax校园招聘",
+          "url": "https://vrfi1sk8a0.jobs.feishu.cn/275376/position/list",
+          "openedAt": "2026-08-20"
+        },
+        {
+          "title": "Ampace新能安招聘",
+          "url": "https://wecruit.hotjob.cn/SU6618fd381eb8053acd5fc2b9/mc/position/campus?projectId=505401%2C505501&recruitType=1",
+          "openedAt": "2026-08-14"
+        },
+        {
+          "title": "联发科技招聘",
+          "url": "https://mediatek.zhiye.com/campus/jobs",
+          "openedAt": "2026-07-10"
+        },
+        {
+          "title": "SGS招聘",
+          "url": "https://app.mokahr.com/m/campus-recruitment/sgs/74104#/jobs",
+          "openedAt": "2026-09-11"
+        },
+        {
+          "title": "网易招聘",
+          "url": "https://campus.163.com/bolehtml/home?type=99&projectId=103",
+          "openedAt": "2026-08-20"
+        },
+        {
+          "title": "阅文集团",
+          "url": "https://yuewen.zhiye.com/personal/deliveryRecord",
+          "openedAt": "2026-09-14"
+        },
+        {
+          "title": "水滴校园招聘",
+          "url": "https://jobs.waterdrop-inc.com/campus"
+        },
+        {
+          "title": "金智科技校园招聘",
+          "url": "https://campus.51job.com/wiscom2027/about1.html",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "乐元素科技（北京）股份有限公司校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/leyuansu/166186?locale=zh-cn",
+          "openedAt": "2026-06-22"
+        },
+        {
+          "title": "北京乐信圣文科技有限责任公司校园招聘",
+          "url": "https://learnings.jobs.feishu.cn/948023/m/?spread=afpznsf",
+          "openedAt": "2026-09-16"
+        },
+        {
+          "title": "宝可梦（上海）玩具有限公司校园招聘",
+          "url": "https://campus-recruit.pokemon.com.cn/campus-recruitment/pokemon/141052",
+          "openedAt": "2026-08-30"
+        },
+        {
+          "title": "中交三航局四公司校园招聘",
+          "url": "https://zhaopin.ccccltd.cn/custom/fxzzw?hidemenu=1&fname=disanhangwugcj&c2=490&c1=&zpzc=&c=&k=&degree=",
+          "openedAt": "2026-09-04"
+        },
+        {
+          "title": "智界汽车校园招聘",
+          "url": "https://chery.zhiye.com/campus/jobs?queryid=f4665d24-9ae1-415b-af70-4d3b366bc56f",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "乐享元游校园招聘",
+          "url": "https://www.nowcoder.com/jobs/company-project?projectid=2716&deliversource=4&activityid=177&activitysuffix=2027yxzc&pagesource=5009&channel=qzsy",
+          "openedAt": "2026-09-15"
+        },
+        {
+          "title": "中国华融校园招聘",
+          "url": "https://campus.51job.com/zxjrzc2027/job.html",
+          "openedAt": "2026-09-04"
+        },
+        {
+          "title": "济南翼菲自动化科技校园招聘",
+          "url": "https://robotphoenix.zhiye.com/jobs?queryid=3882c888-41a7-4cf8-a06d-52051a9e35b6",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "南银理财校园招聘",
+          "url": "https://job.njcb.com.cn",
+          "openedAt": "2026-06-07"
+        },
+        {
+          "title": "中国交通建设股份有限公司轨道交通分公司校园招聘",
+          "url": "https://zhaopin.ccccltd.cn/custom/fxzzw?c2=927&fname=guidaojiaotongfgs&hidemenu=1",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "中交二航局特种分公司校园招聘",
+          "url": "https://zhaopin.ccccltd.cn/custom/xzbk?hidemenu=1",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "旷世芳香控股校园招聘",
+          "url": "https://www.ihr360.com/gateway/api/recruit-website",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "中建三局西北公司校园招聘",
+          "url": "https://recruit.cscec.com/recruit",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "易买工品校园招聘",
+          "url": "https://yesmro101.jobs.feishu.cn/991031/position/list",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "南京晨光公司校园招聘",
+          "url": "https://www.iguopin.com/company/jobs?id=10685380815924859",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "泰豪公司校园招聘",
+          "url": "https://www.tellhow.cn/join/school-social.html",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "中国铁建电气化局集团有限公司校园招聘",
+          "url": "https://crccdqh.zhaopin.com/job/index.html",
+          "openedAt": "2026-09-04"
+        },
+        {
+          "title": "甘肃省电力设计院校园招聘",
+          "url": "https://www.iguopin.com/company/jobs?id=10685388627099860",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "天地和兴校园招聘",
+          "url": "https://tdhxkj.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "平安人寿浙江分公司司校园招聘",
+          "url": "https://wetalent.pingan.com/91f8800d99a13199801575196b665af2/campus/search?positionshareid=90f05acb771c30099a89c44af2abad4c",
+          "openedAt": "2026-08-25"
+        },
+        {
+          "title": "泛林集团校园招聘",
+          "url": "https://campus.51job.com/lamresearch2027/pc/job.html",
+          "openedAt": "2026-08-26"
+        },
+        {
+          "title": "信也科技校园招聘",
+          "url": "https://app.mokahr.com/su/yvpovf",
+          "openedAt": "2026-09-13"
+        },
+        {
+          "title": "平安银行南京分行校园招聘",
+          "url": "https://campus.pingan.com/pabnanjing/position",
+          "openedAt": "2026-08-09"
+        },
+        {
+          "title": "邦戴数科校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/bonditech/143553?locale=zh-cn",
+          "openedAt": "2026-08-25"
+        },
+        {
+          "title": "东材科技校园招聘",
+          "url": "https://www.emtco.cn/jobs",
+          "openedAt": "2026-08-26"
+        },
+        {
+          "title": "青岛海信电器营销股份有限公司郑州分公司校园招聘",
+          "url": "https://job.henu.edu.cn/module/position_brief_detail/id-113630/nid-10822",
+          "openedAt": "2026-08-25"
+        },
+        {
+          "title": "中国核动力研究设计院校园招聘",
+          "url": "https://cnnc.zhiye.com/custom/npiczyjszw?hideall=true",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "卡尔美体育用品集团有限公司校园招聘",
+          "url": "https://xy.liepin.com/kelme/zhaopin.html",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "中国农业银行河南省分行校园招聘",
+          "url": "https://career.abchina.com.cn/build/index.html",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "中金财富校园招聘",
+          "url": "https://ciccwm.zhiye.com/custom/zjcfjobxz?hidemenu=1",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "国科天迅校园招聘",
+          "url": "https://gktx.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "赛轮集团校园招聘",
+          "url": "https://sailuntire.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-17"
+        },
+        {
+          "title": "中兴通讯校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/zte/46903",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "厦门国际银行校园招聘",
+          "url": "https://xib.zhiye.com/campus",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "埃森哲校园招聘",
+          "url": "https://www.accenture.com/cn-zh/careers/local/accenture-china-campus-page",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "大华银行校园招聘",
+          "url": "https://uob.zhaopin.com",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "飞腾公司校园招聘",
+          "url": "https://www.phytium.com.cn/recruitment/campus_recruit",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "乐信圣文校园招聘",
+          "url": "https://learnings.jobs.feishu.cn/948023",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "深圳市优博讯科技股份有限公司校园招聘",
+          "url": "https://urovo.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-03"
+        },
+        {
+          "title": "广汽集团校园招聘",
+          "url": "https://xyzp.51job.com/gacgroup2027/jobs.html",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "中金公司校园招聘",
+          "url": "https://cicc.zhiye.com/custom/campus?hidemenu=1",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "中华财险校园招聘",
+          "url": "https://ciczp.zhiye.com/custom/campus?hidemenu=1",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "南大通用校园招聘",
+          "url": "https://www.x-dhr.com/r.do?method=portal&o=db9023976ddf2ed1cb76b3d5e228a14039fe9b089c38059d&p=2cd5ad79522984f1076b6ed10f714f23988a7a3fd3bc7a52&oursinwindowdialog=true&windowid=win_929379845202332394",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "长沙晶易医药校园招聘",
+          "url": "https://king-eagle.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "千象资产校园招聘",
+          "url": "https://lfd4p99lg4.jobs.feishu.cn/index",
+          "openedAt": "2026-09-07"
+        },
+        {
+          "title": "华阳精机校园招聘",
+          "url": "https://xyz.51job.com/consumer/pc/home/index?ctmid=9580602",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "珀莱雅校园招聘",
+          "url": "https://jobs.proya.com/campus/position/list",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "咪咕校园招聘",
+          "url": "https://job.10086.cn/personal/campus/campus_job_list.html?cid=85",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "四达时代校园招聘",
+          "url": "https://jobs-startimes.ourats.com/req/campus",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "中建交通校园招聘",
+          "url": "https://wxa59fa1f2ace78417.hcmcloud.cn/recruit",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "太古地产校园招聘",
+          "url": "https://www.swireproperties-recruitment.com/campus-recruitment/swireproperties/126012",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "汽车之家校园招聘",
+          "url": "https://talent.autohome.com.cn/campus-recruit-list.html?targetid=1004",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "广州地铁校园招聘",
+          "url": "https://gzmetro.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "太平鸟校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/peacebird-group/172607?locale=zh-cn",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "海颐软件校园招聘",
+          "url": "https://m.liepin.com/campus/project-detail/13806460",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "中审众环会计师事务所校园招聘",
+          "url": "https://job.zszhcpa.cn/campus/jobs",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "回天新材料校园招聘",
+          "url": "https://huitian1.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "天翼安全校园招聘",
+          "url": "https://job.chinatelecom.com.cn/wt/tele/web/index",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "数坤科技校园招聘",
+          "url": "https://shukun.zhiye.com/campus/jobs",
+          "openedAt": "2026-08-18"
+        },
+        {
+          "title": "中国石油天然气股份有限公司长庆油田分公司校园招聘",
+          "url": "https://zhaopin.cnpc.com.cn/web/recruitinfoshow.html?id=8b8b6c9ea07c29cc01a07fefb4460051",
+          "openedAt": "2026-09-08"
+        },
+        {
+          "title": "中航无人机校园招聘",
+          "url": "https://avicuas.zhiye.com/campus?c=5101"
+        },
+        {
+          "title": "中船鹏力校园招聘",
+          "url": "https://www.724pride.com/joinus.html"
+        },
+        {
+          "title": "研微半导体校园招聘",
+          "url": "https://www.psrsemi.com/hire.html"
+        },
+        {
+          "title": "中电港招聘",
+          "url": "https://www.cecport.com/jobs/"
+        },
+        {
+          "title": "英雄游戏校园招聘",
+          "url": "https://www.hero.com/p/join.html"
+        },
+        {
+          "title": "英威腾校园招聘",
+          "url": "https://www.invt.com.cn/careers"
+        },
+        {
+          "title": "南方财经全媒体校园招聘",
+          "url": "https://campus.sfccn.com/"
+        },
+        {
+          "title": "东风汽车集团校园招聘",
+          "url": "https://www.dfmc.com.cn/zhaopin/xiaoyuanzhaopin.html"
+        },
+        {
+          "title": "爱奇艺校园招聘",
+          "url": "https://careers.iqiyi.com/"
+        },
+        {
+          "title": "建信期货校园招聘",
+          "url": "https://www.ccbfutures.com/main/about_ccbfutures/careers/campus_recruitment/index.shtml"
+        },
+        {
+          "title": "中国有研校园招聘",
+          "url": "https://hrcloud.grinm.com/recruit"
+        },
+        {
+          "title": "非凸科技校园招聘",
+          "url": "https://ft.tech/about/campus"
+        },
+        {
+          "title": "NSK校园招聘",
+          "url": "https://www.nsk.com.cn/company/career"
+        },
+        {
+          "title": "通嘉宏瑞校园招聘",
+          "url": "https://www.grandhitek.com.cn/jobs/1.html"
+        },
+        {
+          "title": "中国通号校园招聘",
+          "url": "https://crscd.zhiye.com/campus/jobs"
+        },
+        {
+          "title": "广西汽车集团校园招聘",
+          "url": "https://www.wuling.com.cn/campus-recruitment"
+        },
+        {
+          "title": "国芯微招聘",
+          "url": "https://www.nationalchip.com/index.php/recruit"
+        },
+        {
+          "title": "博道基金校园招聘",
+          "url": "https://www.bdfund.cn/aboutus/job/index.html"
+        },
+        {
+          "title": "上海电气校园招聘",
+          "url": "https://www.hotjob.cn/wt/SEC/mobweb/v8/index"
+        },
+        {
+          "title": "艾迪精密招聘",
+          "url": "https://www.cceddie.com/talent/positions.htm"
+        },
+        {
+          "title": "中铁建设校园招聘",
+          "url": "https://www.hotjob.cn/wt/ztjs/mobweb/v8/index"
+        },
+        {
+          "title": "聚恒集团校园招聘",
+          "url": "https://www.ijheng.com/campus.html"
+        },
+        {
+          "title": "佰维存储招聘",
+          "url": "https://www.biwin.com.cn/jobs"
+        },
+        {
+          "title": "中国人寿养老险招聘",
+          "url": "https://www.clpc.com.cn/chinalifepension/jrwm/zjwm/index.html"
+        },
+        {
+          "title": "中海物业招聘",
+          "url": "https://www.copm.com.cn/"
+        },
+        {
+          "title": "中建七局校园招聘",
+          "url": "https://7bur.cscec.com/rlzy/zpxx/"
+        },
+        {
+          "title": "大华股份校园招聘",
+          "url": "https://www.dahuatech.com/about/campus.html"
+        },
+        {
+          "title": "岚图汽车校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/voyah/146293"
+        },
+        {
+          "title": "丰疆智能校园招聘",
+          "url": "https://campus.fjdynamics.cn/campus-recruitment/fjdynamics/70012/"
+        },
+        {
+          "title": "苍宇天基校园招聘",
+          "url": "https://cytj.com.cn/"
+        },
+        {
+          "title": "国华能源投资校园招聘",
+          "url": "https://zhaopin.chnenergy.com.cn/recTypeSerch?kinds=1&schType=2"
+        },
+        {
+          "title": "徐工校园招聘",
+          "url": "https://www.xcmg.com/aboutus/job_center.htm"
+        },
+        {
+          "title": "致同会计师事务所校园招聘",
+          "url": "https://www.grantthornton.cn/campus-recruitment"
+        },
+        {
+          "title": "牧原校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/muyuan/70116"
+        },
+        {
+          "title": "华润校园招聘",
+          "url": "https://crc.wintalent.cn/wt/CRC/web/index/CompCRCPageindexRecruit?recruitType=1"
+        },
+        {
+          "title": "中铁北京工程局招聘",
+          "url": "https://www.crecg.com/web/rlzy65/rczp11/2025021110080083682/index.html"
+        },
+        {
+          "title": "中交一航局城建公司校园招聘",
+          "url": "https://www.ccccyhjcj.com/"
+        },
+        {
+          "title": "云帐房校园招聘",
+          "url": "https://yunzhangfang.zhiye.com/Campus"
+        },
+        {
+          "title": "金升阳校园招聘",
+          "url": "https://mornsun.zhiye.com/campus"
+        }
       ]
     },
     {

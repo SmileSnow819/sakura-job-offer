@@ -7,6 +7,7 @@ import {
   BriefcaseBusiness,
   Database,
   Download,
+  ExternalLink,
   FileText,
   Hash,
   LayoutGrid,
@@ -603,6 +604,32 @@ export default function TrackerPage() {
                         <FileText size={17} strokeWidth={1.8} />
                         <span>详情</span>
                       </button>
+                      {c.website ? (
+                        <button
+                          type="button"
+                          className="tracker-card-action"
+                          aria-label={`跳转${c.name}官网`}
+                          title="跳转官网"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            window.open(c.website, '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <ExternalLink size={17} strokeWidth={1.8} />
+                          <span>官网</span>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="tracker-card-action"
+                          aria-label={`${c.name}暂时没有官网`}
+                          title="暂时没有官网哦"
+                          onClick={() => setNotice('暂时没有官网哦')}
+                        >
+                          <ExternalLink size={17} strokeWidth={1.8} />
+                          <span>官网</span>
+                        </button>
+                      )}
                       <button
                         type="button"
                         className="tracker-card-action danger"
@@ -650,6 +677,7 @@ export default function TrackerPage() {
               onDetail={(id) => setDialog({ type: 'detail', id })}
               onDelete={(id) => requestDelete([id])}
               onEdit={(id) => setDialog({ type: 'edit', id })}
+              onWebsiteNotice={() => setNotice('暂时没有官网哦')}
             />
           )}
         </div>
@@ -713,10 +741,13 @@ export default function TrackerPage() {
           storageError={error}
           application={active}
           company={data.companies.find((c) => c.id === active.companyId)!}
-          onSave={(application) =>
+          onSave={(application, company) =>
             commit(
               {
                 ...data,
+                companies: company
+                  ? data.companies.map((item) => (item.id === company.id ? company : item))
+                  : data.companies,
                 applications: data.applications.map((a) =>
                   a.id === application.id ? application : a,
                 ),

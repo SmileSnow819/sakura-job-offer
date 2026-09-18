@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useId, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
-import { Check, ChevronRight, FileText, Minus, Trash2, X } from 'lucide-react';
+import { Check, ChevronRight, ExternalLink, FileText, Minus, Trash2, X } from 'lucide-react';
 import { CompanyLogo } from './components';
 import { trackerTimelineMotion } from './motion';
 import {
@@ -21,6 +21,7 @@ interface ApplicationTableProps {
   onDetail: (id: string) => void;
   onDelete: (id: string) => void;
   onEdit: (id: string) => void;
+  onWebsiteNotice: () => void;
   onStageChange: (applicationId: string, stageId: string, status: StageStatus) => boolean;
 }
 
@@ -32,6 +33,7 @@ export default function ApplicationTable({
   onDelete,
   onEdit,
   onStageChange,
+  onWebsiteNotice,
 }: ApplicationTableProps) {
   const [expanded, setExpanded] = useState<Set<string>>(() => new Set());
   const [editingStage, setEditingStage] = useState<{
@@ -232,6 +234,35 @@ export default function ApplicationTable({
                         <FileText size={17} strokeWidth={1.8} />
                         <span>详情</span>
                       </button>
+                      {company.website ? (
+                        <button
+                          type="button"
+                          className="tracker-card-action"
+                          aria-label={`跳转${company.name}官网`}
+                          title="跳转官网"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            window.open(company.website, '_blank', 'noopener,noreferrer');
+                          }}
+                        >
+                          <ExternalLink size={17} strokeWidth={1.8} />
+                          <span>官网</span>
+                        </button>
+                      ) : (
+                        <button
+                          type="button"
+                          className="tracker-card-action"
+                          aria-label={`${company.name}暂时没有官网`}
+                          title="暂时没有官网哦"
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            onWebsiteNotice();
+                          }}
+                        >
+                          <ExternalLink size={17} strokeWidth={1.8} />
+                          <span>官网</span>
+                        </button>
+                      )}
                       <button
                         type="button"
                         className="tracker-card-action danger"

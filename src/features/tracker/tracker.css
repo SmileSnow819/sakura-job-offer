@@ -385,6 +385,18 @@
   font-weight: 700;
   border: 1px solid #fff;
 }
+.tracker-card-top > a,
+.tracker-table-company > a {
+  display: inline-flex;
+  flex-shrink: 0;
+  border-radius: 8px;
+  text-decoration: none;
+}
+.tracker-card-top > a:focus-visible,
+.tracker-table-company > a:focus-visible {
+  outline: 2px solid var(--sakura-600);
+  outline-offset: 3px;
+}
 .tracker-logo img {
   width: 26px;
   height: 26px;
@@ -516,16 +528,21 @@
 .tracker-card-action {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 3px;
   min-width: 40px;
+  min-height: 43px;
   padding: 2px 4px;
   border: 0;
   border-radius: 8px;
   background: transparent;
   color: #607b96;
+  font-family: inherit;
   font-size: 10px;
   line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
   transition:
     color 0.2s ease,

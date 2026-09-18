@@ -4,8 +4,8 @@ import { getCompanyIcon, handleImgError } from '../../utils/getFavicon';
 import { uid, validateFlow, type StageDefinition } from './model';
 
 export function CompanyLogo({ name, website }: { name: string; website: string }) {
-  return (
-    <span className="tracker-logo" aria-hidden="true">
+  const logo = (
+    <span className="tracker-logo">
       <img
         src={getCompanyIcon(name, website)}
         alt=""
@@ -14,6 +14,19 @@ export function CompanyLogo({ name, website }: { name: string; website: string }
         onError={handleImgError}
       />
     </span>
+  );
+  if (!website) return <span title="暂时没有官网哦">{logo}</span>;
+  return (
+    <a
+      href={website}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`打开${name}官网`}
+      title="跳转官网"
+      onClick={(event) => event.stopPropagation()}
+    >
+      {logo}
+    </a>
   );
 }
 

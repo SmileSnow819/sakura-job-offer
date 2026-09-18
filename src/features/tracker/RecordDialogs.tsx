@@ -276,18 +276,20 @@ export function ApplicationDetail({
 }: {
   application: Application;
   company: Company;
-  onSave: (a: Application) => boolean;
+  onSave: (a: Application, company?: Company) => boolean;
   onEdit: () => void;
   onDelete: () => boolean;
   onClose: () => void;
   storageError?: string;
 }) {
   const [draft, setDraft] = useState(() => structuredClone(application));
+  const [website, setWebsite] = useState(company.website);
   const [editingFlow, setEditingFlow] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [discardConfirm, setDiscardConfirm] = useState(false);
   const [error, setError] = useState('');
-  const dirty = JSON.stringify(draft) !== JSON.stringify(application);
+  const dirty =
+    JSON.stringify(draft) !== JSON.stringify(application) || website !== company.website;
   const close = () => {
     if (dirty) setDiscardConfirm(true);
     else onClose();
@@ -451,6 +453,16 @@ export function ApplicationDetail({
             ))}
           </div>
         )}
+        <label className="tracker-field">
+          公司官网
+          <input
+            value={website}
+            maxLength={2048}
+            placeholder="例如 example.com"
+            onChange={(event) => setWebsite(event.target.value)}
+          />
+          {!website && <small>暂时没有官网哦</small>}
+        </label>
         <p className="tracker-help">
           直接推进到后续阶段时，之前未完成的阶段会标记为跳过；回退到某阶段会重置后续状态，保留备注。
         </p>
@@ -535,8 +547,13 @@ export function ApplicationDetail({
             className="tracker-button primary"
             disabled={editingFlow}
             onClick={() => {
-              if (!onSave({ ...draft, updatedAt: new Date().toISOString() }))
-                setError('保存失败，请查看页面提示；修改已保留。');
+              try {
+                const nextCompany = { ...company, website: normalizeWebsite(website) };
+                if (!onSave({ ...draft, updatedAt: new Date().toISOString() }, nextCompany))
+                  setError('保存失败，请查看页面提示；修改已保留。');
+              } catch (cause) {
+                setError((cause as Error).message);
+              }
             }}
           >
             保存进度
