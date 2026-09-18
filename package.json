@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "test:bookmarks": "node --experimental-strip-types --test scripts/test-recruitment-timeline.mjs scripts/test-responsive-card-size.mjs",
+    "test:recruitment-aggregation": "node --test scripts/test-recruitment-aggregation.mjs",
+    "recruitment:aggregate": "node scripts/recruitment-aggregation.mjs",
     "test:tracker": "node --experimental-strip-types --test scripts/test-tracker.mjs",
     "dev": "vp dev",
     "build": "tsc && vp build",

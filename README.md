@@ -50,8 +50,24 @@ pnpm preview        # 预览生产构建
 ## 数据与隐私
 
 - `src/bookmarks.json`：前端展示的招聘入口和分类数据。
+
+### 三来源招聘聚合
+
+跨电脑安装、Cookie 配置和定时运行见：[招聘聚合跨电脑接续指南](docs/ai/recruitment-aggregation.md)。
+
+`pnpm recruitment:aggregate -- --write` 会聚合牛客、飞书多维表格和小红书 Search，并与秋招书签做去重和 diff，确认入口后更新 `src/bookmarks.json`。飞书通过本机 `lark-cli base` 读取，链接清洗会删除内推码和跟踪参数；OfferShow 已移除。
+
+```bash
+XHS_OFFICIAL_ACCOUNTS='小红书招聘,绿联招聘,阅文招聘' \
+PYTHONPATH=/Users/yuki/tools/Spider_XHS /Users/yuki/tools/Spider_XHS/.venv/bin/python \
+  -m spider.aggregation --output /tmp/xiaohongshu-candidates.json
+XIAOHONGSHU_CANDIDATES_FILE=/tmp/xiaohongshu-candidates.json pnpm recruitment:aggregate -- --write
+```
+
+候选文件是 JSON 数组，每项至少包含 `company`、`title`、`recruitmentUrl`，可选 `openedAt`、`sourceUrl` 和 `reason`。Cookie 只能放在本机环境变量或 `~/.codex/.env`，不要写入仓库或报告。
+
 - `data/autumn-watchlist.json`：秋招候选公司、官方入口和官网校验信息。
-- `data/YYYY-MM-DD.md`：招聘官网日常维护日志。
+- `logs/YYYY-MM-DD.md`：每日聚合日志，记录调用工具、来源返回、写入、跳过和错误详情，不记录 Token、Cookie 或内推码。
 - 投递记录保存在浏览器 `localStorage` 的 `sakura-offer-hub:tracker:v1` 中。
 
 项目不会把个人投递记录自动上传到服务器。清除浏览器网站数据可能导致本地记录丢失，请通过「数据备份」定期下载 JSON 文件。
