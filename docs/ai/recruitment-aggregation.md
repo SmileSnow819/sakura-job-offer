@@ -97,7 +97,7 @@ pnpm recruitment:aggregate -- --write > /tmp/recruitment-aggregation-report.json
 node -e "const x=require('/tmp/recruitment-aggregation-report.json'); console.log({additions:x.additions.length,enrichments:x.enrichments.length,duplicates:x.duplicates.length,skipped:x.skipped.length,errors:x.errors.length})"
 ```
 
-牛客和小红书按现有接口/runner读取；飞书通过 `lark-cli base +record-list --as user` 读取。飞书需要本机完成一次 `lark-cli auth login --recommend`，授权账号拥有该表格的阅读权限即可。如果任一来源变成登录或风控错误，报告会保留来源错误，不应把错误当成“没有新增”。招聘链接写入前会清理 `recommendCode`、`spread`、`shareId`、`channel` 等内推/跟踪参数。
+牛客和飞书按现有接口读取；小红书会自动调用本机 Spider_XHS 的 aggregation runner，再读取临时 JSON。默认路径是 `/Users/<用户名>/tools/Spider_XHS`，也可用 `SPIDER_XHS_PATH` 覆盖。飞书需要本机完成一次 `lark-cli auth login --recommend`，授权账号拥有该表格的阅读权限即可。如果任一来源变成登录或风控错误，报告会保留来源错误，不应把错误当成“没有新增”。招聘链接写入前会清理 `recommendCode`、`spread`、`shareId`、`channel` 等内推/跟踪参数。
 
 ## 五、人工更新书签
 
@@ -119,19 +119,14 @@ pnpm check
 
 正式定时任务按北京时间每个工作日 11:00 运行，周六周日跳过，并持续在同一个 Codex 对话线程中执行。
 
-定时任务需要按顺序执行：
+定时任务只需要执行聚合命令，脚本会自动先运行 Spider_XHS：
 
 ```bash
-cd /Users/<用户名>/tools/Spider_XHS
-XHS_OFFICIAL_ACCOUNTS='小红书招聘,绿联招聘,阅文招聘,七十迈招聘' \
-PYTHONPATH=. .venv/bin/python -m spider.aggregation \
-  --output /tmp/xiaohongshu-candidates.json
-
 cd /Users/<用户名>/project/sakura-job-offer
-XIAOHONGSHU_CANDIDATES_FILE=/tmp/xiaohongshu-candidates.json \
-pnpm recruitment:aggregate \
-  -- --write > /tmp/recruitment-aggregation-report.json
+pnpm recruitment:aggregate -- --write
 ```
+
+如需调试或复用已有结果，可用 `XIAOHONGSHU_CANDIDATES_FILE` 指定候选 JSON，覆盖自动 runner。
 
 定时任务会更新 `src/bookmarks.json`，但不会自动提交、推送或部署。日志至少记录运行时间、调用工具、来源状态、返回数量、写入数量、跳过原因和错误详情；不会记录 Token、Cookie 或内推码。
 

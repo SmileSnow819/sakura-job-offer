@@ -1,4 +1,4 @@
-import { appendFile, mkdir, readFile, writeFile } from 'node:fs/promises';
+import { appendFile, mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 import process from 'node:process';
@@ -11,6 +11,9 @@ const FEISHU_URL =
 const FEISHU_BASE_TOKEN = 'IH8ObhOTMaqWGNslZArcMGsInNX';
 const FEISHU_TABLE_ID = 'tblzpVqcTKlokUA6';
 const FEISHU_VIEW_ID = 'vewG7JtQCU';
+const SPIDER_XHS_PATH = process.env.SPIDER_XHS_PATH || '/Users/yuki/tools/Spider_XHS';
+const SPIDER_XHS_PYTHON = `${SPIDER_XHS_PATH}/.venv/bin/python`;
+const XHS_OFFICIAL_ACCOUNTS = '小红书招聘,绿联招聘,七十迈招聘';
 
 const normalizeText = (value) =>
   String(value ?? '')
@@ -299,6 +302,30 @@ export const collectXiaohongshuCandidates = async ({ runner } = {}) => {
   );
 };
 
+/** 运行 Spider_XHS 聚合器并读取其脱敏后的候选 JSON。 */
+export const runSpiderXhsAggregation = async ({
+  execFileImpl = execFileAsync,
+  tempRoot = '/tmp',
+  spiderPath = SPIDER_XHS_PATH,
+  pythonPath = SPIDER_XHS_PYTHON,
+} = {}) => {
+  const tempDir = await mkdtemp(`${tempRoot}/sakura-xhs-`);
+  const outputPath = `${tempDir}/candidates.json`;
+  try {
+    await execFileImpl(pythonPath, ['-m', 'spider.aggregation', '--output', outputPath], {
+      cwd: spiderPath,
+      env: { ...process.env, PYTHONPATH: spiderPath, XHS_OFFICIAL_ACCOUNTS },
+    });
+    return JSON.parse(await readFile(outputPath, 'utf8'));
+  } catch (error) {
+    throw new Error(
+      `Spider_XHS runner 执行失败：${error instanceof Error ? error.message : String(error)}`,
+    );
+  } finally {
+    await rm(tempDir, { recursive: true, force: true });
+  }
+};
+
 /** 聚合三个来源并返回可审阅的差异报告，不修改任何仓库文件。 */
 export const runAggregation = async ({
   fetchImpl = fetch,
@@ -342,7 +369,7 @@ if (isMain) {
   try {
     const xiaohongshuRunner = process.env.XIAOHONGSHU_CANDIDATES_FILE
       ? async () => JSON.parse(await readFile(process.env.XIAOHONGSHU_CANDIDATES_FILE, 'utf8'))
-      : undefined;
+      : runSpiderXhsAggregation;
     const report = await runAggregation({ xiaohongshuRunner });
     if (process.argv.includes('--write')) {
       const data = JSON.parse(await readFile(BOOKMARKS_PATH, 'utf8'));
