@@ -106,6 +106,9 @@ dist-ssr/
 temp
 /vendor/
 
+# 本地招聘聚合运行日志仅保存在本机
+/logs/*.md
+
 # Env files
 .env
 .env.local
