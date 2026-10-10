@@ -41,7 +41,8 @@
         },
         {
           "title": "网易互联网校园招聘",
-          "url": "https://campus.163.com/app/job/position?id=103"
+          "url": "https://campus.163.com/app/job/position?id=103",
+          "openedAt": "2026-09-17"
         },
         {
           "title": "小红书校园招聘",
@@ -65,6 +66,10 @@
           "title": "美团校园招聘",
           "url": "https://zhaopin.meituan.com/web/campus",
           "openedAt": "2026-08-17"
+        },
+        {
+          "title": "古茗校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/guming/39377#/page/%E6%A0%A1%E5%9B%AD%E6%8B%9B%E8%81%98"
         },
         {
           "title": "快手校园招聘",
@@ -95,6 +100,10 @@
           "title": "滴滴校园招聘",
           "url": "https://app.mokahr.com/campus-recruitment/didiglobal/96064#/jobs",
           "openedAt": "2026-08-13"
+        },
+        {
+          "title": "平安银行校园招聘",
+          "url": "https://campus.pingan.com/tech/position"
         },
         {
           "title": "携程校园招聘",
@@ -1804,6 +1813,101 @@
           "title": "见山科技校园招聘",
           "url": "https://app.mokahr.com/campus-recruitment/jianshankeji/100134?locale=zh-cn",
           "openedAt": "2026-09-21"
+        },
+        {
+          "title": "利洁时校园招聘",
+          "url": "https://reckitt.zhaopin.com/?sessionid=",
+          "openedAt": "2026-09-26"
+        },
+        {
+          "title": "中国人寿财产保险股份有限公司校园招聘",
+          "url": "https://chinalife.zhiye.com/custom/campus?hidemenu=1&classificationtwo=610",
+          "openedAt": "2026-09-19"
+        },
+        {
+          "title": "凯莱英制药校园招聘",
+          "url": "https://asymchem.zhiye.com/jobs?queryid=d73b70fa-4de9-4a8c-8c8d-d2043ed56b46",
+          "openedAt": "2026-09-20"
+        },
+        {
+          "title": "协鑫科技校园招聘",
+          "url": "https://campus.51job.com/gcltech2026/job.html",
+          "openedAt": "2026-09-20"
+        },
+        {
+          "title": "江西沃格光电集团股份有限公司校园招聘",
+          "url": "https://wgtechjx.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-20"
+        },
+        {
+          "title": "广州南方测绘科技股份有限公司校园招聘",
+          "url": "https://southsurvey.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-16"
+        },
+        {
+          "title": "深圳华强校园招聘",
+          "url": "https://xyz.51job.com/consumer/pc/home/index?ctmid=9582181",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "申能校园招聘",
+          "url": "https://shenergy.zhiye.com/custom/campus?hidemenu=1&classificationtwo=85&unit_val=85",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "天津联通校园招聘",
+          "url": "https://zglt.zhaopin.com/scjobs/index.html",
+          "openedAt": "2026-09-16"
+        },
+        {
+          "title": "重庆长江电工工业集团有限公司校招校园招聘",
+          "url": "https://norincogroupzhaopin.zhiye.com/campus/jobs?queryid=b114fb4b-6d74-4f3d-8139-6405a2b789c8",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "万丰锦源控股集团校园招聘",
+          "url": "http://wfjob.main.0575xs.com",
+          "openedAt": "2026-09-09"
+        },
+        {
+          "title": "京东方校园招聘",
+          "url": "https://campus.boe.com/custom/xzzw?hidemenu=1",
+          "openedAt": "2026-09-16"
+        },
+        {
+          "title": "云账户校园招聘",
+          "url": "https://xiaozhao.yunzhanghu.com/job",
+          "openedAt": "2026-09-19"
+        },
+        {
+          "title": "正泰集团校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/chint/40745?locale=zh-cn",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "成都市公共交通集团有限公司校园招聘",
+          "url": "https://cdjt.zhiye.com/jobs",
+          "openedAt": "2026-09-16"
+        },
+        {
+          "title": "保利和润房地产投资顾问有限公司校园招聘",
+          "url": "https://polyharmony.zhiye.com/campus/jobs",
+          "openedAt": "2026-09-20"
+        },
+        {
+          "title": "鲜丰水果校园招聘",
+          "url": "https://alidocs.dingtalk.com/notable/share/form/v013bmqyybr6qz1gqwz_euh5uje_rgsvhuc?utm_source=qrcode_form",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "深圳市大梦龙途文化传播有限公司校园招聘",
+          "url": "https://app.mokahr.com/campus-recruitment/damenglongtu/36328",
+          "openedAt": "2026-09-21"
+        },
+        {
+          "title": "江苏灌云农村商业银行股份有限公司校园招聘",
+          "url": "https://campus.51job.com/jsnxzp2027/p2.html?addrname=22",
+          "openedAt": "2026-09-16"
         }
       ]
     },
